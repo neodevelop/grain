@@ -18,7 +18,7 @@ package com.synergyj.grain.domain
 import grails.test.GrailsUnitTestCase
 
 class CourseTests extends GrailsUnitTestCase {
-	def existingCourse = new Course(name:buildString(50), description:buildString(10000), type:CourseType.COURSE, status:Status.PROPOSAL)
+	def existingCourse = new Course(name:buildString(50), content:buildString(10000), type:CourseType.COURSE, status:Status.PROPOSAL)
 	
 	protected void setUp() {
 		super.setUp()
@@ -35,23 +35,19 @@ class CourseTests extends GrailsUnitTestCase {
 		assertFalse course.validate()
 		assertEquals "blank", course.errors.name
 		
-		course = new Course(name:buildString(51))
+		course = new Course(name:buildString(201))
 		assertFalse course.validate()
 		assertEquals "size", course.errors.name
 	}
 	
-	void testConstraintsDescription() {
-		def course = new Course(description:null)
+	void testConstraintsContent() {
+		def course = new Course(content:null)
 		assertFalse course.validate()
-		assertEquals "nullable", course.errors.description
+		assertEquals "nullable", course.errors.content
 		
-		course = new Course(description:"")
+		course = new Course(content:"")
 		assertFalse course.validate()
-		assertEquals "blank", course.errors.description
-		
-		course = new Course(description:buildString(10001))
-		assertFalse course.validate()
-		assertEquals "size", course.errors.description
+		assertEquals "blank", course.errors.content
 	}
 	
 	void testConstraintsType() {

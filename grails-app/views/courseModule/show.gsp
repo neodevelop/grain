@@ -37,9 +37,23 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name">Description:</td>
+                            <td valign="top" class="name">Content:</td>
                             
-                            <td valign="top" class="value">${fieldValue(bean:courseModuleInstance, field:'description')}</td>
+                            <td valign="top" class="value">${fieldValue(bean:courseModuleInstance, field:'content')}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name">Last Updated:</td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean:courseModuleInstance, field:'lastUpdated')}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name">Date Created:</td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean:courseModuleInstance, field:'dateCreated')}</td>
                             
                         </tr>
                     
@@ -54,20 +68,6 @@
                             <td valign="top" class="name">Order:</td>
                             
                             <td valign="top" class="value">${fieldValue(bean:courseModuleInstance, field:'order')}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name">Date Created:</td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean:courseModuleInstance, field:'dateCreated')}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name">Last Updated:</td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean:courseModuleInstance, field:'lastUpdated')}</td>
                             
                         </tr>
                     

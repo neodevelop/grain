@@ -18,9 +18,9 @@ package com.synergyj.grain.domain
 import grails.test.*
 
 class ModuleTopicTests extends GrailsUnitTestCase {
-	def existingCourse = new Course(name:CourseTests.buildString(50), description:CourseTests.buildString(10000), type:CourseType.COURSE)
-	def existingModule = new CourseModule(name:CourseTests.buildString(50), description:CourseTests.buildString(10000), course:existingCourse)
-	def existingModuleTopic = new ModuleTopic(name:CourseTests.buildString(50), description:CourseTests.buildString(10000), module:existingModule, order:1)
+	def existingCourse = new Course(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), type:CourseType.COURSE)
+	def existingModule = new CourseModule(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), course:existingCourse)
+	def existingModuleTopic = new ModuleTopic(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), module:existingModule, order:1)
 	
 	protected void setUp() {
 		super.setUp()

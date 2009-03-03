@@ -25,14 +25,14 @@
                         
                    	        <g:sortableColumn property="name" title="Name" />
                         
-                   	        <g:sortableColumn property="description" title="Description" />
+                   	        <g:sortableColumn property="content" title="Content" />
                         
-                   	        <th>Course</th>
-                   	    
-                   	        <g:sortableColumn property="order" title="Order" />
+                   	        <g:sortableColumn property="lastUpdated" title="Last Updated" />
                         
                    	        <g:sortableColumn property="dateCreated" title="Date Created" />
                         
+                   	        <th>Course</th>
+                   	    
                         </tr>
                     </thead>
                     <tbody>
@@ -43,13 +43,13 @@
                         
                             <td>${fieldValue(bean:courseModuleInstance, field:'name')}</td>
                         
-                            <td>${fieldValue(bean:courseModuleInstance, field:'description')}</td>
+                            <td>${fieldValue(bean:courseModuleInstance, field:'content')}</td>
                         
-                            <td>${fieldValue(bean:courseModuleInstance, field:'course')}</td>
-                        
-                            <td>${fieldValue(bean:courseModuleInstance, field:'order')}</td>
+                            <td>${fieldValue(bean:courseModuleInstance, field:'lastUpdated')}</td>
                         
                             <td>${fieldValue(bean:courseModuleInstance, field:'dateCreated')}</td>
+                        
+                            <td>${fieldValue(bean:courseModuleInstance, field:'course')}</td>
                         
                         </tr>
                     </g:each>

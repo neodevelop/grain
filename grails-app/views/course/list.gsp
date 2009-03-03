@@ -25,7 +25,7 @@
                         
                    	        <g:sortableColumn property="name" title="Name" />
                         
-                   	        <g:sortableColumn property="description" title="Description" />
+                   	        <g:sortableColumn property="content" title="Content" />
                         
                    	        <g:sortableColumn property="lastUpdated" title="Last Updated" />
                         
@@ -43,7 +43,7 @@
                         
                             <td>${fieldValue(bean:courseInstance, field:'name')}</td>
                         
-                            <td>${fieldValue(bean:courseInstance, field:'description')}</td>
+                            <td>${fieldValue(bean:courseInstance, field:'content')}</td>
                         
                             <td>${fieldValue(bean:courseInstance, field:'lastUpdated')}</td>
                         

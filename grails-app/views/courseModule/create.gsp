@@ -31,16 +31,16 @@
                                     <label for="name">Name:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean:courseModuleInstance,field:'name','errors')}">
-                                    <input type="text" maxlength="50" id="name" name="name" value="${fieldValue(bean:courseModuleInstance,field:'name')}"/>
+                                    <input type="text" maxlength="100" id="name" name="name" value="${fieldValue(bean:courseModuleInstance,field:'name')}"/>
                                 </td>
                             </tr> 
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="description">Description:</label>
+                                    <label for="content">Content:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:courseModuleInstance,field:'description','errors')}">
-                                    <textarea rows="5" cols="40" name="description">${fieldValue(bean:courseModuleInstance, field:'description')}</textarea>
+                                <td valign="top" class="value ${hasErrors(bean:courseModuleInstance,field:'content','errors')}">
+                                    <input type="text" id="content" name="content" value="${fieldValue(bean:courseModuleInstance,field:'content')}"/>
                                 </td>
                             </tr> 
                         
@@ -59,24 +59,6 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean:courseModuleInstance,field:'order','errors')}">
                                     <input type="text" id="order" name="order" value="${fieldValue(bean:courseModuleInstance,field:'order')}" />
-                                </td>
-                            </tr> 
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="dateCreated">Date Created:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:courseModuleInstance,field:'dateCreated','errors')}">
-                                    <g:datePicker name="dateCreated" value="${courseModuleInstance?.dateCreated}" ></g:datePicker>
-                                </td>
-                            </tr> 
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="lastUpdated">Last Updated:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean:courseModuleInstance,field:'lastUpdated','errors')}">
-                                    <g:datePicker name="lastUpdated" value="${courseModuleInstance?.lastUpdated}" ></g:datePicker>
                                 </td>
                             </tr> 
                         

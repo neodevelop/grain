@@ -20,20 +20,20 @@ package com.synergyj.grain.domain
  */
 abstract class CourseContent {
 	String name
-	String description
+	String content
 	Date dateCreated
 	Date lastUpdated
 	
 	static constraints = {
-		name blank:false,nullable:false,size:1..50
-		description blank:false,nullable:false,size:1..10000
+		name blank:false,nullable:false,size:1..100
+		content blank:false,nullable:false
 		
 		lastUpdated display:false
 		dateCreated display:false
 	}
 	
 	static mapping = {
-		description type:"text"
+		content type:"text"
 		tablePerHierarchy false
 	}
 }

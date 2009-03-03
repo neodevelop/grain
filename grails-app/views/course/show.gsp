@@ -37,9 +37,9 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name">Description:</td>
+                            <td valign="top" class="name">Content:</td>
                             
-                            <td valign="top" class="value">${fieldValue(bean:courseInstance, field:'description')}</td>
+                            <td valign="top" class="value">${fieldValue(bean:courseInstance, field:'content')}</td>
                             
                         </tr>
                     

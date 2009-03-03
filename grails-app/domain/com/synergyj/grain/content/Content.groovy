@@ -31,7 +31,7 @@ class Content implements Serializable {
 	
 	static constraints = {
 		title blank:false,nullable:false,size:1..200
-		body blank:false,nullable:false,size:1..20000
+		body blank:false,nullable:false
 		author nullable:true
 		lastUpdated display:false
 		dateCreated display:false

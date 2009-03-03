@@ -31,16 +31,16 @@
                                     <label for="name">Name:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean:moduleTopicInstance,field:'name','errors')}">
-                                    <input type="text" maxlength="50" id="name" name="name" value="${fieldValue(bean:moduleTopicInstance,field:'name')}"/>
+                                    <input type="text" maxlength="100" id="name" name="name" value="${fieldValue(bean:moduleTopicInstance,field:'name')}"/>
                                 </td>
                             </tr> 
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="description">Description:</label>
+                                    <label for="content">Content:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:moduleTopicInstance,field:'description','errors')}">
-                                    <textarea rows="5" cols="40" name="description">${fieldValue(bean:moduleTopicInstance, field:'description')}</textarea>
+                                <td valign="top" class="value ${hasErrors(bean:moduleTopicInstance,field:'content','errors')}">
+                                    <input type="text" id="content" name="content" value="${fieldValue(bean:moduleTopicInstance,field:'content')}"/>
                                 </td>
                             </tr> 
                         
