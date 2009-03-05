@@ -32,7 +32,6 @@ class ModuleTopic extends CourseContent implements Comparable<ModuleTopic> {
 	
 	static mapping = {
 		order column:"topic_order"
-		body type:"text"
 	}
 	
 	int compareTo(ModuleTopic other){
