@@ -19,9 +19,21 @@ package com.synergyj.grain.domain
  * Base domain class. This class defines the common properties related to Courses
  */
 abstract class CourseContent {
+	/**
+	 * Name associated to the content, maybe useful tu use in the url.
+	 */
 	String name
+	/**
+	 * Content itself.
+	 */
 	String content
+	/**
+	 * Entity creation date.
+	 */
 	Date dateCreated
+	/**
+	 * Entity last updated date.
+	 */
 	Date lastUpdated
 	
 	static constraints = {
