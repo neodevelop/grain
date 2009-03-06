@@ -21,7 +21,7 @@ class CourseController {
 	def detail = {
 		def course = Course.get(params.id)
 		if(course) {
-			[courseInstance:course]
+			render view:"detail", model:[courseInstance:course]
 		} else {
 			redirect(action:index)
 		}

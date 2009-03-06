@@ -13,12 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.controllers
+package com.synergyj.grain.domain
 
 import grails.test.*
 
-class CourseControllerTests extends grails.test.GrailsUnitTestCase {
-	void testSomething() {
+class CourseControllerTests extends ControllerUnitTestCase {
+	def domain
+	
+	protected void setUp() {
+		super.setUp()
+
+		domain = new Course(id:1, name:CourseTests.buildString(50), content:CourseTests.buildString(10000), type:CourseType.COURSE, status:Status.PROPOSAL)
+		mockDomain Course, [domain]
+	}
+
+	protected void tearDown() {
+		super.tearDown()
+	}
+	
+	void testDetailWithExistingCourse() {
+		mockParams.id = 1
+		controller.detail()
 		
+		assertEquals 1, renderArgs.model.size()
+		assertEquals domain, renderArgs.model.courseInstance
+		assertEquals "detail", renderArgs.view
 	}
 }
