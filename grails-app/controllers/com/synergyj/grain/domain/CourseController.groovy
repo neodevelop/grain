@@ -17,4 +17,13 @@ package com.synergyj.grain.domain
 
 class CourseController {
 	def scaffold = true
+	
+	def detail = {
+		def course = Course.get(params.id)
+		if(course) {
+			[courseInstance:course]
+		} else {
+			redirect(action:index)
+		}
+	}
 }

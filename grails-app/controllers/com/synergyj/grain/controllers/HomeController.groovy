@@ -16,7 +16,5 @@
 package com.synergyj.grain.controllers
 
 class HomeController {
-	def index = {
-		
-	}
+	def index = {}
 }
