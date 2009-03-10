@@ -16,11 +16,12 @@
 package com.synergyj.grain.domain
 
 import grails.test.*
+import com.synergyj.grain.content.ContentType
 
 class ModuleTopicTests extends GrailsUnitTestCase {
 	def existingCourse = new Course(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), type:CourseType.COURSE)
 	def existingModule = new CourseModule(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), course:existingCourse)
-	def existingModuleTopic = new ModuleTopic(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), module:existingModule, order:1)
+	def existingModuleTopic = new ModuleTopic(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), module:existingModule, order:1, type:ContentType.TEXTILE)
 	
 	protected void setUp() {
 		super.setUp()
@@ -33,6 +34,12 @@ class ModuleTopicTests extends GrailsUnitTestCase {
 		def moduleTopic = new ModuleTopic(module:null)
 		assertFalse moduleTopic.validate()
 		assertEquals "nullable", moduleTopic.errors.module
+	}
+	
+	void testConstraintsType() {
+		def moduleTopic = new ModuleTopic(type:null)
+		assertFalse moduleTopic.validate()
+		assertEquals "nullable", moduleTopic.errors.type
 	}
 	
 	void testConstraints() {

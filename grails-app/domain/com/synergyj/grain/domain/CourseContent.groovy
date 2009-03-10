@@ -15,6 +15,8 @@
  */
 package com.synergyj.grain.domain
 
+import com.synergyj.grain.content.ContentType
+
 /**
  * Base domain class. This class defines the common properties related to Courses
  */
@@ -27,6 +29,8 @@ abstract class CourseContent {
 	 * Content itself.
 	 */
 	String content
+	
+	ContentType type
 	/**
 	 * Entity creation date.
 	 */
@@ -39,6 +43,7 @@ abstract class CourseContent {
 	static constraints = {
 		name blank:false,nullable:false,size:1..100
 		content blank:false,nullable:false
+		type nullable:false
 		
 		lastUpdated display:false
 		dateCreated display:false

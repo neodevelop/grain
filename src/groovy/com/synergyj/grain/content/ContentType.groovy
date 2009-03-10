@@ -15,27 +15,8 @@
  */
 package com.synergyj.grain.content
 
-import com.synergyj.grain.auth.User
-
-class Content implements Serializable {
-	String title
-	String body
-	User author
-	ContentType type
-	Date dateCreated
-	Date lastUpdated
-	
-	static mapping = {
-		body type:"text"
-		tablePerHierarchy false
-	}
-	
-	static constraints = {
-		title blank:false,nullable:false,size:1..200
-		body blank:false,nullable:false
-		author nullable:true
-		type nullable:false
-		lastUpdated display:false
-		dateCreated display:false
-	}
+enum ContentType {
+	TEXTILE,
+	MARKDOWN,
+	RADEOX
 }
