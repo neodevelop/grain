@@ -6,7 +6,8 @@ test/reports
 web-app/WEB-INF
 web-app/plugins
 web-app/js/prototype
-
+web-app/js/yui
+web-app/js/yui-cms
 *.iws
 *.war
 *DB*
