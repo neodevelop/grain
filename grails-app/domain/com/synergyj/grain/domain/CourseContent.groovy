@@ -30,7 +30,7 @@ abstract class CourseContent {
 	 */
 	String content
 	
-	ContentType type
+	ContentType contentType
 	/**
 	 * Entity creation date.
 	 */
@@ -43,7 +43,7 @@ abstract class CourseContent {
 	static constraints = {
 		name blank:false,nullable:false,size:1..100
 		content blank:false,nullable:false
-		type nullable:false
+		contentType nullable:false
 		
 		lastUpdated display:false
 		dateCreated display:false

@@ -16,14 +16,14 @@
 package com.synergyj.grain.domain
 
 class Course extends CourseContent {
-	CourseType type
+	CourseType courseType
 	SortedSet modules
 	Status status
 	
 	static hasMany = [modules:CourseModule]
 	
 	static constraints = {
-		type nullable:false
+		courseType nullable:false
 		status nullable:false
 	}
 	
