@@ -2,54 +2,54 @@
 <%@ page import="com.synergyj.grain.domain.CourseModule" %>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <title>CourseModule List</title>
+        <title><g:message code="courseModule.list" default="CourseModule List" /></title>
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
-            <span class="menuButton"><g:link class="create" action="create">New CourseModule</g:link></span>
+            <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
+            <span class="menuButton"><g:link class="create" action="create"><g:message code="courseModule.new" default="New CourseModule" /></g:link></span>
         </div>
         <div class="body">
-            <h1>CourseModule List</h1>
+            <h1><g:message code="courseModule.list" default="CourseModule List" /></h1>
             <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
+            <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
             </g:if>
             <div class="list">
                 <table>
                     <thead>
                         <tr>
                         
-                   	        <g:sortableColumn property="id" title="Id" />
+                   	    <g:sortableColumn property="id" title="Id" titleKey="courseModule.id" />
                         
-                   	        <g:sortableColumn property="name" title="Name" />
+                   	    <g:sortableColumn property="name" title="Name" titleKey="courseModule.name" />
                         
-                   	        <g:sortableColumn property="content" title="Content" />
+                   	    <g:sortableColumn property="content" title="Content" titleKey="courseModule.content" />
                         
-                   	        <g:sortableColumn property="lastUpdated" title="Last Updated" />
-                        
-                   	        <g:sortableColumn property="dateCreated" title="Date Created" />
-                        
-                   	        <th>Course</th>
+                   	    <th><g:message code="courseModule.contentType" default="Content Type" /></th>
                    	    
+                   	    <g:sortableColumn property="lastUpdated" title="Last Updated" titleKey="courseModule.lastUpdated" />
+                        
+                   	    <g:sortableColumn property="dateCreated" title="Date Created" titleKey="courseModule.dateCreated" />
+                        
                         </tr>
                     </thead>
                     <tbody>
                     <g:each in="${courseModuleInstanceList}" status="i" var="courseModuleInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${courseModuleInstance.id}">${fieldValue(bean:courseModuleInstance, field:'id')}</g:link></td>
+                            <td><g:link action="show" id="${courseModuleInstance.id}">${fieldValue(bean: courseModuleInstance, field: "id")}</g:link></td>
                         
-                            <td>${fieldValue(bean:courseModuleInstance, field:'name')}</td>
+                            <td>${fieldValue(bean: courseModuleInstance, field: "name")}</td>
                         
-                            <td>${fieldValue(bean:courseModuleInstance, field:'content')}</td>
+                            <td>${fieldValue(bean: courseModuleInstance, field: "content")}</td>
                         
-                            <td>${fieldValue(bean:courseModuleInstance, field:'lastUpdated')}</td>
+                            <td>${fieldValue(bean: courseModuleInstance, field: "contentType")}</td>
                         
-                            <td>${fieldValue(bean:courseModuleInstance, field:'dateCreated')}</td>
+                            <td><g:formatDate date="${courseModuleInstance.lastUpdated}" /></td>
                         
-                            <td>${fieldValue(bean:courseModuleInstance, field:'course')}</td>
+                            <td><g:formatDate date="${courseModuleInstance.dateCreated}" /></td>
                         
                         </tr>
                     </g:each>
