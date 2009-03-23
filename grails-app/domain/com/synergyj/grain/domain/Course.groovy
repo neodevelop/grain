@@ -16,15 +16,38 @@
 package com.synergyj.grain.domain
 
 class Course extends CourseContent {
+	String overview
+	String audience
+	String prerequisites
+	String goal
+	String method
+	String format
+	String courseKey
 	CourseType courseType
-	SortedSet modules
 	Status status
+	SortedSet modules
 	
 	static hasMany = [modules:CourseModule]
 	
 	static constraints = {
+		overview nullable:false,blank:false
+		audience nullable:false,blank:false
+		prerequisites nullable:false,blank:false
+		goal nullable:false,blank:false
+		method nullable:false,blank:false
+		format nullable:false,blank:false
+		courseKey nullable:false,blank:false,unique:true,size:1..20
 		courseType nullable:false
 		status nullable:false
+	}
+	
+	static mapping = {
+		overview type:"text"
+		audience type:"text"
+		prerequisites type:"text"
+		goal type:"text"
+		method type:"text"
+		format type:"text"
 	}
 	
 	String toString() {

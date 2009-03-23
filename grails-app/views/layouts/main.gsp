@@ -4,16 +4,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<title>Grain - [<g:layoutTitle default="" />]</title>
 	<link rel="stylesheet" href="${createLinkTo(dir:'themes/synergyj',file:'style.css')}" />
-	<link rel="stylesheet" href="${createLinkTo(dir:'themes/synergyj',file:'form.css')}" />
-	<link rel="stylesheet" href="${createLinkTo(dir:'themes/synergyj',file:'ui.all.css')}" />
 	<link rel="shortcut icon" href="${createLinkTo(dir:'themes/synergyj',file:'favicon.ico')}" type="image/x-icon" />
-	<script src="http://www.google.com/jsapi"></script>
-	<script>
-		google.load("jquery", "1.2.6");
-		//google.load("jqueryui", "1.5.3");
-	</script>
+	<g:javascript library="prototype"/>
 	<g:javascript library="application" />
 	<g:layoutHead />
+	
 </head>
 
 <body>
@@ -26,6 +21,9 @@
 
 		<!--left panel start -->
 		<div id="container">
+			<g:if test="${flash.message}">
+            	<div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
+            </g:if>
 			<g:layoutBody />	
 			<br class="spacer" />
 		</div>

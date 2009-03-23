@@ -66,6 +66,55 @@
                             </tr>
                             
                             <tr class="prop">
+                                <td valign="top" class="name"><g:message code="course.overview" default="Overview" />:</td>
+                                
+                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "overview")}</td>
+                                
+                            </tr>
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name"><g:message code="course.audience" default="Audience" />:</td>
+                                
+                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "audience")}</td>
+                                
+                            </tr>
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name"><g:message code="course.prerequisites" default="Prerequisites" />:</td>
+                                
+                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "prerequisites")}</td>
+                                
+                            </tr>
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name"><g:message code="course.goal" default="Goal" />:</td>
+                                
+                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "goal")}</td>
+                                
+                            </tr>
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name"><g:message code="course.method" default="Method" />:</td>
+                                
+                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "method")}</td>
+                                
+                            </tr>
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name"><g:message code="course.format" default="Format" />:</td>
+                                
+                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "format")}</td>
+                                
+                            </tr>
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name"><g:message code="course.courseKey" default="Course Key" />:</td>
+                                
+                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "courseKey")}</td>
+                                
+                            </tr>
+                            
+                            <tr class="prop">
                                 <td valign="top" class="name"><g:message code="course.courseType" default="Course Type" />:</td>
                                 
                                 <td valign="top" class="value">${courseInstance?.courseType?.encodeAsHTML()}</td>

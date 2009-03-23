@@ -16,6 +16,7 @@
 package com.synergyj.grain.content
 
 enum ContentType {
+	HTML,
 	TEXTILE,
 	MARKDOWN,
 	RADEOX

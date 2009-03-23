@@ -26,4 +26,8 @@ class CourseController {
 			redirect(action:index)
 		}
 	}
+	
+	def editCourse = {
+		render("Chido")
+	}
 }

@@ -17,10 +17,7 @@ label, input[type="text"]{
     float:left;
     display:block;
 }
-label
-{
-    margin-right: 5px;
-}
+
 .field{
     width:100%;
     overflow:auto;
