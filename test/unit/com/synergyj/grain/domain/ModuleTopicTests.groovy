@@ -19,9 +19,10 @@ import grails.test.*
 import com.synergyj.grain.content.ContentType
 
 class ModuleTopicTests extends GrailsUnitTestCase {
-	def existingCourse = new Course(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), type:CourseType.COURSE)
+	def string10000 = CourseTests.buildString(10000);
+	def existingCourse = new Course(name:CourseTests.buildString(50), content:string10000, courseType:CourseType.COURSE, status:Status.PROPOSAL, overview:string10000, prerequisites:string10000, goal:string10000, method:string10000, format:string10000, courseKey:"COURSE", audience:string10000, contentType:ContentType.HTML)
 	def existingModule = new CourseModule(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), course:existingCourse)
-	def existingModuleTopic = new ModuleTopic(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), module:existingModule, order:1, type:ContentType.TEXTILE)
+	def existingModuleTopic = new ModuleTopic(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), module:existingModule, order:1, contentType:ContentType.TEXTILE)
 	
 	protected void setUp() {
 		super.setUp()
@@ -37,9 +38,9 @@ class ModuleTopicTests extends GrailsUnitTestCase {
 	}
 	
 	void testConstraintsType() {
-		def moduleTopic = new ModuleTopic(type:null)
+		def moduleTopic = new ModuleTopic(contentType:null)
 		assertFalse moduleTopic.validate()
-		assertEquals "nullable", moduleTopic.errors.type
+		assertEquals "nullable", moduleTopic.errors.contentType
 	}
 	
 	void testConstraints() {

@@ -16,14 +16,94 @@
 package com.synergyj.grain.domain
 
 import grails.test.GrailsUnitTestCase
+import com.synergyj.grain.content.ContentType
 
 class CourseTests extends GrailsUnitTestCase {
-	def existingCourse = new Course(name:buildString(50), content:buildString(10000), type:CourseType.COURSE, status:Status.PROPOSAL)
+	def string10000 = buildString(10000);
+	def existingCourse = new Course(name:buildString(50), content:string10000, courseType:CourseType.COURSE, status:Status.PROPOSAL, overview:string10000, prerequisites:string10000, goal:string10000, method:string10000, format:string10000, courseKey:"COURSE", audience:string10000, contentType:ContentType.HTML)
 	
 	protected void setUp() {
 		super.setUp()
 		
 		mockForConstraintsTests Course, [ existingCourse ]
+	}
+	
+	void testConstraintsOverview() {
+		def course = new Course(overview:null)
+		assertFalse course.validate()
+		assertEquals "nullable", course.errors.overview
+		
+		course = new Course(overview:"")
+		assertFalse course.validate()
+		assertEquals "blank", course.errors.overview
+	}
+	
+	void testConstraintsAudience() {
+		def course = new Course(audience:null)
+		assertFalse course.validate()
+		assertEquals "nullable", course.errors.audience
+		
+		course = new Course(audience:"")
+		assertFalse course.validate()
+		assertEquals "blank", course.errors.audience
+	}
+	
+	void testConstraintsPrerequisites() {
+		def course = new Course(prerequisites:null)
+		assertFalse course.validate()
+		assertEquals "nullable", course.errors.prerequisites
+		
+		course = new Course(prerequisites:"")
+		assertFalse course.validate()
+		assertEquals "blank", course.errors.prerequisites
+	}
+	
+	void testConstraintsGoal() {
+		def course = new Course(goal:null)
+		assertFalse course.validate()
+		assertEquals "nullable", course.errors.goal
+		
+		course = new Course(goal:"")
+		assertFalse course.validate()
+		assertEquals "blank", course.errors.goal
+	}
+	
+	void testConstraintsMethod() {
+		def course = new Course(method:null)
+		assertFalse course.validate()
+		assertEquals "nullable", course.errors.method
+		
+		course = new Course(method:"")
+		assertFalse course.validate()
+		assertEquals "blank", course.errors.method
+	}
+	
+	void testConstraintsFormat() {
+		def course = new Course(format:null)
+		assertFalse course.validate()
+		assertEquals "nullable", course.errors.format
+		
+		course = new Course(format:"")
+		assertFalse course.validate()
+		assertEquals "blank", course.errors.format
+	}
+	
+	void testConstraintsCourseKey() {
+		def course = new Course(courseKey:null)
+		assertFalse course.validate()
+		assertEquals "nullable", course.errors.courseKey
+		
+		course = new Course(courseKey:"")
+		assertFalse course.validate()
+		assertEquals "blank", course.errors.courseKey
+		
+		course = new Course(courseKey:"COURSE")
+		assertFalse course.validate()
+		assertEquals "unique", course.errors.courseKey
+		
+		course = new Course(courseKey:buildString(21))
+		assertFalse course.validate()
+		assertEquals "size", course.errors.courseKey
 	}
 	
 	void testConstraintsName() {
@@ -51,9 +131,15 @@ class CourseTests extends GrailsUnitTestCase {
 	}
 	
 	void testConstraintsType() {
-		def course = new Course(type:null)
+		def course = new Course(courseType:null)
 		assertFalse course.validate()
-		assertEquals "nullable", course.errors.type
+		assertEquals "nullable", course.errors.courseType
+	}
+	
+	void testConstraintsContentType() {
+		def course = new Course(contentType:null)
+		assertFalse course.validate()
+		assertEquals "nullable", course.errors.contentType
 	}
 	
 	void testConstraintsStatus() {
@@ -63,7 +149,10 @@ class CourseTests extends GrailsUnitTestCase {
 	}
 	
 	void testConstraints() {
-		assertTrue existingCourse.validate()
+		existingCourse.courseKey = "COURSE1"
+		def validate = existingCourse.validate()
+		println existingCourse.errors
+		assertTrue validate
 		assertEquals existingCourse.toString(), buildString(50)
 	}
 	

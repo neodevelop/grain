@@ -16,6 +16,7 @@
 package com.synergyj.grain.domain
 
 import grails.test.*
+import com.synergyj.grain.content.ContentType
 
 class CourseControllerTests extends ControllerUnitTestCase {
 	def domain
@@ -23,7 +24,9 @@ class CourseControllerTests extends ControllerUnitTestCase {
 	protected void setUp() {
 		super.setUp()
 
-		domain = new Course(id:1, name:CourseTests.buildString(50), content:CourseTests.buildString(10000), type:CourseType.COURSE, status:Status.PROPOSAL)
+		def string10000 = CourseTests.buildString(10000);
+		domain = new Course(name:CourseTests.buildString(50), content:string10000, courseType:CourseType.COURSE, status:Status.PROPOSAL, overview:string10000, prerequisites:string10000, goal:string10000, method:string10000, format:string10000, courseKey:"COURSE", audience:string10000, contentType:ContentType.HTML)
+		
 		mockDomain Course, [domain]
 	}
 

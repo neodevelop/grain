@@ -18,14 +18,14 @@ package com.synergyj.grain.domain
 import com.synergyj.grain.content.ContentType
 
 class CourseModuleTests extends grails.test.GrailsUnitTestCase {
-	def existingCourse = new Course(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), type:CourseType.COURSE)
-	def existingModule = new CourseModule(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), course:existingCourse, order:1, type:ContentType.TEXTILE)
+	//def existingCourse = new Course(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), type:CourseType.COURSE)
+	def existingModule = new CourseModule(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), course:new Course(), order:1, contentType:ContentType.HTML)
 	
 	protected void setUp() {
 		super.setUp()
 		
 		mockForConstraintsTests CourseModule, [ existingModule ]
-		mockForConstraintsTests Course, [ existingCourse ]
+		//mockForConstraintsTests Course, [ existingCourse ]
 	}
 	
 	void testConstraintsCourse() {
@@ -37,7 +37,7 @@ class CourseModuleTests extends grails.test.GrailsUnitTestCase {
 	void testConstraintsType() {
 		def module = new CourseModule()
 		assertFalse module.validate()
-		assertEquals "nullable", module.errors.type
+		assertEquals "nullable", module.errors.contentType
 	}
 	
 	void testConstraintsOrder() {
