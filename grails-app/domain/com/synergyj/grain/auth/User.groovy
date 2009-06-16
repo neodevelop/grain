@@ -16,34 +16,41 @@
 package com.synergyj.grain.auth
 
 class User {
+	static transients = ['pass']
+	static hasMany = [roles:Role]
+	static belongsTo = Role
+	
+	
 	Date dateCreated
 	Date lastUpdated
 	String email
-	String login
-	String password
-	String realName
+	String username
+	String passwd
+	String userRealName
 	Boolean enabled = true
-	String about
+	String description
 	String company
 	String blog
 	String geolocation
 	String site
-
-	static hasMany = [roles:Role]
+	boolean emailShow
+	
+	/** plain password to create a MD5 password */
+	String pass = '[secret]'
 
 	static constraints = {
-		email nullable:false,blank:false,unique:true,email:true,size:1..200
-		login nullable:false,blank:false,unique:true,size:3..25
-		password nullable:false,blank:false,size:5..25
-		realName nullable:false,blank:false,size:0..200
-		company nullable:true,blank:true,size:0..100
+		email        nullable:false, blank:false, size:1..200, unique:true,email:true
+		username     nullable:false, blank:false, size:3..25,  unique:true
+		passwd       nullable:false, blank:false, size:5..25
+		userRealName nullable:false, blank:false, size:0..200
+		company      nullable:true,  blank:true,  size:0..100
+		geolocation  nullable:true,  blank:true,  size:0..200
+		description  nullable:true,  blank:true,  size:0..1000
+		blog         nullable:true,  blank:true,  size:0..300, url:true
+		site         nullable:false, blank:false, size:1..20,  url:true
+		lastUpdated  display:false
+		dateCreated  display:false
 		//geolocation(nullable:true,blank:true,size:0..200,geolocation:true)
-		geolocation nullable:true,blank:true,size:0..200
-		about nullable:true,blank:true,size:0..1000
-		blog nullable:true,blank:true,url:true,size:0..300
-		site nullable:false,blank:false,url:true,size:1..20
-		lastUpdated display:false
-		dateCreated display:false
 	}
 
 	static mapping = {
@@ -52,6 +59,6 @@ class User {
     }
 
 	String toString() {
-		login
+		username
 	}
 }

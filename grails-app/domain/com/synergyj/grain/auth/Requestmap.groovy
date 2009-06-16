@@ -15,20 +15,16 @@
  */
 package com.synergyj.grain.auth
 
-class Role {
-	String description
-	String authority
-	Date dateCreated
-	Date lastUpdated
-	
-	static constraints = {
-		description nullable:true,  blank:true,  size:0..200
-		authority   nullable:false, blank:false, size:1..200, unique:true
-		lastUpdated display:false
-		dateCreated display:false
-	}
+/**
+ * Request Map domain class.
+ */
+class Requestmap {
 
-	String toString() {
-		authority
+	String url
+	String configAttribute
+
+	static constraints = {
+		url(blank: false, unique: true)
+		configAttribute(blank: false)
 	}
 }
