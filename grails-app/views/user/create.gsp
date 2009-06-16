@@ -1,89 +1,99 @@
-
-<%@ page import="com.synergyj.grain.auth.User" %>
-<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta name="layout" content="main" />
-	<title>Create User</title>         
+	<title>Create User</title>
 </head>
+
 <body>
+
 	<div class="nav">
 		<span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
 		<span class="menuButton"><g:link class="list" action="list">User List</g:link></span>
 	</div>
+
 	<div class="body">
-
+		<h1>Create User</h1>
 		<g:if test="${flash.message}">
-		<div id="message">${flash.message}</div>
-	</g:if>
-	<g:hasErrors bean="${userInstance}">
-	<div id="errors">
-		<g:renderErrors bean="${userInstance}" as="list" />
-	</div>
-</g:hasErrors>
+		<div class="message">${flash.message}</div>
+		</g:if>
+		<g:hasErrors bean="${person}">
+		<div class="errors">
+			<g:renderErrors bean="${person}" as="list" />
+		</div>
+		</g:hasErrors>
+		<g:form action="save">
+			<div class="dialog">
+				<table>
+				<tbody>
 
-<g:form action="save" method="post" >
-<fieldset class=""><legend>Create User</legend>
-	<div class="required">
-		<label for="email">Email:</label>
-		<input type="text" id="email" name="email" value="${fieldValue(bean:userInstance,field:'email')}"/>
-		<span class="reqMark">*</span>
-	</div>
+					<tr class="prop">
+						<td valign="top" class="name"><label for="username">Login Name:</label></td>
+						<td valign="top" class="value ${hasErrors(bean:person,field:'username','errors')}">
+							<input type="text" id="username" name="username" value="${person.username?.encodeAsHTML()}"/>
+						</td>
+					</tr>
 
-	<div class="required">
-		<label for="login">Login:</label>
-		<input type="text" maxlength="25" id="login" name="login" value="${fieldValue(bean:userInstance,field:'login')}"/>
-		<span class="reqMark">*</span>
-	</div>
-	<div class="optional">
-		<label for="password">Password:</label>
-		<input type="text" id="password" name="password" value="${fieldValue(bean:userInstance,field:'password')}"/>
-		<span class="reqMark">*</span>
-	</div>
+					<tr class="prop">
+						<td valign="top" class="name"><label for="userRealName">Full Name:</label></td>
+						<td valign="top" class="value ${hasErrors(bean:person,field:'userRealName','errors')}">
+							<input type="text" id="userRealName" name="userRealName" value="${person.userRealName?.encodeAsHTML()}"/>
+						</td>
+					</tr>
 
-	<div class="required">
-		<label for="realName">Real Name:</label>
-		<input type="text" maxlength="200" id="realName" name="realName" value="${fieldValue(bean:userInstance,field:'realName')}"/>
-		<span class="reqMark">*</span>
-	</div>
+					<tr class="prop">
+						<td valign="top" class="name"><label for="passwd">Password:</label></td>
+						<td valign="top" class="value ${hasErrors(bean:person,field:'passwd','errors')}">
+							<input type="password" id="passwd" name="passwd" value="${person.passwd?.encodeAsHTML()}"/>
+						</td>
+					</tr>
 
-	<div class="required">
-		<label for="company">Company:</label>
-		<input type="text" maxlength="100" id="company" name="company" value="${fieldValue(bean:userInstance,field:'company')}"/>
-		<span class="reqMark">*</span>
-	</div>
+					<tr class="prop">
+						<td valign="top" class="name"><label for="enabled">Enabled:</label></td>
+						<td valign="top" class="value ${hasErrors(bean:person,field:'enabled','errors')}">
+							<g:checkBox name="enabled" value="${person.enabled}" ></g:checkBox>
+						</td>
+					</tr>
 
-	<div class="required">
-		<label for="geolocation">Geolocation:</label>
-		<input type="text" maxlength="200" id="geolocation" name="geolocation" value="${fieldValue(bean:userInstance,field:'geolocation')}"/>
-		<br/>
-	</div>
+					<tr class="prop">
+						<td valign="top" class="name"><label for="description">Description:</label></td>
+						<td valign="top" class="value ${hasErrors(bean:person,field:'description','errors')}">
+							<input type="text" id="description" name="description" value="${person.description?.encodeAsHTML()}"/>
+						</td>
+					</tr>
 
-	<div class="required">
-		<label for="about">About:</label>
-		<textarea rows="5" cols="40" name="about">${fieldValue(bean:userInstance, field:'about')}</textarea>
-		<br/>
-	</div>
+					<tr class="prop">
+						<td valign="top" class="name"><label for="email">Email:</label></td>
+						<td valign="top" class="value ${hasErrors(bean:person,field:'email','errors')}">
+							<input type="text" id="email" name="email" value="${person.email?.encodeAsHTML()}"/>
+						</td>
+					</tr>
 
-	<div class="required">
-		<label for="blog">Blog:</label>
-		<input type="text" maxlength="200" id="blog" name="blog" value="${fieldValue(bean:userInstance,field:'blog')}"/>
-		<span class="reqMark">*</span>
-	</div>
+					<tr class="prop">
+						<td valign="top" class="name"><label for="emailShow">Show Email:</label></td>
+						<td valign="top" class="value ${hasErrors(bean:person,field:'emailShow','errors')}">
+							<g:checkBox name="emailShow" value="${person.emailShow}"/>
+						</td>
+					</tr>
 
-	<div class="required">
-		<label for="enabled">Enabled:</label>
-		<g:checkBox name="enabled" value="${userInstance?.enabled}" ></g:checkBox>
-		<span class="reqMark">*</span>
-	</div>				
-	<div class="required">
-	</div>
-	<center>
-	<input class="save" type="submit" value="Create" />
-	</center>
-</fieldset>
+					<tr class="prop">
+						<td valign="top" class="name" align="left">Assign Roles:</td>
+					</tr>
 
-</g:form>
-</div>
+					<g:each in="${authorityList}">
+					<tr>
+						<td valign="top" class="name" align="left">${it.authority.encodeAsHTML()}</td>
+						<td align="left"><g:checkBox name="${it.authority}"/></td>
+					</tr>
+					</g:each>
+
+				</tbody>
+				</table>
+			</div>
+
+			<div class="buttons">
+				<span class="button"><input class="save" type="submit" value="Create" /></span>
+			</div>
+
+		</g:form>
+
+	</div>
 </body>
-</html>
