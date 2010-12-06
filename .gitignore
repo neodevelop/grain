@@ -12,3 +12,5 @@ cobertura.ser
 ddl.sql
 docs
 target
+.idea
+grain.iml
