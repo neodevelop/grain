@@ -35,10 +35,6 @@
 					<td valign="top" class="value">${authority.description}</td>
 				</tr>
 
-				<tr class="prop">
-					<td valign="top" class="name">People:</td>
-					<td valign="top" class="value">${authority.people}</td>
-				</tr>
 
 			</tbody>
 			</table>

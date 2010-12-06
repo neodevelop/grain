@@ -45,16 +45,6 @@
 					</td>
 				</tr>
 
-				<tr class="prop">
-					<td valign="top" class="name"><label for="people">People:</label></td>
-					<td valign="top" class="value ${hasErrors(bean:authority,field:'people','errors')}">
-						<ul>
-						<g:each var="p" in="${authority.people?}">
-							<li>${p}</li>
-						</g:each>
-						</ul>
-					</td>
-				</tr>
 			</tbody>
 			</table>
 			</div>
