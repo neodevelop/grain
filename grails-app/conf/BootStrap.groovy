@@ -39,16 +39,13 @@ class BootStrap {
       def about = new MenuItem(labelCode: 'menu.item.about').controller('info').action('show').id('1')
       save(about)
 
-      def services = new MenuItem(labelCode: 'menu.item.services')
-      services.link(controller: 'info', action: 'show', id: '2')
+      def services = new MenuItem(labelCode: 'menu.item.services').link(controller: 'info', action: 'show', id: '2')
       save(services)
 
-      def contact = new MenuItem(labelCode: 'menu.item.contact')
-      contact.controller('info').action('show').id('3')
+      def contact = new MenuItem(labelCode: 'menu.item.contact').controller('info').action('show').id('3')
       save(contact)
 
-      def google = new MenuItem(labelCode: 'menu.item.google')
-      google.url('http://google.com')
+      def google = new MenuItem(labelCode: 'menu.item.google').url('http://google.com')
       save(google)
 
       def homeOption = new MenuOption(item: home, order: 0)
