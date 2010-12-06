@@ -28,4 +28,8 @@ class LinkParam {
     name nullable: false, blank: false, minSize: 1, maxSize: 100
     value nullable: false, blank: false, minSize: 1, maxSize: 100
   }
+
+  public String toString() {
+    "${name}:${value}"
+  }
 }

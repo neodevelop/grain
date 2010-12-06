@@ -21,6 +21,10 @@ class Menu {
   static hasMany = [items: MenuOption]
 
   static constraints = {
-    name nullable: false, blank: false, unique:true, minSize: 1, maxSize: 100
+    name nullable: false, blank: false, unique: true, minSize: 1, maxSize: 100
+  }
+
+  public String toString() {
+    name
   }
 }

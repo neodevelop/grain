@@ -31,4 +31,8 @@ class MenuOption {
   static mapping = {
     order column: 'menu_option_order'
   }
+
+  public String toString() {
+    "${menu.name}:${item}"
+  }
 }

@@ -15,20 +15,18 @@
  */
 package com.synergyj.grain.ui
 
-class MenuItem {
-  String labelCode
-  LinkType type
-  String permissions
+import grails.test.*
 
-  static hasMany = [linkParams: LinkParam]
-
-  static constraints = {
-    labelCode blank: false, nullable: false, minSize: 1, maxSize: 100
-    type nullable: false
-    permissions blank: true, nullable: true, minSize: 1, maxSize: 200
+class MenuItemControllerTests extends ControllerUnitTestCase {
+  protected void setUp() {
+    super.setUp()
   }
 
-  public String toString() {
-    labelCode
+  protected void tearDown() {
+    super.tearDown()
+  }
+
+  void testSomething() {
+
   }
 }
