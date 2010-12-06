@@ -9,8 +9,13 @@
 
 <!-- Lava Lamp Navigation  -->
 <link rel="stylesheet" href="${createLinkTo(dir:'themes/wb/css',file:'lavalamp.css')}" />
+<script type="text/javascript" src="${createLinkTo(dir:'themes/wb/js',file:'jquery.js')}"></script>
+<script type="text/javascript" src="${createLinkTo(dir:'themes/wb/js',file:'jquery-1.2.3.min.js')}"></script>
+
+<%--
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>
+--%>
 
 <script type="text/javascript" src="${createLinkTo(dir:'themes/wb/js',file:'jquery.easing.min.js')}"></script>
 <script type="text/javascript" src="${createLinkTo(dir:'themes/wb/js',file:'jquery.lavalamp.min.js')}"></script>
