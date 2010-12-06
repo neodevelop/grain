@@ -15,6 +15,8 @@
  */
 package com.synergyj.grain.ui
 
+import static com.synergyj.grain.ui.LinkParam.*
+
 class MenuItem {
   String labelCode
   LinkType type
@@ -30,5 +32,58 @@ class MenuItem {
 
   public String toString() {
     labelCode
+  }
+
+  def isController() {
+    def hasLinkParamController
+    if (this.linkParams) {
+      hasLinkParamController = this.linkParams.find {param ->
+        param.name == CONTROLLER
+      }
+    } else {
+      hasLinkParamController = true
+    }
+    type == LinkType.CONTROLLER && hasLinkParamController
+  }
+
+  def link(params) {
+    if (params.controller) {
+      type = LinkType.CONTROLLER
+      addToLinkParams(controller(params.controller))
+      if (params.action) {
+        this.addToLinkParams(action(params.action))
+      }
+      if (params.id) {
+        this.addToLinkParams(id(params.id))
+      }
+    }
+  }
+
+  def url(url) {
+    type = LinkType.URL
+    this.addToLinkParams(LinkParam.url(url))
+    this
+  }
+
+  def controller(controller) {
+    type = LinkType.CONTROLLER
+    assert isController()
+    this.addToLinkParams(LinkParam.controller(controller))
+    this
+  }
+
+  def action(action) {
+    assert isController()
+    assert this.linkParams.find {param ->
+      param.name == CONTROLLER
+    }
+    this.addToLinkParams(LinkParam.action(action))
+    this
+  }
+
+  def id(id) {
+    assert isController()
+    this.addToLinkParams(LinkParam.id(id))
+    this
   }
 }

@@ -27,4 +27,10 @@ class Menu {
   public String toString() {
     name
   }
+
+  def option(MenuOption option) {
+    option.menu = this
+    this.addToItems(option)
+    this
+  }
 }

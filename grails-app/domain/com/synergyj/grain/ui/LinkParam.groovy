@@ -19,9 +19,14 @@ package com.synergyj.grain.ui
  * This class storages the link params to build a MenuItem.
  */
 class LinkParam {
+  public static final String CONTROLLER = 'controller'
+  public static final String ACTION = 'action'
+  public static final String ID = 'id'
+  public static final String URL = 'url'
   String name
   String value
 
+  static transients = ['CONTROLLER', 'ACTION']
   static belongsTo = [menuItem: MenuItem]
 
   static constraints = {
@@ -31,5 +36,21 @@ class LinkParam {
 
   public String toString() {
     "${name}:${value}"
+  }
+
+  def static url(url) {
+    new LinkParam(name: URL, value: url)
+  }
+
+  def static controller(controller) {
+    new LinkParam(name: CONTROLLER, value: controller)
+  }
+
+  def static action(action) {
+    new LinkParam(name: ACTION, value: action)
+  }
+
+  def static id(id) {
+    new LinkParam(name: ID, value: id)
   }
 }
