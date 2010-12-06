@@ -8,15 +8,8 @@
     <div id="nav">
       <ul class="lavaLampWithImage" id="1">
         <g:each in="${options}" var="option">
-          <li><a href="index.html">${option.item.labelCode}</a></li>
+          <li><a href="${menu.link(option:option)}">${g.message(code:option.item.labelCode, default:option.item.labelCode)}</a></li>
         </g:each>
-      <%--
-      <li class="current"><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="events.html">Events</a></li>
-      <li><a href="contacts.html">Contacts</a></li>
-      --%>
       </ul>
     </div>
     <!-- End LavaLamp Navigation  -->

@@ -26,7 +26,6 @@ class MenuTagLibTests extends TagLibUnitTestCase {
         super.tearDown()
     }
 
-    void testSomething() {
-
+    void testExtractParams() {
     }
 }

@@ -26,9 +26,86 @@ class MenuTagLib {
     assert name
     def result = []
     def menu = menuService.findMenu(name)
+
+    def byOrder = [compare: { a, b -> a.order.compareTo(b.order) }] as Comparator
+
     if (menu) {
-      result = menu.items
+      result = menu.items.sort(byOrder)
     }
     result
+  }
+
+  def valueForKey(params, key) {
+    def result = null
+    def param = params.find {param ->
+      param.name == key
+    }
+    if (param) {
+      result = param.value
+    }
+    result
+  }
+
+  def extractParams(params) {
+    def result = [:]
+    def foundParams = params.findAll {param ->
+      param.name.startsWith('p')
+    }
+    foundParams.each {param ->
+      result.put(param.name, param.value)
+    }
+    result
+  }
+
+  def link = {attrs ->
+    def option = attrs.option
+    assert option
+    def item = option.item
+    def type = item.type
+    def params = item.linkParams
+    def link = ''
+
+    switch (type.ordinal()) {
+      case 0:
+        //Mapping
+        break
+      case 1:
+        //Controller
+        def controller = valueForKey(params, 'controller')
+        assert controller
+
+        def action = valueForKey(params, 'action')
+        def id = valueForKey(params, 'id')
+        def extraParams = extractParams(params)
+
+        def linkParams = [:]
+        linkParams.controller = controller
+
+        if (action) {
+          linkParams.action = action
+        }
+
+        if (id) {
+          linkParams.id = id
+        }
+
+        if (extraParams) {
+          linkParams.params = extraParams
+        }
+
+        link = g.createLink(linkParams)
+        break
+      case 2:
+        //Url
+        def url = valueForKey(params, 'url')
+        assert url
+        link = url
+        break
+      default:
+        log.warn "no preparados aun para ${type.dump()}"
+        log.warn item.dump()
+        break
+    }
+    out << link
   }
 }
