@@ -1,6 +1,6 @@
 package com.synergyj.grain.themes
 
 class TestController {
-
-    def index = { }
+  def index = { }
+  def content = {}
 }

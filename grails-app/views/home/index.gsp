@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>Bienvenidos</title>
-	<meta name="layout" content="wb" />
+	<meta name="layout" content="wbMain" />
 </head>
 <body>
 	<div id="box">
