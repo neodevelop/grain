@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>Bienvenidos</title>
-	<meta name="layout" content="synergyj" />
+	<meta name="layout" content="wb" />
 </head>
 <body>
 	<div id="box">
