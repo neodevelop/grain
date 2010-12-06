@@ -27,9 +27,8 @@ class MenuTagLib {
     def result = []
     def menu = menuService.findMenu(name)
 
-    def byOrder = [compare: { a, b -> a.order.compareTo(b.order) }] as Comparator
-
     if (menu) {
+      def byOrder = [compare: { a, b -> a.order.compareTo(b.order) }] as Comparator
       result = menu.items.sort(byOrder)
     }
     result

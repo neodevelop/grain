@@ -36,13 +36,16 @@ class BootStrap {
       def home = new MenuItem(labelCode: 'menu.item.home').controller('home').action('index')
       save(home)
 
-      def about = new MenuItem(labelCode: 'menu.item.about').controller('info').action('show').id('1')
+      def about = new MenuItem(labelCode: 'menu.item.about').controller('info').action('show').id('about')
       save(about)
 
-      def services = new MenuItem(labelCode: 'menu.item.services').link(controller: 'info', action: 'show', id: '2')
+      def services = new MenuItem(labelCode: 'menu.item.services').link(controller: 'info', action: 'show', id: 'services')
       save(services)
 
-      def contact = new MenuItem(labelCode: 'menu.item.contact').controller('info').action('show').id('3')
+      def events = new MenuItem(labelCode: 'menu.item.events').link(controller: 'info', action: 'show', id: 'events')
+      save(events)
+
+      def contact = new MenuItem(labelCode: 'menu.item.contact').controller('info').action('show').id('contact')
       save(contact)
 
       def google = new MenuItem(labelCode: 'menu.item.google').url('http://google.com')
@@ -50,18 +53,36 @@ class BootStrap {
 
       def homeOption = new MenuOption(item: home, order: 0)
       save(homeOption)
-
       def aboutOption = new MenuOption(item: about, order: 1)
       save(aboutOption)
       def servicesOption = new MenuOption(item: services, order: 2)
       save(servicesOption)
-      def contactOption = new MenuOption(item: contact, order: 3)
+      def eventsOption = new MenuOption(item: events, order: 3)
+      save(eventsOption)
+      def contactOption = new MenuOption(item: contact, order: 4)
       save(contactOption)
 
-      def menu = new Menu(name: 'top')
-      save(menu)
-      menu.option(homeOption).option(aboutOption).option(servicesOption).option(contactOption)
-      save(menu)
+      def topMenu = new Menu(name: 'top')
+      save(topMenu)
+      topMenu.option(homeOption).option(aboutOption).option(servicesOption).option(contactOption).option(eventsOption)
+      save(topMenu)
+
+
+      def homeOptionB = new MenuOption(item: home, order: 0)
+      save(homeOptionB)
+      def aboutOptionB = new MenuOption(item: about, order: 1)
+      save(aboutOptionB)
+      def servicesOptionB = new MenuOption(item: services, order: 2)
+      save(servicesOptionB)
+      def eventsOptionB = new MenuOption(item: events, order: 3)
+      save(eventsOptionB)
+      def contactOptionB = new MenuOption(item: contact, order: 4)
+      save(contactOptionB)
+
+      def bottomMenu = new Menu(name: 'bottom')
+      save(bottomMenu)
+      bottomMenu.option(homeOptionB).option(aboutOptionB).option(servicesOptionB).option(contactOptionB).option(eventsOptionB)
+      save(bottomMenu)
 
     }
   }
