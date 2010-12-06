@@ -18,24 +18,28 @@ package com.synergyj.grain.content
 import com.synergyj.grain.auth.User
 
 class Content implements Serializable {
-	String title
-	String body
-	User author
-	ContentType type
-	Date dateCreated
-	Date lastUpdated
-	
-	static mapping = {
-		body type:"text"
-		tablePerHierarchy false
-	}
-	
-	static constraints = {
-		title blank:false,nullable:false,size:1..200
-		body blank:false,nullable:false
-		author nullable:true
-		type nullable:false
-		lastUpdated display:false
-		dateCreated display:false
-	}
+  String title
+  String body
+  Locale locale
+  String key
+  User author
+  ContentType type
+  Date dateCreated
+  Date lastUpdated
+
+  static mapping = {
+    body type: "text"
+    tablePerHierarchy false
+  }
+
+  static constraints = {
+    title blank: false, nullable: false, minSize: 1, maxSize: 200
+    body blank: false, nullable: false
+    locale nullable: false
+    key nullable: true, blank: true, minSize: 1, maxSize: 200
+    author nullable: true
+    type nullable: false
+    lastUpdated display: false
+    dateCreated display: false
+  }
 }
