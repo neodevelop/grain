@@ -29,7 +29,7 @@ class SetupFilters {
 				
 				if(needsReviewSetup && controllerName != "setup") {
 					log.trace "redirecting to setup controller"
-					redirect controller:'setup', action:'index'
+					//redirect controller:'setup', action:'index'
 				}
 			}
 			after = {
