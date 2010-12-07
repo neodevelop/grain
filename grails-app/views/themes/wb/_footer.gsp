@@ -1,6 +1,8 @@
 <!-- Begin Footer1  -->
 <div id="footer1">
   <div id="footer1content">
+    <content:body key="footerContent"/>
+    <%--
     <div id="corporateinfo">
       <div style="width:60px; float:left;">
         <img src="${createLinkTo(dir: 'themes/wb/images', file: 'icon5.png')}" width="48" height="50" alt=""/>
@@ -27,6 +29,7 @@
     <div id="connect">
       <h5>Connect With Us</h5>
       <br/><a href="http://twitter.com/synergyj"><img src="${createLinkTo(dir: 'themes/wb/images', file: 'icon6.png')}" alt="" width="39" height="49" class="leftimage"/></a><a href="http://facebook.com/synergyj"><img src="${createLinkTo(dir: 'themes/wb/images', file: 'icon7.png')}" alt="" width="46" height="49" class="leftimage"/></a> <a href="http://linkedin.com/synergyj"><img src="${createLinkTo(dir: 'themes/wb/images', file: 'icon8.png')}" alt="" width="52" height="49" class="leftimage"/></a><img src="${createLinkTo(dir: 'themes/wb/images', file: 'icon9.png')}" alt="" width="34" height="49" class="leftimage"/></div>
+      --%>
   </div>
 </div>
 <!-- End Footer1  -->
