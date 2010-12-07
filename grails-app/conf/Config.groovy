@@ -29,19 +29,20 @@
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
-grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
-                      xml: ['text/xml', 'application/xml'],
-                      text: 'text/plain',
-                      js: 'text/javascript',
-                      rss: 'application/rss+xml',
-                      atom: 'application/atom+xml',
-                      css: 'text/css',
-                      csv: 'text/csv',
-                      all: '*/*',
-                      json: ['application/json','text/json'],
-                      form: 'application/x-www-form-urlencoded',
-                      multipartForm: 'multipart/form-data'
-                    ]
+grails.mime.types = [
+    html: ['text/html', 'application/xhtml+xml'],
+    xml: ['text/xml', 'application/xml'],
+    text: 'text/plain',
+    js: 'text/javascript',
+    rss: 'application/rss+xml',
+    atom: 'application/atom+xml',
+    css: 'text/css',
+    csv: 'text/csv',
+    all: '*/*',
+    json: ['application/json', 'text/json'],
+    form: 'application/x-www-form-urlencoded',
+    multipartForm: 'multipart/form-data'
+]
 
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.cache.maxsize = 1000
@@ -66,38 +67,69 @@ grails.spring.bean.packages = []
 
 // set per-environment serverURL stem for creating absolute links
 environments {
-    production {
-        grails.serverURL = "http://www.changeme.com"
-    }
-    development {
-        grails.serverURL = "http://localhost:8080/${appName}"
-    }
-    test {
-        grails.serverURL = "http://localhost:8080/${appName}"
-    }
+  production {
+    grails.serverURL = "http://www.changeme.com"
+  }
+  development {
+    grails.serverURL = "http://localhost:8080/${appName}"
+  }
+  test {
+    grails.serverURL = "http://localhost:8080/${appName}"
+  }
 
 }
 
 // log4j configuration
 log4j = {
-    // Example of changing the log pattern for the default console
-    // appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+  // Example of changing the log pattern for the default console
+  // appender:
+  //
+  //appenders {
+  //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+  //}
 
-    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
-           'org.codehaus.groovy.grails.web.pages', //  GSP
-           'org.codehaus.groovy.grails.web.sitemesh', //  layouts
-           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping', // URL mapping
-           'org.codehaus.groovy.grails.commons', // core / classloading
-           'org.codehaus.groovy.grails.plugins', // plugins
-           'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
-           'org.springframework',
-           'org.hibernate',
-           'net.sf.ehcache.hibernate'
+  error 'org.codehaus.groovy.grails.web.servlet',  //  controllers
+      'org.codehaus.groovy.grails.web.pages', //  GSP
+      'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+      'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+      'org.codehaus.groovy.grails.web.mapping', // URL mapping
+      'org.codehaus.groovy.grails.commons', // core / classloading
+      'org.codehaus.groovy.grails.plugins', // plugins
+      'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+      'org.springframework',
+      'org.hibernate',
+      'net.sf.ehcache.hibernate'
 
-    warn   'org.mortbay.log'
+  warn 'org.mortbay.log'
 }
+
+
+/*
+ * Spring Security Config
+ */
+environments {
+  test {
+    grails.plugins.springsecurity.portMapper.httpPort = 80
+    grails.plugins.springsecurity.portMapper.httpsPort = 80
+  }
+  production {
+    grails.plugins.springsecurity.portMapper.httpPort = 80
+    grails.plugins.springsecurity.portMapper.httpsPort = 443
+  }
+}
+
+
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.synergyj.grain.auth.User'
+grails.plugins.springsecurity.userLookup.usernamePropertyName = 'email'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.synergyj.grain.auth.PersonAuthority'
+grails.plugins.springsecurity.authority.className = 'com.synergyj.grain.auth.Role'
+grails.plugins.springsecurity.rememberMe.cookieName = 'grain_remember_me'
+grails.plugins.springsecurity.rememberMe.key = 'grain_synergyj'
+grails.plugins.springsecurity.rememberMe.persistentToken.domainClassName = 'com.synergyj.grain.auth.PersistentLogin'
+grails.plugins.springsecurity.rememberMe.persistent = true
+grails.plugins.springsecurity.rememberMe.alwaysRemember = true
+//grails.plugins.springsecurity.failureHandler.defaultFailureUrl = '/account/authfail?login_error=1'
+//grails.plugins.springsecurity.auth.loginFormUrl = '/account/login'
+//grails.plugins.springsecurity.adh.errorPage = '/account/denied'
+//grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/account'
+
