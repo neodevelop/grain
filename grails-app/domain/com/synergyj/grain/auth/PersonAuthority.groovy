@@ -48,7 +48,7 @@ class PersonAuthority implements Serializable {
   }
 
   static boolean remove(User user, Role role, boolean flush = false) {
-    PersonAuthority instance = UserRole.findByUserAndRole(user, role)
+    PersonAuthority instance = PersonAuthority.findByUserAndRole(user, role)
     instance ? instance.delete(flush: flush) : false
   }
 
