@@ -52,8 +52,8 @@
           <td valign="top" class="name">
             <label for="locale"><g:message code="content.locale" default="Locale"/>:</label>
           </td>
-          <td valign="top" class="value ${hasErrors(bean: contentInstance, field: 'locale', 'errors')}">
-            <g:localeSelect name="locale" value="${contentInstance?.locale}"/>
+          <td valign="top" class="value ${hasErrors(bean: contentInstance, field: 'language', 'errors')}">
+            <g:localeSelect name="locale" value=""/>
 
           </td>
         </tr>

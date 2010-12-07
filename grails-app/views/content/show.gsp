@@ -44,9 +44,9 @@
         </tr>
 
         <tr class="prop">
-          <td valign="top" class="name"><g:message code="content.locale" default="Locale"/>:</td>
+          <td valign="top" class="name"><g:message code="content.language" default="Language"/>:</td>
 
-          <td valign="top" class="value">${fieldValue(bean: contentInstance, field: "locale")}</td>
+          <td valign="top" class="value">${fieldValue(bean: contentInstance, field: "language")}</td>
 
         </tr>
 

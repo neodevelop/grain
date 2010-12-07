@@ -25,7 +25,7 @@
 
         <g:sortableColumn property="body" title="Body" titleKey="content.body"/>
 
-        <g:sortableColumn property="locale" title="Locale" titleKey="content.locale"/>
+        <g:sortableColumn property="language" title="Language" titleKey="content.language"/>
 
         <g:sortableColumn property="key" title="Key" titleKey="content.key"/>
 
@@ -43,7 +43,7 @@
 
           <td>${fieldValue(bean: contentInstance, field: "body")}</td>
 
-          <td>${fieldValue(bean: contentInstance, field: "locale")}</td>
+          <td>${fieldValue(bean: contentInstance, field: "language")}</td>
 
           <td>${fieldValue(bean: contentInstance, field: "key")}</td>
 

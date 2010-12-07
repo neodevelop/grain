@@ -20,7 +20,7 @@ import com.synergyj.grain.auth.User
 class Content implements Serializable {
   String title
   String body
-  Locale locale
+  String language
   String key
   User author
   ContentType type
@@ -35,7 +35,7 @@ class Content implements Serializable {
   static constraints = {
     title blank: false, nullable: false, minSize: 1, maxSize: 200
     body blank: false, nullable: false
-    locale nullable: false
+    language nullable: false, maxSize:100
     key nullable: true, blank: true, minSize: 1, maxSize: 200
     author nullable: true
     type nullable: false

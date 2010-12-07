@@ -15,6 +15,8 @@
  */
 package com.synergyj.grain.content
 
+import org.springframework.beans.propertyeditors.LocaleEditor
+
 class ContentController {
 
   def index = { redirect(action: "list", params: params) }
@@ -30,11 +32,17 @@ class ContentController {
   def create = {
     def contentInstance = new Content()
     contentInstance.properties = params
+    contentInstance.language = params.locale?.language
     return [contentInstance: contentInstance]
   }
 
   def save = {
     def contentInstance = new Content(params)
+    def localeEditor = new LocaleEditor()
+    localeEditor.setAsText(params.locale)
+    def loc = localeEditor.value
+    contentInstance.language = loc.getLanguage()
+
     if (!contentInstance.hasErrors() && contentInstance.save()) {
       flash.message = "content.created"
       flash.args = [contentInstance.id]
@@ -85,6 +93,10 @@ class ContentController {
         }
       }
       contentInstance.properties = params
+      def localeEditor = new LocaleEditor()
+      localeEditor.setAsText(params.locale)
+      def loc = localeEditor.value
+      contentInstance.language = loc.getLanguage()
       if (!contentInstance.hasErrors() && contentInstance.save()) {
         flash.message = "content.updated"
         flash.args = [params.id]

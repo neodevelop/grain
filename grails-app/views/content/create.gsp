@@ -47,11 +47,10 @@
 
         <tr class="prop">
           <td valign="top" class="name">
-            <label for="locale"><g:message code="content.locale" default="Locale"/>:</label>
+            <label for="language"><g:message code="content.language" default="Language"/>:</label>
           </td>
-          <td valign="top" class="value ${hasErrors(bean: contentInstance, field: 'locale', 'errors')}">
-            <g:localeSelect name="locale" value="${contentInstance?.locale}"/>
-
+          <td valign="top" class="value ${hasErrors(bean: contentInstance, field: 'language', 'errors')}">
+            <g:localeSelect name="locale" />
           </td>
         </tr>
 
@@ -67,7 +66,7 @@
 
         <tr class="prop">
           <td valign="top" class="name">
-            <label for="author"><g:message code="content.author" default="Author"/>:</label>
+            <label for="author.id"><g:message code="content.author" default="Author"/>:</label>
           </td>
           <td valign="top" class="value ${hasErrors(bean: contentInstance, field: 'author', 'errors')}">
             <g:select name="author.id" from="${com.synergyj.grain.auth.User.list()}" optionKey="id" value="${contentInstance?.author?.id}" noSelection="['null': '']"/>
