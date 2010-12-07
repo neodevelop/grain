@@ -15,21 +15,18 @@
  */
 package com.synergyj.grain.auth
 
-/**
- * Request Map domain class.
- */
-class Requestmap {
+import grails.test.*
 
-  String url
-  String configAttribute
-
-  static constraints = {
-    url blank: false, unique: true
-    configAttribute blank: false
+class PersonAuthorityTests extends GrailsUnitTestCase {
+  protected void setUp() {
+    super.setUp()
   }
 
-  static mapping = {
-    cache true
-    table 'gr_request_map'
+  protected void tearDown() {
+    super.tearDown()
+  }
+
+  void testSomething() {
+
   }
 }
