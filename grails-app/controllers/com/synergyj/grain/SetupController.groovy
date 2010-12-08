@@ -18,6 +18,9 @@ package com.synergyj.grain
 
 import com.synergyj.grain.auth.User
 
+import grails.plugins.springsecurity.Secured
+
+@Secured(['permitAll'])
 class SetupController {
 	def index = {
 		def noUsers = User.count() == 0

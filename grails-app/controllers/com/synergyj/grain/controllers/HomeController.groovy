@@ -15,6 +15,9 @@
  */
 package com.synergyj.grain.controllers
 
+import grails.plugins.springsecurity.Secured
+
+@Secured(['permitAll'])
 class HomeController {
 	def index = {}
 }
