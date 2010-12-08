@@ -26,6 +26,9 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
+import grails.plugins.springsecurity.SecurityConfigType
+
+
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
@@ -103,10 +106,9 @@ log4j = {
   warn 'org.mortbay.log'
 }
 
-
 /*
- * Spring Security Config
- */
+* Spring Security Config
+*/
 environments {
   test {
     grails.plugins.springsecurity.portMapper.httpPort = 80
@@ -124,12 +126,20 @@ grails.plugins.springsecurity.userLookup.usernamePropertyName = 'email'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.synergyj.grain.auth.PersonAuthority'
 grails.plugins.springsecurity.authority.className = 'com.synergyj.grain.auth.Role'
 grails.plugins.springsecurity.rememberMe.cookieName = 'grain_remember_me'
-grails.plugins.springsecurity.rememberMe.key = 'grain_synergyj'
+grails.plugins.springsecurity.rememberMe.key = 'gHUaaSP3456X9S3hTjskQ'
 grails.plugins.springsecurity.rememberMe.persistentToken.domainClassName = 'com.synergyj.grain.auth.PersistentLogin'
 grails.plugins.springsecurity.rememberMe.persistent = true
 grails.plugins.springsecurity.rememberMe.alwaysRemember = true
-//grails.plugins.springsecurity.failureHandler.defaultFailureUrl = '/account/authfail?login_error=1'
-//grails.plugins.springsecurity.auth.loginFormUrl = '/account/login'
-//grails.plugins.springsecurity.adh.errorPage = '/account/denied'
-//grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/account'
+grails.plugins.springsecurity.failureHandler.defaultFailureUrl = '/account/authfail?login_error=1'
+grails.plugins.springsecurity.auth.loginFormUrl = '/account/login'
+grails.plugins.springsecurity.adh.errorPage = '/account/denied'
+grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/account'
+grails.plugins.springsecurity.rejectIfNoRule = true
+grails.plugins.springsecurity.securityConfigType = SecurityConfigType.Annotation
+
+grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+    '/themes/**': ['permitAll'],
+    '/js/**': ['permitAll'],
+    '/images/**': ['permitAll']
+]
 

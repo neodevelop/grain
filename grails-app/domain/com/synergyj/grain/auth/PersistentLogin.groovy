@@ -13,8 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.synergyj.grain.auth
 
-// Place your Spring DSL code here
-beans = {
-  userDetailsService(com.synergyj.grain.auth.GrainUserDetailsService)
+class PersistentLogin {
+
+  String id
+  String username
+  String token
+  Date lastUsed
+
+  static constraints = {
+    username maxSize: 64
+    token maxSize: 64
+    id maxSize: 64
+  }
+
+  static transients = ['series']
+
+  void setSeries(String series) { id = series }
+
+  String getSeries() { id }
+
+  static mapping = {
+    table 'persistent_logins'
+    id column: 'series', generator: 'assigned'
+    version false
+  }
 }
