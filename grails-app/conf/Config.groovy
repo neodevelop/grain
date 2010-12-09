@@ -131,11 +131,19 @@ grails.plugins.springsecurity.rememberMe.persistentToken.domainClassName = 'com.
 grails.plugins.springsecurity.rememberMe.persistent = true
 grails.plugins.springsecurity.rememberMe.alwaysRemember = true
 grails.plugins.springsecurity.failureHandler.defaultFailureUrl = '/account/authfail?login_error=1'
-grails.plugins.springsecurity.auth.loginFormUrl = '/account/login'
-grails.plugins.springsecurity.adh.errorPage = '/account/denied'
-grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/account'
+grails.plugins.springsecurity.auth.loginFormUrl = '/login'
+grails.plugins.springsecurity.adh.errorPage = '/denied'
+grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/'
 grails.plugins.springsecurity.rejectIfNoRule = true
 grails.plugins.springsecurity.securityConfigType = SecurityConfigType.Annotation
+grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
+
+grails.plugins.springsecurity.failureHandler.exceptionMappings = [
+    'org.springframework.security.authentication.LockedException': '/accountLocked',
+    'org.springframework.security.authentication.DisabledException': '/accountDisabled',
+    'org.springframework.security.authentication.AccountExpiredException': '/accountExpired',
+    'org.springframework.security.authentication.CredentialsExpiredException': '/passwordExpired'
+]
 
 grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/themes/**': ['permitAll'],

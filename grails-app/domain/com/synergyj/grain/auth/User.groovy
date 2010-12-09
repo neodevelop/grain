@@ -45,7 +45,7 @@ class User {
     company nullable: true, blank: true, size: 0..100
     geolocation nullable: true, blank: true, size: 0..200
     description nullable: true, blank: true
-    website nullable: false, blank: false, size: 1..100, url: true
+    website nullable: true, blank: true, size: 1..100, url: true
     geolocation nullable: true, blank: true, size: 0..200
     lastUpdated display: false
     dateCreated display: false
@@ -61,7 +61,7 @@ class User {
   }
 
   Set<Role> getAuthorities() {
-    UserRole.findAllByUser(this).collect { it.role } as Set
+    PersonAuthority.findAllByUser(this).collect { it.role } as Set
   }
 
   String toString() {

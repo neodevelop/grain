@@ -31,6 +31,10 @@ environments {
 			url = "jdbc:hsqldb:file:devDB"
 			dbCreate = "update" // one of 'create', 'create-drop','update'
 		}
+    hibernate {
+      show_sql = false
+      format_sql = true
+    }
 	}
 	test {
 		dataSource {

@@ -28,6 +28,7 @@ class Content implements Serializable {
   Date lastUpdated
 
   static mapping = {
+    cache true
     body type: "text"
     tablePerHierarchy false
   }
