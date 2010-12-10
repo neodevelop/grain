@@ -42,7 +42,7 @@ class BootStrap {
       def services = new MenuItem(labelCode: 'menu.item.services').link(controller: 'info', action: 'show', id: 'services')
       save(services)
 
-      def events = new MenuItem(labelCode: 'menu.item.events').link(controller: 'info', action: 'show', id: 'events')
+      def account = new MenuItem(labelCode: 'menu.item.account').link(controller: 'account', action: 'index')
       save(events)
 
       def contact = new MenuItem(labelCode: 'menu.item.contact').controller('info').action('show').id('contact')
@@ -57,9 +57,9 @@ class BootStrap {
       save(aboutOption)
       def servicesOption = new MenuOption(item: services, order: 2)
       save(servicesOption)
-      def eventsOption = new MenuOption(item: events, order: 3)
+      def eventsOption = new MenuOption(item: account, order: 4)
       save(eventsOption)
-      def contactOption = new MenuOption(item: contact, order: 4)
+      def contactOption = new MenuOption(item: contact, order: 3)
       save(contactOption)
 
       def topMenu = new Menu(name: 'top')
@@ -74,9 +74,9 @@ class BootStrap {
       save(aboutOptionB)
       def servicesOptionB = new MenuOption(item: services, order: 2)
       save(servicesOptionB)
-      def eventsOptionB = new MenuOption(item: events, order: 3)
+      def eventsOptionB = new MenuOption(item: account, order: 4)
       save(eventsOptionB)
-      def contactOptionB = new MenuOption(item: contact, order: 4)
+      def contactOptionB = new MenuOption(item: contact, order: 3)
       save(contactOptionB)
 
       def bottomMenu = new Menu(name: 'bottom')
