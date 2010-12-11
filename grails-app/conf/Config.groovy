@@ -137,6 +137,7 @@ grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/'
 grails.plugins.springsecurity.rejectIfNoRule = true
 grails.plugins.springsecurity.securityConfigType = SecurityConfigType.Annotation
 grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
+grails.plugins.springsecurity.useSessionFixationPrevention = true
 
 grails.plugins.springsecurity.failureHandler.exceptionMappings = [
     'org.springframework.security.authentication.LockedException': '/accountLocked',
