@@ -36,8 +36,8 @@ class MenuItem {
 
   def isController() {
     def hasLinkParamController
-    if (this.linkParams) {
-      hasLinkParamController = this.linkParams.find {param ->
+    if (linkParams) {
+      hasLinkParamController = linkParams.find {param ->
         param.name == CONTROLLER
       }
     } else {
@@ -51,24 +51,25 @@ class MenuItem {
       type = LinkType.CONTROLLER
       addToLinkParams(controller(params.controller))
       if (params.action) {
-        this.addToLinkParams(action(params.action))
+        addToLinkParams(action(params.action))
       }
       if (params.id) {
-        this.addToLinkParams(id(params.id))
+        addToLinkParams(id(params.id))
       }
     }
+    this
   }
 
   def url(url) {
     type = LinkType.URL
-    this.addToLinkParams(LinkParam.url(url))
+    addToLinkParams(LinkParam.url(url))
     this
   }
 
   def controller(controller) {
     type = LinkType.CONTROLLER
     assert isController()
-    this.addToLinkParams(LinkParam.controller(controller))
+    addToLinkParams(LinkParam.controller(controller))
     this
   }
 
@@ -77,13 +78,13 @@ class MenuItem {
     assert this.linkParams.find {param ->
       param.name == CONTROLLER
     }
-    this.addToLinkParams(LinkParam.action(action))
+    addToLinkParams(LinkParam.action(action))
     this
   }
 
   def id(id) {
     assert isController()
-    this.addToLinkParams(LinkParam.id(id))
+    addToLinkParams(LinkParam.id(id))
     this
   }
 }

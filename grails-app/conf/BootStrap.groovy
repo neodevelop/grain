@@ -21,6 +21,7 @@ import com.synergyj.grain.ui.MenuOption
 
 class BootStrap {
   def save(domain) {
+    assert domain
     if (domain.hasErrors()) {
       domain.errors.each {error ->
         println error.dump()
@@ -43,7 +44,7 @@ class BootStrap {
       save(services)
 
       def account = new MenuItem(labelCode: 'menu.item.account').link(controller: 'account', action: 'index')
-      save(events)
+      save(account)
 
       def contact = new MenuItem(labelCode: 'menu.item.contact').controller('info').action('show').id('contact')
       save(contact)
@@ -57,14 +58,14 @@ class BootStrap {
       save(aboutOption)
       def servicesOption = new MenuOption(item: services, order: 2)
       save(servicesOption)
-      def eventsOption = new MenuOption(item: account, order: 4)
-      save(eventsOption)
+      def accountOption = new MenuOption(item: account, order: 4)
+      save(accountOption)
       def contactOption = new MenuOption(item: contact, order: 3)
       save(contactOption)
 
       def topMenu = new Menu(name: 'top')
       save(topMenu)
-      topMenu.option(homeOption).option(aboutOption).option(servicesOption).option(contactOption).option(eventsOption)
+      topMenu.option(homeOption).option(aboutOption).option(servicesOption).option(contactOption).option(accountOption)
       save(topMenu)
 
 
@@ -74,14 +75,14 @@ class BootStrap {
       save(aboutOptionB)
       def servicesOptionB = new MenuOption(item: services, order: 2)
       save(servicesOptionB)
-      def eventsOptionB = new MenuOption(item: account, order: 4)
-      save(eventsOptionB)
+      def accountOptionB = new MenuOption(item: account, order: 4)
+      save(accountOptionB)
       def contactOptionB = new MenuOption(item: contact, order: 3)
       save(contactOptionB)
 
       def bottomMenu = new Menu(name: 'bottom')
       save(bottomMenu)
-      bottomMenu.option(homeOptionB).option(aboutOptionB).option(servicesOptionB).option(contactOptionB).option(eventsOptionB)
+      bottomMenu.option(homeOptionB).option(aboutOptionB).option(servicesOptionB).option(contactOptionB).option(accountOptionB)
       save(bottomMenu)
 
     }
