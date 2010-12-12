@@ -34,7 +34,7 @@ class BootStrap {
 
   def init = { servletContext ->
     if (MenuItem.count() == 0) {
-      def home = new MenuItem(labelCode: 'menu.item.home').controller('home').action('index')
+      def home = new MenuItem(labelCode: 'menu.item.home').link(mapping: 'home')
       save(home)
 
       def about = new MenuItem(labelCode: 'menu.item.about').controller('info').action('show').id('about')
@@ -43,8 +43,11 @@ class BootStrap {
       def services = new MenuItem(labelCode: 'menu.item.services').link(controller: 'info', action: 'show', id: 'services')
       save(services)
 
-      def account = new MenuItem(labelCode: 'menu.item.account').link(controller: 'account', action: 'index')
+      def account = new MenuItem(labelCode: 'menu.item.account').link(mapping: 'me')
       save(account)
+
+      def login = new MenuItem(labelCode: 'menu.item.login').link(mapping: 'login')
+      save(login)
 
       def contact = new MenuItem(labelCode: 'menu.item.contact').controller('info').action('show').id('contact')
       save(contact)
@@ -58,14 +61,17 @@ class BootStrap {
       save(aboutOption)
       def servicesOption = new MenuOption(item: services, order: 2)
       save(servicesOption)
-      def accountOption = new MenuOption(item: account, order: 4)
+      def accountOption = new MenuOption(item: account, order: 4, permissions: 'isAuthenticated()')
       save(accountOption)
+      def loginOption = new MenuOption(item: login, order: 4, permissions: 'isAnonymous()')
+      save(loginOption)
       def contactOption = new MenuOption(item: contact, order: 3)
       save(contactOption)
 
       def topMenu = new Menu(name: 'top')
       save(topMenu)
-      topMenu.option(homeOption).option(aboutOption).option(servicesOption).option(contactOption).option(accountOption)
+      topMenu.option(homeOption).option(aboutOption).option(servicesOption)
+      topMenu.option(contactOption).option(accountOption).option(loginOption)
       save(topMenu)
 
 

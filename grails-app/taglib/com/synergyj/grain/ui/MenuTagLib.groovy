@@ -15,8 +15,22 @@
  */
 package com.synergyj.grain.ui
 
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+
+import javax.servlet.FilterChain
+import org.springframework.expression.Expression
+import org.springframework.security.access.expression.ExpressionUtils
+import org.springframework.security.web.FilterInvocation
+import static com.synergyj.grain.ui.LinkParam.*
+
 class MenuTagLib {
   def menuService
+  def springSecurityService
+  def webExpressionHandler
+  protected Map<String, Expression> expressionCache = [:]
+  protected static final FilterChain DUMMY_CHAIN = [
+      doFilter: { req, res -> throw new UnsupportedOperationException() }
+  ] as FilterChain
 
   static namespace = 'menu'
   static returnObjectForTags = ['options']
@@ -24,14 +38,41 @@ class MenuTagLib {
   def options = {attrs ->
     def name = attrs.name
     assert name
-    def result = []
+    def foundOptions = []
     def menu = menuService.findMenu(name)
 
     if (menu) {
       def byOrder = [compare: { a, b -> a.order.compareTo(b.order) }] as Comparator
-      result = menu.items.sort(byOrder)
+      foundOptions = menu.items.sort(byOrder)
     }
-    result
+
+    def options = []
+
+    foundOptions.each {option ->
+      def permissions = option.permissions ?: option.item.permissions
+      if (permissions) {
+        def auth = springSecurityService.authentication
+        def expression = findOrCreateExpression(permissions)
+        def fi = new FilterInvocation(request, response, DUMMY_CHAIN)
+        def ctx = webExpressionHandler.createEvaluationContext(auth, fi)
+        if (ExpressionUtils.evaluateAsBoolean(expression, ctx)) {
+          options << option
+        }
+      } else {
+        options << option
+      }
+    }
+
+    options
+  }
+
+  protected synchronized Expression findOrCreateExpression(String text) {
+    Expression expression = expressionCache.get(text);
+    if (!expression) {
+      expression = webExpressionHandler.expressionParser.parseExpression(text)
+      expressionCache[text] = expression
+    }
+    return expression
   }
 
   def valueForKey(params, key) {
@@ -66,15 +107,20 @@ class MenuTagLib {
 
     switch (type.ordinal()) {
       case 0:
-        //Mapping
+        def mapping = valueForKey(params, MAPPING)
+        assert mapping
+        def linkParams = [:]
+        linkParams.mapping = mapping
+
+        link = g.createLink(linkParams)
         break
       case 1:
         //Controller
-        def controller = valueForKey(params, 'controller')
+        def controller = valueForKey(params, CONTROLLER)
         assert controller
 
-        def action = valueForKey(params, 'action')
-        def id = valueForKey(params, 'id')
+        def action = valueForKey(params, ACTION)
+        def id = valueForKey(params, ID)
         def extraParams = extractParams(params)
 
         def linkParams = [:]
@@ -96,7 +142,7 @@ class MenuTagLib {
         break
       case 2:
         //Url
-        def url = valueForKey(params, 'url')
+        def url = valueForKey(params, URL)
         assert url
         link = url
         break

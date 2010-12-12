@@ -15,13 +15,24 @@
  */
 
 class UrlMappings {
-	static mappings = {
-		"/"(controller: 'home')
-		"/$controller/$action?/$id?"{
-			constraints {
-				// apply constraints here
-			}
-		}
-		"500"(view:'/error')
-	}
+  static mappings = {
+    name me: '/me' {
+      controller = 'user'
+      action = 'me'
+    }
+    name login: '/login' {
+      controller = 'user'
+      action = 'login'
+    }
+    name home: '/' {
+      controller = 'home'
+      action = 'index'
+    }
+    "/$controller/$action?/$id?" {
+      constraints {
+        // apply constraints here
+      }
+    }
+    "500"(controller: 'error')
+  }
 }

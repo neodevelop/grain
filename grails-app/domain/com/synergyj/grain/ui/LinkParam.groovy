@@ -23,6 +23,7 @@ class LinkParam {
   public static final String ACTION = 'action'
   public static final String ID = 'id'
   public static final String URL = 'url'
+  public static final String MAPPING = 'mapping'
   String name
   String value
 
@@ -52,5 +53,9 @@ class LinkParam {
 
   def static id(id) {
     new LinkParam(name: ID, value: id)
+  }
+
+  def static mapping(mapping) {
+    new LinkParam(name: MAPPING, value: mapping)
   }
 }

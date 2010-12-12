@@ -56,7 +56,15 @@ class MenuItem {
       if (params.id) {
         addToLinkParams(id(params.id))
       }
+    } else if (params.mapping) {
+      type = LinkType.MAPPING
+      addToLinkParams(mapping(params.mapping))
     }
+    this
+  }
+
+  def mapping(mapping) {
+    addToLinkParams(LinkParam.mapping(mapping))
     this
   }
 

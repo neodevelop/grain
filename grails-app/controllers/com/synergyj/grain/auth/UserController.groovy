@@ -15,7 +15,15 @@
  */
 package com.synergyj.grain.auth
 
+import grails.plugins.springsecurity.Secured
+
 class UserController {
-    
-    def scaffold = User
+  @Secured(['isAuthenticated()'])
+  def me = {
+
+  }
+
+  @Secured(['permitAll()'])
+  def login = {
+  }
 }

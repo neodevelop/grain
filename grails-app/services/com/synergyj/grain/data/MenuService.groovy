@@ -21,6 +21,7 @@ class MenuService {
   static transactional = false
 
   def findMenu(key) {
+    //TODO: Add caching here
     def menu = Menu.findByName(key)
     menu
   }
