@@ -26,4 +26,12 @@ class UserController {
   @Secured(['permitAll()'])
   def login = {
   }
+
+  @Secured(['permitAll()'])
+  def forgotPassword = {
+  }
+
+  @Secured(['permitAll()'])
+  def signup = {
+  }
 }
