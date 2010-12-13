@@ -20,36 +20,28 @@ import grails.test.GrailsUnitTestCase
 import com.synergyj.grain.domain.CourseTests
 
 class RoleTests extends GrailsUnitTestCase {
-	def existingRole = new Role(description:CourseTests.buildString(200), name:CourseTests.buildString(200))
-	
-	void setUp() {
-		super.setUp()
-		
-		mockForConstraintsTests Role, [ existingRole ]
-	}
-	
-	void testNameConstraints() {
-		def role = new Role()
-		assertFalse role.validate()
-		assertEquals "nullable", role.errors.name
-		
-		role = new Role(name:"")
-		assertFalse role.validate()
-		assertEquals "blank", role.errors.name
-		
-		role = new Role(name:CourseTests.buildString(201))
-		assertFalse role.validate()
-		assertEquals "size", role.errors.name
-	}
-	
-	void testDescriptionConstraints() {
-		def role = new Role(description:CourseTests.buildString(201))
-		assertFalse role.validate()
-		assertEquals "size", role.errors.description
-	}
-	
-	void testConstraints() {
-		assertTrue existingRole.validate()
-		assertEquals existingRole.toString(), CourseTests.buildString(200)
-	}
+  def existingRole = new Role(description: CourseTests.buildString(200), authority: CourseTests.buildString(200))
+
+  void setUp() {
+    super.setUp()
+
+    mockForConstraintsTests Role, [existingRole]
+  }
+
+  void testDescriptionConstraints() {
+    def role = new Role(description: CourseTests.buildString(201))
+    assertFalse role.validate()
+    assertEquals "size", role.errors.description
+  }
+
+  void testAuthorityConstraints() {
+    def role = new Role(authority: CourseTests.buildString(201))
+    assertFalse role.validate()
+    assertEquals "size", role.errors.authority
+  }
+
+  void testConstraints() {
+    assertTrue existingRole.validate()
+    assertEquals existingRole.toString(), CourseTests.buildString(200)
+  }
 }
