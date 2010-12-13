@@ -46,6 +46,9 @@ class BootStrap {
       def account = new MenuItem(labelCode: 'menu.item.account').link(mapping: 'me')
       save(account)
 
+      def register = new MenuItem(labelCode: 'menu.item.register').link(mapping: 'signup')
+      save(register)
+
       def login = new MenuItem(labelCode: 'menu.item.login').link(mapping: 'login')
       save(login)
 
@@ -63,15 +66,17 @@ class BootStrap {
       save(servicesOption)
       def accountOption = new MenuOption(item: account, order: 4, permissions: 'isAuthenticated()')
       save(accountOption)
-      def loginOption = new MenuOption(item: login, order: 4, permissions: 'isAnonymous()')
+      def loginOption = new MenuOption(item: login, order: 5, permissions: 'isAnonymous()')
       save(loginOption)
+      def registerOption = new MenuOption(item: register, order: 4, permissions: 'isAnonymous()')
+      save(registerOption)
       def contactOption = new MenuOption(item: contact, order: 3)
       save(contactOption)
 
       def topMenu = new Menu(name: 'top')
       save(topMenu)
-      topMenu.option(homeOption).option(aboutOption).option(servicesOption)
-      topMenu.option(contactOption).option(accountOption).option(loginOption)
+      topMenu.option(homeOption).option(aboutOption)
+      topMenu.option(contactOption).option(accountOption).option(loginOption).option(registerOption)
       save(topMenu)
 
 
