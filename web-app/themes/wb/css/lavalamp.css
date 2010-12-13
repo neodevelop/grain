@@ -3,6 +3,7 @@
     height: 57px;
     overflow: hidden;
     margin-top: 0px;
+    float: right;
 }
 
 .lavaLampWithImage li {
@@ -37,7 +38,7 @@
     height: 40px;
     position: relative;
     overflow: hidden;
-    margin: 0 30px;
+    margin: 0 25px;
     font-size: 17px;
 }
 
