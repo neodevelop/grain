@@ -30,7 +30,7 @@ grails.project.dependency.resolution = {
     test 'org.grails.plugins:code-coverage:1.2'
     test 'org.grails.plugins:codenarc:0.8'
     test 'org.grails.plugins:gmetrics:0.3'
-    test 'org.grails.plugins:geb:0.4'
+    test 'org.grails.plugins:geb:0.5.1'
     test 'org.grails.plugins:spock:0.5-groovy-1.7'
   }
 
