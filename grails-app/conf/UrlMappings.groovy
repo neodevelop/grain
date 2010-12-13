@@ -28,6 +28,14 @@ class UrlMappings {
       controller = 'home'
       action = 'index'
     }
+    name forgotPassword: '/forgotPassword' {
+      controller = 'user'
+      action = 'forgotPassword'
+    }
+    name signup: '/signup' {
+      controller = 'user'
+      action = 'signup'
+    }
     "/$controller/$action?/$id?" {
       constraints {
         // apply constraints here
