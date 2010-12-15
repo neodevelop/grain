@@ -38,7 +38,7 @@ environments {
 	}
 	test {
 		dataSource {
-			dbCreate = "update"
+			dbCreate = "create"
 			url = "jdbc:hsqldb:mem:testDB"
 		}
 	}
