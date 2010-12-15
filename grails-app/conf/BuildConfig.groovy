@@ -18,14 +18,14 @@ grails.project.dependency.resolution = {
   }
 
   plugins {
-    runtime "org.grails.plugins:spring-security-core:1.0.1"
+    runtime 'org.grails.plugins:spring-security-core:1.0.1'
     runtime 'org.grails.plugins:tiny-mce:0.1.3'
-    runtime "org.grails.plugins:i18n-templates:1.1.0.1"
+    runtime 'org.grails.plugins:i18n-templates:1.1.0.1'
     runtime 'org.grails.plugins:javascript-validator:0.9'
-    runtime "org.grails.plugins:mail:0.9"
+    runtime 'org.grails.plugins:mail:0.9'
     runtime 'org.grails.plugins:richui:0.8'
-    runtime "org.grails.plugins:settings:1.4"
-    runtime "org.grails.plugins:jquery:1.4.3.2"
+    runtime 'org.grails.plugins:settings:1.4'
+    runtime 'org.grails.plugins:jquery:1.4.3.2'
 
     test 'org.grails.plugins:code-coverage:1.2'
     test 'org.grails.plugins:codenarc:0.8'
@@ -35,7 +35,11 @@ grails.project.dependency.resolution = {
   }
 
   dependencies {
-    runtime "mysql:mysql-connector-java:5.1.13"
+    runtime 'mysql:mysql-connector-java:5.1.13'
+
+    test('org.seleniumhq.selenium:selenium-htmlunit-driver:2.0a7') {
+      exclude 'xml-apis'
+    }
   }
 
 }
