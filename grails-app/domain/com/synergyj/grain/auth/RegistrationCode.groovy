@@ -1,5 +1,4 @@
-/*
- * Copyright 2002-2010 the original author or authors.
+/* Copyright 2009-2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +14,18 @@
  */
 package com.synergyj.grain.auth
 
-import grails.test.*
+class RegistrationCode {
+  String username
+  String token = UUID.randomUUID().toString().replaceAll('-', '')
+  Date dateCreated
 
-class RegisterControllerTests extends ControllerUnitTestCase {
-  protected void setUp() {
-    super.setUp()
+  static mapping = {
+    version false
   }
 
-  protected void tearDown() {
-    super.tearDown()
-  }
-
-  void testSomething() {
+  static RegistrationCode create(String email) {
+    def rc = new RegistrationCode(username: email)
+    rc.save(flush: true)
+    rc
   }
 }

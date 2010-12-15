@@ -15,31 +15,45 @@
  */
 package com.synergyj.grain.data
 
-import com.synergyj.grain.auth.User
+import com.synergyj.grain.BusinessException
+import com.synergyj.grain.UserRegistrationException
 import com.synergyj.grain.auth.RegisterUserCommand
+import com.synergyj.grain.auth.RegistrationCode
+import com.synergyj.grain.auth.User
+import com.synergyj.grain.UserAlreadyExistsException
 
 class UserService {
 
   static transactional = true
   def springSecurityService
+  def notificationService
 
   def findUser(email) {
-    User.findByEmail(email)
+    email ? User.findByEmail(email) : null
   }
 
-  def createUser(RegisterUserCommand userCommand) {
-    //springSecurityService
-    def user = new User(email: userCommand.email, password: userCommand.password)
-    try {
-      if (user.hasErrors()) {
-        user.errors.each {
-          println it
-        }
-      }
-      user.save(flush: true)
-    } catch (Throwable t) {
-      log.warn 'Cant save user', t
-      t.printStackTrace()
+  def createUser(userCommand) throws BusinessException {
+    def userFound = findUser(userCommand.email)
+    if(userFound) { throw new UserAlreadyExistsException('register.user.already.exists', userCommand.email)}
+    def user = new User(userCommand.properties)
+    String salt = userCommand.email
+
+    user.enabled = true
+    user.accountExpired = false
+    user.accountLocked = true
+    user.emailShow = true
+    user.passwordExpired = false
+    user.password = springSecurityService.encodePassword(user.password, salt)
+
+    if (user.validate() && user.save(flush: true)) {
+      log.info 'User created'
+    } else {
+      throw new UserRegistrationException('user.registration.error', user)
     }
+
+    def registration = RegistrationCode.create(user.email)
+    notificationService.sendNewRegistration(registration)
+
+    user
   }
 }

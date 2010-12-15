@@ -21,25 +21,25 @@ class User {
   Date lastUpdated
 
   String email
-  String firstName
-  String lastName
-  Boolean enabled
-  String description
-  String company
-  String geolocation
-  String website
-  Boolean emailShow
+  String firstName = ''
+  String lastName = ''
+  Boolean enabled = true
+  String description = ''
+  String company = ''
+  String geolocation = ''
+  String website = ''
+  Boolean emailShow = true
 
 
   String password
-  Boolean accountExpired
-  Boolean accountLocked
-  Boolean passwordExpired
+  Boolean accountExpired = false
+  Boolean accountLocked = false
+  Boolean passwordExpired = false
 
 
   static constraints = {
     email nullable: false, blank: false, size: 1..300, unique: true, email: true
-    password nullable: false, blank: false, size: 5..25
+    password nullable: false, blank: false, size: 5..200
     firstName nullable: true, blank: true, size: 0..200
     lastName nullable: true, blank: true, size: 0..200
     company nullable: true, blank: true, size: 0..100
@@ -47,8 +47,8 @@ class User {
     description nullable: true, blank: true
     website nullable: true, blank: true, size: 1..300, url: true
     geolocation nullable: true, blank: true, size: 0..200
-    lastUpdated display: false
-    dateCreated display: false
+    lastUpdated display: false, nullable: true
+    dateCreated display: false, nullable: true
   }
 
   static mapping = {

@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.auth
+package com.synergyj.grain.test
 
-import grails.test.*
+import geb.spock.GebReportingSpec
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
-class RegisterControllerTests extends ControllerUnitTestCase {
-  protected void setUp() {
-    super.setUp()
+abstract class BaseTests extends GebReportingSpec {
+  def static base_url = ConfigurationHolder.config.grails.serverURL
+
+  String getBaseUrl() {
+    base_url
   }
 
-  protected void tearDown() {
-    super.tearDown()
+  File getReportDir() {
+    new File("target/test-reports/geb")
   }
 
-  void testSomething() {
-  }
 }

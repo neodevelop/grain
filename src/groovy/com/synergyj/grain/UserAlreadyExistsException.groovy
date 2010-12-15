@@ -13,19 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.auth
+package com.synergyj.grain
 
-import grails.test.*
+class UserAlreadyExistsException extends BusinessException {
+  String email
 
-class RegisterControllerTests extends ControllerUnitTestCase {
-  protected void setUp() {
-    super.setUp()
-  }
-
-  protected void tearDown() {
-    super.tearDown()
-  }
-
-  void testSomething() {
+  UserAlreadyExistsException(String message, String email) {
+    super(message)
+    this.email = email
   }
 }

@@ -13,19 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.auth
+package com.synergyj.grain
 
-import grails.test.*
-
-class RegisterControllerTests extends ControllerUnitTestCase {
-  protected void setUp() {
-    super.setUp()
-  }
-
-  protected void tearDown() {
-    super.tearDown()
-  }
-
-  void testSomething() {
+class BusinessException extends Exception {
+  BusinessException(String message) {
+    super(message)
   }
 }

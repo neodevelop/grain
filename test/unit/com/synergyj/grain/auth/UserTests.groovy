@@ -64,7 +64,7 @@ class UserTests extends GrailsUnitTestCase {
     assertFalse user.validate()
     assertEquals "size", user.errors.password
 
-    user = new User(password: CourseTests.buildString(26))
+    user = new User(password: CourseTests.buildString(201))
     assertFalse user.validate()
     assertEquals "size", user.errors.password
   }

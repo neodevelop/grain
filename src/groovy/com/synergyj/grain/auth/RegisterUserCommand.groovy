@@ -20,7 +20,7 @@ class RegisterUserCommand implements Serializable {
   String password
 
   static constraints = {
-    email nullable: false, blank: false, email: true
-    password nullable: false, blank: false
+    email nullable: false, blank: false, size: 1..300, email: true
+    password nullable: false, blank: false, size: 5..200
   }
 }

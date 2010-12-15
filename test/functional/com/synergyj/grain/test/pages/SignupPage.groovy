@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.auth
+package com.synergyj.grain.test.pages
 
-import grails.test.*
+import geb.Page
+import com.synergyj.grain.test.BaseTests
 
-class RegisterControllerTests extends ControllerUnitTestCase {
-  protected void setUp() {
-    super.setUp()
-  }
-
-  protected void tearDown() {
-    super.tearDown()
-  }
-
-  void testSomething() {
+class SignupPage extends Page {
+  static url = BaseTests.base_url + '/signup'
+  static content = {
+    header { $("header2") }
+    //errors(required: false) { $("errors") }
+    errors(required: false) { $("div.errors") }
+    sendButton(to: [SignupPage]) { $("form").find("input", name: "sendButton") }
+    password { $("form").find("input", name: "password") }
   }
 }

@@ -17,21 +17,31 @@ package com.synergyj.grain.auth
 
 import grails.plugins.springsecurity.Secured
 
+import com.synergyj.grain.BusinessException
+
 @Secured(['permitAll'])
 class RegisterController {
   def userService
+
   def index = { }
+
   def user = { RegisterUserCommand userdata ->
-    def userFound = userService.findUser(userdata.email)
-    if (userdata.hasErrors() || userFound) {
-      if (userFound) {
-        flash.message = g.message(code: 'register.user.already.exists', args: [userdata.email])
-      }
+    if (userdata.hasErrors()) {
       userdata.password = ''
       render view: "/register/index", model: [userdata: userdata]
-      return
+    } else {
+
+      try {
+        userService.createUser(userdata)
+      } catch (BusinessException be) {
+        flash.message = g.message(code: be.message, args: [userdata.email])
+        render view: "/register/index", model: [userdata: userdata]
+        return
+      }
+      flash.message = g.message(code: 'register.success', args: [userdata.email])
+      redirect controller: 'register', action: 'success'
     }
-    userService.createUser(userdata)
-    render 'Chido'
   }
+
+  def success = {}
 }

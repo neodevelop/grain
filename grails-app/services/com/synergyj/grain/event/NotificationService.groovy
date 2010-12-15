@@ -13,19 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.auth
+package com.synergyj.grain.event
 
-import grails.test.*
+import com.synergyj.grain.auth.RegistrationCode
 
-class RegisterControllerTests extends ControllerUnitTestCase {
-  protected void setUp() {
-    super.setUp()
-  }
+class NotificationService {
 
-  protected void tearDown() {
-    super.tearDown()
-  }
+  static transactional = true
 
-  void testSomething() {
+  def sendNewRegistration(RegistrationCode registration) {
+    //TODO: Implement the email sending
   }
 }

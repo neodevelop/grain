@@ -33,5 +33,6 @@ class UserController {
 
   @Secured(['permitAll()'])
   def signup = {
+    render view: "/register/index", model: [userdata: new RegisterUserCommand()]
   }
 }
