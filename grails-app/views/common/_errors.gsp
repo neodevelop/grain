@@ -1,5 +1,5 @@
-<div id="errors" class="errors">
-	<g:hasErrors bean="${instance}">
-		<g:renderErrors bean="${instance}" as="list" />
-	</g:hasErrors>
-</div>
+<g:hasErrors bean="${instance}">
+  <div id="errors" class="errors">
+    <g:renderErrors bean="${instance}" as="list"/>
+  </div>
+</g:hasErrors>
