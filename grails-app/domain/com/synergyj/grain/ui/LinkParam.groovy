@@ -35,6 +35,11 @@ class LinkParam {
     value nullable: false, blank: false, minSize: 1, maxSize: 100
   }
 
+  static mapping = {
+    table 'gr_link_params'
+    cache true
+  }
+
   public String toString() {
     "${name}:${value}"
   }

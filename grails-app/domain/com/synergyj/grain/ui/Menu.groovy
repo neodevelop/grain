@@ -24,6 +24,12 @@ class Menu {
     name nullable: false, blank: false, unique: true, minSize: 1, maxSize: 100
   }
 
+  static mapping = {
+    table 'gr_menues'
+    cache true
+    items cache: true
+  }
+
   public String toString() {
     name
   }

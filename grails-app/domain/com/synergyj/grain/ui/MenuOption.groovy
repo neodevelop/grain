@@ -30,6 +30,8 @@ class MenuOption {
 
   static mapping = {
     order column: 'menu_option_order'
+    table 'gr_menues_options'
+    cache true
   }
 
   public String toString() {

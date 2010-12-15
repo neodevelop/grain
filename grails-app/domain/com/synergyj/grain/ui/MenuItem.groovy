@@ -30,6 +30,11 @@ class MenuItem {
     permissions blank: true, nullable: true, minSize: 1, maxSize: 200
   }
 
+  static mapping = {
+    table 'gr_menues_items'
+    cache true
+  }
+
   public String toString() {
     labelCode
   }
