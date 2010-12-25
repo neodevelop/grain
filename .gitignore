@@ -15,3 +15,11 @@ target
 .idea
 grain.iml
 grain-grailsPlugins.iml
+web-app/css/main.css
+web-app/images/favicon.ico
+web-app/images/grails_logo.jpg
+web-app/images/grails_logo.png
+web-app/images/leftnav_btm.png
+web-app/images/leftnav_midstretch.png
+web-app/images/leftnav_top.png
+web-app/images/springsource.png
