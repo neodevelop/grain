@@ -19,5 +19,5 @@ import grails.plugins.springsecurity.Secured
 
 @Secured(['permitAll'])
 class HomeController {
-	def index = {}
+  def index = {}
 }
