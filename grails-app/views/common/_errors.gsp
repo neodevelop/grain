@@ -1,5 +1,5 @@
 <g:hasErrors bean="${instance}">
-  <div id="errors" class="errors">
+  <jqvalui:renderErrors render="true" style="margin-bottom:10px">
     <g:renderErrors bean="${instance}" as="list"/>
-  </div>
+  </jqvalui:renderErrors>
 </g:hasErrors>
