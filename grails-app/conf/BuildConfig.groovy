@@ -22,7 +22,10 @@ grails.project.dependency.resolution = {
     runtime 'org.grails.plugins:tiny-mce:0.1.3'
     runtime 'org.grails.plugins:mail:0.9'
     runtime 'org.grails.plugins:settings:1.4'
-    runtime 'org.grails.plugins:jquery:1.4.3.2'
+    runtime 'org.grails.plugins:jquery:1.4.2.7'
+    runtime 'org.grails.plugins:jquery-validation:1.7'
+    runtime 'org.grails.plugins:jquery-validation-ui:1.0.1'
+    runtime 'org.grails.plugins:bean-fields:1.0-RC4'
 
     test 'org.grails.plugins:code-coverage:1.2'
     test 'org.grails.plugins:codenarc:0.8'
