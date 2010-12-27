@@ -38,8 +38,8 @@ class User {
 
 
   static constraints = {
-    email nullable: false, blank: false, size: 1..300, unique: true, email: true
-    password nullable: false, blank: false, size: 5..200
+    email nullable: false, blank: false, size: 1..80, unique: true, email: true
+    password nullable: false, blank: false, size: 5..80
     firstName nullable: true, blank: true, size: 0..200
     lastName nullable: true, blank: true, size: 0..200
     company nullable: true, blank: true, size: 0..100
