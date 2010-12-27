@@ -4,7 +4,10 @@
 </head>
 <body>
 <g:render template="/common/errors" model="[instance:userdata]"/>
-<g:form action="user" method="post" controller="register">
+
+<jqvalui:renderValidationScript for="com.synergyj.grain.auth.RegisterUserCommand" form="registerForm" errorClass="invalid" validClass="success" onsubmit="true"/>
+
+<g:form name="registerForm" action="user" method="post" controller="register">
   <table>
     <tbody>
 
