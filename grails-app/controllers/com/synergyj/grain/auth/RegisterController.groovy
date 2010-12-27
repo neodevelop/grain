@@ -34,7 +34,7 @@ class RegisterController {
       try {
         userService.createUser(userdata)
       } catch (BusinessException be) {
-        flash.message = g.message(code: be.message, args: [userdata.email])
+        flash.error = g.message(code: be.message, args: [userdata.email])
         render view: "/register/index", model: [userdata: userdata]
         return
       }
