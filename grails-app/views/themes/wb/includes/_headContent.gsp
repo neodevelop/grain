@@ -1,6 +1,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 <g:javascript library="jquery" plugin="jquery"/>
+<jqval:resources/>
+<jqvalui:resources />
+
 
 <!-- CSS Sheet  -->
 
