@@ -1,4 +1,4 @@
-grails.project.plugins.dir = "${userHome}/.grails/plugins"
+grails.project.plugins.dir = "${userHome}/.grails/1.3.6/grain/plugins"
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
