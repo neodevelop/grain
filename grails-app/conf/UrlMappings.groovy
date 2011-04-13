@@ -36,6 +36,10 @@ class UrlMappings {
       controller = 'user'
       action = 'signup'
     }
+    name content: "/$id" {
+      controller = 'page'
+      action = 'show'
+    }
     "/$controller/$action?/$id?" {
       constraints {
         // apply constraints here
