@@ -38,4 +38,12 @@
             overflowToDisk="false"
             maxElementsOnDisk="10000000">
     </cache>
+
+    <cache
+            name="menus"
+            eternal="true"
+            maxElementsInMemory="10000"
+            overflowToDisk="false"
+            maxElementsOnDisk="10000000">
+    </cache>
 </ehcache>

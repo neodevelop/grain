@@ -15,7 +15,7 @@
  */
 package com.synergyj.grain.ui
 
-class MenuOption {
+class MenuOption implements Serializable {
   MenuItem item
   Integer order
   String permissions

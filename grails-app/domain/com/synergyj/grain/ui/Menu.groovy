@@ -15,7 +15,7 @@
  */
 package com.synergyj.grain.ui
 
-class Menu {
+class Menu implements Serializable {
   String name
 
   static hasMany = [items: MenuOption]
