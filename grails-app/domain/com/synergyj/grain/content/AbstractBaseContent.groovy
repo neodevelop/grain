@@ -13,29 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.ui
+package com.synergyj.grain.content
 
-class MenuOption {
-  MenuItem item
-  Integer order
-  String permissions
+import com.synergyj.grain.auth.User
 
-  static belongsTo = [menu: Menu]
-
-  static constraints = {
-    menu nullable: true
-    item nullable: false
-    order nullable: false
-    permissions blank: true, nullable: true, minSize: 1, maxSize: 200
-  }
+abstract class AbstractBaseContent implements Serializable {
+  String title
+  String body
+  String language
+  String key
+  User author
+  ContentType type
+  Date dateCreated
+  Date lastUpdated
 
   static mapping = {
-    order column: 'menu_option_order'
-    table 'gr_menues_options'
     cache true
+    body type: "text"
+    tablePerHierarchy false
   }
 
-  public String toString() {
-    "${menu.name}:${item}"
+  static constraints = {
+    title blank: false, nullable: false, minSize: 1, maxSize: 200
+    body blank: false, nullable: false
+    language nullable: false, maxSize: 100
+    key nullable: true, blank: true, minSize: 1, maxSize: 200
+    author nullable: true
+    type nullable: false
+    lastUpdated display: false
+    dateCreated display: false
   }
 }

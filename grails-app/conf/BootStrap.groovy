@@ -18,16 +18,25 @@ import com.synergyj.grain.ui.MenuItem
 import com.synergyj.grain.ui.LinkType
 import com.synergyj.grain.ui.Menu
 import com.synergyj.grain.ui.MenuOption
+import com.synergyj.grain.content.Content
+import com.synergyj.grain.content.ContentType
 
 class BootStrap {
   def save(domain) {
     assert domain
     if (domain.hasErrors()) {
+      println "errors"
       domain.errors.each {error ->
         println error.dump()
       }
     } else {
-      domain.save(flush: true)
+      println "trying to save"
+      def saved = domain.save(flush: true, failOnError: true)
+      if (!saved) {
+        domain.errors.each {error ->
+          println error.dump()
+        }
+      }
     }
 
   }
@@ -96,6 +105,31 @@ class BootStrap {
       bottomMenu.option(homeOptionB).option(aboutOptionB).option(servicesOptionB).option(contactOptionB).option(accountOptionB)
       save(bottomMenu)
 
+    }
+
+    def c = Content.count()
+    println c
+    if (c == 0) {
+      def iconbox = new Content(title: 'iconbox', body: 'iconbox', language: 'es', key: 'iconbox', type: ContentType.HTML)
+      save(iconbox)
+
+      def home = new Content(title: 'home', body: 'home', language: 'es', key: 'home', type: ContentType.HTML)
+      save(home)
+
+      def footerContent = new Content(title: 'footerContent', body: 'footerContent', language: 'es', key: 'footerContent', type: ContentType.HTML)
+      save(footerContent)
+
+      def copyright = new Content(title: 'copyright', body: 'copyright', language: 'es', key: 'copyright', type: ContentType.HTML)
+      save(copyright)
+
+      def latestnewsHtml = '''
+        <h1>Latest News</h1><h4>What’s happening with us</h4>
+  <p><img src="themes/wb/images/pic01.gif" alt="" width="67" height="67" vspace="5" class="leftimage"/><span class="smalltitle">Autem vel eum iriure dolor in</span> hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu.<span class="smalltitle"><a href="#">More</a></span><img src="${createLinkTo(dir: 'themes/wb/images', file: 'arrow.png')}" width="11" height="10" alt=""/></p>
+  <p><img src="themes/wb/images/pic02.gif" alt="" width="67" height="67" vspace="5" class="leftimage"/><span class="smalltitle">Autem vel eum iriure dolor in</span> hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu.<span class="smalltitle"><a href="#">More</a></span><img src="${createLinkTo(dir: 'themes/wb/images', file: 'arrow.png')}" width="11" height="10" alt=""/></p>
+  <p><img src="themes/wb/images/pic08.jpg" alt="" width="67" height="67" vspace="5" class="leftimage"/><span class="smalltitle">Autem vel eum iriure dolor in</span> hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu.<span class="smalltitle"><a href="#">More</a></span><img src="${createLinkTo(dir: 'themes/wb/images', file: 'arrow.png')}" width="11" height="10" alt=""/></p>
+      '''
+      def latestnews = new Content(title: 'latestnews', body: latestnewsHtml, language: 'es', key: 'latestnews', type: ContentType.HTML)
+      save(latestnews)
     }
   }
   def destroy = {

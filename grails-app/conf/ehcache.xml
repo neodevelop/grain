@@ -31,5 +31,11 @@
            timeToIdleSeconds="300"
             />
 
-
+    <cache
+            name="genericContent"
+            eternal="true"
+            maxElementsInMemory="10000"
+            overflowToDisk="false"
+            maxElementsOnDisk="10000000">
+    </cache>
 </ehcache>

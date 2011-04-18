@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2008 the original author or authors.
+ * Copyright 2002-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,32 +15,10 @@
  */
 package com.synergyj.grain.content
 
-import com.synergyj.grain.auth.User
-
-class Content implements Serializable {
-  String title
-  String body
-  String language
-  String key
-  User author
-  ContentType type
-  Date dateCreated
-  Date lastUpdated
+class Content extends AbstractBaseContent {
 
   static mapping = {
+    table 'gr_generic_content'
     cache true
-    body type: "text"
-    tablePerHierarchy false
-  }
-
-  static constraints = {
-    title blank: false, nullable: false, minSize: 1, maxSize: 200
-    body blank: false, nullable: false
-    language nullable: false, maxSize: 100
-    key nullable: true, blank: true, minSize: 1, maxSize: 200
-    author nullable: true
-    type nullable: false
-    lastUpdated display: false
-    dateCreated display: false
   }
 }
