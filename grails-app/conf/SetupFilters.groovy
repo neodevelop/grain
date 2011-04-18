@@ -21,10 +21,10 @@ class SetupFilters {
 		all(controller:'*', action:'*') {
 			before = {
 				def needsReviewSetup = false;
-				if(User.count() == 0) {
+				/*if(User.count() == 0) {
 					log.info "There is no users in Grain"
 					needsReviewSetup = true
-				}
+				}*/
 				
 				
 				if(needsReviewSetup && controllerName != "setup") {
