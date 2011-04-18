@@ -20,7 +20,6 @@ import com.synergyj.grain.course.Status
 import com.synergyj.grain.course.CourseModule
 
 class Course extends CourseContent {
-  String name
 	String overview
 	String audience
 	String prerequisites
