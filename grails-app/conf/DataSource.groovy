@@ -32,7 +32,7 @@ environments {
 			dbCreate = "update" // one of 'create', 'create-drop','update'
 		}
     hibernate {
-      show_sql = false
+      show_sql = true
       format_sql = true
     }
 	}

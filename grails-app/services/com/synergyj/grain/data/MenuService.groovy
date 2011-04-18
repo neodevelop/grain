@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2010 the original author or authors.
+ * Copyright 2002-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,25 @@
 package com.synergyj.grain.data
 
 import com.synergyj.grain.ui.Menu
+import net.sf.ehcache.Ehcache
+import net.sf.ehcache.CacheManager
+import net.sf.ehcache.Element
 
 class MenuService {
   static transactional = false
+  static profiled = true
+  static Ehcache menuCache = CacheManager.getInstance().getCache("menus")
 
   def findMenu(key) {
-    //TODO: Add caching here
-    def menu = Menu.findByName(key)
-    menu
+    def result
+    def lookup = key
+    result = menuCache.get(lookup)?.value
+    if (!result) {
+      result = Menu.findByName(key)
+      if(result) {
+        menuCache.put(new Element(lookup, result))
+      }
+    }
+    result
   }
 }

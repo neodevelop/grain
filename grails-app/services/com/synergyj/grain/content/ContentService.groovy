@@ -15,16 +15,38 @@
  */
 package com.synergyj.grain.content
 
+import net.sf.ehcache.Ehcache
+import net.sf.ehcache.CacheManager
+import net.sf.ehcache.Element
+
 class ContentService {
 
   static transactional = false
+  static profiled = true
+
+  static Ehcache genericContent = CacheManager.getInstance().getCache("genericContent")
 
   def findContent(key, language) {
-    //TODO: add caching for this query
-    def c = Content.findByKeyAndLanguage(key, language)
-    if(!c) {
-      c = Content.findByKey(key)
+    def result
+    def lookup = key + language
+    result = genericContent.get(lookup)?.value
+    if (!result) {
+      def c = Content.findByKeyAndLanguage(key, language)
+      if (c) {
+        genericContent.put(new Element(lookup, c))
+        result = c
+      } else {
+        result = genericContent.get(key)?.value
+        if (!result) {
+          c = Content.findByKey(key)
+          if (c) {
+            genericContent.put(new Element(lookup, c))
+            result = c
+          }
+        }
+      }
     }
-    c
+
+    result
   }
 }
