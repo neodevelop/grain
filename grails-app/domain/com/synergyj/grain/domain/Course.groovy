@@ -16,6 +16,7 @@
 package com.synergyj.grain.domain
 
 class Course extends CourseContent {
+  String name
 	String overview
 	String audience
 	String prerequisites

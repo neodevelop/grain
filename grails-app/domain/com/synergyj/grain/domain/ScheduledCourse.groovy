@@ -21,6 +21,7 @@ class ScheduledCourse{
 	Course course
 	SortedSet courseSessions
 	Date beginDate
+	Date limitRegistrationDate
 	BigDecimal costByCourse
 	BigDecimal costByModule
 	
