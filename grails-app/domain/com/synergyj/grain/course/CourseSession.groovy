@@ -16,8 +16,8 @@
 package com.synergyj.grain.course
 
 import com.synergyj.grain.auth.User
-import com.synergyj.grain.domain.CourseModule
-import com.synergyj.grain.domain.ScheduledCourse
+import com.synergyj.grain.course.CourseModule
+import com.synergyj.grain.course.ScheduledCourse
 
 class CourseSession{
 	Date sessionDate

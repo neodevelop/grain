@@ -100,7 +100,7 @@
                     <label for="courseType"><g:message code="course.courseType" default="Course Type" />:</label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'courseType', 'errors')}">
-                    <g:select name="courseType" from="${com.synergyj.grain.domain.CourseType?.values()}" value="${courseInstance?.courseType}"  />
+                    <g:select name="courseType" from="${com.synergyj.grain.course.CourseType?.values()}" value="${courseInstance?.courseType}"  />
 
                 </td>
             </tr>
@@ -110,7 +110,7 @@
                     <label for="status"><g:message code="course.status" default="Status" />:</label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'status', 'errors')}">
-                    <g:select name="status" from="${com.synergyj.grain.domain.Status?.values()}" value="${courseInstance?.status}"  />
+                    <g:select name="status" from="${com.synergyj.grain.course.Status?.values()}" value="${courseInstance?.status}"  />
 
                 </td>
             </tr>

@@ -17,7 +17,7 @@ package com.synergyj.grain.auth
 
 import grails.test.GrailsUnitTestCase
 
-import com.synergyj.grain.domain.CourseTests
+import com.synergyj.grain.course.CourseTests
 
 class UserTests extends GrailsUnitTestCase {
   def existingUser = new User(email: "something@server.com", password: "secret")

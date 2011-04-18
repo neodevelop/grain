@@ -15,9 +15,9 @@
  */
 package com.synergyj.grain.course
 
-import com.synergyj.grain.domain.CourseType
-import com.synergyj.grain.domain.Status
-import com.synergyj.grain.domain.CourseModule
+import com.synergyj.grain.course.CourseType
+import com.synergyj.grain.course.Status
+import com.synergyj.grain.course.CourseModule
 
 class Course extends CourseContent {
   String name

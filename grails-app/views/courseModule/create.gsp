@@ -1,5 +1,5 @@
 
-<%@ page import="com.synergyj.grain.domain.CourseModule" %>
+<%@ page import="com.synergyj.grain.course.CourseModule" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -61,7 +61,7 @@
                                     <label for="course"><g:message code="courseModule.course" default="Course" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: courseModuleInstance, field: 'course', 'errors')}">
-                                    <g:select name="course.id" from="${com.synergyj.grain.domain.Course.list()}" optionKey="id" value="${courseModuleInstance?.course?.id}"  />
+                                    <g:select name="course.id" from="${com.synergyj.grain.course.Course.list()}" optionKey="id" value="${courseModuleInstance?.course?.id}"  />
 
                                 </td>
                             </tr>

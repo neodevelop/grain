@@ -1,5 +1,5 @@
 
-<%@ page import="com.synergyj.grain.domain.ModuleTopic" %>
+<%@ page import="com.synergyj.grain.course.ModuleTopic" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -64,7 +64,7 @@
                                     <label for="module"><g:message code="moduleTopic.module" default="Module" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: moduleTopicInstance, field: 'module', 'errors')}">
-                                    <g:select name="module.id" from="${com.synergyj.grain.domain.CourseModule.list()}" optionKey="id" value="${moduleTopicInstance?.module?.id}"  />
+                                    <g:select name="module.id" from="${com.synergyj.grain.course.CourseModule.list()}" optionKey="id" value="${moduleTopicInstance?.module?.id}"  />
 
                                 </td>
                             </tr>
@@ -74,7 +74,7 @@
                                     <label for="parent"><g:message code="moduleTopic.parent" default="Parent" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: moduleTopicInstance, field: 'parent', 'errors')}">
-                                    <g:select name="parent.id" from="${com.synergyj.grain.domain.ModuleTopic.list()}" optionKey="id" value="${moduleTopicInstance?.parent?.id}" noSelection="['null': '']" />
+                                    <g:select name="parent.id" from="${com.synergyj.grain.course.ModuleTopic.list()}" optionKey="id" value="${moduleTopicInstance?.parent?.id}" noSelection="['null': '']" />
 
                                 </td>
                             </tr>

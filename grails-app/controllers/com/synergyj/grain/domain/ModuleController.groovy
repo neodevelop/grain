@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.domain
+package com.synergyj.grain.course
 
 import grails.plugins.springsecurity.Secured
 import com.synergyj.grain.course.CourseModule

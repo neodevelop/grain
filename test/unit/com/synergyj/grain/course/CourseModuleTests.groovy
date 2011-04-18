@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.domain
+package com.synergyj.grain.course
 
 import com.synergyj.grain.content.ContentType
-import com.synergyj.grain.course.CourseModule
 
 class CourseModuleTests extends grails.test.GrailsUnitTestCase {
 	//def existingCourse = new Course(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), type:CourseType.COURSE)
@@ -62,6 +61,6 @@ class CourseModuleTests extends grails.test.GrailsUnitTestCase {
 	
 	void testConstraints() {
 		assertTrue existingModule.validate()
-		assertEquals existingModule.toString(), CourseTests.buildString(50)
+		groovy.util.GroovyTestCase.assertEquals existingModule.toString(), CourseTests.buildString(50)
 	}
 }

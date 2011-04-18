@@ -1,4 +1,4 @@
-<%@ page import="com.synergyj.grain.domain.Course" %>
+<%@ page import="com.synergyj.grain.course.Course" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

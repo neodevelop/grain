@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.domain
+package com.synergyj.grain.course
 
 import grails.test.GrailsUnitTestCase
 import com.synergyj.grain.content.ContentType
+import com.synergyj.grain.course.CourseType
+import com.synergyj.grain.course.Status
 
 class CourseTests extends GrailsUnitTestCase {
 	def string10000 = buildString(10000);
@@ -153,7 +155,7 @@ class CourseTests extends GrailsUnitTestCase {
 		def validate = existingCourse.validate()
 		println existingCourse.errors
 		assertTrue validate
-		assertEquals existingCourse.toString(), buildString(50)
+		groovy.util.GroovyTestCase.assertEquals existingCourse.toString(), buildString(50)
 	}
 	
 	static def buildString(length) {

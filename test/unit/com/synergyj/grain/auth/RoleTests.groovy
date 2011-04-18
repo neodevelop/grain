@@ -17,7 +17,7 @@ package com.synergyj.grain.auth
 
 import grails.test.GrailsUnitTestCase
 
-import com.synergyj.grain.domain.CourseTests
+import com.synergyj.grain.course.CourseTests
 
 class RoleTests extends GrailsUnitTestCase {
   def existingRole = new Role(description: CourseTests.buildString(200), authority: CourseTests.buildString(200))

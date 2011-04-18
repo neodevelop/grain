@@ -16,7 +16,7 @@
 package com.synergyj.grain.course
 
 import com.synergyj.grain.auth.User
-import com.synergyj.grain.domain.ScheduledCourse
+import com.synergyj.grain.course.ScheduledCourse
 
 class Registration {
 	Date dateCreated

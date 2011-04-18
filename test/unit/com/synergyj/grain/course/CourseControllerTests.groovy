@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.domain
+package com.synergyj.grain.course
 
 import grails.test.*
 import com.synergyj.grain.content.ContentType
+import com.synergyj.grain.course.CourseType
+import com.synergyj.grain.course.Status
 
 class CourseControllerTests extends ControllerUnitTestCase {
 	def domain
