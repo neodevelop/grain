@@ -1,5 +1,5 @@
 
-<%@ page import="com.synergyj.grain.domain.ModuleTopic" %>
+<%@ page import="com.synergyj.grain.course.ModuleTopic" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

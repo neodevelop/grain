@@ -16,6 +16,7 @@
 package com.synergyj.grain.domain
 
 import grails.plugins.springsecurity.Secured
+import com.synergyj.grain.course.CourseModule
 
 @Secured(["hasRole('ROLE_ADMIN')"])
 class ModuleController {

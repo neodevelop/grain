@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.domain
+package com.synergyj.grain.course
+
+import com.synergyj.grain.domain.CourseModule
 
 class ModuleTopic extends CourseContent implements Comparable<ModuleTopic> {
 	CourseModule module

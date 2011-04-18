@@ -13,25 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.domain
+package com.synergyj.grain.course
 
 import com.synergyj.grain.auth.User
+import com.synergyj.grain.domain.CourseModule
+import com.synergyj.grain.domain.ScheduledCourse
 
-class ScheduledCourse{
-	Course course
-	SortedSet courseSessions
-	Date beginDate
-	Date limitRegistrationDate
-	BigDecimal costByCourse
-	BigDecimal costByModule
-	
+class CourseSession{
+	Date sessionDate
+	CourseModule module
 	Date dateCreated
 	Date lastUpdated
+	
+	static hasMany = [teachers:User]
+	static belongsTo = [scheduledCourse:ScheduledCourse]
 	
 	static constraints = {
 		lastUpdated display:false
 		dateCreated display:false
 	}
 	
-	static hasMany = [courseSessions:CourseSession]
+	String toString(){
+		sessionDate.toString()
+	}
 }

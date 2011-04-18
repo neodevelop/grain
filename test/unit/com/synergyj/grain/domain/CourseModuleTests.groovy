@@ -16,6 +16,7 @@
 package com.synergyj.grain.domain
 
 import com.synergyj.grain.content.ContentType
+import com.synergyj.grain.course.CourseModule
 
 class CourseModuleTests extends grails.test.GrailsUnitTestCase {
 	//def existingCourse = new Course(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), type:CourseType.COURSE)

@@ -17,6 +17,7 @@ package com.synergyj.grain.domain
 
 import grails.test.*
 import com.synergyj.grain.content.ContentType
+import com.synergyj.grain.course.CourseModule
 
 class ModuleTopicTests extends GrailsUnitTestCase {
 	def string10000 = CourseTests.buildString(10000);

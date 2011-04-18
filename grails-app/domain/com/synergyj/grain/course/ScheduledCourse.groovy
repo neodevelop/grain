@@ -13,44 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.domain
+package com.synergyj.grain.course
 
-import com.synergyj.grain.content.ContentType
+import com.synergyj.grain.auth.User
 
-/**
- * Base domain class. This class defines the common properties related to Courses
- */
-abstract class CourseContent {
-	/**
-	 * Name associated to the content, maybe useful tu use in the url.
-	 */
-	String name
-	/**
-	 * Content itself.
-	 */
-	String content
+class ScheduledCourse{
+	Course course
+	SortedSet courseSessions
+	Date beginDate
+	Date limitRegistrationDate
+	BigDecimal costByCourse
+	BigDecimal costByModule
 	
-	ContentType contentType
-	/**
-	 * Entity creation date.
-	 */
 	Date dateCreated
-	/**
-	 * Entity last updated date.
-	 */
 	Date lastUpdated
 	
 	static constraints = {
-		name blank:false,nullable:false,size:1..100
-		content blank:false,nullable:false
-		contentType nullable:false
-		
 		lastUpdated display:false
 		dateCreated display:false
 	}
 	
-	static mapping = {
-		content type:"text"
-		tablePerHierarchy false
-	}
+	static hasMany = [courseSessions:CourseSession]
 }

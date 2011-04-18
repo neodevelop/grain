@@ -13,30 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.domain
+package com.synergyj.grain.course
 
-class CourseModule extends CourseContent implements Comparable<CourseModule> {
-	Course course
-	Integer order
-	SortedSet topics
-	
-	static hasMany = [topics:ModuleTopic]
-	static belongsTo = [course:Course]
-	
-	static mapping = {
-		order column:"module_order"
-	}
+import com.synergyj.grain.auth.User
+import com.synergyj.grain.domain.ScheduledCourse
+
+class Registration {
+	Date dateCreated
+	Date lastUpdated
+	User student
+	ScheduledCourse scheduledCourse
+	Date registrationDate
+	Boolean completeCourse
 	
 	static constraints = {
-		course nullable:false
-		order nullable:false
+		lastUpdated display:false
+		dateCreated display:false
 	}
 	
-	int compareTo(CourseModule other){
-		order - other.order
-	}
-	
-	String toString() {
-		name
-	}
+	static hasMany = [courseSessions:CourseSession]
 }
