@@ -25,8 +25,6 @@
                         
                    	    <g:sortableColumn property="name" title="Name" titleKey="course.name" />
                         
-                   	    <g:sortableColumn property="content" title="Content" titleKey="course.content" />
-                        
                    	    <th><g:message code="course.contentType" default="Content Type" /></th>
                    	    
                    	    <g:sortableColumn property="lastUpdated" title="Last Updated" titleKey="course.lastUpdated" />
@@ -43,13 +41,11 @@
                         
                             <td>${fieldValue(bean: courseInstance, field: "name")}</td>
                         
-                            <td>${fieldValue(bean: courseInstance, field: "content")}</td>
-                        
                             <td>${fieldValue(bean: courseInstance, field: "contentType")}</td>
                         
-                            <td><g:formatDate date="${courseInstance.lastUpdated}" /></td>
+                            <td><g:formatDate date="${courseInstance.lastUpdated}" format="dd-MM-yy hh:mm" /></td>
                         
-                            <td><g:formatDate date="${courseInstance.dateCreated}" /></td>
+                            <td><g:formatDate date="${courseInstance.dateCreated}" format="dd-MM-yy hh:mm" /></td>
                         
                         </tr>
                     </g:each>

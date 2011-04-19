@@ -33,14 +33,14 @@
                             <tr class="prop">
                                 <td valign="top" class="name"><g:message code="course.name" default="Name" />:</td>
                                 
-                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "name")}</td>
+                                <td valign="top" class="value"><b>${fieldValue(bean: courseInstance, field: "name")}</b></td>
                                 
                             </tr>
                             
                             <tr class="prop">
                                 <td valign="top" class="name"><g:message code="course.content" default="Content" />:</td>
                                 
-                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "content")}</td>
+                                <td valign="top" class="value">${courseInstance?.content}</td>
                                 
                             </tr>
                             
@@ -54,56 +54,56 @@
                             <tr class="prop">
                                 <td valign="top" class="name"><g:message code="course.lastUpdated" default="Last Updated" />:</td>
                                 
-                                <td valign="top" class="value"><g:formatDate date="${courseInstance?.lastUpdated}" /></td>
+                                <td valign="top" class="value"><g:formatDate date="${courseInstance?.lastUpdated}" format="dd-MM-yy hh:mm" /></td>
                                 
                             </tr>
                             
                             <tr class="prop">
                                 <td valign="top" class="name"><g:message code="course.dateCreated" default="Date Created" />:</td>
                                 
-                                <td valign="top" class="value"><g:formatDate date="${courseInstance?.dateCreated}" /></td>
+                                <td valign="top" class="value"><g:formatDate date="${courseInstance?.dateCreated}" format="dd-MM-yy hh:mm" /></td>
                                 
                             </tr>
                             
                             <tr class="prop">
                                 <td valign="top" class="name"><g:message code="course.overview" default="Overview" />:</td>
                                 
-                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "overview")}</td>
+                                <td valign="top" class="value">${courseInstance?.overview}</td>
                                 
                             </tr>
                             
                             <tr class="prop">
                                 <td valign="top" class="name"><g:message code="course.audience" default="Audience" />:</td>
                                 
-                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "audience")}</td>
+                                <td valign="top" class="value">${courseInstance?.audience}</td>
                                 
                             </tr>
                             
                             <tr class="prop">
                                 <td valign="top" class="name"><g:message code="course.prerequisites" default="Prerequisites" />:</td>
                                 
-                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "prerequisites")}</td>
+                                <td valign="top" class="value">${courseInstance?.prerequisites}</td>
                                 
                             </tr>
                             
                             <tr class="prop">
                                 <td valign="top" class="name"><g:message code="course.goal" default="Goal" />:</td>
                                 
-                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "goal")}</td>
+                                <td valign="top" class="value">${courseInstance?.goal}</td>
                                 
                             </tr>
                             
                             <tr class="prop">
                                 <td valign="top" class="name"><g:message code="course.method" default="Method" />:</td>
                                 
-                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "method")}</td>
+                                <td valign="top" class="value">${courseInstance?.method}</td>
                                 
                             </tr>
                             
                             <tr class="prop">
                                 <td valign="top" class="name"><g:message code="course.format" default="Format" />:</td>
                                 
-                                <td valign="top" class="value">${fieldValue(bean: courseInstance, field: "format")}</td>
+                                <td valign="top" class="value">${courseInstance?.format}</td>
                                 
                             </tr>
                             
