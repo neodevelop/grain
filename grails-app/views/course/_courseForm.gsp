@@ -1,5 +1,3 @@
-<jv:generateValidation domain="course" form="courseForm" display="list" container="errors"/>
-<resource:richTextEditor type="full"/>
 <div class="dialog">
     <table>
         <tbody>
@@ -27,7 +25,7 @@
                     <label for="content"><g:message code="course.content" default="Content" />:</label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'content', 'errors')}">
-					<richui:richTextEditor name="content" value="${courseInstance?.content}"/>
+                  <g:textArea rows="5" cols="30" name="content">${courseInstance?.content}</g:textArea>
                 </td>
             </tr>
 
@@ -36,7 +34,7 @@
                     <label for="overview"><g:message code="course.overview" default="Overview" />:</label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'overview', 'errors')}">
-					<richui:richTextEditor name="overview" value="${courseInstance?.overview}"/>
+                  <g:textArea rows="5" cols="30"  name="overview">${courseInstance?.overview}</g:textArea>
                 </td>
             </tr>
         
@@ -45,7 +43,7 @@
                     <label for="audience"><g:message code="course.audience" default="Audience" />:</label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'audience', 'errors')}">
-					<richui:richTextEditor name="audience" value="${courseInstance?.audience}"/>
+                  <g:textArea rows="5" cols="30" name="audience">${courseInstance?.audience}</g:textArea>
                 </td>
             </tr>
         
@@ -54,7 +52,7 @@
                     <label for="prerequisites"><g:message code="course.prerequisites" default="Prerequisites" />:</label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'prerequisites', 'errors')}">
-					<richui:richTextEditor name="prerequisites" value="${courseInstance?.prerequisites}"/>
+                  <g:textArea rows="5" cols="30" name="prerequisites">${courseInstance?.prerequisites}</g:textArea>
                 </td>
             </tr>
         
@@ -63,7 +61,7 @@
                     <label for="goal"><g:message code="course.goal" default="Goal" />:</label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'goal', 'errors')}">
-					<richui:richTextEditor name="goal" value="${courseInstance?.goal}"/>
+                  <g:textArea rows="5" cols="30" name="goal">${courseInstance?.goal}</g:textArea>
                 </td>
             </tr>
         
@@ -72,7 +70,7 @@
                     <label for="method"><g:message code="course.method" default="Method" />:</label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'method', 'errors')}">
-					<richui:richTextEditor name="method" value="${courseInstance?.method}"/>
+                  <g:textArea rows="5" cols="30" name="method">${courseInstance?.method}</g:textArea>
                 </td>
             </tr>
         
@@ -81,7 +79,7 @@
                     <label for="format"><g:message code="course.format" default="Format" />:</label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'format', 'errors')}">
-					<richui:richTextEditor name="format" value="${courseInstance?.format}"/>
+                  <g:textArea rows="5" cols="30" name="format">${courseInstance?.format}</g:textArea>
                 </td>
             </tr>
         

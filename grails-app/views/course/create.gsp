@@ -5,6 +5,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
         <title><g:message code="course.create" default="Create Course" /></title>
+        <g:javascript plugin="jquery" library="jquery"/>
+        <script type="text/javascript" src="http://markitup.jaysalvat.com/examples/markitup/jquery.markitup.js"></script>
+        <script type="text/javascript" src="http://markitup.jaysalvat.com/examples/markitup/sets/html/set.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://markitup.jaysalvat.com/examples/markitup/skins/markitup/style.css"/>
+        <link rel="stylesheet" type="text/css" href="http://markitup.jaysalvat.com/examples/markitup/sets/html/style.css"/>
+        <g:javascript>
+          $(function(){
+            $('textarea').markItUp(myHtmlSettings);
+          });
+        </g:javascript>
     </head>
     <body>
         <div class="nav">
