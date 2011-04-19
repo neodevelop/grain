@@ -20,8 +20,14 @@ import com.synergyj.grain.ui.Menu
 import com.synergyj.grain.ui.MenuOption
 import com.synergyj.grain.content.Content
 import com.synergyj.grain.content.ContentType
+import com.synergyj.grain.auth.User
+import com.synergyj.grain.auth.Role
+import com.synergyj.grain.auth.PersonAuthority
 
 class BootStrap {
+  
+  def springSecurityService
+  
   def save(domain) {
     assert domain
     if (domain.hasErrors()) {
@@ -38,10 +44,23 @@ class BootStrap {
         }
       }
     }
-
   }
 
   def init = { servletContext ->
+    
+    if(Role.count() == 0){
+      def adminRole = new Role(authority:'ROLE_ADMIN',description:'Administrador').save(flush:true)
+      def userRole = new Role(authority:'USER_ADMIN',description:'Usuario').save(flush:true)
+      log.debug "Roles creados ${adminRole},${userRole}"
+      String password = springSecurityService.encodePassword('password')
+      def user = new User(email:'user@user.com',password:password).save(flush:true)
+      def admin = new User(email:'admin@admin.com',password:password).save(flush:true)
+      log.debug "Usuarios creados: ${user.email},${admin.email}"
+      PersonAuthority.create user, userRole, true
+      PersonAuthority.create admin, adminRole, true
+      log.debug "Autorización concedidad para los usuarios"
+    }
+    
     if (MenuItem.count() == 0) {
       def home = new MenuItem(labelCode: 'menu.item.home').link(mapping: 'home')
       save(home)

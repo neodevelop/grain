@@ -144,7 +144,7 @@ appenders {
       'net.sf.ehcache.hibernate'
 
   warn 'org.mortbay.log'
-
+  debug 'com.synergyj'
 // configure the performanceStatsAppender to log at INFO level
 //    info   performanceStatsAppender: 'org.perf4j.TimingLogger'
 }
@@ -193,7 +193,8 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/themes/**': ['permitAll'],
     '/js/**': ['permitAll'],
     '/images/**': ['permitAll'],
-    '/plugins/**': ['permitAll']
+    '/plugins/**': ['permitAll'],
+    '/**': ['permitAll']
 ]
 
 // Added by the JQuery Validation plugin:

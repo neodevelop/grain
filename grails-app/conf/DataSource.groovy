@@ -33,7 +33,7 @@ environments {
 		}
     hibernate {
       show_sql = true
-      format_sql = true
+      format_sql = false
     }
 	}
 	test {

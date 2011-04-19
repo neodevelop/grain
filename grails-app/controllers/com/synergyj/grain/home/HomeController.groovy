@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.synergyj.grain.controllers
+package com.synergyj.grain.home
 
 import grails.plugins.springsecurity.Secured
 
-@Secured(['permitAll'])
+//@Secured(['permitAll'])
 class HomeController {
   def index = {}
 }

@@ -17,7 +17,7 @@ package com.synergyj.grain.course
 
 import grails.plugins.springsecurity.Secured
 
-@Secured(["hasRole('ROLE_ADMIN')"])
+//@Secured(["hasRole('ROLE_ADMIN')"])
 class ModuleTopicController {
 
     def scaffold = ModuleTopic

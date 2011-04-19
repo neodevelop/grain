@@ -17,7 +17,7 @@ package com.synergyj.grain.ui
 
 import grails.plugins.springsecurity.Secured
 
-@Secured(["hasRole('ROLE_ADMIN')"])
+//@Secured(["hasRole('ROLE_ADMIN')"])
 class MenuItemController {
 
   def index = { redirect(action: "list", params: params) }

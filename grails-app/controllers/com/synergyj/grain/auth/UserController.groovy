@@ -18,20 +18,20 @@ package com.synergyj.grain.auth
 import grails.plugins.springsecurity.Secured
 
 class UserController {
-  @Secured(['isAuthenticated()'])
+  //@Secured(['isAuthenticated()'])
   def me = {
 
   }
 
-  @Secured(['permitAll()'])
+  //@Secured(['permitAll()'])
   def login = {
   }
 
-  @Secured(['permitAll()'])
+  //@Secured(['permitAll()'])
   def forgotPassword = {
   }
 
-  @Secured(['permitAll()'])
+  //@Secured(['permitAll()'])
   def signup = {
     render view: "/register/index", model: [userdata: new RegisterUserCommand()]
   }

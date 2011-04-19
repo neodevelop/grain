@@ -19,7 +19,7 @@ import grails.plugins.springsecurity.Secured
 
 import com.synergyj.grain.BusinessException
 
-@Secured(['permitAll'])
+//@Secured(['permitAll'])
 class RegisterController {
   def userService
 

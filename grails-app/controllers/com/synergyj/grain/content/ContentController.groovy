@@ -19,7 +19,7 @@ import org.springframework.beans.propertyeditors.LocaleEditor
 import grails.plugins.springsecurity.Secured
 
 //@Secured(["hasRole('ROLE_ADMIN')"])
-@Secured(['permitAll'])
+//@Secured(['permitAll'])
 class ContentController {
 
   def index = { redirect(action: "list", params: params) }
