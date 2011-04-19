@@ -40,7 +40,7 @@
                             <tr class="prop">
                                 <td valign="top" class="name"><g:message code="moduleTopic.content" default="Content" />:</td>
                                 
-                                <td valign="top" class="value">${fieldValue(bean: moduleTopicInstance, field: "content")}</td>
+                                <td valign="top" class="value">${moduleTopicInstance?.content}</td>
                                 
                             </tr>
                             
@@ -54,14 +54,14 @@
                             <tr class="prop">
                                 <td valign="top" class="name"><g:message code="moduleTopic.lastUpdated" default="Last Updated" />:</td>
                                 
-                                <td valign="top" class="value"><g:formatDate date="${moduleTopicInstance?.lastUpdated}" /></td>
+                                <td valign="top" class="value"><g:formatDate date="${moduleTopicInstance?.lastUpdated}" format="dd-MM-yy hh:mm" /></td>
                                 
                             </tr>
                             
                             <tr class="prop">
                                 <td valign="top" class="name"><g:message code="moduleTopic.dateCreated" default="Date Created" />:</td>
                                 
-                                <td valign="top" class="value"><g:formatDate date="${moduleTopicInstance?.dateCreated}" /></td>
+                                <td valign="top" class="value"><g:formatDate date="${moduleTopicInstance?.dateCreated}" format="dd-MM-yy hh:mm" /></td>
                                 
                             </tr>
                             

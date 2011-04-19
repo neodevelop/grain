@@ -5,6 +5,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
         <title><g:message code="moduleTopic.create" default="Create ModuleTopic" /></title>
+        <link rel="stylesheet" type="text/css" href="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.css"/>
+        <g:javascript plugin="jquery" library="jquery"/>
+        <script type="text/javascript" src="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.js"></script>
+        <g:javascript>
+          $(function(){
+            $('textarea').wysiwyg();
+          });
+        </g:javascript>
     </head>
     <body>
         <div class="nav">
@@ -41,8 +49,7 @@
                                     <label for="content"><g:message code="moduleTopic.content" default="Content" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: moduleTopicInstance, field: 'content', 'errors')}">
-                                    <g:textField name="content" value="${fieldValue(bean: moduleTopicInstance, field: 'content')}" />
-
+                                    <g:textArea name="content" rows="5" cols="70">${moduleTopicInstance?.content}</g:textArea>
                                 </td>
                             </tr>
                         
@@ -81,8 +88,7 @@
                                     <label for="order"><g:message code="moduleTopic.order" default="Order" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: moduleTopicInstance, field: 'order', 'errors')}">
-                                    <g:textField name="order" value="${fieldValue(bean: moduleTopicInstance, field: 'order')}" />
-
+                                    <g:select from="${1..99}" name="order" value="${fieldValue(bean: moduleTopicInstance, field: 'order')}" />
                                 </td>
                             </tr>
                         

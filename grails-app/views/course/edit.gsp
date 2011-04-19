@@ -5,6 +5,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
         <title><g:message code="course.edit" default="Edit Course" /></title>
+        <link rel="stylesheet" type="text/css" href="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.css"/>
+        <g:javascript plugin="jquery" library="jquery"/>
+        <script type="text/javascript" src="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.js"></script>
+        <g:javascript>
+          $(function(){
+            $('textarea').wysiwyg();
+          });
+        </g:javascript>
     </head>
     <body>
         <div class="nav">

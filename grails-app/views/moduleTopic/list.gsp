@@ -25,8 +25,6 @@
                         
                    	    <g:sortableColumn property="name" title="Name" titleKey="moduleTopic.name" />
                         
-                   	    <g:sortableColumn property="content" title="Content" titleKey="moduleTopic.content" />
-                        
                    	    <th><g:message code="moduleTopic.contentType" default="Content Type" /></th>
                    	    
                    	    <g:sortableColumn property="lastUpdated" title="Last Updated" titleKey="moduleTopic.lastUpdated" />
@@ -43,13 +41,11 @@
                         
                             <td>${fieldValue(bean: moduleTopicInstance, field: "name")}</td>
                         
-                            <td>${fieldValue(bean: moduleTopicInstance, field: "content")}</td>
-                        
                             <td>${fieldValue(bean: moduleTopicInstance, field: "contentType")}</td>
                         
-                            <td><g:formatDate date="${moduleTopicInstance.lastUpdated}" /></td>
+                            <td><g:formatDate date="${moduleTopicInstance.lastUpdated}" format="dd-MM-yy hh:mm" /></td>
                         
-                            <td><g:formatDate date="${moduleTopicInstance.dateCreated}" /></td>
+                            <td><g:formatDate date="${moduleTopicInstance.dateCreated}" format="dd-MM-yy hh:mm" /></td>
                         
                         </tr>
                     </g:each>
