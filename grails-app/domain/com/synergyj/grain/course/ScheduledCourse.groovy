@@ -15,8 +15,6 @@
  */
 package com.synergyj.grain.course
 
-import com.synergyj.grain.auth.User
-
 class ScheduledCourse{
 	Course course
 	SortedSet courseSessions
@@ -29,6 +27,9 @@ class ScheduledCourse{
 	Date lastUpdated
 	
 	static constraints = {
+    course nullable:false
+    beginDate()
+    limitRegistrationDate()
 		lastUpdated display:false
 		dateCreated display:false
 	}

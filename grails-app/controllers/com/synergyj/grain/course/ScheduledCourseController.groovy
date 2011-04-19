@@ -15,10 +15,116 @@
  */
 package com.synergyj.grain.course
 
-import grails.plugins.springsecurity.Secured
-
-//@Secured(["hasRole('ROLE_ADMIN')"])
 class ScheduledCourseController {
 
-    def scaffold = ScheduledCourse
+    def index = { redirect(action: "list", params: params) }
+
+    // the delete, save and update actions only accept POST requests
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+
+    def list = {
+        params.max = Math.min(params.max ? params.max.toInteger() : 10,  100)
+        [scheduledCourseInstanceList: ScheduledCourse.list(params), scheduledCourseInstanceTotal: ScheduledCourse.count()]
+    }
+
+    def create = {
+        def scheduledCourseInstance = new ScheduledCourse()
+        scheduledCourseInstance.properties = params
+        return [scheduledCourseInstance: scheduledCourseInstance]
+    }
+
+    def save = {
+        def scheduledCourseInstance = new ScheduledCourse(params)
+        if (!scheduledCourseInstance.hasErrors() && scheduledCourseInstance.save()) {
+            flash.message = "scheduledCourse.created"
+            flash.args = [scheduledCourseInstance.id]
+            flash.defaultMessage = "ScheduledCourse ${scheduledCourseInstance.id} created"
+            redirect(action: "show", id: scheduledCourseInstance.id)
+        }
+        else {
+            render(view: "create", model: [scheduledCourseInstance: scheduledCourseInstance])
+        }
+    }
+
+    def show = {
+        def scheduledCourseInstance = ScheduledCourse.get(params.id)
+        if (!scheduledCourseInstance) {
+            flash.message = "scheduledCourse.not.found"
+            flash.args = [params.id]
+            flash.defaultMessage = "ScheduledCourse not found with id ${params.id}"
+            redirect(action: "list")
+        }
+        else {
+            return [scheduledCourseInstance: scheduledCourseInstance]
+        }
+    }
+
+    def edit = {
+        def scheduledCourseInstance = ScheduledCourse.get(params.id)
+        if (!scheduledCourseInstance) {
+            flash.message = "scheduledCourse.not.found"
+            flash.args = [params.id]
+            flash.defaultMessage = "ScheduledCourse not found with id ${params.id}"
+            redirect(action: "list")
+        }
+        else {
+            return [scheduledCourseInstance: scheduledCourseInstance]
+        }
+    }
+
+    def update = {
+        def scheduledCourseInstance = ScheduledCourse.get(params.id)
+        if (scheduledCourseInstance) {
+            if (params.version) {
+                def version = params.version.toLong()
+                if (scheduledCourseInstance.version > version) {
+                    
+                    scheduledCourseInstance.errors.rejectValue("version", "scheduledCourse.optimistic.locking.failure", "Another user has updated this ScheduledCourse while you were editing")
+                    render(view: "edit", model: [scheduledCourseInstance: scheduledCourseInstance])
+                    return
+                }
+            }
+            scheduledCourseInstance.properties = params
+            if (!scheduledCourseInstance.hasErrors() && scheduledCourseInstance.save()) {
+                flash.message = "scheduledCourse.updated"
+                flash.args = [params.id]
+                flash.defaultMessage = "ScheduledCourse ${params.id} updated"
+                redirect(action: "show", id: scheduledCourseInstance.id)
+            }
+            else {
+                render(view: "edit", model: [scheduledCourseInstance: scheduledCourseInstance])
+            }
+        }
+        else {
+            flash.message = "scheduledCourse.not.found"
+            flash.args = [params.id]
+            flash.defaultMessage = "ScheduledCourse not found with id ${params.id}"
+            redirect(action: "edit", id: params.id)
+        }
+    }
+
+    def delete = {
+        def scheduledCourseInstance = ScheduledCourse.get(params.id)
+        if (scheduledCourseInstance) {
+            try {
+                scheduledCourseInstance.delete()
+                flash.message = "scheduledCourse.deleted"
+                flash.args = [params.id]
+                flash.defaultMessage = "ScheduledCourse ${params.id} deleted"
+                redirect(action: "list")
+            }
+            catch (org.springframework.dao.DataIntegrityViolationException e) {
+                flash.message = "scheduledCourse.not.deleted"
+                flash.args = [params.id]
+                flash.defaultMessage = "ScheduledCourse ${params.id} could not be deleted"
+                redirect(action: "show", id: params.id)
+            }
+        }
+        else {
+            flash.message = "scheduledCourse.not.found"
+            flash.args = [params.id]
+            flash.defaultMessage = "ScheduledCourse not found with id ${params.id}"
+            redirect(action: "list")
+        }
+    }
 }
