@@ -76,6 +76,16 @@
           </td>
         </tr>
 
+
+        <tr class="prop">
+          <td valign="top" class="name">
+            <label for="open"><g:message code="scheduledCourse.open" default="Is open?" />:</label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'open', 'errors')}">
+            <g:checkBox name="open" value="${scheduledCourseInstance?.open}" />
+          </td>
+        </tr>
+
         </tbody>
       </table>
     </div>

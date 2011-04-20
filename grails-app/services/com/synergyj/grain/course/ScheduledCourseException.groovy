@@ -15,26 +15,7 @@
  */
 package com.synergyj.grain.course
 
-import com.synergyj.grain.auth.User
-import com.synergyj.grain.course.CourseModule
-import com.synergyj.grain.course.ScheduledCourse
-
-class CourseSession{
-	Date sessionDate
-	CourseModule module
-	Date dateCreated
-	Date lastUpdated
-	
-	static hasMany = [teachers:User]
-	static belongsTo = [scheduledCourse:ScheduledCourse]
-	
-	static constraints = {
-    module nullable:true
-		lastUpdated display:false
-		dateCreated display:false
-	}
-	
-	String toString(){
-		sessionDate.toString()
-	}
+class ScheduledCourseException extends RuntimeException{
+  def scheduledCourse
+  def message
 }

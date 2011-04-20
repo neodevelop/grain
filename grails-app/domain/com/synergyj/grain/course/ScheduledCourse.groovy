@@ -17,11 +17,12 @@ package com.synergyj.grain.course
 
 class ScheduledCourse{
 	Course course
-	SortedSet courseSessions
+	//SortedSet courseSessions
 	Date beginDate
 	Date limitRegistrationDate
 	BigDecimal costByCourse
 	BigDecimal costByModule
+  Boolean open = true
 	
 	Date dateCreated
 	Date lastUpdated

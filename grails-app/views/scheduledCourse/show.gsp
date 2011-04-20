@@ -66,6 +66,13 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name"><g:message code="scheduledCourse.open" default="Is open?" />:</td>
+
+          <td valign="top" class="value"><g:formatBoolean boolean="${scheduledCourseInstance?.open}" true="Yes" false="No"/></td>
+
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="scheduledCourse.courseSessions" default="Course Sessions" />:</td>
 
           <td  valign="top" style="text-align: left;" class="value">
