@@ -41,26 +41,6 @@
 
         <tr class="prop">
           <td valign="top" class="name">
-            <label for="beginDate"><g:message code="scheduledCourse.beginDate" default="Begin Date" />:</label>
-          </td>
-          <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'beginDate', 'errors')}">
-            <g:datePicker name="beginDate" value="${scheduledCourseInstance?.beginDate}"  />
-
-          </td>
-        </tr>
-
-        <tr class="prop">
-          <td valign="top" class="name">
-            <label for="limitRegistrationDate"><g:message code="scheduledCourse.limitRegistrationDate" default="Limit Registration Date" />:</label>
-          </td>
-          <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'limitRegistrationDate', 'errors')}">
-            <g:datePicker name="limitRegistrationDate" value="${scheduledCourseInstance?.limitRegistrationDate}"  />
-
-          </td>
-        </tr>
-
-        <tr class="prop">
-          <td valign="top" class="name">
             <label for="costByCourse"><g:message code="scheduledCourse.costByCourse" default="Cost By Course" />:</label>
           </td>
           <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'costByCourse', 'errors')}">
@@ -92,6 +72,26 @@
             </ul>
             <g:link controller="courseSession" params="['scheduledCourse.id': scheduledCourseInstance?.id]" action="create"><g:message code="courseSession.new" default="New CourseSession" /></g:link>
 
+
+          </td>
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name">
+            <label for="beginDate"><g:message code="scheduledCourse.beginDate" default="Begin Date" />:</label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'beginDate', 'errors')}">
+            <g:datePicker name="beginDate" value="${scheduledCourseInstance?.beginDate}" precision="day"  />
+
+          </td>
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name">
+            <label for="limitRegistrationDate"><g:message code="scheduledCourse.limitRegistrationDate" default="Limit Registration Date" />:</label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'limitRegistrationDate', 'errors')}">
+            <g:datePicker name="limitRegistrationDate" value="${scheduledCourseInstance?.limitRegistrationDate}" precision="day"  />
 
           </td>
         </tr>

@@ -1,3 +1,4 @@
+
 <%@ page import="com.synergyj.grain.course.ScheduledCourse" %>
 <html>
 <head>
@@ -37,44 +38,30 @@
         </tr>
 
         <tr class="prop">
-          <td valign="top" class="name"><g:message code="scheduledCourse.beginDate" default="Begin Date" />:</td>
-
-          <td valign="top" class="value"><g:formatDate date="${scheduledCourseInstance?.beginDate}" /></td>
-
-        </tr>
-
-        <tr class="prop">
-          <td valign="top" class="name"><g:message code="scheduledCourse.limitRegistrationDate" default="Limit Registration Date" />:</td>
-
-          <td valign="top" class="value"><g:formatDate date="${scheduledCourseInstance?.limitRegistrationDate}" /></td>
-
-        </tr>
-
-        <tr class="prop">
-          <td valign="top" class="name"><g:message code="scheduledCourse.lastUpdated" default="Last Updated" />:</td>
-
-          <td valign="top" class="value"><g:formatDate date="${scheduledCourseInstance?.lastUpdated}" /></td>
-
-        </tr>
-
-        <tr class="prop">
-          <td valign="top" class="name"><g:message code="scheduledCourse.dateCreated" default="Date Created" />:</td>
-
-          <td valign="top" class="value"><g:formatDate date="${scheduledCourseInstance?.dateCreated}" /></td>
-
-        </tr>
-
-        <tr class="prop">
           <td valign="top" class="name"><g:message code="scheduledCourse.costByCourse" default="Cost By Course" />:</td>
 
-          <td valign="top" class="value"><g:formatNumber number="${scheduledCourseInstance?.costByCourse}" /></td>
+          <td valign="top" class="value">$ <g:formatNumber number="${scheduledCourseInstance?.costByCourse}" format="#,##0.00;(#,##0.00)" /></td>
 
         </tr>
 
         <tr class="prop">
           <td valign="top" class="name"><g:message code="scheduledCourse.costByModule" default="Cost By Module" />:</td>
 
-          <td valign="top" class="value"><g:formatNumber number="${scheduledCourseInstance?.costByModule}" /></td>
+          <td valign="top" class="value">$ <g:formatNumber number="${scheduledCourseInstance?.costByModule}" format="#,##0.00;(#,##0.00)" /></td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="scheduledCourse.beginDate" default="Begin Date" />:</td>
+
+          <td valign="top" class="value"><g:formatDate date="${scheduledCourseInstance?.beginDate}" format="dd-MMMM-yy" /></td>
+
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="scheduledCourse.limitRegistrationDate" default="Limit Registration Date" />:</td>
+
+          <td valign="top" class="value"><g:formatDate date="${scheduledCourseInstance?.limitRegistrationDate}" format="dd-MMMM-yy" /></td>
 
         </tr>
 

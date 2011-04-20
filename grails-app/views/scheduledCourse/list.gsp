@@ -1,3 +1,4 @@
+
 <%@ page import="com.synergyj.grain.course.ScheduledCourse" %>
 <html>
 <head>
@@ -28,9 +29,7 @@
 
         <g:sortableColumn property="limitRegistrationDate" title="Limit Registration Date" titleKey="scheduledCourse.limitRegistrationDate" />
 
-        <g:sortableColumn property="lastUpdated" title="Last Updated" titleKey="scheduledCourse.lastUpdated" />
-
-        <g:sortableColumn property="dateCreated" title="Date Created" titleKey="scheduledCourse.dateCreated" />
+        <g:sortableColumn property="costByCourse" title="Cost By Course" titleKey="scheduledCourse.costByCourse" />
 
       </tr>
       </thead>
@@ -42,13 +41,11 @@
 
           <td>${fieldValue(bean: scheduledCourseInstance, field: "course")}</td>
 
-          <td><g:formatDate date="${scheduledCourseInstance.beginDate}" /></td>
+          <td><g:formatDate date="${scheduledCourseInstance.beginDate}" format="dd-MMMM-yy" /></td>
 
-          <td><g:formatDate date="${scheduledCourseInstance.limitRegistrationDate}" /></td>
+          <td><g:formatDate date="${scheduledCourseInstance.limitRegistrationDate}" format="dd-MMMM-yy" /></td>
 
-          <td><g:formatDate date="${scheduledCourseInstance.lastUpdated}" /></td>
-
-          <td><g:formatDate date="${scheduledCourseInstance.dateCreated}" /></td>
+          <td>$ <g:formatNumber number="${scheduledCourseInstance.costByCourse}" format="#,##0.00;(#,##0.00)" /></td>
 
         </tr>
       </g:each>

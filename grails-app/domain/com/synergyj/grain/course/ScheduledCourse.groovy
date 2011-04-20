@@ -28,8 +28,8 @@ class ScheduledCourse{
 	
 	static constraints = {
     course nullable:false
-    beginDate()
-    limitRegistrationDate()
+    //beginDate()
+    //limitRegistrationDate()
 		lastUpdated display:false
 		dateCreated display:false
 	}
