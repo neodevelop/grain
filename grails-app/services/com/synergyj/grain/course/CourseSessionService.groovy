@@ -21,7 +21,6 @@ class CourseSessionService {
 
     def createSession4ScheduledCourse(Long scheduledCourseId,Date sessionDate) {
       def scheduledCourse = ScheduledCourse.get(scheduledCourseId)
-      println scheduledCourse.dump()
       if(!scheduledCourse)
         throw ScheduledCourseException(message:"No se encontró el curso agendado...")
       def courseSession = new CourseSession()

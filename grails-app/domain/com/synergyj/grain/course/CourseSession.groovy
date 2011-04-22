@@ -18,6 +18,7 @@ package com.synergyj.grain.course
 import com.synergyj.grain.auth.User
 import com.synergyj.grain.course.CourseModule
 import com.synergyj.grain.course.ScheduledCourse
+import java.text.SimpleDateFormat
 
 class CourseSession{
 	Date sessionDate
@@ -27,6 +28,8 @@ class CourseSession{
 	
 	static hasMany = [teachers:User]
 	static belongsTo = [scheduledCourse:ScheduledCourse]
+
+  static dateFormat = new SimpleDateFormat("dd-MM-yy")
 	
 	static constraints = {
     module nullable:true
@@ -35,6 +38,6 @@ class CourseSession{
 	}
 	
 	String toString(){
-		sessionDate.toString()
+    dateFormat.format(this.sessionDate)
 	}
 }
