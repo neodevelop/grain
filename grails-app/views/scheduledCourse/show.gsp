@@ -17,8 +17,9 @@
       });
 
       $("a.deleteSession").live("click",function(){
-        var index = this.href.substring(this.href.length-2);
-
+        var splitLink = this.href.split('/')
+        var index = splitLink[splitLink.length - 1];
+        //alert(index);
         $.ajax({
           type:'POST',
           url:this.href,
@@ -43,7 +44,7 @@
       var date = new Date(e.sessionDate)
       var stringdate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
       var link = "<a class='deleteSession' id='"+e.id+"' href='${createLink(controller:'courseSession',action:'deleteAsync')}/"+e.id+"'>Delete</a>";
-      $("<li>"+stringdate+" "+link+"</li>").appendTo("div#sessionList > ul");
+      $("<li id='sessionCourse"+e.id+"'>"+stringdate+" "+link+"</li>").appendTo("div#sessionList > ul");
     }
   </g:javascript>
 

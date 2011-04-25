@@ -17,7 +17,9 @@ package com.synergyj.grain.course
 
 import java.text.SimpleDateFormat
 import grails.converters.JSON
+import grails.plugins.springsecurity.Secured
 
+@Secured(["hasRole('ROLE_ADMIN')"])
 class ScheduledCourseController {
 
   def courseSessionService

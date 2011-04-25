@@ -23,6 +23,9 @@ import com.synergyj.grain.content.ContentType
 import com.synergyj.grain.auth.User
 import com.synergyj.grain.auth.Role
 import com.synergyj.grain.auth.PersonAuthority
+import com.synergyj.grain.course.Course
+import com.synergyj.grain.course.CourseType
+import com.synergyj.grain.course.Status
 
 class BootStrap {
   
@@ -48,9 +51,10 @@ class BootStrap {
 
   def init = { servletContext ->
     
-    if(Role.count() == 0){
+    if(!Role.count()){
       def adminRole = new Role(authority:'ROLE_ADMIN',description:'Administrador').save(flush:true)
       def userRole = new Role(authority:'USER_ADMIN',description:'Usuario').save(flush:true)
+      def guestUser = new Role()
       log.debug "Roles creados ${adminRole},${userRole}"
       String password = springSecurityService.encodePassword('password')
       def user = new User(email:'user@user.com',password:password).save(flush:true)
@@ -59,6 +63,38 @@ class BootStrap {
       PersonAuthority.create user, userRole, true
       PersonAuthority.create admin, adminRole, true
       log.debug "Autorización concedidad para los usuarios"
+    }
+
+    if(!Course.count()){
+      def courseSpring = new Course(
+          name:'Desarrollo profesional con Spring 3',
+          content:'<p>Este es el contenido del curso</p>',
+          contentType:ContentType.HTML,
+          overview:"<p>Spring es una tecnología dedicada para permitir construir aplicaciones usando POJO’s….</p>",
+          audience:"<p>Todos los desarrolladores Java</p>",
+          prerequisites:"<p><ul><li>EJB</li><li>JDBC</li><li>Hibernate</li></ul></p>",
+          goal:"<p>Entender los conceptos Inyección de dependencias e Inversión del Control </p>",
+          method:"<p>Prácticos</p>",
+          format:"<p>Formato del curso</p>",
+          courseKey:"SPRING3.2011",
+          courseType:CourseType.COURSE,
+          status:Status.LIVE
+      ).save(flush:true)
+
+      def courseWebAdv = new Course(
+          name:'Desarrollo Web Avanzado',
+          content:'<p><ul><li>CSS y Javascript con jQuery</li><li>SpringMVC a profundidad</li><li>Flujos web con Spring WebFlow 2<br></li></ul></p>',
+          contentType:ContentType.HTML,
+          overview:"<p>En la actualidad, las aplicaciones web son la plataforma principal de muchos motores organizacionales, dandole la oportunidad a los usuarios de interactuar entre ellos con los datos de la operación.</p>",
+          audience:"<p>Todos los desarrolladores Java</p>",
+          prerequisites:"<p><ul><li>Servlets</li><li>JSP</li><li>MVC</li></ul></p>",
+          goal:"<p>Desarrollar las habilidades necesarias para implementar un sitio web con funcionalidades atractivas</p>",
+          method:"<p>Prácticos</p>",
+          format:"<p>Formato del curso</p>",
+          courseKey:"WEBADV.2011",
+          courseType:CourseType.COURSE,
+          status:Status.LIVE
+      ).save(flush:true)
     }
     
     if (MenuItem.count() == 0) {

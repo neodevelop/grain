@@ -18,7 +18,7 @@ grails.project.dependency.resolution = {
   }
 
   plugins {
-    runtime 'org.grails.plugins:spring-security-core:1.0.1'
+    runtime 'org.grails.plugins:spring-security-core:latest.integration'
     runtime 'org.grails.plugins:mail:0.9'
     runtime 'org.grails.plugins:settings:1.4'
     runtime 'org.grails.plugins:jquery:latest.integration'

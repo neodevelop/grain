@@ -26,9 +26,6 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
-import grails.plugins.springsecurity.SecurityConfigType
-
-
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
@@ -178,7 +175,7 @@ grails.plugins.springsecurity.auth.loginFormUrl = '/login'
 grails.plugins.springsecurity.adh.errorPage = '/denied'
 grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/'
 grails.plugins.springsecurity.rejectIfNoRule = true
-grails.plugins.springsecurity.securityConfigType = SecurityConfigType.Annotation
+//grails.plugins.springsecurity.securityConfigType = SecurityConfigType.Annotation // It's default
 grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 grails.plugins.springsecurity.useSessionFixationPrevention = true
 
@@ -193,8 +190,7 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/themes/**': ['permitAll'],
     '/js/**': ['permitAll'],
     '/images/**': ['permitAll'],
-    '/plugins/**': ['permitAll'],
-    '/**': ['permitAll']
+    '/plugins/**': ['permitAll']
 ]
 
 // Added by the JQuery Validation plugin:

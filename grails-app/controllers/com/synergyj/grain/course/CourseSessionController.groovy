@@ -18,7 +18,7 @@ package com.synergyj.grain.course
 import grails.plugins.springsecurity.Secured
 import grails.converters.JSON
 
-//@Secured(["hasRole('ROLE_ADMIN')"])
+@Secured(["hasRole('ROLE_ADMIN')"])
 class CourseSessionController {
 
   def scaffold = CourseSession
