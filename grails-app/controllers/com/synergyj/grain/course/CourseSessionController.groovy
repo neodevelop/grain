@@ -16,9 +16,17 @@
 package com.synergyj.grain.course
 
 import grails.plugins.springsecurity.Secured
+import grails.converters.JSON
 
 //@Secured(["hasRole('ROLE_ADMIN')"])
 class CourseSessionController {
 
-    def scaffold = CourseSession
+  def scaffold = CourseSession
+
+  def deleteAsync = {
+    def courseSession = CourseSession.get(params.id as Long);
+    courseSession.delete()
+    render courseSession as JSON
+
+  }
 }

@@ -15,6 +15,23 @@
         $('#newSessionCourse').fadeIn();
         $('#showAddCourseSession').hide();
       });
+
+      $("a.deleteSession").live("click",function(){
+        var index = this.href.substring(this.href.length-2);
+
+        $.ajax({
+          type:'POST',
+          url:this.href,
+          success:function(data){
+            $("li#sessionCourse"+index).fadeOut('slow');
+          },
+          error:function(){
+            alert("Couldn't delete session");
+          }
+        });
+
+        return false;
+      });
     });
 
     function restoreLink(){
@@ -23,7 +40,10 @@
       return false;
     }
     function reacting(e){
-      $("<li><a href='#'>"+e+"</a></li>").appendTo("div#sessionList > ul");
+      var date = new Date(e.sessionDate)
+      var stringdate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+      var link = "<a class='deleteSession' id='"+e.id+"' href='${createLink(controller:'courseSession',action:'deleteAsync')}/"+e.id+"'>Delete</a>";
+      $("<li>"+stringdate+" "+link+"</li>").appendTo("div#sessionList > ul");
     }
   </g:javascript>
 
@@ -102,6 +122,9 @@
               <g:each in="${scheduledCourseInstance?.courseSessions}" var="courseSessionInstance">
                 <li id="sessionCourse${courseSessionInstance.id}">
                   ${courseSessionInstance.encodeAsHTML()}
+                  <a class="deleteSession" href="${createLink(controller:'courseSession',action:'deleteAsync',id:courseSessionInstance.id)}">
+                    Delete
+                  </a>
                 </li>
               </g:each>
             </ul>

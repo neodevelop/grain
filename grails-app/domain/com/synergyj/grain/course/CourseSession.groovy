@@ -29,7 +29,7 @@ class CourseSession{
 	static hasMany = [teachers:User]
 	static belongsTo = [scheduledCourse:ScheduledCourse]
 
-  static dateFormat = new SimpleDateFormat("dd-MM-yy")
+  static dateFormat = new SimpleDateFormat("dd-MM-yyyy")
 	
 	static constraints = {
     module nullable:true

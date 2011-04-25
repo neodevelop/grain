@@ -16,6 +16,7 @@
 package com.synergyj.grain.course
 
 import java.text.SimpleDateFormat
+import grails.converters.JSON
 
 class ScheduledCourseController {
 
@@ -28,8 +29,7 @@ class ScheduledCourseController {
     def dateFormat = new SimpleDateFormat("dd/MM/yy")
     def sessionDate = dateFormat.parse(params.sessionDate as String) as Date
     def courseSession = courseSessionService.createSession4ScheduledCourse(scheduledCourseId,sessionDate)
-    println courseSession.dump()
-    render "${courseSession}"
+    render courseSession as JSON
   }
 
   // the delete, save and update actions only accept POST requests
