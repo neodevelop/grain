@@ -18,8 +18,7 @@ package com.synergyj.grain.content
 import org.springframework.beans.propertyeditors.LocaleEditor
 import grails.plugins.springsecurity.Secured
 
-//@Secured(["hasRole('ROLE_ADMIN')"])
-//@Secured(['permitAll'])
+@Secured(["hasRole('ROLE_ADMIN')"])
 class ContentController {
 
   def index = { redirect(action: "list", params: params) }

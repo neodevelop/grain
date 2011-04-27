@@ -17,7 +17,7 @@ package com.synergyj.grain.content
 
 import grails.plugins.springsecurity.Secured
 
-//@Secured(['permitAll'])
+@Secured(['permitAll'])
 class NewsItemController {
     
     def scaffold = true
