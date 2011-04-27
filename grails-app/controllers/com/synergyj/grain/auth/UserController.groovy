@@ -16,6 +16,7 @@
 package com.synergyj.grain.auth
 
 import grails.plugins.springsecurity.Secured
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class UserController {
   @Secured(['isAuthenticated()'])
@@ -25,6 +26,10 @@ class UserController {
 
   @Secured(['permitAll()'])
   def login = {
+    def config = SpringSecurityUtils.securityConfig
+    String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
+
+    [postUrl: postUrl, rememberMeParameter: config.rememberMe.parameter]
   }
 
   @Secured(['permitAll()'])
