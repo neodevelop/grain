@@ -56,8 +56,9 @@ class BootStrap {
       def userRole = new Role(authority:'USER_ADMIN',description:'Usuario').save(flush:true)
       def guestUser = new Role()
       log.debug "Roles creados ${adminRole},${userRole}"
-      String password = springSecurityService.encodePassword('password')
+      String password = springSecurityService.encodePassword('password', 'user@user.com')
       def user = new User(email:'user@user.com',password:password).save(flush:true)
+      password = springSecurityService.encodePassword('password', 'admin@admin.com')
       def admin = new User(email:'admin@admin.com',password:password).save(flush:true)
       log.debug "Usuarios creados: ${user.email},${admin.email}"
       PersonAuthority.create user, userRole, true
