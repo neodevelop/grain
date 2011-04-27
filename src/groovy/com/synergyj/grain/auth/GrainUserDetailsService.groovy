@@ -15,55 +15,60 @@
  */
 package com.synergyj.grain.auth
 
-import org.codehaus.groovy.grails.plugins.springsecurity.GrailsUser
+import org.codehaus.groovy.grails.plugins.springsecurity.GormUserDetailsService
 import org.codehaus.groovy.grails.plugins.springsecurity.GrailsUserDetailsService
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.GrantedAuthorityImpl
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException
-import org.springframework.security.core.GrantedAuthority
 
-class GrainUserDetailsService implements GrailsUserDetailsService {
-
+class GrainUserDetailsService extends GormUserDetailsService implements GrailsUserDetailsService {
   /**
-   * Some Spring Security classes (e.g. RoleHierarchyVoter) expect at least one role, so
-   * we give a user with no granted roles this one which gets past that restriction but
-   * doesn't grant anything.
+   * Every user has the Role ROLE_USER
    */
-  static final List NO_ROLES = [new GrantedAuthorityImpl(SpringSecurityUtils.NO_ROLE)]
+  static final GrantedAuthorityImpl DEFAULT_ROLE = new GrantedAuthorityImpl('ROLE_USER');
 
-  UserDetails loadUserByUsername(String username, boolean loadRoles)
-  throws UsernameNotFoundException {
-    return loadUserByUsername(username)
+  UserDetails loadUserByUsername(String username, boolean loadRoles) throws UsernameNotFoundException {
+    User.withTransaction { status ->
+      def user = loadUser(username)
+      Collection<GrantedAuthority> authorities = loadAuthorities(user, username, loadRoles).findAll {it != null}
+      authorities << DEFAULT_ROLE
+      return createUserDetails(user, authorities)
+    }
   }
 
-  UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+  UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    loadUserByUsername username, true
+  }
 
-    User.withTransaction { status ->
-
-      User user = User.findByEmail(userName)
-      if (!user) throw new UsernameNotFoundException('User not found', userName)
-
-      def conf = SpringSecurityUtils.securityConfig
-
-      String usernamePropertyName = conf.userLookup.usernamePropertyName
-      String passwordPropertyName = conf.userLookup.passwordPropertyName
-      String enabledPropertyName = conf.userLookup.enabledPropertyName
-      String accountExpiredPropertyName = conf.userLookup.accountExpiredPropertyName
-      String accountLockedPropertyName = conf.userLookup.accountLockedPropertyName
-      String passwordExpiredPropertyName = conf.userLookup.passwordExpiredPropertyName
-
-      String username = user."$usernamePropertyName"
-      String password = user."$passwordPropertyName"
-      boolean enabled = enabledPropertyName ? user."$enabledPropertyName" : true
-      boolean accountExpired = accountExpiredPropertyName ? user."$accountExpiredPropertyName" : false
-      boolean accountLocked = accountLockedPropertyName ? user."$accountLockedPropertyName" : false
-      boolean passwordExpired = passwordExpiredPropertyName ? user."$passwordExpiredPropertyName" : false
-
-      def authorities = loadAuthorities(user, userName, loadRoles).findAll {it != null}  ?: NO_ROLES
-
-      return new GrainUserDetails(username, password, enabled, !accountExpired, !passwordExpired, !accountLocked,
-            authorities, user.id)
+  protected loadUser(String username) {
+    User user = User.findByEmail(username)
+    if (!user) {
+      log.warn "User not found: $username"
+      throw new UsernameNotFoundException('User not found', username)
     }
+    user
+  }
+
+  protected UserDetails createUserDetails(user, Collection<GrantedAuthority> authorities) {
+
+    def conf = SpringSecurityUtils.securityConfig
+
+    String usernamePropertyName = conf.userLookup.usernamePropertyName
+    String passwordPropertyName = conf.userLookup.passwordPropertyName
+    String enabledPropertyName = conf.userLookup.enabledPropertyName
+    String accountExpiredPropertyName = conf.userLookup.accountExpiredPropertyName
+    String accountLockedPropertyName = conf.userLookup.accountLockedPropertyName
+    String passwordExpiredPropertyName = conf.userLookup.passwordExpiredPropertyName
+
+    String username = user."$usernamePropertyName"
+    String password = user."$passwordPropertyName"
+    boolean enabled = enabledPropertyName ? user."$enabledPropertyName" : true
+    boolean accountExpired = accountExpiredPropertyName ? user."$accountExpiredPropertyName" : false
+    boolean accountLocked = accountLockedPropertyName ? user."$accountLockedPropertyName" : false
+    boolean passwordExpired = passwordExpiredPropertyName ? user."$passwordExpiredPropertyName" : false
+
+    return new GrainUserDetails(username, password, enabled, !accountExpired, !passwordExpired, !accountLocked, authorities, user.id)
   }
 }
