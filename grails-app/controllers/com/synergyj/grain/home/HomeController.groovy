@@ -17,7 +17,7 @@ package com.synergyj.grain.home
 
 import grails.plugins.springsecurity.Secured
 
-//@Secured(['permitAll'])
+@Secured(["hasRole('ROLE_ADMIN')"])
 class HomeController {
   def index = {}
 }
