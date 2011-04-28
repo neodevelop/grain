@@ -20,6 +20,10 @@ class UrlMappings {
       controller = 'user'
       action = 'me'
     }
+    name updateme: '/updateme' {
+      controller = 'user'
+      action = 'edit'
+    }
     name login: '/login' {
       controller = 'user'
       action = 'login'

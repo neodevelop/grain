@@ -19,9 +19,25 @@ import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class UserController {
+
+  def springSecurityService
+
   @Secured(['isAuthenticated()'])
   def me = {
+    [user:springSecurityService.currentUser]
+  }
 
+  @Secured(['isAuthenticated()'])
+  def edit = {
+    [user:springSecurityService.currentUser]
+  }
+
+  @Secured(['isAuthenticated()'])
+  def save = {
+    def currentUser = User.findByEmail(springSecurityService.currentUser.email)
+    currentUser.properties = params
+    currentUser.save()
+    redirect action:'me'
   }
 
   @Secured(['permitAll()'])
