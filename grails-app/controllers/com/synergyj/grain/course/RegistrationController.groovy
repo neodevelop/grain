@@ -17,8 +17,9 @@ package com.synergyj.grain.course
 
 import grails.plugins.springsecurity.Secured
 
-@Secured(["hasRole('ROLE_ADMIN')"])
 class RegistrationController {
 
-    def scaffold = Registration
+  def index = {
+
+  }
 }

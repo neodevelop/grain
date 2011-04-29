@@ -190,7 +190,8 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/themes/**': ['permitAll'],
     '/js/**': ['permitAll'],
     '/images/**': ['permitAll'],
-    '/plugins/**': ['permitAll']
+    '/plugins/**': ['permitAll'],
+    '/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY']
 ]
 
 // Added by the JQuery Validation plugin:

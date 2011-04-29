@@ -76,13 +76,12 @@
           </td>
         </tr>
 
-
         <tr class="prop">
           <td valign="top" class="name">
-            <label for="open"><g:message code="scheduledCourse.open" default="Is open?" />:</label>
+            <label for="status"><g:message code="scheduledCourse.status" default="Status:" />:</label>
           </td>
-          <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'open', 'errors')}">
-            <g:checkBox name="open" value="${scheduledCourseInstance?.open}" />
+          <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'scheduledCourseStatus', 'errors')}">
+            <g:select name="scheduledCourseStatus" from="${com.synergyj.grain.course.ScheduledCourseStatus?.values()}" value="${scheduledCourseInstance?.scheduledCourseStatus}"  />
           </td>
         </tr>
 

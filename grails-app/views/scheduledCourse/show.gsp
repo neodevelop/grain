@@ -108,9 +108,9 @@
         </tr>
 
         <tr class="prop">
-          <td valign="top" class="name"><g:message code="scheduledCourse.open" default="Is open?" />:</td>
+          <td valign="top" class="name"><g:message code="scheduledCourse.status" default="Status:" />:</td>
 
-          <td valign="top" class="value"><g:formatBoolean boolean="${scheduledCourseInstance?.open}" true="Yes" false="No"/></td>
+          <td valign="top" class="value">${scheduledCourseInstance.scheduledCourseStatus}</td>
 
         </tr>
 

@@ -53,7 +53,7 @@ class BootStrap {
     
     if(!Role.count()){
       def adminRole = new Role(authority:'ROLE_ADMIN',description:'Administrador').save(flush:true)
-      def userRole = new Role(authority:'USER_ADMIN',description:'Usuario').save(flush:true)
+      def userRole = new Role(authority:'ROLE_USER',description:'Usuario').save(flush:true)
       def guestUser = new Role()
       log.debug "Roles creados ${adminRole},${userRole}"
       String password = springSecurityService.encodePassword('password', 'user@user.com')

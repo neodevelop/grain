@@ -16,42 +16,9 @@
   <g:if test="${flash.message}">
     <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
   </g:if>
-  <div class="list">
-    <table>
-      <thead>
-      <tr>
 
-        <g:sortableColumn property="id" title="Id" titleKey="scheduledCourse.id" />
+  <g:render template="list" model="[scheduledCourseList:scheduledCourseInstanceList]"/>
 
-        <th><g:message code="scheduledCourse.course" default="Course" /></th>
-
-        <g:sortableColumn property="beginDate" title="Begin Date" titleKey="scheduledCourse.beginDate" />
-
-        <g:sortableColumn property="limitRegistrationDate" title="Limit Registration Date" titleKey="scheduledCourse.limitRegistrationDate" />
-
-        <g:sortableColumn property="costByCourse" title="Cost By Course" titleKey="scheduledCourse.costByCourse" />
-
-      </tr>
-      </thead>
-      <tbody>
-      <g:each in="${scheduledCourseInstanceList}" status="i" var="scheduledCourseInstance">
-        <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-
-          <td><g:link action="show" id="${scheduledCourseInstance.id}">${fieldValue(bean: scheduledCourseInstance, field: "id")}</g:link></td>
-
-          <td>${fieldValue(bean: scheduledCourseInstance, field: "course")}</td>
-
-          <td><g:formatDate date="${scheduledCourseInstance.beginDate}" format="dd-MMMM-yy" /></td>
-
-          <td><g:formatDate date="${scheduledCourseInstance.limitRegistrationDate}" format="dd-MMMM-yy" /></td>
-
-          <td>$ <g:formatNumber number="${scheduledCourseInstance.costByCourse}" format="#,##0.00;(#,##0.00)" /></td>
-
-        </tr>
-      </g:each>
-      </tbody>
-    </table>
-  </div>
   <div class="paginateButtons">
     <g:paginate total="${scheduledCourseInstanceTotal}" />
   </div>
