@@ -20,6 +20,7 @@ import grails.plugins.springsecurity.Secured
 class RegistrationController {
 
   def index = {
-
+    def scheduledCoursesForRegistration = ScheduledCourse.findAllByScheduledCourseStatus(ScheduledCourseStatus.SCHEDULED)
+    [scheduledCoursesForRegistration:scheduledCoursesForRegistration]
   }
 }

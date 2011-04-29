@@ -1,4 +1,9 @@
 <html>
-  <head><title>Simple GSP page</title></head>
-  <body>Place your content here</body>
+  <head>
+    <title>Registration</title>
+  </head>
+  <body>
+  <h1>Lista de cursos disponibles</h1>
+  <g:render template="/scheduledCourse/list" model="[scheduledCourseList:scheduledCoursesForRegistration]"/>
+  </body>
 </html>

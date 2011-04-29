@@ -21,7 +21,21 @@
     <g:each in="${scheduledCourseList}" status="i" var="scheduledCourse">
       <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 
-        <td>${fieldValue(bean: scheduledCourse, field: "course")}</td>
+        <td>
+          <sec:ifAllGranted roles="ROLE_ADMIN">
+            <g:link controller="scheduledCourse" action="show" id="${scheduledCourse.id}">
+              ${fieldValue(bean: scheduledCourse, field: "course")}
+            </g:link>
+          </sec:ifAllGranted>
+
+          <sec:ifAllGranted roles="ROLE_USER">
+            <sec:ifNotGranted roles="ROLE_ADMIN">
+              <!-- TODO: Mostrar el detalle del curso(temario) -->
+              ${fieldValue(bean: scheduledCourse, field: "course")}
+            </sec:ifNotGranted>
+          </sec:ifAllGranted>
+
+        </td>
 
         <td><g:formatDate date="${scheduledCourse.beginDate}" format="dd-MMMM-yy" /></td>
 
@@ -29,8 +43,10 @@
 
         <td>$ <g:formatNumber number="${scheduledCourse.costByCourse}" format="#,##0.00;(#,##0.00)" /></td>
 
-        <sec:ifAllGranted roles="ROLE_ADMIN">
-          <th>Inscribete</th>
+        <sec:ifAllGranted roles="ROLE_USER">
+          <sec:ifNotGranted roles="ROLE_ADMIN">
+            <th>Inscribete</th>
+          </sec:ifNotGranted>
         </sec:ifAllGranted>
 
       </tr>
