@@ -22,19 +22,25 @@ class RegistrationService {
   static transactional = true
 
   def addUserToScheduledCourse(User user, long scheduledCourseId) {
+    // Buscamos el curso calendarizado
     def scheduledCourse = ScheduledCourse.get(scheduledCourseId)
+    // Creamos la instancia de registro con usuario, curso agendado, fecha de registro
     def registration = new Registration(
         student: user,
         scheduledCourse: scheduledCourse,
         completeCourse: false,
-        registrationDate: new Date(),
-        courseSessions: scheduledCourse.courseSessions
+        registrationDate: new Date()
     )
-    // TODO: Validar que el usuario no este registrado previamente
+    // Buscamos si ya esta registrado a este curso
+    def userRegisteredToThisCourse =  Registration.countByStudentAndScheduledCourse(user,scheduledCourse)
+    // Si esta registrado arrojamos excepción con el respectivo mensaje
+    if(userRegisteredToThisCourse){
+      throw new RegistrationException(registration:registration,message:"registration.alreadyRegistered")
+    }
     // TODO: Validar y avisar cuando un usuario quiera registrarse a otro curso y no deba por interferncia en sus clases
-    // TODO: Guardar el registro
-    println registration.dump()
-    println registration.validate()
+    // Guardamos el registro
+    registration.save()
+    // Regresamos el registro recientemente guardado...
     registration
   }
 }

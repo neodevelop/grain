@@ -15,7 +15,7 @@
  */
 package com.synergyj.grain.course
 
-import grails.plugins.springsecurity.Secured
+import grails.converters.JSON
 
 class RegistrationController {
 
@@ -30,8 +30,15 @@ class RegistrationController {
   def addMeToCourse = {
     def user = springSecurityService.currentUser
     def scheduleCourseId = params.id as Long
-    def registration =  registrationService.addUserToScheduledCourse(user,scheduleCourseId)
-    registration.save()
-    registration
+    def registration
+    try{
+      registration =  registrationService.addUserToScheduledCourse(user,scheduleCourseId)
+    }catch(RegistrationException ex){
+      def result = ['message':g.message(code:ex.message,default:'No te puedes registrar a este curso(varias causas)'),'registration':ex.registration]
+      render(result as JSON)
+    }
+    if(registration){
+      render(registration as JSON)
+    }
   }
 }

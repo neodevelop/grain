@@ -47,9 +47,19 @@
           <sec:ifNotGranted roles="ROLE_ADMIN">
             <th>
               <div id="registration${i}">
-                 <g:remoteLink action="addMeToCourse" controller="registration" id="${scheduledCourse.id}">
+                <g:remoteLink action="addMeToCourse" controller="registration" id="${scheduledCourse.id}" onSuccess="registered(data,${i})">
                   Inscribete
-                 </g:remoteLink>
+                </g:remoteLink>
+                <g:javascript>
+                  function registered(registration,index){
+                    $("div#registration"+index +" > a").hide();
+                    if(registration.message){
+                      $("<span id='fail"+index+"'>"+registration.message+"</span>").appendTo("div#registration"+index);
+                    }else{
+                      $("<span id='ok"+index+"'>${message(code:'registration.ok',default:'Haz quedado registrado!!!')}</span>").appendTo("div#registration"+index);
+                    }
+                  }
+                </g:javascript>
               </div>
             </th>
           </sec:ifNotGranted>
