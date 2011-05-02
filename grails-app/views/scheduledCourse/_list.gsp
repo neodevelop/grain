@@ -45,7 +45,13 @@
 
         <sec:ifAllGranted roles="ROLE_USER">
           <sec:ifNotGranted roles="ROLE_ADMIN">
-            <th>Inscribete</th>
+            <th>
+              <div id="registration${i}">
+                 <g:remoteLink action="addMeToCourse" controller="registration" id="${scheduledCourse.id}">
+                  Inscribete
+                 </g:remoteLink>
+              </div>
+            </th>
           </sec:ifNotGranted>
         </sec:ifAllGranted>
 

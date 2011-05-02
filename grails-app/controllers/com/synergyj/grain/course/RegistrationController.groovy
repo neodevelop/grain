@@ -19,8 +19,19 @@ import grails.plugins.springsecurity.Secured
 
 class RegistrationController {
 
+  def springSecurityService
+  def registrationService
+
   def index = {
     def scheduledCoursesForRegistration = ScheduledCourse.findAllByScheduledCourseStatus(ScheduledCourseStatus.SCHEDULED)
     [scheduledCoursesForRegistration:scheduledCoursesForRegistration]
+  }
+
+  def addMeToCourse = {
+    def user = springSecurityService.currentUser
+    def scheduleCourseId = params.id as Long
+    def registration =  registrationService.addUserToScheduledCourse(user,scheduleCourseId)
+    registration.save()
+    registration
   }
 }
