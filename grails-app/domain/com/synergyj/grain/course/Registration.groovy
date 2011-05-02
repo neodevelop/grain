@@ -30,6 +30,5 @@ class Registration {
 		lastUpdated display:false
 		dateCreated display:false
 	}
-	
-	static hasMany = [courseSessions:CourseSession]
+
 }
