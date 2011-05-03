@@ -37,9 +37,27 @@ class RegistrationService {
     if(userRegisteredToThisCourse){
       throw new RegistrationException(registration:registration,message:"registration.alreadyRegistered")
     }
-    // TODO: Validar y avisar cuando un usuario quiera registrarse a otro curso y no deba por interferncia en sus clases
+    // Buscar las sesiones de los cursos a los que el usuario ya está inscrito
+    def registrations = Registration.findAllByStudent(user)
+    def sessions = []
+    registrations.each{ reg ->
+      sessions << reg.scheduledCourse.courseSessions
+    }
+    def sameSessions = []
+
+    sessions.flatten().each{ courseSessionRegistered ->
+      println courseSessionRegistered
+      //scheduledCourse.courseSessions*.getSessionDate(){ courseSessionScheduled ->
+      //  if(courseSessionScheduled == courseSessionRegistered)
+      //    sameSessions << courseSessionScheduled
+      //}
+    }
+    scheduledCourse.courseSessions*.sessionDate.each{
+      println "***** $it"
+    }
+    println sameSessions
     // Guardamos el registro
-    registration.save()
+    //registration.save()
     // Regresamos el registro recientemente guardado...
     registration
   }
