@@ -37,27 +37,33 @@ class RegistrationService {
     if(userRegisteredToThisCourse){
       throw new RegistrationException(registration:registration,message:"registration.alreadyRegistered")
     }
+
     // Buscar las sesiones de los cursos a los que el usuario ya está inscrito
     def registrations = Registration.findAllByStudent(user)
-    def sessions = []
-    registrations.each{ reg ->
-      sessions << reg.scheduledCourse.courseSessions
+    // Definimos una variable para almacenar las sesiones de los cursos registrados
+    def sessions =  registrations.collect{ reg ->
+      reg.scheduledCourse.courseSessions*.sessionDate
     }
-    def sameSessions = []
 
+    // Definimos una variable para almacenar las sesiones que se enciman
+    def sameSessions = []
+    // Iteramos las sesiones de curso registrado una vez aplanadas
     sessions.flatten().each{ courseSessionRegistered ->
-      println courseSessionRegistered
-      //scheduledCourse.courseSessions*.getSessionDate(){ courseSessionScheduled ->
-      //  if(courseSessionScheduled == courseSessionRegistered)
-      //    sameSessions << courseSessionScheduled
-      //}
+      // Iteramos las sesiones del curso calendarizado para comparar
+      scheduledCourse.courseSessions*.sessionDate.each{ courseSessionScheduled ->
+        // ¿Existe la sesion de curso agendado en el curso registrado?
+        if(courseSessionScheduled == courseSessionRegistered)
+          sameSessions << courseSessionScheduled // Cierto, entonces agregamos la sesion
+      }
     }
-    scheduledCourse.courseSessions*.sessionDate.each{
-      println "***** $it"
+    // Si tenemos las mismas sesiones???
+    if(sameSessions){
+      // Entonces arrojamos excepción
+      throw new RegistrationException(registration:registration,message:"registration.sessions.busy")
     }
-    println sameSessions
+
     // Guardamos el registro
-    //registration.save()
+    registration.save()
     // Regresamos el registro recientemente guardado...
     registration
   }
