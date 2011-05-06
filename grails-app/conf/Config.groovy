@@ -194,6 +194,20 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY']
 ]
 
+// Temporalmente agregado para usar el flujo de registro
+grails {
+  mail {
+    host = "smtp.gmail.com"
+    port = 465
+    username = "cursos@synergyj.com"
+    password = "entrenamiento"
+    props = ["mail.smtp.auth":"true",
+        "mail.smtp.socketFactory.port":"465",
+        "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+        "mail.smtp.socketFactory.fallback":"false"]
+  }
+}
+
 // Added by the JQuery Validation plugin:
 //jqueryValidation.packed = true
 //jqueryValidation.cdn = false  // false or "microsoft"

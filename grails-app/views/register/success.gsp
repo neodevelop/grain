@@ -4,5 +4,5 @@
   <parameter name="pageHeader" value="${g.message(code: 'user.create.success', default: 'Signup Success')}"/>
 </head>
 <body>
-
+  <h1>hola mundo!!!</h1>
 </body>

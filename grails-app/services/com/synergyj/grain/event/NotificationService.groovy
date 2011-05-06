@@ -24,7 +24,11 @@ class NotificationService {
   static transactional = false
 
   def sendNewRegistration(RegistrationCode registration) {
-    //TODO: Implement the email sending
-
+    mailService.sendMail {
+      to registration.username
+      from "no-reply@synergyj.com"
+      subject "Activa tu cuenta en SynergyJ.com"
+      body(view:"/mail/registrationNotification",model:[registration:registration])
+    }
   }
 }
