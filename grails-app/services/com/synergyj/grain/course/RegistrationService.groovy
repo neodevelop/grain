@@ -64,6 +64,9 @@ class RegistrationService {
 
     // Guardamos el registro
     registration.save()
+
+    // TODO: Notificar al usuario de su registro
+
     // Regresamos el registro recientemente guardado...
     registration
   }

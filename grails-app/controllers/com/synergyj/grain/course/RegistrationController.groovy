@@ -16,7 +16,9 @@
 package com.synergyj.grain.course
 
 import grails.converters.JSON
+import grails.plugins.springsecurity.Secured
 
+@Secured(['isAuthenticated()'])
 class RegistrationController {
 
   def springSecurityService

@@ -19,9 +19,12 @@ import com.synergyj.grain.auth.RegistrationCode
 
 class NotificationService {
 
-  static transactional = true
+  def mailService
+
+  static transactional = false
 
   def sendNewRegistration(RegistrationCode registration) {
     //TODO: Implement the email sending
+
   }
 }
