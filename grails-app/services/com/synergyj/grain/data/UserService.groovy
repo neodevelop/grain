@@ -51,7 +51,6 @@ class UserService {
       throw new UserRegistrationException('user.registration.error', user)
     }
 
-    def registration = RegistrationCode.create(user.email)
     notificationService.sendNewRegistration(registration)
 
     user
