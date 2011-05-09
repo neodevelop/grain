@@ -56,4 +56,6 @@ class UserController {
   def signup = {
     render view: "/register/index", model: [userdata: new RegisterUserCommand()]
   }
+
+  def accountLocked = {}
 }

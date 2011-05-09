@@ -44,6 +44,7 @@ class UrlMappings {
       controller = 'page'
       action = 'show'
     }
+    "/accountLocked"(controller:"user",view:"accountLocked")
     "/$controller/$action?/$id?" {
       constraints {
         // apply constraints here

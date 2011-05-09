@@ -40,7 +40,7 @@ class UserService {
 
     user.enabled = true
     user.accountExpired = false
-    user.accountLocked = true
+    user.accountLocked = false
     user.emailShow = true
     user.passwordExpired = false
     user.password = springSecurityService.encodePassword(user.password, salt)

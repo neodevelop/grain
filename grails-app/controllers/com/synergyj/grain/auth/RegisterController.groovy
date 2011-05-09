@@ -26,22 +26,20 @@ class RegisterController {
   def index = { }
 
   def user = { RegisterUserCommand userdata ->
+    def user
     if (userdata.hasErrors()) {
       userdata.password = ''
       render view: "/register/index", model: [userdata: userdata]
     } else {
-
       try {
-        userService.createUser(userdata)
+        user = userService.createUser(userdata)
       } catch (BusinessException be) {
         flash.error = g.message(code: be.message, args: [userdata.email])
         render view: "/register/index", model: [userdata: userdata]
         return
       }
-      flash.message = g.message(code: 'register.success', args: [userdata.email])
-      redirect controller: 'register', action: 'success'
+      render view:"success",model:[user:user]
     }
   }
 
-  def success = {}
 }

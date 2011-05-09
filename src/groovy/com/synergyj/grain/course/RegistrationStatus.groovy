@@ -15,21 +15,9 @@
  */
 package com.synergyj.grain.course
 
-import com.synergyj.grain.auth.User
-import com.synergyj.grain.course.ScheduledCourse
-
-class Registration {
-	Date dateCreated
-	Date lastUpdated
-	User student
-	ScheduledCourse scheduledCourse
-	Date registrationDate
-	Boolean completeCourse
-  RegistrationStatus registrationStatus
-	
-	static constraints = {
-		lastUpdated display:false
-		dateCreated display:false
-	}
-
+public enum RegistrationStatus {
+  REGISTERED,
+  PENDING_PAYMENT,
+  PAYED,
+  IN_COURSE
 }

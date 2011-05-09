@@ -4,5 +4,10 @@
   <parameter name="pageHeader" value="${g.message(code: 'user.create.success', default: 'Signup Success')}"/>
 </head>
 <body>
-  <h1>hola mundo!!!</h1>
+  <g:if test="${user.id}">
+      <div align="center">
+        <h2>Haz quedado registrado</h2>
+      </div>
+      <h3>Te hemos enviado un correo a <b>${user.email}</b> para que puedas activar tu cuenta...</h3>
+  </g:if>
 </body>

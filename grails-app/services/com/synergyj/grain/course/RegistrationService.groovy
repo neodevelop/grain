@@ -29,7 +29,8 @@ class RegistrationService {
         student: user,
         scheduledCourse: scheduledCourse,
         completeCourse: false,
-        registrationDate: new Date()
+        registrationDate: new Date(),
+        registrationStatus: RegistrationStatus.REGISTERED
     )
     // Buscamos si ya esta registrado a este curso
     def userRegisteredToThisCourse =  Registration.countByStudentAndScheduledCourse(user,scheduledCourse)
