@@ -16,10 +16,37 @@
 package com.synergyj.grain.course
 
 import com.synergyj.grain.auth.User
+import com.synergyj.grain.auth.RegisterUserCommand
 
 class RegistrationService {
 
   static transactional = true
+
+  def userService
+
+  def registerFromLanding(RegisterUserCommand userCommand, Long scheduledCourseId){
+    userCommand.tos = true // Lo coloco aquí por que aún no lo tengo en la forma
+    // Validamos los datos(constraints) del usuario
+    if(userCommand.validate()){
+      println "RegisterUserCommand validado OK"
+      // TODO: Buscar si ya existe el usuario, si no pues se crea uno
+      def user = userService.findUser(userCommand.email)
+      if(!user){
+        user = userService.createUser(userCommand)
+        // TODO: Notificar al usuario que ha sido registrado
+        // TODO: Se le envía un correo con la liga para que haga login con los datos que acaba de ingresar
+      }
+      // TODO: Crear un registro de inscripción
+      def registration = addUserToScheduledCourse(user,scheduledCourseId)
+
+      // TODO: Notificar la inscripción
+    }else{
+      // TODO: Lanzar la excepción para el error
+      println "RegisterUserCommand validado FAIL"
+      println userCommand.errors.dump()
+    }
+
+  }
 
   def addUserToScheduledCourse(User user, long scheduledCourseId) {
     // Buscamos el curso calendarizado

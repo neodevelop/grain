@@ -21,9 +21,11 @@ import grails.converters.JSON
 
 class LandingController {
 
+  def registrationService
+
   @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
   def addMe = { RegisterUserCommand registerUserCommand ->
-    println "Result: " + registerUserCommand.dump()
+    registrationService.registerFromLanding(registerUserCommand,Long.valueOf(params.scheduledCourseId))
     response.addHeader("Access-Control-Allow-Origin","*")
     render registerUserCommand as JSON
   }
