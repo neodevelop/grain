@@ -44,11 +44,14 @@ class UrlMappings {
       controller = 'page'
       action = 'show'
     }
-    "/accountLocked"(controller:"user",view:"accountLocked")
-    "/$controller/$action?/$id?" {
-      constraints {
-        // apply constraints here
+    name locked: "/accountLocked"(controller:"user",view:"accountLocked")
+      "/$controller/$action?/$id?" {
+        constraints {
+          // apply constraints here
       }
+    }
+    name addMeFromLanding: "/addMeFromLanding"(controller:"landing"){
+      action = [GET:"addMe"]
     }
     "500"(controller: 'error')
   }

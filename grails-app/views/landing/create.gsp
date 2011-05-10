@@ -12,30 +12,17 @@
           type:'POST',
           url:form.attr("action"),
           data:form.serialize(),
-          dataType:"text",
-          success:function(text){ console.log(text); },
+          dataType:"json",
+          success:function(json){ console.log(json); },
           error:function(xhr){ console.log(xhr); }
         });
         return false;
       });
-
-      $("a#reg").click(function(){
-        var url = $(this).attr("href");
-        $.ajax({
-          type:'GET',
-          url:url,
-          dataType:"json",
-          success:function(text){ console.log("OK"); console.log(text); },
-          error:function(xhr){ console.log("FAIL"); console.log(xhr); }
-        });
-        return false;
-      });
-
     });
   </script>
 </head>
 <body>
-<form id="registration" action="http://localhost:8080/grain/registration/addMeFromLanding" method="POST">
+<form id="registration" action="http://localhost:8080/grain/addMeFromLanding" method="POST">
 
   <ul>
     <li>

@@ -4,27 +4,18 @@
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
   <script type="text/javascript">
     $(function(){
-      $("form#registration").submit(function(){
-        var form = $(this);
-        //console.log(form);
-        $.ajax({
-          type:'GET',
-          url:form.attr("action"),
-          data:form.serialize(),
-          dataType:"json",
-          success:function(data){ console.log("OK");  },
-          error:function(xhr){ console.log(xhr);  },
-          complete:function(data){
-            console.log(data);
-          }
-        });
+      $("a#send").click(function(){
+        var form = $("form#registration");
+        console.log(form);
+        var url = form.attr("action") + "?" + form.serialize();
+        $.getJSON(url,function(data){ console.log("OK"); });
         return false;
       });
     });
   </script>
 </head>
 <body>
-<form id="registration" action="http://localhost:8080/grain/registration/addMeFromLanding" method="POST">
+<form id="registration" action="http://localhost:8080/grain/addMeFromLanding" method="POST">
 
   <ul>
     <li>
@@ -41,7 +32,7 @@
     </li>
     <li>
       <div class="submit">
-        <input class="sendButton" name="sendButton" type="submit" value="Registrarme!!!"/>
+        <a href="#" id="send">Registrarme</a>
       </div>
     </li>
   </ul>

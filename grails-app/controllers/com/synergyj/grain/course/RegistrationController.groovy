@@ -47,14 +47,4 @@ class RegistrationController {
       render(registration as JSON)
     }
   }
-
-  @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
-  def addMeFromLanding = { RegisterUserCommand registerUserCommand ->
-    println "Result: " + registerUserCommand.dump()
-    render registerUserCommand as JSON
-  }
-
-  @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
-  def landing = {
-  }
 }
