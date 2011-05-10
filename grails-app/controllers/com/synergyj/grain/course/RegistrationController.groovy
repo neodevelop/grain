@@ -17,18 +17,22 @@ package com.synergyj.grain.course
 
 import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
+import com.synergyj.grain.auth.RegisterUserCommand
 
-@Secured(['isAuthenticated()'])
 class RegistrationController {
 
   def springSecurityService
   def registrationService
 
+  //static allowedMethods = [addMeFromLanding: "POST"]
+
+  @Secured(['isAuthenticated()'])
   def index = {
     def scheduledCoursesForRegistration = ScheduledCourse.findAllByScheduledCourseStatus(ScheduledCourseStatus.SCHEDULED)
     [scheduledCoursesForRegistration:scheduledCoursesForRegistration]
   }
 
+  @Secured(['isAuthenticated()'])
   def addMeToCourse = {
     def user = springSecurityService.currentUser
     def scheduleCourseId = params.id as Long
@@ -42,5 +46,15 @@ class RegistrationController {
     if(registration){
       render(registration as JSON)
     }
+  }
+
+  @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+  def addMeFromLanding = { RegisterUserCommand registerUserCommand ->
+    println "Result: " + registerUserCommand.dump()
+    render registerUserCommand as JSON
+  }
+
+  @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+  def landing = {
   }
 }

@@ -18,11 +18,13 @@ package com.synergyj.grain.auth
 class RegisterUserCommand implements Serializable {
   String email
   String password
+  String confirmPassword
   Boolean tos = false
 
   static constraints = {
     email nullable: false, blank: false, size: 1..80, email: true
     password nullable: false, blank: false, size: 5..80
+    confirmPassword validator:{ val,obj -> val == obj.password  }
     tos nullable:true
   }
 }

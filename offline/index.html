@@ -1,0 +1,52 @@
+<html>
+<head>
+  <title>Registro al curso</title>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      $("form#registration").submit(function(){
+        var form = $(this);
+        //console.log(form);
+        $.ajax({
+          type:'GET',
+          url:form.attr("action"),
+          data:form.serialize(),
+          dataType:"json",
+          success:function(data){ console.log("OK");  },
+          error:function(xhr){ console.log(xhr);  },
+          complete:function(data){
+            console.log(data);
+          }
+        });
+        return false;
+      });
+    });
+  </script>
+</head>
+<body>
+<form id="registration" action="http://localhost:8080/grain/registration/addMeFromLanding" method="POST">
+
+  <ul>
+    <li>
+      <label for="email">E-m@il:</label>
+      <input type="text" id="email" name="email" value=""/>
+    </li>
+    <li>
+      <label for="password">Password:</label>
+      <input type="password" maxlength="200" id="password" name="password" value=""/>
+    </li>
+    <li>
+      <label for="confirmPassword">Confirmar password:</label>
+      <input type="password" maxlength="200" id="confirmPassword" name="confirmPassword" value=""/>
+    </li>
+    <li>
+      <div class="submit">
+        <input class="sendButton" name="sendButton" type="submit" value="Registrarme!!!"/>
+      </div>
+    </li>
+  </ul>
+
+</form>
+
+</body>
+</html>
