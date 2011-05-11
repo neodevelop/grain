@@ -46,12 +46,12 @@ class UserService {
     user.password = springSecurityService.encodePassword(user.password, salt)
 
     if (user.validate() && user.save(flush: true)) {
+      // Notificación de la creación de la cuenta del usuario
+      notificationService.sendNewRegistration(user)
       log.info 'User created'
     } else {
       throw new UserRegistrationException('user.registration.error', user)
     }
-
-    notificationService.sendNewRegistration(registration)
 
     user
   }

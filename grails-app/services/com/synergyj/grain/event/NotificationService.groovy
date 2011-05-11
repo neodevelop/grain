@@ -16,6 +16,7 @@
 package com.synergyj.grain.event
 
 import com.synergyj.grain.auth.RegistrationCode
+import com.synergyj.grain.auth.User
 
 class NotificationService {
 
@@ -23,7 +24,8 @@ class NotificationService {
 
   static transactional = false
 
-  def sendNewRegistration(RegistrationCode registration) {
+  def sendNewRegistration(User user) {
+    // TODO: Se le envía un correo con la liga para que haga login con los datos que acaba de ingresar
     /*
     mailService.sendMail {
       to registration.username
@@ -32,6 +34,6 @@ class NotificationService {
       body(view:"/mail/registrationNotification",model:[registration:registration])
     }*/
 
-    println "Envío de mail a ${registration.username}"
+    println "Envío de mail a ${user.email}"
   }
 }

@@ -17,6 +17,7 @@ package com.synergyj.grain.course
 
 import com.synergyj.grain.auth.User
 import com.synergyj.grain.auth.RegisterUserCommand
+import com.synergyj.grain.RegistrationException
 
 class RegistrationService {
 
@@ -28,18 +29,14 @@ class RegistrationService {
     userCommand.tos = true // Lo coloco aquí por que aún no lo tengo en la forma
     // Validamos los datos(constraints) del usuario
     if(userCommand.validate()){
-      println "RegisterUserCommand validado OK"
-      // TODO: Buscar si ya existe el usuario, si no pues se crea uno
+      // Buscar si ya existe el usuario
       def user = userService.findUser(userCommand.email)
+      // Si no existe entonces se crea
       if(!user){
         user = userService.createUser(userCommand)
-        // TODO: Notificar al usuario que ha sido registrado
-        // TODO: Se le envía un correo con la liga para que haga login con los datos que acaba de ingresar
       }
-      // TODO: Crear un registro de inscripción
+      // Se crea registro de inscripción
       def registration = addUserToScheduledCourse(user,scheduledCourseId)
-
-      // TODO: Notificar la inscripción
     }else{
       // TODO: Lanzar la excepción para el error
       println "RegisterUserCommand validado FAIL"

@@ -17,7 +17,8 @@ package com.synergyj.grain.course
 
 import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
-import com.synergyj.grain.auth.RegisterUserCommand
+
+import com.synergyj.grain.RegistrationException
 
 class RegistrationController {
 
