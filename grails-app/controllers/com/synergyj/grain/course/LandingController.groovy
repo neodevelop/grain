@@ -25,9 +25,9 @@ class LandingController {
 
   @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
   def addMe = { RegisterUserCommand registerUserCommand ->
-    registrationService.registerFromLanding(registerUserCommand,Long.valueOf(params.scheduledCourseId))
+    def registration = registrationService.registerFromLanding(registerUserCommand,Long.valueOf(params.scheduledCourseId))
     response.addHeader("Access-Control-Allow-Origin","*")
-    render registerUserCommand as JSON
+    render registration as JSON
   }
 
   @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])

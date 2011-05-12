@@ -60,7 +60,7 @@ class RegistrationService {
     def userRegisteredToThisCourse =  Registration.countByStudentAndScheduledCourse(user,scheduledCourse)
     // Si esta registrado arrojamos excepción con el respectivo mensaje
     if(userRegisteredToThisCourse){
-      throw new RegistrationException(registration:registration,message:"registration.alreadyRegistered")
+      throw new RegistrationException(message:"registration.alreadyRegistered",registration:registration)
     }
 
     // Buscar las sesiones de los cursos a los que el usuario ya está inscrito
@@ -84,13 +84,14 @@ class RegistrationService {
     // Si tenemos las mismas sesiones???
     if(sameSessions){
       // Entonces arrojamos excepción
-      throw new RegistrationException(registration:registration,message:"registration.sessions.busy")
+      throw new RegistrationException(message:"registration.sessions.busy",registration:registration)
     }
 
     // Guardamos el registro
     registration.save()
 
-    // TODO: Notificar al usuario de su registro
+    // Notificamos al usuario que se ha inscrito al curso
+
 
     // Regresamos el registro recientemente guardado...
     registration
