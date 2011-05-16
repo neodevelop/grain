@@ -17,11 +17,7 @@ package com.synergyj.grain
 
 import com.synergyj.grain.course.Registration
 
-class RegistrationException extends BusinessException {
+class RegistrationException extends RuntimeException{
+  def message
   def registration
-
-  RegistrationException(String message, Registration registration){
-    super(message)
-    this.registration = registration
-  }
 }

@@ -4,14 +4,20 @@
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
   <script type="text/javascript">
     $(function(){
-
       $("a#send").click(function(){
         var form = $("form#registration");
         console.log(form);
         var url = form.attr("action") + "?" + form.serialize();
         $('div#loader').fadeIn('slow');
+        $("p#message").remove();
         $.getJSON(url,function(data){
           console.log("OK");
+          if(data.message){
+            $("<p id='message' style='display:none;'>"+data.message+"</p>").insertBefore("div#loader").fadeIn('slow');
+          }
+          if(data.id > 0){
+            $("<p id='message' style='display:none;'>Haz quedado registrado, te hemos enviado un correo...</p>").insertBefore("div#loader").fadeIn('slow');
+          }
         }).complete(function(){ $('div#loader').fadeOut('slow'); }) ;
         return false;
       });

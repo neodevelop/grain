@@ -18,6 +18,7 @@ package com.synergyj.grain.course
 import com.synergyj.grain.auth.User
 import com.synergyj.grain.auth.RegisterUserCommand
 import com.synergyj.grain.RegistrationException
+import com.synergyj.grain.UserRegistrationException
 
 class RegistrationService {
 
@@ -28,10 +29,11 @@ class RegistrationService {
 
   def registerFromLanding(RegisterUserCommand userCommand, Long scheduledCourseId){
     userCommand.tos = true // Lo coloco aquí por que aún no lo tengo en la forma
+    def user
     // Validamos los datos(constraints) del usuario
     if(userCommand.validate()){
       // Buscar si ya existe el usuario
-      def user = userService.findUser(userCommand.email)
+      user = userService.findUser(userCommand.email)
       // Si no existe entonces se crea
       if(!user){
         user = userService.createUser(userCommand)
@@ -39,9 +41,8 @@ class RegistrationService {
       // Se crea registro de inscripción
       def registration = addUserToScheduledCourse(user,scheduledCourseId)
     }else{
-      // TODO: Lanzar la excepción para el error
-      println "RegisterUserCommand validado FAIL"
-      println userCommand.errors.dump()
+      // Se lanza la excepción del error
+      throw new RegistrationException(message:"register.invalid")
     }
 
   }

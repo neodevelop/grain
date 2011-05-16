@@ -18,6 +18,9 @@ package com.synergyj.grain.course
 import grails.plugins.springsecurity.Secured
 import com.synergyj.grain.auth.RegisterUserCommand
 import grails.converters.JSON
+import com.synergyj.grain.BusinessException
+import com.synergyj.grain.UserRegistrationException
+import com.synergyj.grain.RegistrationException
 
 class LandingController {
 
@@ -25,7 +28,12 @@ class LandingController {
 
   @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
   def addMe = { RegisterUserCommand registerUserCommand ->
-    def registration = registrationService.registerFromLanding(registerUserCommand,Long.valueOf(params.scheduledCourseId))
+    def registration
+    try{
+      registration = registrationService.registerFromLanding(registerUserCommand,Long.valueOf(params.scheduledCourseId))
+    }catch(RegistrationException ex){
+      registration = ['message':g.message(code:ex.message,default:'No te puedes registrar a este curso(varias causas)')]
+    }
     response.addHeader("Access-Control-Allow-Origin","*")
     render registration as JSON
   }
