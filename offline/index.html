@@ -4,11 +4,15 @@
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
   <script type="text/javascript">
     $(function(){
+
       $("a#send").click(function(){
         var form = $("form#registration");
         console.log(form);
         var url = form.attr("action") + "?" + form.serialize();
-        $.getJSON(url,function(data){ console.log("OK"); });
+        $('div#loader').fadeIn('slow');
+        $.getJSON(url,function(data){
+          console.log("OK");
+        }).complete(function(){ $('div#loader').fadeOut('slow'); }) ;
         return false;
       });
     });
@@ -36,7 +40,9 @@
       </div>
     </li>
   </ul>
-
+  <div id="loader" style="display:none;">
+    <img src="ajax-loader.gif" id="ajax_loader"/>
+  </div>
 </form>
 
 </body>

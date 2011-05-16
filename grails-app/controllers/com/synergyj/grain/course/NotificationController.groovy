@@ -2,7 +2,7 @@ package com.synergyj.grain.course
 
 class NotificationController {
 
-    def registration = {
-
+    def index = {
+      render(view:params.mailView ?: 'registration')
     }
 }

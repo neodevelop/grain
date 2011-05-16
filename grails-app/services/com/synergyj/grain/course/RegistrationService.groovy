@@ -24,6 +24,7 @@ class RegistrationService {
   static transactional = true
 
   def userService
+  def notificationService
 
   def registerFromLanding(RegisterUserCommand userCommand, Long scheduledCourseId){
     userCommand.tos = true // Lo coloco aquí por que aún no lo tengo en la forma
@@ -91,7 +92,7 @@ class RegistrationService {
     registration.save()
 
     // Notificamos al usuario que se ha inscrito al curso
-
+    notificationService.sendCourseRegistration(registration)
 
     // Regresamos el registro recientemente guardado...
     registration

@@ -37,10 +37,10 @@ class NotificationService {
 
   def sendCourseRegistration(Registration registration){
     mailService.sendMail {
-      to user.email
+      to registration.student.email
       from "no-reply@synergyj.com"
-      subject "Bienvenido a tu entrenamiento en SynergyJ.com"
-      body(view:"/notification/registration",model:[user:user])
+      subject "Te has inscrito a un curso en SynergyJ.com"
+      body(view:"/notification/scheduledCourse",model:[user:registration.student,scheduledCourse:registration.scheduledCourse])
     }
   }
 }
