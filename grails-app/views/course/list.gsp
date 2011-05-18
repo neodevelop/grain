@@ -3,25 +3,31 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="layout" content="main" />
+        <meta name="layout" content="wb" />
         <title><g:message code="course.list" default="Course List" /></title>
+        <parameter name="pageHeader" value="${g.message(code: 'course.list', default: 'Course List')}"/>
+        <script type="text/javascript" language="javascript" src="${createLinkTo(dir:'js',file:'tables.js')}"></script>
+        <jqui:resources plugin="jquery-ui" themeCss="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/overcast/jquery-ui.css" />
+        <g:javascript>
+          $(function(){
+            $("div.nav a").button();
+            $("div.list table").styleTable();
+          });
+        </g:javascript>
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="course.new" default="New Course" /></g:link></span>
+            <span class="menuButto  n"><g:link class="create" action="create"><g:message code="course.new" default="New Course" /></g:link></span>
         </div>
+        <br/>
         <div class="body">
-            <h1><g:message code="course.list" default="Course List" /></h1>
             <g:if test="${flash.message}">
             <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
             </g:if>
             <div class="list">
-                <table>
+                <table cellpadding="5" cellspacing="0" border="0" width="100%">
                     <thead>
                         <tr>
-                        
-                   	    <g:sortableColumn property="id" title="Id" titleKey="course.id" />
                         
                    	    <g:sortableColumn property="name" title="Name" titleKey="course.name" />
                         
@@ -35,11 +41,9 @@
                     </thead>
                     <tbody>
                     <g:each in="${courseInstanceList}" status="i" var="courseInstance">
-                        <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                        <tr>
                         
-                            <td><g:link action="show" id="${courseInstance.id}">${fieldValue(bean: courseInstance, field: "id")}</g:link></td>
-                        
-                            <td>${fieldValue(bean: courseInstance, field: "name")}</td>
+                            <td width="40%"><g:link action="show" id="${courseInstance.id}">${fieldValue(bean: courseInstance, field: "name")}</g:link></td>
                         
                             <td>${fieldValue(bean: courseInstance, field: "contentType")}</td>
                         

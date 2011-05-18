@@ -66,6 +66,7 @@ grails.logging.jul.usebridge = true
 grails.spring.bean.packages = []
 
 grails.views.javascript.library = "jquery"
+jqueryUi.cdn = 'googlecode'
 
 // set per-environment serverURL stem for creating absolute links
 environments {

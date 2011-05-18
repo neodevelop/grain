@@ -25,7 +25,7 @@
                     <label for="content"><g:message code="course.content" default="Content" />:</label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'content', 'errors')}">
-                  <g:textArea rows="5" cols="70" name="content" value="">${courseInstance?.content}</g:textArea>
+                  <g:textArea rows="5" cols="80" name="content" value="">${courseInstance?.content}</g:textArea>
                 </td>
             </tr>
 
@@ -34,7 +34,7 @@
                     <label for="overview"><g:message code="course.overview" default="Overview" />:</label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'overview', 'errors')}">
-                  <g:textArea rows="5" cols="70"  name="overview">${courseInstance?.overview}</g:textArea>
+                  <g:textArea rows="5" cols="80"  name="overview">${courseInstance?.overview}</g:textArea>
                 </td>
             </tr>
         
