@@ -7,10 +7,8 @@
         <title><g:message code="course.list" default="Course List" /></title>
         <parameter name="pageHeader" value="${g.message(code: 'course.list', default: 'Course List')}"/>
         <script type="text/javascript" language="javascript" src="${createLinkTo(dir:'js',file:'tables.js')}"></script>
-        <jqui:resources plugin="jquery-ui" themeCss="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/overcast/jquery-ui.css" />
         <g:javascript>
           $(function(){
-            $("div.nav a").button();
             $("div.list table").styleTable();
           });
         </g:javascript>

@@ -5,13 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="wb" />
         <title><g:message code="courseModule.edit" default="Edit CourseModule" /></title>
-        <link rel="stylesheet" type="text/css" href="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.css"/>
-        <script type="text/javascript" src="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.js"></script>
-        <g:javascript>
-          $(function(){
-            $('textarea').wysiwyg();
-          });
-        </g:javascript>
+        <parameter name="pageHeader" value="${g.message(code: 'courseModule.edit', default: 'Change Course Module')}"/>
     </head>
     <body>
         <div class="nav">
@@ -19,15 +13,7 @@
             <span class="menuButton"><g:link class="create" action="create"><g:message code="courseModule.new" default="New CourseModule" /></g:link></span>
         </div>
         <div class="body">
-            <h1><g:message code="courseModule.edit" default="Edit CourseModule" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
-            </g:if>
-            <g:hasErrors bean="${courseModuleInstance}">
-            <div class="errors">
-                <g:renderErrors bean="${courseModuleInstance}" as="list" />
-            </div>
-            </g:hasErrors>
+
             <g:form method="post" >
                 <g:hiddenField name="id" value="${courseModuleInstance?.id}" />
                 <g:hiddenField name="version" value="${courseModuleInstance?.version}" />

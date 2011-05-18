@@ -6,19 +6,13 @@
         <meta name="layout" content="wb" />
         <title><g:message code="course.show" default="Show Course" /></title>
         <parameter name="pageHeader" value="${g.message(code: 'course.show', default: 'Course Info')}"/>
-        <jqui:resources plugin="jquery-ui" themeCss="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/overcast/jquery-ui.css" />
-        <g:javascript>
-          $(function(){
-            $("div.nav a").button();
-          });
-        </g:javascript>
     </head>
     <body>
         <div class="nav">
             <span class="menuButton"><g:link class="list" action="list"><g:message code="course.list" default="Course List" /></g:link></span>
             <span class="menuButton"><g:link class="create" action="create"><g:message code="course.new" default="New Course" /></g:link></span>
         </div>
-        <div id="content">
+        <div class="content">
             <h1>${fieldValue(bean: courseInstance, field: "name")}</h1>
             <g:if test="${flash.message}">
             <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
@@ -30,7 +24,7 @@
                         <tbody>
                             
                             <tr class="prop">
-                                <td valign="top" class="name" width="30%"><g:message code="course.content" default="Content" />:</td>
+                                <td valign="top" class="name" width="20%"><g:message code="course.content" default="Content" />:</td>
                                 
                                 <td valign="top" class="value">${courseInstance?.content}</td>
                                 

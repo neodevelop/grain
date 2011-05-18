@@ -3,17 +3,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="layout" content="main" />
+        <meta name="layout" content="wb" />
         <title><g:message code="courseModule.show" default="Show CourseModule" /></title>
+        <parameter name="pageHeader" value="${g.message(code: 'courseModule.show', default: 'Show Course Module')}"/>
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="courseModule.list" default="CourseModule List" /></g:link></span>
             <span class="menuButton"><g:link class="create" action="create"><g:message code="courseModule.new" default="New CourseModule" /></g:link></span>
         </div>
         <div class="body">
-            <h1><g:message code="courseModule.show" default="Show CourseModule" /></h1>
             <g:if test="${flash.message}">
             <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
             </g:if>

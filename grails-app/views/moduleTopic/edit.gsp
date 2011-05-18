@@ -3,33 +3,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="layout" content="main" />
+        <meta name="layout" content="wb" />
         <title><g:message code="moduleTopic.edit" default="Edit ModuleTopic" /></title>
-        <link rel="stylesheet" type="text/css" href="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.css"/>
-        <g:javascript plugin="jquery" library="jquery"/>
-        <script type="text/javascript" src="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.js"></script>
-        <g:javascript>
-          $(function(){
-            $('textarea').wysiwyg();
-          });
-        </g:javascript>
+        <parameter name="pageHeader" value="${g.message(code: 'moduleTopic.edit', default: 'Edit Module Topic')}"/>
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="moduleTopic.list" default="ModuleTopic List" /></g:link></span>
             <span class="menuButton"><g:link class="create" action="create"><g:message code="moduleTopic.new" default="New ModuleTopic" /></g:link></span>
         </div>
         <div class="body">
-            <h1><g:message code="moduleTopic.edit" default="Edit ModuleTopic" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
-            </g:if>
-            <g:hasErrors bean="${moduleTopicInstance}">
-            <div class="errors">
-                <g:renderErrors bean="${moduleTopicInstance}" as="list" />
-            </div>
-            </g:hasErrors>
+
             <g:form method="post" >
                 <g:hiddenField name="id" value="${moduleTopicInstance?.id}" />
                 <g:hiddenField name="version" value="${moduleTopicInstance?.version}" />

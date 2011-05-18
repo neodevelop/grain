@@ -3,21 +3,24 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="layout" content="main" />
+        <meta name="layout" content="wb" />
         <title><g:message code="moduleTopic.list" default="ModuleTopic List" /></title>
+        <parameter name="pageHeader" value="${g.message(code: 'moduleTopic.list', default: 'Module Topic List')}"/>
+        <script type="text/javascript" language="javascript" src="${createLinkTo(dir:'js',file:'tables.js')}"></script>
+        <g:javascript>
+          $(function(){
+            $("div.list table").styleTable();
+          });
+        </g:javascript>
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
             <span class="menuButton"><g:link class="create" action="create"><g:message code="moduleTopic.new" default="New ModuleTopic" /></g:link></span>
         </div>
+        <br/>
         <div class="body">
-            <h1><g:message code="moduleTopic.list" default="ModuleTopic List" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
-            </g:if>
             <div class="list">
-                <table>
+                <table cellpadding="5" cellspacing="0" border="0" width="100%">
                     <thead>
                         <tr>
                         
