@@ -171,21 +171,14 @@ grails.plugins.springsecurity.rememberMe.key = 'gHUaaSP3456X9S3hTjskQ'
 grails.plugins.springsecurity.rememberMe.persistentToken.domainClassName = 'com.synergyj.grain.auth.PersistentLogin'
 grails.plugins.springsecurity.rememberMe.persistent = true
 grails.plugins.springsecurity.rememberMe.alwaysRemember = true
-grails.plugins.springsecurity.failureHandler.defaultFailureUrl = '/account/authfail?login_error=1'
-grails.plugins.springsecurity.auth.loginFormUrl = '/login'
-grails.plugins.springsecurity.adh.errorPage = '/denied'
-grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/'
+//grails.plugins.springsecurity.failureHandler.defaultFailureUrl = '/account/authfail?login_error=1'
+//grails.plugins.springsecurity.auth.loginFormUrl = '/login'
+//grails.plugins.springsecurity.adh.errorPage = '/denied'
+//grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/'
 //grails.plugins.springsecurity.rejectIfNoRule = true
 //grails.plugins.springsecurity.securityConfigType = SecurityConfigType.Annotation // It's default
 grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 grails.plugins.springsecurity.useSessionFixationPrevention = true
-
-grails.plugins.springsecurity.failureHandler.exceptionMappings = [
-    'org.springframework.security.authentication.LockedException': '/accountLocked',
-    'org.springframework.security.authentication.DisabledException': '/accountDisabled',
-    'org.springframework.security.authentication.AccountExpiredException': '/accountExpired',
-    'org.springframework.security.authentication.CredentialsExpiredException': '/passwordExpired'
-]
 
 grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/themes/**': ['permitAll'],
@@ -208,80 +201,3 @@ grails {
         "mail.smtp.socketFactory.fallback":"false"]
   }
 }
-
-// Added by the JQuery Validation plugin:
-//jqueryValidation.packed = true
-//jqueryValidation.cdn = false  // false or "microsoft"
-//jqueryValidation.additionalMethods = false
-
-// Added by the JQuery Validation UI plugin:
-/*
-//jqueryValidationUi {
-  errorClass = 'error'
-  validClass = 'valid'
-  onsubmit = true
-  renderErrorsOnTop = false
-
-  qTip {
-    packed = true
-    classes = 'ui-tooltip-red ui-tooltip-shadow ui-tooltip-rounded'
-  }
-*/
-  /*
-    Grails constraints to JQuery Validation rules mapping for client side validation.
-    Constraint not found in the ConstraintsMap will trigger remote AJAX validation.
-  */
-  /*
-  StringConstraintsMap = [
-      blank: 'required', // inverse: blank=false, required=true
-      creditCard: 'creditcard',
-      email: 'email',
-      inList: 'inList',
-      minSize: 'minlength',
-      maxSize: 'maxlength',
-      size: 'rangelength',
-      matches: 'matches',
-      notEqual: 'notEqual',
-      url: 'url',
-      nullable: 'required',
-      unique: 'unique',
-      validator: 'validator'
-  ]
-
-  // Long, Integer, Short, Float, Double, BigInteger, BigDecimal
-  NumberConstraintsMap = [
-      min: 'min',
-      max: 'max',
-      range: 'range',
-      notEqual: 'notEqual',
-      nullable: 'required',
-      inList: 'inList',
-      unique: 'unique',
-      validator: 'validator'
-  ]
-
-  CollectionConstraintsMap = [
-      minSize: 'minlength',
-      maxSize: 'maxlength',
-      size: 'rangelength',
-      nullable: 'required',
-      validator: 'validator'
-  ]
-
-  DateConstraintsMap = [
-      min: 'minDate',
-      max: 'maxDate',
-      range: 'rangeDate',
-      notEqual: 'notEqual',
-      nullable: 'required',
-      inList: 'inList',
-      unique: 'unique',
-      validator: 'validator'
-  ]
-
-  ObjectConstraintsMap = [
-      nullable: 'required',
-      validator: 'validator'
-  ]
-}
-*/

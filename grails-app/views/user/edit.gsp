@@ -4,9 +4,9 @@
   <parameter name="pageHeader" value="${g.message(code: 'me.title', default: 'This is me')}"/>
 </head>
 <body>
-  <g:form action="save">
+  <g:form action="save" class="form">
   <h4>e-m@il:</h4>
-    <h3>${user.email}</h3>
+  <h3>${user.email}</h3>
   <br>
   <h4>first name:</h4>
     <g:textField name="firstName" value="${user.firstName}"/>
@@ -22,8 +22,9 @@
   <br>
   <h4>geolocation:</h4>
     <g:textField name="geolocation" value="${user.geolocation}"/>
-  <br>
+  <br/>
+  <br/>
   <g:link mapping="me">Cancel and return</g:link>
-  <g:submitButton name="submit" value="Update info"/>
+  <g:submitButton name="submit" value="Update info" class="submit"/>
   </g:form>
 </body>

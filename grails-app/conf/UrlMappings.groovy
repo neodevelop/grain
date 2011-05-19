@@ -16,6 +16,10 @@
 
 class UrlMappings {
   static mappings = {
+    "/$controller/$action?/$id?"{
+			constraints {
+			}
+		}
     name me: '/me' {
       controller = 'user'
       action = 'me'
@@ -23,10 +27,6 @@ class UrlMappings {
     name updateme: '/updateme' {
       controller = 'user'
       action = 'edit'
-    }
-    name login: '/login' {
-      controller = 'user'
-      action = 'login'
     }
     name home: '/' {
       controller = 'home'
@@ -43,12 +43,6 @@ class UrlMappings {
     name content: "/$id" {
       controller = 'page'
       action = 'show'
-    }
-    name locked: "/accountLocked"(controller:"user",view:"accountLocked")
-      "/$controller/$action?/$id?" {
-        constraints {
-          // apply constraints here
-      }
     }
     name addMeFromLanding: "/addMeFromLanding"(controller:"landing"){
       action = [GET:"addMe"]

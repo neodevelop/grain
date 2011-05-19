@@ -17,6 +17,7 @@ package com.synergyj.grain.auth
 
 import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import com.synergyj.grain.course.Registration
 
 class UserController {
 
@@ -24,7 +25,9 @@ class UserController {
 
   @Secured(['isAuthenticated()'])
   def me = {
-    [user:springSecurityService.currentUser]
+    def user = springSecurityService.currentUser
+    def myRegisteredCourse = Registration.findByStudent(user)
+    [user:user,myRegisteredCourse:myRegisteredCourse]
   }
 
   @Secured(['isAuthenticated()'])
@@ -38,14 +41,6 @@ class UserController {
     currentUser.properties = params
     currentUser.save()
     redirect action:'me'
-  }
-
-  @Secured(['permitAll()'])
-  def login = {
-    def config = SpringSecurityUtils.securityConfig
-    String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
-
-    [postUrl: postUrl, rememberMeParameter: config.rememberMe.parameter]
   }
 
   @Secured(['permitAll()'])
