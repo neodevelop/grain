@@ -832,3 +832,14 @@ form.button-to {
 		float: left;
 		text-indent: -9999px;
 }
+
+#content #left{
+  width:auto;
+  float: left;
+}
+
+#content #right{
+  width:auto;
+  float: right;
+  text-align:left;
+}

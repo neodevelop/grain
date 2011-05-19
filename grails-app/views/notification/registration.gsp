@@ -42,10 +42,10 @@
                   </h1>
                 </td>
                 <td width="55" valign="middle" style="vertical-align:middle; text-align: center;">
-                  <h2 class="date" style="margin:0; padding:0; font-size:13px; font-weight: normal; color: #192c45; text-transform: uppercase; font-weight: bold; line-height:1;">
+                  <h2 class="date" style="margin:0; padding:0; font-size:13px; font-weight: normal; color:#192c45; text-transform: uppercase; font-weight: bold; line-height:1;">
                     Entrenamiento
                   </h2>
-                  <h2 class="date" style="margin:0; padding:0; font-size:23px; font-weight: normal; color: #192c45; font-weight: bold;">
+                  <h2 class="date" style="margin:0; padding:0; font-size:23px; font-weight: normal; color:#192c45; font-weight: bold;">
                     2011
                   </h2>
                 </td>
@@ -69,7 +69,7 @@
                           <tbody>
                           <tr>
                             <td height="49" width="100%" valign="middle" bgcolor="#c8cfd8" background="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/themes/mail/images/article-title-bg.jpg'}" style="vertical-align:middle; border-left-width: 1px; border-left-color: #BAC2CC; border-left-style: solid; border-right-width: 1px; border-right-color: #BAC2CC; border-right-style: solid; border-bottom-width: 1px; border-bottom-color: #98a3b4; border-bottom-style: solid; border-top-width: 1px; border-top-color: #BAC2CC; border-top-style: solid;">
-                              <h3 class="textshadow" style="margin:0; margin-left: 17px; padding:0; font-size: 18px; font-weight: normal; color:#324258;">
+                              <h3 class="textshadow" style="margin:0; margin-left: 17px; padding:0; font-size: 18px; font-weight: normal; color:#192c45;">
                                 Hola <b>${user?.email ?: 'noname'}</b>, bienvenido a tu cuenta
                               </h3>
                             </td>
@@ -80,7 +80,7 @@
                                 <tr>
                                   <td valign="top" style="padding-right: 20px;">
                                     <img width="164" height="164" src="
-                                    ${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/themes/mail/images/test-photo.jpg'}" alt="istockphoto" align="left" style="border-width: 3px; border-style: solid; border-color: #ffffff;" />
+                                    ${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/themes/mail/images/hello.jpg'}" alt="istockphoto" align="left" style="border-width: 3px; border-style: solid; border-color: #ffffff;" />
                                   </td>
                                 </tr>
                               </table>

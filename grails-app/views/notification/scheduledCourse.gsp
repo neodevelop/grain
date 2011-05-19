@@ -80,7 +80,7 @@
                                 <tr>
                                   <td valign="top" style="padding-right: 20px;">
                                     <img width="164" height="164" src="
-                                    ${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/themes/mail/images/test-photo.jpg'}" alt="istockphoto" align="left" style="border-width: 3px; border-style: solid; border-color: #ffffff;" />
+                                    ${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/themes/mail/images/register.jpg'}" alt="istockphoto" align="left" style="border-width: 3px; border-style: solid; border-color: #ffffff;" />
                                   </td>
                                 </tr>
                               </table>
