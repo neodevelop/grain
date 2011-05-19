@@ -171,12 +171,11 @@ grails.plugins.springsecurity.rememberMe.key = 'gHUaaSP3456X9S3hTjskQ'
 grails.plugins.springsecurity.rememberMe.persistentToken.domainClassName = 'com.synergyj.grain.auth.PersistentLogin'
 grails.plugins.springsecurity.rememberMe.persistent = true
 grails.plugins.springsecurity.rememberMe.alwaysRemember = true
-//grails.plugins.springsecurity.failureHandler.defaultFailureUrl = '/account/authfail?login_error=1'
-//grails.plugins.springsecurity.auth.loginFormUrl = '/login'
-//grails.plugins.springsecurity.adh.errorPage = '/denied'
-//grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/'
-//grails.plugins.springsecurity.rejectIfNoRule = true
-//grails.plugins.springsecurity.securityConfigType = SecurityConfigType.Annotation // It's default
+grails.plugins.springsecurity.errors.login.fail = "security.login.fail"
+grails.plugins.springsecurity.errors.login.expired = "security.login.expired"
+grails.plugins.springsecurity.errors.login.passwordExpired = "security.login.passwordExpired"
+grails.plugins.springsecurity.errors.login.disabled = "security.login.disabled"
+grails.plugins.springsecurity.errors.login.locked = "security.login.locked"
 grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 grails.plugins.springsecurity.useSessionFixationPrevention = true
 

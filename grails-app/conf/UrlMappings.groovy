@@ -20,6 +20,10 @@ class UrlMappings {
 			constraints {
 			}
 		}
+    name login:'/login' {
+      controller = 'login'
+      action = 'index'
+    }
     name me: '/me' {
       controller = 'user'
       action = 'me'

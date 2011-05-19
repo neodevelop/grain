@@ -36,7 +36,6 @@ class LoginController {
       redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
     }
     else {
-      println "NO ESTA LOGUEADO"
       redirect action:auth, params: params
     }
   }
@@ -45,7 +44,6 @@ class LoginController {
    * Show the login page.
    */
   def auth = {
-    println "Esta AUTH"
     def config = SpringSecurityUtils.securityConfig
 
     if (springSecurityService.isLoggedIn()) {
@@ -115,10 +113,10 @@ class LoginController {
     }
 
     if (springSecurityService.isAjax(request)) {
-      render([error: msg] as JSON)
+      render([error: message(code:msg)] as JSON)
     }
     else {
-      flash.message = msg
+      flash.message = message(code:msg)
       redirect action: auth, params: params
     }
   }
