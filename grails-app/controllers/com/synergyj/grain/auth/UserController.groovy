@@ -18,6 +18,8 @@ package com.synergyj.grain.auth
 import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import com.synergyj.grain.course.Registration
+import com.synergyj.grain.course.ScheduledCourse
+import com.synergyj.grain.course.ScheduledCourseStatus
 
 class UserController {
 
@@ -25,9 +27,25 @@ class UserController {
 
   @Secured(['isAuthenticated()'])
   def me = {
-    def user = springSecurityService.currentUser
-    def myRegisteredCourse = Registration.findByStudent(user)
-    [user:user,myRegisteredCourse:myRegisteredCourse]
+    User user = springSecurityService.currentUser
+    def roleAdmin = user.authorities.find { it.authority == "ROLE_ADMIN" }
+    if(roleAdmin){
+      // Obtenemos los cursos con el status SCHEDULED, los que se van a abrir
+      def currentScheduledCourses = ScheduledCourse.findAllByScheduledCourseStatus(ScheduledCourseStatus.SCHEDULED)
+      // Obtenemos los registros(Registration) de cada curso calendarizado
+      def registrationsPerScheduledCourse = [:]
+      // Iteramos los cursos calendarizados
+      currentScheduledCourses.each{ scheduledCourse ->
+        // Obtenemos los registros por curso
+        def registrations = Registration.findAllByScheduledCourse(scheduledCourse)
+        // Creamos una entrada en el mapa con el key CourseKey y el Value la lista de Registrations
+        registrationsPerScheduledCourse."${scheduledCourse.course.courseKey}" = registrations
+      }
+      return [user:user,scheduledCourseList:currentScheduledCourses,registrationsPerScheduledCourse:registrationsPerScheduledCourse]
+    }else{
+      def myRegisteredCourse = Registration.findByStudent(user)
+      return [user:user,myRegisteredCourse:myRegisteredCourse]
+    }
   }
 
   @Secured(['isAuthenticated()'])

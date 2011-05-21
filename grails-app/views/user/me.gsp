@@ -6,6 +6,7 @@
   <g:javascript>
     $(function(){
       $("div#tabs").tabs();
+      $("#accordion").accordion({ header:'div.note' });
     });
   </g:javascript>
 </head>
@@ -27,6 +28,32 @@
   <g:link mapping="updateme">Change my profile</g:link>
 </div>
 <div id="right">
+
+  <sec:ifAllGranted roles="ROLE_ADMIN">
+
+  <div id="tabs" style="width:550px;">
+    <ul>
+      <g:each in="${scheduledCourseList}" var="scheduledCourse" status="i">
+        <li><a href="#sc-${i}">${scheduledCourse.course.courseKey}</a></li>
+      </g:each>
+    </ul>
+
+    <g:each in="${scheduledCourseList}" var="scheduledCourse" status="i">
+    <div id="sc-${i}">
+      <h1>Lista de inscritos</h1>
+      <ul id="registrations">
+      <g:each in="${registrationsPerScheduledCourse[scheduledCourse.course.courseKey]}" var="registration">
+        <li>${registration.student} - ${registration.registrationStatus}</li>
+      </g:each>
+      </ul>
+    </div>
+    </g:each>
+
+  </div>
+
+  </sec:ifAllGranted>
+
+  <sec:ifNotGranted roles="ROLE_ADMIN">
   <g:if test="${!myRegisteredCourse}">
     <h1>Aún no te has registrado a ningún curso</h1>
     <h3>Explora nuestro calendario e inscríbete!!!</h3>
@@ -80,5 +107,6 @@
       </div>
     </div>
   </g:else>
+  </sec:ifNotGranted>
 </div>
 </body>
