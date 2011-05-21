@@ -41,6 +41,7 @@
     <g:each in="${scheduledCourseList}" var="scheduledCourse" status="i">
     <div id="sc-${i}">
       <h1>Lista de inscritos</h1>
+      <h3>Comienza: <g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd-MM-yy"/> </h3>
       <ul id="registrations">
       <g:each in="${registrationsPerScheduledCourse[scheduledCourse.course.courseKey]}" var="registration">
         <li>${registration.student} - ${registration.registrationStatus}</li>
