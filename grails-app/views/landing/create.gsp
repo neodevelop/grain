@@ -22,7 +22,7 @@
   </script>
 </head>
 <body>
-<form id="registration" action="http://localhost:8080/grain/addMeFromLanding" method="POST">
+<form id="registration" action="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath}/addMeFromLanding" method="POST">
 
   <ul>
     <li>
@@ -45,6 +45,5 @@
   </ul>
 
 </form>
-<a id="reg" href="http://localhost:8080/grain/registration/addMeFromLanding">Presioname...</a>
 </body>
 </html>
