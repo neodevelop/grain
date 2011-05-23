@@ -16,6 +16,7 @@
 package com.synergyj.grain.course
 
 public enum ScheduledCourseStatus {
+  PLANNING,
   SCHEDULED,
   FINISHED,
   CANCELLED,
