@@ -18,7 +18,9 @@ package com.synergyj.grain.course
 import com.synergyj.grain.auth.User
 import com.synergyj.grain.auth.RegisterUserCommand
 import com.synergyj.grain.RegistrationException
-import com.synergyj.grain.UserRegistrationException
+import javax.mail.AuthenticationFailedException
+import org.codehaus.groovy.grails.commons.GrailsApplication
+import grails.util.Environment
 
 class RegistrationService {
 

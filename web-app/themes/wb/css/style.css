@@ -844,7 +844,7 @@ form.button-to {
   text-align:left;
 }
 
-#content #right #tabs a.button{
+#content #right a.button{
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	color: #924800;
@@ -863,7 +863,7 @@ form.button-to {
   background: linear-gradient(top, #f1e767 0%,#feb645 100%); /* W3C */
 }
 
-#content #right #tabs a.button:hover{
+#content #right a.button:hover{
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	color: #343144;

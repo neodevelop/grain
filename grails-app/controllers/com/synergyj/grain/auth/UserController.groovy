@@ -16,7 +16,6 @@
 package com.synergyj.grain.auth
 
 import grails.plugins.springsecurity.Secured
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import com.synergyj.grain.course.Registration
 import com.synergyj.grain.course.ScheduledCourse
 import com.synergyj.grain.course.ScheduledCourseStatus

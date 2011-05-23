@@ -44,7 +44,7 @@
       <h3>Comienza: <g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd-MM-yy"/> </h3>
       <ul id="registrations">
       <g:each in="${registrationsPerScheduledCourse[scheduledCourse.course.courseKey]}" var="registration">
-        <li>${registration.student} - ${registration.registrationStatus}</li>
+        <li><b>${registration?.student?.firstName ?: ''} ${registration?.student?.lastName ?: ''}</b> ${registration?.student?.email} - ${registration.registrationStatus}</li>
       </g:each>
       </ul>
     </div>
@@ -58,6 +58,9 @@
   <g:if test="${!myRegisteredCourse}">
     <h1>Aún no te has registrado a ningún curso</h1>
     <h3>Explora nuestro calendario e inscríbete!!!</h3>
+    <p>
+      <g:link class="button">Ver el calendario</g:link>
+    </p>
   </g:if>
   <g:else>
     <div id="tabs" style="width:550px;">
@@ -75,7 +78,8 @@
             <g:link class="button">Escoge tu forma de pago</g:link>
           </p>
           <p align="center">
-            <img src="${createLinkTo(file:'mpagos_01.gif',dir:'themes/wb/images')}" alt="pagos"/>
+            <img src="${createLinkTo(file:'mpagos_01.gif',dir:'''themes/wb/
+images''')}" alt="pagos"/>
           </p>
         </g:if>
         <g:if test="${myRegisteredCourse.registrationStatus == RegistrationStatus.PENDING_PAYMENT}">

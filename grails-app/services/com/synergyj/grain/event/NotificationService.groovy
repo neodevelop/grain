@@ -18,6 +18,7 @@ package com.synergyj.grain.event
 import com.synergyj.grain.auth.RegistrationCode
 import com.synergyj.grain.auth.User
 import com.synergyj.grain.course.Registration
+import grails.util.Environment
 
 class NotificationService {
 
@@ -27,20 +28,40 @@ class NotificationService {
 
   def sendUserRegistration(User user) {
     //Se le envía un correo con la liga para que haga login con los datos que acaba de ingresar
-    mailService.sendMail {
-      to user.email
-      from "no-reply@synergyj.com"
-      subject "Bienvenido a tu entrenamiento en SynergyJ.com"
-      body(view:"/notification/registration",model:[user:user])
+    switch(Environment.current){
+      case Environment.DEVELOPMENT:
+        log.debug("${Environment.current} - Mail con Objeto: ${user}")
+        break
+      case Environment.TEST:
+        log.debug("${Environment.current} Correo de registro...")
+        break
+      case Environment.PRODUCTION:
+        mailService.sendMail {
+          to user.email
+          from "no-reply@synergyj.com"
+          subject "Bienvenido a tu entrenamiento en SynergyJ.com"
+          body(view:"/notification/registration",model:[user:user])
+        }
+        break
     }
   }
 
   def sendCourseRegistration(Registration registration){
-    mailService.sendMail {
-      to registration.student.email
-      from "no-reply@synergyj.com"
-      subject "Te has inscrito a un curso en SynergyJ.com"
-      body(view:"/notification/scheduledCourse",model:[user:registration.student,scheduledCourse:registration.scheduledCourse])
+    switch(Environment.current){
+      case Environment.DEVELOPMENT:
+        log.debug("${Environment.current} - Mail con Objeto: ${registration}")
+        break
+      case Environment.TEST:
+        log.debug("${Environment.current} Correo de registro...")
+        break
+      case Environment.PRODUCTION:
+        mailService.sendMail {
+          to registration.student.email
+          from "no-reply@synergyj.com"
+          subject "Te has inscrito a un curso en SynergyJ.com"
+          body(view:"/notification/scheduledCourse",model:[user:registration.student,scheduledCourse:registration.scheduledCourse])
+        }
+        break
     }
   }
 }
