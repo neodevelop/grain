@@ -19,5 +19,6 @@ public enum RegistrationStatus {
   REGISTERED,
   PENDING_PAYMENT,
   PAYED,
-  IN_COURSE
+  IN_COURSE,
+  CANCELLED
 }
