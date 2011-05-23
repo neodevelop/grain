@@ -48,7 +48,7 @@
             <th>
               <div id="registration${i}">
                 <g:remoteLink action="addMeToCourse" controller="registration" id="${scheduledCourse.id}" onSuccess="registered(data,${i})">
-                  Inscribete
+                  <g:message code="registration.register" default="Register here..." />
                 </g:remoteLink>
                 <g:javascript>
                   function registered(registration,index){
