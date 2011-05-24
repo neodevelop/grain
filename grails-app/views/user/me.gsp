@@ -59,7 +59,7 @@
     <h1>Aún no te has registrado a ningún curso</h1>
     <h3>Explora nuestro calendario e inscríbete!!!</h3>
     <p>
-      <g:link class="button">Ver el calendario</g:link>
+      <g:link controller="calendar" class="button">Ver el calendario</g:link>
     </p>
   </g:if>
   <g:else>
