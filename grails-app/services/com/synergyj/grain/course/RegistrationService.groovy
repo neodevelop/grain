@@ -32,6 +32,7 @@ class RegistrationService {
   def registerFromLanding(RegisterUserCommand userCommand, Long scheduledCourseId){
     userCommand.tos = true // Lo coloco aquí por que aún no lo tengo en la forma
     def user
+    def registration
     // Validamos los datos(constraints) del usuario
     if(userCommand.validate()){
       // Buscar si ya existe el usuario
@@ -41,12 +42,14 @@ class RegistrationService {
         user = userService.createUser(userCommand)
       }
       // Se crea registro de inscripción
-      def registration = addUserToScheduledCourse(user,scheduledCourseId)
+      registration = addUserToScheduledCourse(user,scheduledCourseId)
     }else{
       // Se lanza la excepción del error
       throw new RegistrationException(message:"register.invalid")
     }
-
+    if(!registration)
+      throw new RegistrationException(message:"register.invalid")
+    return registration
   }
 
   def addUserToScheduledCourse(User user, long scheduledCourseId) {

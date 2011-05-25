@@ -85,7 +85,7 @@
                                 </tr>
                               </table>
                               <p style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
-                                Te has inscrito al curso <b>${scheduledCourse?.course?.name ?: "Nombre del curso"}</b>
+                                Te has inscrito al curso <b>${scheduledCourse?.course?.courseKey ?: "!!!"}</b>
                               </p>
                               <p style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
                                 Las sesiones de este curso son:
