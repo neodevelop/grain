@@ -95,7 +95,7 @@ class RegistrationService {
     }
 
     // Guardamos el registro
-    registration.save()
+    registration.save(flush:true)
 
     // Notificamos al usuario que se ha inscrito al curso
     notificationService.sendCourseRegistration(registration)
