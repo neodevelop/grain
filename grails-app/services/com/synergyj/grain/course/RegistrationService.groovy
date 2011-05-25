@@ -100,7 +100,7 @@ class RegistrationService {
     // Notificamos al usuario que se ha inscrito al curso
     notificationService.sendCourseRegistration(registration)
 
-    // Regresamos el registro recientemente guardado...
-    registration
+    // Regresamos el id del registro recientemente guardado...
+    registration.id
   }
 }

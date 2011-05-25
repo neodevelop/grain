@@ -30,7 +30,8 @@ class LandingController {
   def addMe = { RegisterUserCommand registerUserCommand ->
     def registration
     try{
-      registration = registrationService.registerFromLanding(registerUserCommand,Long.valueOf(params.scheduledCourseId))
+      def registrationId = registrationService.registerFromLanding(registerUserCommand,Long.valueOf(params.scheduledCourseId))
+      registration = Registration.get(registrationId)
     }catch(RegistrationException ex){
       registration = ['message':g.message(code:ex.message,default:'No te puedes registrar a este curso(varias causas)')]
     }
