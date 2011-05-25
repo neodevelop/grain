@@ -48,7 +48,7 @@ class RegistrationService {
       throw new RegistrationException(message:"register.invalid")
     }
     if(!registration)
-      throw new RegistrationException(message:"register.invalid")
+      throw new RegistrationException(message:"register.cannot")
     return registration
   }
 
@@ -100,7 +100,7 @@ class RegistrationService {
     // Notificamos al usuario que se ha inscrito al curso
     notificationService.sendCourseRegistration(registration)
 
-    // Regresamos el id del registro recientemente guardado...
-    registration.id
+    // Regresamos el registro recientemente guardado...
+    registration
   }
 }
