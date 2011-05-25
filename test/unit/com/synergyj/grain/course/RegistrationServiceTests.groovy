@@ -15,8 +15,8 @@ class RegistrationServiceTests extends GrailsUnitTestCase {
     void testAddUserToScheduledCourse() {
       def user = new User(email:'user@user.com',password:password)
       mockDomain(User,[user])
-      def scheduledCourse = new ScheduledCourse(id:1,costByCourse:6500,costByModule:2000)
-      mockDomain(ScheduledCourse,[scheduledCourse])
+      //def scheduledCourse = new ScheduledCourse(id:1,costByCourse:6500,costByModule:2000)
+      //mockDomain(ScheduledCourse,[scheduledCourse])
       // TODO: probar los casos
       // Muchos métodos estáticos en el servicio, tal vez lo mejor sea hacer una prueba de integración...
     }
