@@ -1,9 +1,9 @@
 <div class="list">
-  <table id="scheduludeCourseList">
+  <table id="scheduludeCourseList" cellpadding="5" cellspacing="0" border="0" width="100%">
     <thead>
     <tr>
 
-      <th><g:message code="scheduledCourse.course" default="Course" /></th>
+      <th width="30%"><g:message code="scheduledCourse.course" default="Course" /></th>
 
       <g:sortableColumn property="beginDate" title="Begin Date" titleKey="scheduledCourse.beginDate" />
 
@@ -12,7 +12,9 @@
       <g:sortableColumn property="costByCourse" title="Cost By Course" titleKey="scheduledCourse.costByCourse" />
 
       <sec:ifAllGranted roles="ROLE_USER">
-        <th>&nbsp;</th>
+        <sec:ifNotGranted roles="ROLE_ADMIN">
+          <th>&nbsp;</th>
+        </sec:ifNotGranted>
       </sec:ifAllGranted>
 
     </tr>

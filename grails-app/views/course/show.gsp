@@ -1,8 +1,6 @@
-
 <%@ page import="com.synergyj.grain.course.Course" %>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="wb" />
         <title><g:message code="course.show" default="Show Course" /></title>
         <parameter name="pageHeader" value="${g.message(code: 'course.show', default: 'Course Info')}"/>

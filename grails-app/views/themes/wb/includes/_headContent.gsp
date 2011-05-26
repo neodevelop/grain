@@ -2,7 +2,7 @@
 
 <g:javascript library="jquery" plugin="jquery"/>
 <!-- Hoja de estilo y js para jquery-ui -->
-<jqui:resources plugin="jquery-ui" themeCss="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/overcast/jquery-ui.css" />
+<jqui:resources plugin="jquery-ui" themeCss="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/overcast/jquery-ui.css" />
 
 <!-- CSS Sheet  -->
 

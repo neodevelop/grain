@@ -3,20 +3,17 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="layout" content="main" />
+  <meta name="layout" content="wb" />
   <title><g:message code="scheduledCourse.edit" default="Edit ScheduledCourse" /></title>
+  <parameter name="pageHeader" value="${g.message(code: 'scheduledCourse.edit', default: 'Edit ScheduledCourse')}"/>
 </head>
 <body>
 <div class="nav">
-  <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
   <span class="menuButton"><g:link class="list" action="list"><g:message code="scheduledCourse.list" default="ScheduledCourse List" /></g:link></span>
   <span class="menuButton"><g:link class="create" action="create"><g:message code="scheduledCourse.new" default="New ScheduledCourse" /></g:link></span>
 </div>
+<br/>
 <div class="body">
-  <h1><g:message code="scheduledCourse.edit" default="Edit ScheduledCourse" /></h1>
-  <g:if test="${flash.message}">
-    <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
-  </g:if>
   <g:hasErrors bean="${scheduledCourseInstance}">
     <div class="errors">
       <g:renderErrors bean="${scheduledCourseInstance}" as="list" />
@@ -64,15 +61,11 @@
             <label for="courseSessions"><g:message code="scheduledCourse.courseSessions" default="Course Sessions" />:</label>
           </td>
           <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'courseSessions', 'errors')}">
-
             <ul>
               <g:each in="${scheduledCourseInstance?.courseSessions}" var="courseSessionInstance">
                 <li><g:link controller="courseSession" action="show" id="${courseSessionInstance.id}">${courseSessionInstance?.encodeAsHTML()}</g:link></li>
               </g:each>
             </ul>
-            <g:link controller="courseSession" params="['scheduledCourse.id': scheduledCourseInstance?.id]" action="create"><g:message code="courseSession.new" default="New CourseSession" /></g:link>
-
-
           </td>
         </tr>
 
