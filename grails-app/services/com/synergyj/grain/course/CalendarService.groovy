@@ -15,30 +15,17 @@
  */
 package com.synergyj.grain.course
 
-import com.synergyj.grain.auth.User
-import com.synergyj.grain.course.CourseModule
-import com.synergyj.grain.course.ScheduledCourse
-import java.text.SimpleDateFormat
+class CalendarService {
+  static transactional = true
 
-class CourseSession{
-  Date sessionStartTime
-  Date sessionEndTime
-	CourseModule module
-	Date dateCreated
-	Date lastUpdated
-	
-	static hasMany = [teachers:User]
-	static belongsTo = [scheduledCourse:ScheduledCourse]
-
-  static dateFormat = new SimpleDateFormat("dd-MM-yyyy")
-	
-	static constraints = {
-    module nullable:true
-		lastUpdated display:false
-		dateCreated display:false
-	}
-	
-	String toString(){
-    dateFormat.format(this.sessionStartTime)
-	}
+  def obtainSessionsFromFromScheduledCourse(Long scheduledCourseId){
+    def criteria = CourseSession.createCriteria()
+    // Obtenemos las sesiones de un curso calendarizado ordenadas por fecha de inicio
+    def sessions = criteria.list {
+      scheduledCourse{
+        eq("id",scheduledCourseId)
+      }
+      order("sessionStartTime", "asc")
+    }
+  }
 }

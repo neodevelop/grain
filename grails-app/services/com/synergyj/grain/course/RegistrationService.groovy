@@ -74,7 +74,7 @@ class RegistrationService {
     def registrations = Registration.findAllByStudent(user)
     // Definimos una variable para almacenar las sesiones de los cursos registrados
     def sessions =  registrations.collect{ reg ->
-      reg.scheduledCourse.courseSessions*.sessionDate
+      reg.scheduledCourse.courseSessions*.sessionStartTime
     }
 
     // Definimos una variable para almacenar las sesiones que se enciman
@@ -82,7 +82,7 @@ class RegistrationService {
     // Iteramos las sesiones de curso registrado una vez aplanadas
     sessions.flatten().each{ courseSessionRegistered ->
       // Iteramos las sesiones del curso calendarizado para comparar
-      scheduledCourse.courseSessions*.sessionDate.each{ courseSessionScheduled ->
+      scheduledCourse.courseSessions*.sessionStartTime.each{ courseSessionScheduled ->
         // ¿Existe la sesion de curso agendado en el curso registrado?
         if(courseSessionScheduled == courseSessionRegistered)
           sameSessions << courseSessionScheduled // Cierto, entonces agregamos la sesion

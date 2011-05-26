@@ -91,7 +91,7 @@
                                 Las sesiones de este curso son:
                                 <ul style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px; padding-left:230px;">
                                   <g:each in="${scheduledCourse?.courseSessions}" var="courseSession">
-                                    <li><g:formatDate date="${courseSession?.sessionDate}" format="dd-MM-yy"/></li>
+                                    <li><g:formatDate date="${courseSession?.sessionStartTime}" format="dd-MM-yy"/></li>
                                   </g:each>
                                 </ul>
                               </p>

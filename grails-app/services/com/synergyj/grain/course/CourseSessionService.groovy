@@ -19,13 +19,19 @@ class CourseSessionService {
 
     static transactional = true
 
-    def createSession4ScheduledCourse(Long scheduledCourseId,Date sessionDate) {
+    def createSession4ScheduledCourse(Long scheduledCourseId,Date sessionStartTime) {
       def scheduledCourse = ScheduledCourse.get(scheduledCourseId)
       if(!scheduledCourse)
         throw ScheduledCourseException(message:"No se encontró el curso agendado...")
       def courseSession = new CourseSession()
       courseSession.scheduledCourse = scheduledCourse
-      courseSession.sessionDate = sessionDate
+      // TODO: Obtener las horas de inicio y fin desde el front
+      Calendar calendar = new GregorianCalendar()
+      calendar.setTime(sessionStartTime)
+      calendar.set(Calendar.HOUR_OF_DAY,9)
+      courseSession.sessionStartTime = calendar.time
+      calendar.set(Calendar.HOUR_OF_DAY,18)
+      courseSession.sessionEndTime = calendar.time
       if(courseSession.hasErrors()){
         throw ScheduledCourseException(message:"No se puede crear la sesión del curso...")
       }else{

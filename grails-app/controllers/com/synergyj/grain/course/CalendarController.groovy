@@ -15,7 +15,35 @@
  */
 package com.synergyj.grain.course
 
+import grails.converters.JSON
+
 class CalendarController {
 
-  def index = { }
+  def calendarService
+
+  def index = {
+
+  }
+
+  def scheduledCourseInfo = {
+    def scheduledCourses = ScheduledCourse.findAllByScheduledCourseStatusInList([ScheduledCourseStatus.PLANNING,ScheduledCourseStatus.SCHEDULED])
+    def events = []
+    scheduledCourses.each{ sc ->
+      def sessions = calendarService.obtainSessionsFromFromScheduledCourse(sc.id)
+      // Generamos los objetos eventInfo iterando las sesiones
+      def contador = 1
+      sessions.each { courseSession ->
+        def properties = [
+          id:courseSession.id,
+          title:"${sc.course.name} - Sesión ${contador++}",
+          start:courseSession.sessionStartTime,
+          end:courseSession.sessionEndTime,
+          url:g.createLink(controller:"scheduledCourse", action:"show", id:sc.id)
+        ]
+        def eventInfo = new EventInfo(properties)
+        events << eventInfo
+      }
+    }
+    render events as JSON
+  }
 }

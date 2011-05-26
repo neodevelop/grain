@@ -103,7 +103,7 @@ images''')}" alt="pagos"/>
         <h4>${myRegisteredCourse.scheduledCourse.course.courseKey}</h4>
         <ul>
           <g:each in="${myRegisteredCourse.scheduledCourse.courseSessions}" var="courseSession">
-            <li><g:formatDate date="${courseSession?.sessionDate}" format="EEEE dd - MMMM - yyyy"/></li>
+            <li><g:formatDate date="${courseSession?.sessionStartTime}" format="EEEE dd - MMMM - yyyy"/></li>
           </g:each>
         </ul>
         <p>

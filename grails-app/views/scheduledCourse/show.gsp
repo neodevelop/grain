@@ -6,7 +6,7 @@
   <parameter name="pageHeader" value="${g.message(code: 'scheduledCourse.show', default: 'Scheduled Course Info')}"/>
   <g:javascript>
     $(function(){
-      $('#sessionDate').datepicker({ dateFormat:"dd/mm/yy" });
+      $('#sessionStartTime').datepicker({ dateFormat:"dd/mm/yy" });
 
       $('#showAddCourseSession').click(function(){
         $('#newSessionCourse').show();
@@ -38,7 +38,7 @@
       return false;
     }
     function reacting(e){
-      var date = new Date(e.sessionDate)
+      var date = new Date(e.sessionStartTime)
       var stringdate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
       var link = "<a class='deleteSession' id='"+e.id+"' href='${createLink(controller:'courseSession',action:'deleteAsync')}/"+e.id+"'>Delete</a>";
       $("<li id='sessionCourse"+e.id+"'>"+stringdate+" "+link+"</li>").appendTo("div#sessionList > ul");
@@ -52,7 +52,7 @@
   <span class="menuButton"><g:link class="create" action="create"><g:message code="scheduledCourse.new" default="New ScheduledCourse" /></g:link></span>
 </div>
 <div class="body">
-  <g:form>
+  <g:form style="height: 100%">
     <div class="dialog">
       <table>
         <tbody>
@@ -114,7 +114,7 @@
             <ul>
               <g:each in="${scheduledCourseInstance?.courseSessions}" var="courseSessionInstance">
                 <li id="sessionCourse${courseSessionInstance.id}">
-                  ${courseSessionInstance.encodeAsHTML()}
+                  ${courseSessionInstance?.encodeAsHTML()}
                   <a class="deleteSession" href="${createLink(controller:'courseSession',action:'deleteAsync',id:courseSessionInstance.id)}">
                     Delete
                   </a>
@@ -150,7 +150,7 @@
       onSuccess="reacting(data)"
       onComplete="restoreLink()" style="height:100%;" >
     <g:hiddenField name="scheduledCourseId" value="${scheduledCourseInstance.id}"/>
-    Fecha de la Sessión: <g:textField name="sessionDate" />
+    Fecha de la Sessión: <g:textField name="sessionStartTime" />
     <input type="submit" value="Add Session to Course" id="addSession" name="addSession"/>
   </g:formRemote>
 </div>

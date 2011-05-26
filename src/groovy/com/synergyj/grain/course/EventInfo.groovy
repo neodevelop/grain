@@ -15,30 +15,21 @@
  */
 package com.synergyj.grain.course
 
-import com.synergyj.grain.auth.User
-import com.synergyj.grain.course.CourseModule
-import com.synergyj.grain.course.ScheduledCourse
-import java.text.SimpleDateFormat
+class EventInfo {
+  Long id
+  String title
+  Boolean allDay = false
+  Date start
+  Date end
+  String url
+  String className
+  Boolean editable = false
 
-class CourseSession{
-  Date sessionStartTime
-  Date sessionEndTime
-	CourseModule module
-	Date dateCreated
-	Date lastUpdated
-	
-	static hasMany = [teachers:User]
-	static belongsTo = [scheduledCourse:ScheduledCourse]
+  String color
+  String backgroundColor
+  String borderColor
+  String textColor
 
-  static dateFormat = new SimpleDateFormat("dd-MM-yyyy")
-	
-	static constraints = {
-    module nullable:true
-		lastUpdated display:false
-		dateCreated display:false
-	}
-	
-	String toString(){
-    dateFormat.format(this.sessionStartTime)
-	}
+  // Considerar elementos para eventRender
+
 }

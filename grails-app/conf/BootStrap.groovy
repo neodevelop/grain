@@ -28,6 +28,7 @@ import com.synergyj.grain.course.Status
 import grails.util.GrailsUtil
 import com.synergyj.grain.course.ScheduledCourse
 import com.synergyj.grain.course.ScheduledCourseStatus
+import grails.converters.JSON
 
 class BootStrap {
   
@@ -52,7 +53,11 @@ class BootStrap {
   }
 
   def init = { servletContext ->
-    
+
+    JSON.registerObjectMarshaller(Date) {
+      return it?.format("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    }
+
     if(!Role.count()){
       def adminRole = new Role(authority:'ROLE_ADMIN',description:'Administrador').save(flush:true)
       def userRole = new Role(authority:'ROLE_USER',description:'Usuario').save(flush:true)
