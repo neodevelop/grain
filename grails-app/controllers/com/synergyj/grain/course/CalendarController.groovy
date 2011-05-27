@@ -38,7 +38,10 @@ class CalendarController {
           title:"${sc.course.name} - Sesión ${contador++}",
           start:courseSession.sessionStartTime,
           end:courseSession.sessionEndTime,
-          url:g.createLink(controller:"scheduledCourse", action:"show", id:sc.id)
+          url:g.createLink(controller:"scheduledCourse", action:"show", id:sc.id),
+          backgroundColor:sc.course.backgroundColor,
+          borderColor:sc.course.borderColor,
+          textColor:sc.course.textColor
         ]
         def eventInfo = new EventInfo(properties)
         events << eventInfo

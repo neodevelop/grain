@@ -30,6 +30,12 @@ class Course extends CourseContent {
 	CourseType courseType
 	Status status
 	SortedSet modules
+
+  // Colores para eventos de calendario
+  String color
+  String backgroundColor
+  String borderColor
+  String textColor
 	
 	static hasMany = [modules:CourseModule]
 	

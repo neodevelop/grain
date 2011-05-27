@@ -31,5 +31,6 @@ class EventInfo {
   String textColor
 
   // Considerar elementos para eventRender
+  // Ver el plugin de jQuery de qTip http://craigsworks.com/projects/qtip2/
 
 }
