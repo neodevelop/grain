@@ -36,7 +36,7 @@ class RegistrationService {
     // Validamos los datos(constraints) del usuario
     if(userCommand.validate()){
       // Buscar si ya existe el usuario
-      user = userService.findUser(userCommand.email)
+      user = userService.findUser(userCommand.email.toLowerCase())
       // Si no existe entonces se crea
       if(!user){
         user = userService.createUser(userCommand)
