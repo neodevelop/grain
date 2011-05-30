@@ -29,10 +29,12 @@ import grails.util.GrailsUtil
 import com.synergyj.grain.course.ScheduledCourse
 import com.synergyj.grain.course.ScheduledCourseStatus
 import grails.converters.JSON
+import com.synergyj.grain.course.CourseSession
 
 class BootStrap {
   
   def springSecurityService
+  def courseSessionService
   
   def save(domain) {
     assert domain
@@ -88,7 +90,11 @@ class BootStrap {
             format:"<p>Formato del curso</p>",
             courseKey:"SPRING3.2011",
             courseType:CourseType.COURSE,
-            status:Status.LIVE
+            status:Status.LIVE,
+            color:"",
+            backgroundColor:"#204d20",
+            borderColor:"#4d794d",
+            textColor:"#cccc80"
         ).save(flush:true)
 
         def courseWebAdv = new Course(
@@ -103,14 +109,38 @@ class BootStrap {
             format:"<p>Formato del curso</p>",
             courseKey:"WEBADV.2011",
             courseType:CourseType.COURSE,
-            status:Status.LIVE
+            status:Status.LIVE,
+            color:"",
+            backgroundColor:"#990066",
+            borderColor:"#bf609f",
+            textColor:"#fbdbee"
         ).save(flush:true)
+
+        def courseHibernate = new Course(
+            name:'Persistencia en Java con Hibernate',
+            content:'<p><ul><li>Objetos persistentes</li><li>Transacciones</li><li>SessionFactory</li></ul></p>',
+            contentType:ContentType.HTML,
+            overview:"<p>La persistencia es importante, o no?</p>",
+            audience:"<p>Todos los desarrolladores Java</p>",
+            prerequisites:"<p><ul><li>BD</li><li>JSP</li><li>SQL</li></ul></p>",
+            goal:"<p>Manejar Hibernate como se debe</p>",
+            method:"<p>Prácticos</p>",
+            format:"<p>Formato del curso</p>",
+            courseKey:"HIBERNATE.2011",
+            courseType:CourseType.COURSE,
+            status:Status.LIVE,
+            color:"",
+            backgroundColor:"#794d20",
+            borderColor:"#c6b39f",
+            textColor:"#ffecdf"
+        ).save(flush:true)
+
       }
 
       if(!ScheduledCourse.count()){
         def sc1 = new ScheduledCourse(
-          beginDate:(new Date() + 45),
-          limitRegistrationDate:(new Date() + 30),
+          beginDate:(new Date() + 15),
+          limitRegistrationDate:(new Date() + 10),
           costByCourse:7000,
           costByModule:2000,
           scheduledCourseStatus:ScheduledCourseStatus.SCHEDULED,
@@ -118,13 +148,32 @@ class BootStrap {
         ).save(flush:true)
 
         def sc2 = new ScheduledCourse(
-          beginDate:(new Date() + 45),
-          limitRegistrationDate:(new Date() + 30),
+          beginDate:(new Date() + 15),
+          limitRegistrationDate:(new Date() + 10),
           costByCourse:7000,
           costByModule:2000,
           scheduledCourseStatus:ScheduledCourseStatus.SCHEDULED,
           course:Course.get(2L)
         ).save(flush:true)
+
+        def sc3 = new ScheduledCourse(
+          beginDate:(new Date() + 15),
+          limitRegistrationDate:(new Date() + 10),
+          costByCourse:7000,
+          costByModule:2000,
+          scheduledCourseStatus:ScheduledCourseStatus.SCHEDULED,
+          course:Course.get(3L)
+        ).save(flush:true)
+
+        //Creamos sesiones para todos los cursos
+        ScheduledCourse.list().each{ scheduledCourse ->
+          def begin = scheduledCourse.beginDate
+          5.times{
+            begin += 7
+            courseSessionService.createSession4ScheduledCourse(scheduledCourse.id,begin)
+          }
+        }
+
       }
 
     }
