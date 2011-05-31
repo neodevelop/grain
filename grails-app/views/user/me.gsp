@@ -75,7 +75,7 @@
         Registro: <b><g:formatDate date="${myRegisteredCourse.registrationDate}" format="EEEE dd-MM-yyyy"/></b><br/>
         <g:if test="${myRegisteredCourse.registrationStatus == RegistrationStatus.REGISTERED}">
           <p align="center">
-            <g:link class="button">Escoge tu forma de pago</g:link>
+            <g:link class="button" controller="payment">Escoge tu forma de pago</g:link>
           </p>
           <p align="center">
             <img src="${createLinkTo(file:'mpagos_01.gif',dir:'''themes/wb/
