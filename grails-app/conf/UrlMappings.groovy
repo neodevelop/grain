@@ -44,6 +44,10 @@ class UrlMappings {
       controller = 'user'
       action = 'signup'
     }
+    name calendar:"/calendar"{
+      controller = 'calendar'
+      action = 'index'
+    }
     name content: "/$id" {
       controller = 'page'
       action = 'show'
