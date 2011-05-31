@@ -15,26 +15,6 @@
  */
 package com.synergyj.grain.course
 
-class ScheduledCourse{
-	Course course
-	Date beginDate
-	Date limitRegistrationDate
-	BigDecimal costByCourse
-	BigDecimal costByModule
-  ScheduledCourseStatus scheduledCourseStatus
-	
-	Date dateCreated
-	Date lastUpdated
-	
-	static constraints = {
-    course nullable:false
-		lastUpdated display:false
-		dateCreated display:false
-	}
-	
-	static hasMany = [courseSessions:CourseSession]
-
-  String toString(){
-    "${course} : ${beginDate} : ${scheduledCourseStatus}"
-  }
+class PromotionPerScheduledCourseController {
+  def scaffold = PromotionPerScheduledCourse
 }

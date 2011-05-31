@@ -155,5 +155,7 @@
   </g:formRemote>
 </div>
 
+<!-- TODO: Agregar promociones -->
+
 </body>
 </html>

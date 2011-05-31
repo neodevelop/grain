@@ -15,26 +15,15 @@
  */
 package com.synergyj.grain.course
 
-class ScheduledCourse{
-	Course course
-	Date beginDate
-	Date limitRegistrationDate
-	BigDecimal costByCourse
-	BigDecimal costByModule
-  ScheduledCourseStatus scheduledCourseStatus
-	
-	Date dateCreated
-	Date lastUpdated
-	
-	static constraints = {
-    course nullable:false
-		lastUpdated display:false
-		dateCreated display:false
-	}
-	
-	static hasMany = [courseSessions:CourseSession]
+class PromotionPerScheduledCourse {
 
-  String toString(){
-    "${course} : ${beginDate} : ${scheduledCourseStatus}"
+  Promotion promotion
+  ScheduledCourse scheduledCourse
+  Date validUntil
+
+  static constraints = {
+    promotion nullable: false
+    scheduledCourse nullable: false
+    validUntil nullable: false
   }
 }
