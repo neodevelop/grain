@@ -1,4 +1,4 @@
-<%@ page import="com.synergyj.grain.course.RegistrationStatus" %>
+<%@ page import="com.synergyj.grain.course.KindPromotion; com.synergyj.grain.course.RegistrationStatus" %>
 <head>
   <title><g:message code='payment.info' default="Payment info"/></title>
   <meta name='layout' content='wb'/>
@@ -25,6 +25,10 @@
           }
           if(kind=='GIFT'){
             // Todo confirmar el regalo con alguna imagen
+          }
+          if(kind=='RECOMMENDATION'){
+            totalDiscount += ($(this).val()*1);
+
           }
         });
         totalPaymentWithDiscount = (totalPayment*(1-(totalDiscount*.01)));
@@ -105,8 +109,14 @@
               <g:hiddenField name="kindPromotion${i}" value="${promotionPerCourse.promotion.kindPromotion}"/>
               ${promotionPerCourse.promotion.description}
             </li>
-            <ul class="validUntil">
+            <ul id="extraInfo${i}" class="extraInfo">
               <li>Válido hasta: <g:formatDate date="${promotionPerCourse.validUntil}" format="dd-MM-yy"/></li>
+              <g:if test="${promotionPerCourse.promotion.kindPromotion == KindPromotion.RECOMMENDATION}">
+                <li>
+                  Email de la persona que te recomienda<br/>
+                  <g:textField name="recommendationFrom"/>
+                </li>
+              </g:if>
             </ul>
             </g:if>
           </g:each>

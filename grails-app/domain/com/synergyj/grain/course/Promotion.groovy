@@ -16,7 +16,7 @@
 package com.synergyj.grain.course
 
 class Promotion {
-  String
+  String promotionKey
   String description
   Double discount
   KindPromotion kindPromotion

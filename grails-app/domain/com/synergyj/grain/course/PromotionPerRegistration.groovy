@@ -18,4 +18,5 @@ package com.synergyj.grain.course
 class PromotionPerRegistration {
   Promotion promotion
   static belongsTo = [registration:Registration]
+  static hasMany = [promotionPerRegistrationProperties:PromotionPerRegistrationProperty]
 }
