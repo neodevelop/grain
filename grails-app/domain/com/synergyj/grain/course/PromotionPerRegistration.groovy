@@ -15,18 +15,7 @@
  */
 package com.synergyj.grain.course
 
-class Promotion {
-  String
-  String description
-  Double discount
-  KindPromotion kindPromotion
-
-  static constraints = {
-    promotionKey blank:false
-    description blank:false
-  }
-
-  String toString(){
-    "$promotionKey"
-  }
+class PromotionPerRegistration {
+  Promotion promotion
+  static belongsTo = [registration:Registration]
 }

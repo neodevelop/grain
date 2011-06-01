@@ -26,6 +26,9 @@ class Registration {
 	Date registrationDate
 	Boolean completeCourse
   RegistrationStatus registrationStatus
+  Boolean invoice
+
+  static hasMany = [promotions:PromotionPerRegistration]
 	
 	static constraints = {
 		lastUpdated display:false
