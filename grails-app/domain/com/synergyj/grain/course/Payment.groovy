@@ -15,24 +15,19 @@
  */
 package com.synergyj.grain.course
 
-import com.synergyj.grain.auth.User
-import com.synergyj.grain.course.ScheduledCourse
+class Payment {
+  Double quantity
+  String txIdentifier
+  Date paymentDate
+  PaymentStatus paymentStatus
 
-class Registration {
-	Date dateCreated
+  Date dateCreated
 	Date lastUpdated
-	User student
-	ScheduledCourse scheduledCourse
-	Date registrationDate
-	Boolean completeCourse
-  RegistrationStatus registrationStatus
-  Boolean invoice
 
-  static hasMany = [promotions:PromotionPerRegistration,payments:Payment]
-	
-	static constraints = {
-		lastUpdated display:false
-		dateCreated display:false
-	}
+  static belongsTo = [registration:Registration]
 
+  static constraints = {
+    dateCreated(display:false)
+    dateUpdated(display:false)
+  }
 }

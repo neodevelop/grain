@@ -20,12 +20,17 @@ class PromotionPerScheduledCourse {
   Promotion promotion
   Date validUntil
 
+  Date dateCreated
+  Date lastUpdated
+
   static belongsTo = [scheduledCourse:ScheduledCourse]
 
   static constraints = {
     promotion nullable: false
     scheduledCourse nullable: false
     validUntil nullable: false
+    dateCreated(display:false)
+    lastUpdated(display:false)
   }
 
   boolean hasNotExpired(){

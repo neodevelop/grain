@@ -91,8 +91,10 @@
     </span>
     <g:hiddenField name="totalAmount" value="${registration.scheduledCourse.costByCourse}"/>
   </h1>
-  <br>
-
+  <br/><br/>
+  <div id="buttonPayment" align="center">
+    <a href="#" class="button">Realizar el pago</a>
+  </div>
 </div>
 <div id="right">
   <div id="tabs" style="width:450px;">

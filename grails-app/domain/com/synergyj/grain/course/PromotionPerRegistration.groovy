@@ -17,6 +17,15 @@ package com.synergyj.grain.course
 
 class PromotionPerRegistration {
   Promotion promotion
+
+  Date dateCreated
+	Date lastUpdated
+
   static belongsTo = [registration:Registration]
   static hasMany = [promotionPerRegistrationProperties:PromotionPerRegistrationProperty]
+
+  static constraints = {
+    dateCreated(display:false)
+    lastUpdated(display:false)
+  }
 }

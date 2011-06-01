@@ -21,9 +21,14 @@ class Promotion {
   Double discount
   KindPromotion kindPromotion
 
+  Date dateCreated
+	Date lastUpdated
+
   static constraints = {
     promotionKey blank:false
     description blank:false
+    dateCreated(display:false)
+    lastUpdated(display:false)
   }
 
   String toString(){
