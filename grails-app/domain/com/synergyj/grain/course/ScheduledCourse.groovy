@@ -32,7 +32,7 @@ class ScheduledCourse{
 		dateCreated display:false
 	}
 	
-	static hasMany = [courseSessions:CourseSession]
+	static hasMany = [courseSessions:CourseSession,promotions:PromotionPerScheduledCourse]
 
   String toString(){
     "${course} : ${beginDate} : ${scheduledCourseStatus}"

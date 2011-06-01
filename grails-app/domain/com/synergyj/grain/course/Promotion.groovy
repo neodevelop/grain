@@ -19,7 +19,7 @@ class Promotion {
   String promotionKey
   String description
   Double discount
-  KindPromotion kindPromotion = KindPromotion.NO_ACCUMULABLE
+  KindPromotion kindPromotion
 
   static constraints = {
     promotionKey blank:false

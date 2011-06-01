@@ -18,12 +18,17 @@ package com.synergyj.grain.course
 class PromotionPerScheduledCourse {
 
   Promotion promotion
-  ScheduledCourse scheduledCourse
   Date validUntil
+
+  static belongsTo = [scheduledCourse:ScheduledCourse]
 
   static constraints = {
     promotion nullable: false
     scheduledCourse nullable: false
     validUntil nullable: false
+  }
+
+  boolean hasNotExpired(){
+    new Date() <= this.validUntil
   }
 }

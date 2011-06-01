@@ -23,8 +23,10 @@ class PaymentController {
     // Obtenemos el usuario actual
     def user = springSecurityService.currentUser
     // Obtenemos sus cursos pendientes por pagar
-    def registrations = Registration.findAllByStudentAndRegistrationStatus(user,RegistrationStatus.REGISTERED)
+    def registration = Registration.findByStudentAndRegistrationStatus(user,RegistrationStatus.REGISTERED)
     //Obtenemos las promociones de este curso calendarizado
+    def promotionsPerCourse = PromotionPerScheduledCourse.findAllByScheduledCourse(registration.scheduledCourse)
     // Regresamos sus cursos para presentar el detalle y las promociones a escoger
+    [registration:registration,promotionsPerCourse:promotionsPerCourse]
   }
 }
