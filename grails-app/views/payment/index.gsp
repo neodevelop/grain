@@ -123,6 +123,12 @@
           <li>
             <g:checkBox name="needInvoice" checked="false"/><i>Necesitarás factura?</i>
           </li>
+          <li>
+            ¿Cuántos pagos deseas presentar para cubrir el costo del curso?<br/>
+            <g:radioGroup name="paymentNumbers" labels="['Uno','Dos','Tres']" values="[1,2,3]" value="1">
+              ${it.radio} ${it.label}<br/>
+            </g:radioGroup>
+          </li>
         </ul>
       </div>
       </g:formRemote>
