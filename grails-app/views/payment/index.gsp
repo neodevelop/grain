@@ -36,7 +36,7 @@
         if($(":checkbox[name='needInvoice']").is(":checked")){
           calculateIva(totalPaymentWithDiscount);
         }else{
-          $("span#finalAmount").html("$ "+ totalPaymentWithDiscount );
+          $("span#finalAmount").html( totalPaymentWithDiscount );
         }
       });
 
@@ -47,7 +47,7 @@
           $("div#invoice").show();
         }else{
           // Se muestra la cantidad original
-          $("span#finalAmount").html("$ "+ totalPaymentWithDiscount );
+          $("span#finalAmount").html( totalPaymentWithDiscount );
           $("div#invoice").hide();
         }
       });
@@ -55,15 +55,23 @@
     });
 
     function calculateIva(totalPaymentNoIva){
-      $('span#IVA').html("$ " + (totalPaymentNoIva * 0.16));
+      $('span#IVA').html(totalPaymentNoIva * 0.16);
       var totalPaymentPlusIva = totalPaymentNoIva * 1.16;
       totalPaymentPlusIva = Math.round(totalPaymentPlusIva)
-      $("span#finalAmount").html("$ "+ totalPaymentPlusIva );
+      $("span#finalAmount").html( totalPaymentPlusIva );
+    }
+
+    function putPriceInHidden(){
+      $(":input[name='finalAmount']").val($("span#finalAmount").text());
+    }
+
+    function disabledOptions(){
+      $(":checkbox, :radio").attr('disabled',true);
+      $(":input[name='confirmPayment']").hide();
     }
   </g:javascript>
 </head>
 <body>
-
 <div id="left">
   <h4>Course:</h4>
   <h3>${registration.scheduledCourse.course}</h3>
@@ -86,14 +94,11 @@
   </div>
   <h2>Final price:</h2>
   <h1>
-    <span id="finalAmount">
-      ${registration.scheduledCourse.costByCourse}
-    </span>
+    $ <span id="finalAmount"> ${registration.scheduledCourse.costByCourse}</span>
     <g:hiddenField name="totalAmount" value="${registration.scheduledCourse.costByCourse}"/>
   </h1>
   <br/><br/>
-  <div id="buttonPayment" align="center">
-    <a href="#" class="button">Realizar el pago</a>
+  <div id="paymentConfirmation">
   </div>
 </div>
 <div id="right">
@@ -101,8 +106,8 @@
       <ul>
         <li><a href="#tabs-1">Promotions for this course</a></li>
       </ul>
-      <g:formRemote name="calculateAmount" url="[action:'calculateAmount',controller:'payment']">
       <div id="tabs-1">
+        <g:formRemote name="makePayments" after="disabledOptions()" before="putPriceInHidden()" url="[action:'confirm']" update="paymentConfirmation">
         <ul id="promotions">
           <g:each in="${promotionsPerCourse}" var="promotionPerCourse" status="i">
             <g:if test="${promotionPerCourse.hasNotExpired() }">
@@ -127,13 +132,18 @@
           </li>
           <li>
             ¿Cuántos pagos deseas presentar para cubrir el costo del curso?<br/>
-            <g:radioGroup name="paymentNumbers" labels="['Uno','Dos','Tres']" values="[1,2,3]" value="1">
+            <i>(Esto NO aplica a Tárjetas de Crédito, <br/>solo a depositos en efectivo o transferencias)</i><br/>
+            <g:radioGroup name="paymentNumber" labels="['Uno','Dos']" values="[1,2]" value="1">
               ${it.radio} ${it.label}<br/>
             </g:radioGroup>
           </li>
         </ul>
+        <g:hiddenField name="finalAmount" value=""/>
+        <div width="100%" style="position: relative; float: right;">
+          <input type="submit" id="confirmPayment" name="confirmPayment" value="Confirmar el pago" class="button"/>
+        </div>
+        </g:formRemote>
       </div>
-      </g:formRemote>
   </div>
 </div>
 </body>

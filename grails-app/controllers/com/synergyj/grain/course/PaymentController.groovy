@@ -29,4 +29,28 @@ class PaymentController {
     // Regresamos sus cursos para presentar el detalle y las promociones a escoger
     [registration:registration,promotionsPerCourse:promotionsPerCourse]
   }
+
+  def confirm = {
+    println params.dump()
+    // Poner en sesion el correo de la recomendacion si existe
+    // Poner en sesion las promociones que escogío
+    // Crear el modelo con el numero de pagos a realizar y la cantidad total
+    def payments = []
+    def paymentsNumber = Integer.valueOf(params.paymentNumber)
+    switch(paymentsNumber){
+      case 1:
+        payments << new Payment(
+            amount: Double.valueOf(params.finalAmount),paymentStatus: PaymentStatus.REGISTERED
+        )
+        break
+      case 2:
+        payments << new Payment(
+            amount: Double.valueOf(params.finalAmount)/2,paymentStatus: PaymentStatus.REGISTERED
+        )
+        payments *= 2
+        break
+    }
+    def model = [payments:payments]
+    render template: "confirm",model:model
+  }
 }
