@@ -17,7 +17,7 @@ package com.synergyj.grain.course
 
 class Payment {
   Double quantity
-  String txIdentifier
+  String transactionId // Para DineroMail...confirmar con trx_id
   Date paymentDate
   PaymentStatus paymentStatus
 
@@ -27,6 +27,7 @@ class Payment {
   static belongsTo = [registration:Registration]
 
   static constraints = {
+    transactionId unique: true, maxSize: 20
     dateCreated(display:false)
     dateUpdated(display:false)
   }
