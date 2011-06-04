@@ -19,20 +19,21 @@ import com.synergyj.grain.auth.User
 import com.synergyj.grain.course.ScheduledCourse
 
 class Registration {
-	Date dateCreated
-	Date lastUpdated
-	User student
-	ScheduledCourse scheduledCourse
-	Date registrationDate
-	Boolean completeCourse
+  Date dateCreated
+  Date lastUpdated
+  User student
+  ScheduledCourse scheduledCourse
   RegistrationStatus registrationStatus
-  Boolean invoice
+  Boolean invoice = false
 
-  static hasMany = [promotions:PromotionPerRegistration,payments:Payment]
-	
-	static constraints = {
-		lastUpdated display:false
-		dateCreated display:false
-	}
+  static hasMany = [promotions: PromotionPerRegistration, payments: Payment]
+
+  static constraints = {
+    lastUpdated display: false, nullable: true
+    dateCreated display: false, nullable: true
+    student nullable: false
+    scheduledCourse nullable: false
+    invoice nullable: true
+  }
 
 }
