@@ -21,6 +21,7 @@ import com.synergyj.grain.auth.RegisterUserCommand
 import com.synergyj.grain.auth.RegistrationCode
 import com.synergyj.grain.auth.User
 import com.synergyj.grain.UserAlreadyExistsException
+import javax.naming.directory.SearchControls
 
 class UserService {
 
@@ -28,16 +29,21 @@ class UserService {
   def springSecurityService
   def notificationService
 
-  def findUser(email) {
-    email ? User.findByEmail(email) : null
+  def findUser(String email) {
+    println "buscando user con ${email} "
+    def user = User.findByEmail(email.toLowerCase())
+    println "user encontrado: ${user}"
+    user
   }
 
   def createUser(userCommand) throws BusinessException {
     def userFound = findUser(userCommand.email)
-    if(userFound) { throw new UserAlreadyExistsException('register.user.already.exists', userCommand.email)}
+    if (userFound) { return userFound }
+
     def user = new User(userCommand.properties)
     String salt = userCommand.email
 
+    user.password = user.password.toLowerCase()
     user.enabled = true
     user.accountExpired = false
     user.accountLocked = false
