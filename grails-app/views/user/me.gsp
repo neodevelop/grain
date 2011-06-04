@@ -72,7 +72,7 @@
       <div id="tabs-1">
         <h3>${myRegisteredCourse.scheduledCourse.course.name}</h3>
         <h4>${myRegisteredCourse.scheduledCourse.course.courseKey}</h4>
-        Registro: <b><g:formatDate date="${myRegisteredCourse.registrationDate}" format="EEEE dd-MM-yyyy"/></b><br/>
+        Registro: <b><g:formatDate date="${myRegisteredCourse.dateCreated}" format="EEEE dd-MM-yyyy"/></b><br/>
         <g:if test="${myRegisteredCourse.registrationStatus == RegistrationStatus.REGISTERED}">
           <p align="center">
             <g:link class="button" controller="payment">Escoge tu forma de pago</g:link>

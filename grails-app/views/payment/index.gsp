@@ -77,7 +77,7 @@
   <h3>${registration.scheduledCourse.course}</h3>
   <br>
   <h4>Registration on:</h4>
-  <h3><g:formatDate date="${registration.registrationDate}" format="EEEE dd-MMMM-yyyy"/></h3>
+  <h3><g:formatDate date="${registration.dateCreated}" format="EEEE dd-MMMM-yyyy"/></h3>
   <br>
   <h4>Original Price:</h4>
   <h3>
