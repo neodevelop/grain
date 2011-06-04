@@ -26,7 +26,7 @@ class CalendarController {
   }
 
   def scheduledCourseInfo = {
-    def scheduledCourses = ScheduledCourse.findAllByScheduledCourseStatusInList([ScheduledCourseStatus.PLANNING,ScheduledCourseStatus.SCHEDULED])
+    def scheduledCourses = ScheduledCourse.findAllByScheduledCourseStatusInList([ScheduledCourseStatus.publicCourses()])
     def events = []
     scheduledCourses.each{ sc ->
       def sessions = calendarService.obtainSessionsFromFromScheduledCourse(sc.id)
