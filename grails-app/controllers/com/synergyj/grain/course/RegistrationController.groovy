@@ -36,7 +36,7 @@ class RegistrationController {
   @Secured(['isAuthenticated()'])
   def addMeToCourse = {
     def user = springSecurityService.currentUser
-    def scheduleCourseId = params.id as Long
+    def scheduleCourseId = params.long('id')
     def registration
     try{
       registration =  registrationService.addUserToScheduledCourse(user,scheduleCourseId)

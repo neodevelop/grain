@@ -21,6 +21,7 @@ import grails.converters.JSON
 import com.synergyj.grain.BusinessException
 import com.synergyj.grain.UserRegistrationException
 import com.synergyj.grain.RegistrationException
+import grails.util.GrailsUtil
 
 class LandingController {
 
@@ -32,6 +33,7 @@ class LandingController {
     try{
       registration = registrationService.registerFromLanding(registerUserCommand,Long.valueOf(params.scheduledCourseId))
     }catch(RegistrationException ex){
+      GrailsUtil.sanitize(ex).printStackTrace()
       registration = ['message':g.message(code:ex.message,default:'No te puedes registrar a este curso(varias causas)')]
     }
     response.addHeader("Access-Control-Allow-Origin","*")

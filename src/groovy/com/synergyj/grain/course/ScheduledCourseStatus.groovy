@@ -15,10 +15,15 @@
  */
 package com.synergyj.grain.course
 
-public enum ScheduledCourseStatus {
+enum ScheduledCourseStatus {
+  DRAFT,
   PLANNING,
   SCHEDULED,
   FINISHED,
   CANCELLED,
   PROGRESS
+
+  static List<ScheduledCourseStatus> publicCourses() {
+    [PLANNING, SCHEDULED, PROGRESS]
+  }
 }
