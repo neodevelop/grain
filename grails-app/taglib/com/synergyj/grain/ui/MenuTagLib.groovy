@@ -98,59 +98,61 @@ class MenuTagLib {
   }
 
   def link = {attrs ->
-    def option = attrs.option
-    assert option
-    def item = option.item
-    def type = item.type
-    def params = item.linkParams
-    def link = ''
+    Menu.withTransaction {
+      def option = attrs.option
+      assert option
+      def item = option.item
+      def type = item.type
+      def params = item.linkParams
+      def link = ''
 
-    switch (type.ordinal()) {
-      case 0:
-        def mapping = valueForKey(params, MAPPING)
-        assert mapping
-        def linkParams = [:]
-        linkParams.mapping = mapping
+      switch (type.ordinal()) {
+        case 0:
+          def mapping = valueForKey(params, MAPPING)
+          assert mapping
+          def linkParams = [:]
+          linkParams.mapping = mapping
 
-        link = g.createLink(linkParams)
-        break
-      case 1:
-        //Controller
-        def controller = valueForKey(params, CONTROLLER)
-        assert controller
+          link = g.createLink(linkParams)
+          break
+        case 1:
+          //Controller
+          def controller = valueForKey(params, CONTROLLER)
+          assert controller
 
-        def action = valueForKey(params, ACTION)
-        def id = valueForKey(params, ID)
-        def extraParams = extractParams(params)
+          def action = valueForKey(params, ACTION)
+          def id = valueForKey(params, ID)
+          def extraParams = extractParams(params)
 
-        def linkParams = [:]
-        linkParams.controller = controller
+          def linkParams = [:]
+          linkParams.controller = controller
 
-        if (action) {
-          linkParams.action = action
-        }
+          if (action) {
+            linkParams.action = action
+          }
 
-        if (id) {
-          linkParams.id = id
-        }
+          if (id) {
+            linkParams.id = id
+          }
 
-        if (extraParams) {
-          linkParams.params = extraParams
-        }
+          if (extraParams) {
+            linkParams.params = extraParams
+          }
 
-        link = g.createLink(linkParams)
-        break
-      case 2:
-        //Url
-        def url = valueForKey(params, URL)
-        assert url
-        link = url
-        break
-      default:
-        log.warn "no preparados aun para ${type.dump()}"
-        log.warn item.dump()
-        break
+          link = g.createLink(linkParams)
+          break
+        case 2:
+          //Url
+          def url = valueForKey(params, URL)
+          assert url
+          link = url
+          break
+        default:
+          log.warn "no preparados aun para ${type.dump()}"
+          log.warn item.dump()
+          break
+      }
+      out << link
     }
-    out << link
   }
 }

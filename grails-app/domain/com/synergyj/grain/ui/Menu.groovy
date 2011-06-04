@@ -27,7 +27,7 @@ class Menu implements Serializable {
   static mapping = {
     table 'gr_menues'
     cache true
-    items cache: true
+    items cache: true, lazy: false
   }
 
   public String toString() {

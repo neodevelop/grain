@@ -19,6 +19,7 @@ import com.synergyj.grain.ui.Menu
 import net.sf.ehcache.Ehcache
 import net.sf.ehcache.CacheManager
 import net.sf.ehcache.Element
+import com.synergyj.grain.ui.MenuItem
 
 class MenuService {
   static transactional = false
@@ -31,6 +32,11 @@ class MenuService {
     result = menuCache.get(lookup)?.value
     if (!result) {
       result = Menu.findByName(key)
+
+      result.items.each {
+        it.item.dump()
+      }
+
       if(result) {
         menuCache.put(new Element(lookup, result))
       }
