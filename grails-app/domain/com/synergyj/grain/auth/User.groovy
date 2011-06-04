@@ -55,7 +55,7 @@ class User {
     cache true
     table 'gr_people'
 
-    password column: '`password`'
+    password column: 'pwd'
     description type: "text"
   }
 
