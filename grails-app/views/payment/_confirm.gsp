@@ -3,18 +3,7 @@
     Payment ${i + 1}: $ ${payment.amount}<br/><br/>
   </g:each>
 </div>
-
-<form action="https://mexico.dineromail.com/Shop/Shop_Ingreso.asp" method="post">
-  <input type="hidden" name="NombreItem" value="Curso: Desarrollo profesional con Spring 3">
-  <input type="hidden" name="TipoMoneda" value="1">
-  <input type="hidden" name="PrecioItem" value="7000.00">
-  <input type="hidden" name="E_Comercio" value="580433">
-  <input type="hidden" name="NroItem" value="SPRING.2011">
-  <input type="hidden" name="image_url" value="http://synergyj.com/images/logo.gif">
-  <input type="hidden" name="DireccionExito" value="http://localhost:8080/ok">
-  <input type="hidden" name="DireccionFracaso" value="http://localhost:8080/error">
-  <input type="hidden" name="DireccionEnvio" value="0">
-  <input type="hidden" name="Mensaje" value="0">
-  <input type='hidden' name='MediosPago' value='4,5,19,20,13,14,18,2,7'>
-  <input type="image" src="https://mexico.dineromail.com/imagenes/botones/pagar-medios_c.gif" border="0" name="submit" alt="Pagar con DineroMail">
-</form>
+<input type="hidden" name="TipoMoneda" value="1">
+<a href="https://mexico.dineromail.com/Shop/Shop_Ingreso.asp?NombreItem=Curso%3A+Desarrollo+profesional+con+Spring+3&TipoMoneda=1&PrecioItem=7000%2E00&E_Comercio=580433&NroItem=-&image_url=http%3A%2F%2Fsynergyj%2Ecom%2Fimages%2Flogo%2Egif&DireccionExito=http%3A%2F%2Fentrenamiento%2Esynergyj%2Ecom%2Fok&DireccionFracaso=http%3A%2F%2Fentrenamiento%2Esynergyj%2Ecom%2Ferror&DireccionEnvio=0&Mensaje=0">
+  <img src="https://mexico.dineromail.com/imagenes/botones/pagar-medios_c.gif" border="0" />
+</a>
