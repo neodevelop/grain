@@ -28,17 +28,15 @@ class MenuService {
 
   def findMenu(key) {
     def result
-    def lookup = key
-    result = menuCache.get(lookup)?.value
+    result = menuCache.get(key)?.value
     if (!result) {
-      result = Menu.findByName(key)
-
-      result.items.each {
-        it.item.dump()
+      result = Menu.createCriteria().get {
+        eq 'name', key
+        join 'items'
       }
 
       if(result) {
-        menuCache.put(new Element(lookup, result))
+        menuCache.put(new Element(key, result))
       }
     }
     result
