@@ -3,28 +3,84 @@
   <title>Registro al curso</title>
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
   <script type="text/javascript" src="https://raw.github.com/malsup/form/master/jquery.form.js"></script>
+
   <script type="text/javascript">
     $(function(){
-      $('#registration').ajaxForm(function() {
-        alert("Thank you for your comment!");
+
+      $('#registration').ajaxForm({
+        dataType:'json',
+        beforeSubmit:prepareVisualForm,
+        success:processJson,
+        complete:completeRequest
       });
+
     });
+
+    function processJson(data){
+      if(data.message){
+        $("<p id='message' style='display:none;'>"+data.message+"</p>").insertBefore("div#loader").fadeIn('slow');
+      }
+      if(data.id > 0){
+        $("<p id='message' style='display:none;'>Haz quedado registrado, te hemos enviado un correo...</p>").insertBefore("div#loader").fadeIn('slow');
+      }
+    }
+
+    function prepareVisualForm(formData, jqForm, options) {
+      $('div#loader').fadeIn('slow');
+      $("p#message").remove();
+      // TODO: Validar que sea una direccion de correo valida
+      var email = $("#email").val();
+      if(email != 0){
+        if(isValidEmailAddress(email)){
+          $("#validEmail").css({ "background-image": "url('validYes.png')" });
+          return true;
+        }else{
+          $("#validEmail").css({ "background-image": "url('validNo.png')" });
+          $('div#loader').fadeOut('slow');
+          return false;
+        }
+      }else{
+        $("#validEmail").css({ "background-image": "url('validNo.png')" });
+        $('div#loader').fadeOut('slow');
+        return false;
+      }
+    }
+
+    function completeRequest(){
+      $('div#loader').fadeOut('slow');
+    }
+
+    function isValidEmailAddress(emailAddress) {
+      var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+      return pattern.test(emailAddress);
+    }
+
   </script>
+
+  <style>
+    #validEmail
+    {
+      margin-top: 4px;
+      margin-left: 9px;
+      position: absolute;
+      width: 16px;
+      height: 16px;
+    }
+  </style>
+
 </head>
 <body>
 <form id="registration" action="http://localhost:8080/addMeFromLanding" method="POST">
   <input type="hidden" id="scheduledCourseId" name="scheduledCourseId" value="1"/>
-  <ul>
-    <li>
-      <label for="email">E-m@il:</label>
-      <input type="text" id="email" name="email" value=""/>
-    </li>
-    <li>
-      <div class="submit">
-        <input type="submit" value="Registrar" name="registrar" />
-      </div>
-    </li>
-  </ul>
+
+  <label for="email">E-m@il:</label>
+  <input type="text" id="email" name="email" value="" size="50"/>
+  <span id="validEmail"></span>
+
+  <div class="submit">
+    <input type="submit" value="Registrar" name="registrar" />
+  </div>
+
   <div id="loader" style="display:none;">
     <img src="ajax-loader.gif" id="ajax_loader"/>
   </div>

@@ -29,13 +29,17 @@ class LandingController {
 
   @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
   def addMe = { RegisterUserCommand registerUserCommand ->
-    def registration
+    // TODO: Recibir el mail y el id de curso
+    println params.dump()
+    def registration = new Registration()
+    /*
     try{
       registration = registrationService.registerFromLanding(registerUserCommand,Long.valueOf(params.scheduledCourseId))
     }catch(RegistrationException ex){
       GrailsUtil.sanitize(ex).printStackTrace()
       registration = ['message':g.message(code:ex.message,default:'No te puedes registrar a este curso(varias causas)')]
     }
+    */
     response.addHeader("Access-Control-Allow-Origin","*")
     render registration as JSON
   }

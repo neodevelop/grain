@@ -53,7 +53,7 @@ class UrlMappings {
       action = 'show'
     }
     name addMeFromLanding: "/addMeFromLanding"(controller:"landing"){
-      action = [GET:"addMe"]
+      action = [POST:"addMe"]
     }
     "500"(controller: 'error')
   }
