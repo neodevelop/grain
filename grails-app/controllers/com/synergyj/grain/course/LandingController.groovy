@@ -22,26 +22,38 @@ import com.synergyj.grain.BusinessException
 import com.synergyj.grain.UserRegistrationException
 import com.synergyj.grain.RegistrationException
 import grails.util.GrailsUtil
+import com.synergyj.grain.auth.User
 
 class LandingController {
 
   def registrationService
+  def userService
 
   @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
   def addMe = { RegisterUserCommand registerUserCommand ->
-    // TODO: Recibir el mail y el id de curso
-    println params.dump()
-    def registration = new Registration()
-    /*
-    try{
-      registration = registrationService.registerFromLanding(registerUserCommand,Long.valueOf(params.scheduledCourseId))
-    }catch(RegistrationException ex){
-      GrailsUtil.sanitize(ex).printStackTrace()
-      registration = ['message':g.message(code:ex.message,default:'No te puedes registrar a este curso(varias causas)')]
+    // Recibimos el email y el id de curso calendarizado
+    def email = params.email
+    def scheduledCourseId = params.long("scheduledCourseId")
+    // Generamos una URL alternativa para regresarla en caso de no se envíe el correo o el usuario quiera proceder sin ver el correo
+    def url = request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/'
+    // Buscamos el usuario por su correo
+    def user = userService.findUser(email)
+    // Si existe entonces se le envia una notificación de que ha quedado registrado
+    if(user){
+        // TODO: En la confirmación deben ir los datos del curso
+      //notificationService.sendConfirmRegistration(user,scheduledCourseId)
+      url += "confirmRegistration?email=${user.email}&scheduledCourseId=${scheduledCourseId}"
+    }else{
+      // Si no existe entonces se le envía una invitación para registrarse en donde le enviamos el curso al que esta interesado
+      // TODO: En la notificación deben de ir los datos del curso y una liga para que se registre
+      //notificationService.sendInvitation(email,scheduledCourseId)
+      url += "signup?email=${email}&scheduledCourseId=${scheduledCourseId}"
     }
-    */
+
+    // Regresamos una respuesta para el formulario de registro
     response.addHeader("Access-Control-Allow-Origin","*")
-    render registration as JSON
+    response.addHeader("Content-Type","	application/json;charset=UTF-8")
+    render([url:url] as JSON)
   }
 
   @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])

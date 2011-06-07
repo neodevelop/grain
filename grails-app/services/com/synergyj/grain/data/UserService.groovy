@@ -30,9 +30,7 @@ class UserService {
   def notificationService
 
   def findUser(String email) {
-    println "buscando user con ${email} "
     def user = User.findByEmail(email.toLowerCase())
-    println "user encontrado: ${user}"
     user
   }
 

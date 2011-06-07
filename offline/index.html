@@ -10,25 +10,28 @@
       $('#registration').ajaxForm({
         dataType:'json',
         beforeSubmit:prepareVisualForm,
-        success:processJson,
-        complete:completeRequest
+        complete:completeRequest,
+        success:processJson
       });
 
     });
 
     function processJson(data){
-      if(data.message){
-        $("<p id='message' style='display:none;'>"+data.message+"</p>").insertBefore("div#loader").fadeIn('slow');
+      var message = "";
+      if(data.url){
+        message = "<p id='message' style='display:none;'>Gracias !!! Te hemos enviado un correo";
+        message += "<br/><i>O bien, si deseas continuar haz clic <a href='"+data.url+"'>aqu&iacute;</a></i></p>";
+      }else{
+        message = "<p id='message' style='display:none;'>Una disculpa!!! No hemos podido procesar tu petici&oacute;n";
+        message += "<br/><i>Por favor intentalo más tarde...</i></p>";
       }
-      if(data.id > 0){
-        $("<p id='message' style='display:none;'>Haz quedado registrado, te hemos enviado un correo...</p>").insertBefore("div#loader").fadeIn('slow');
-      }
+      $(message).insertBefore("div#loader").fadeIn('slow');
+      $('div#loader').fadeOut('slow');
     }
 
     function prepareVisualForm(formData, jqForm, options) {
       $('div#loader').fadeIn('slow');
       $("p#message").remove();
-      // TODO: Validar que sea una direccion de correo valida
       var email = $("#email").val();
       if(email != 0){
         if(isValidEmailAddress(email)){
