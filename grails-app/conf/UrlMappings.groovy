@@ -24,10 +24,6 @@ class UrlMappings {
       controller = 'login'
       action = 'index'
     }
-    name logiut:'/logout' {
-      controller = 'logout'
-      action = 'index'
-    }
     name me: '/me' {
       controller = 'user'
       action = 'me'

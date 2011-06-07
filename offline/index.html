@@ -2,47 +2,26 @@
 <head>
   <title>Registro al curso</title>
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+  <script type="text/javascript" src="https://raw.github.com/malsup/form/master/jquery.form.js"></script>
   <script type="text/javascript">
     $(function(){
-      $("a#send").click(function(){
-        var form = $("form#registration");
-        console.log(form);
-        var url = form.attr("action") + "?" + form.serialize();
-        $('div#loader').fadeIn('slow');
-        $("p#message").remove();
-        $.getJSON(url,function(data){
-          console.log("OK");
-          if(data.message){
-            $("<p id='message' style='display:none;'>"+data.message+"</p>").insertBefore("div#loader").fadeIn('slow');
-          }
-          if(data.id > 0){
-            $("<p id='message' style='display:none;'>Haz quedado registrado, te hemos enviado un correo...</p>").insertBefore("div#loader").fadeIn('slow');
-          }
-        }).complete(function(){ $('div#loader').fadeOut('slow'); }) ;
-        return false;
+      $('#registration').ajaxForm(function() {
+        alert("Thank you for your comment!");
       });
     });
   </script>
 </head>
 <body>
-<form id="registration" action="http://localhost:8080/grain/addMeFromLanding" method="POST">
-  <input type="hidden" id="scheduledCourseId" name="scheduledCourseId" value="2"/>
+<form id="registration" action="http://localhost:8080/addMeFromLanding" method="POST">
+  <input type="hidden" id="scheduledCourseId" name="scheduledCourseId" value="1"/>
   <ul>
     <li>
       <label for="email">E-m@il:</label>
       <input type="text" id="email" name="email" value=""/>
     </li>
     <li>
-      <label for="password">Password:</label>
-      <input type="password" maxlength="200" id="password" name="password" value=""/>
-    </li>
-    <li>
-      <label for="confirmPassword">Confirmar password:</label>
-      <input type="password" maxlength="200" id="confirmPassword" name="confirmPassword" value=""/>
-    </li>
-    <li>
       <div class="submit">
-        <a href="#" id="send">Registrarme</a>
+        <input type="submit" value="Registrar" name="registrar" />
       </div>
     </li>
   </ul>
