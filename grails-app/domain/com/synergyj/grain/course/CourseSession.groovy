@@ -33,6 +33,8 @@ class CourseSession{
   static dateFormat = new SimpleDateFormat("dd-MM-yyyy")
 	
 	static constraints = {
+    sessionStartTime nullable:false
+    sessionEndTime nullable:true
     module nullable:true
 		lastUpdated display:false
 		dateCreated display:false

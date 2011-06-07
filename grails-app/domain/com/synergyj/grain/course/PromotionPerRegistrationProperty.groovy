@@ -25,6 +25,8 @@ class PromotionPerRegistrationProperty {
   static belongsTo = [promotionPerRegistration:PromotionPerRegistration]
 
   static constraints = {
+    propertyKey nullable:false,blank:false
+    propertyValue nullable:false,blank:false
     dateCreated(display:false)
     lastUpdated(display:false)
   }

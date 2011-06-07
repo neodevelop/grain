@@ -27,6 +27,7 @@ class Payment {
   static belongsTo = [registration:Registration]
 
   static constraints = {
+    amount nullable:false,blank:false
     transactionId unique: true, maxSize: 20
     dateCreated(display:false)
     dateUpdated(display:false)

@@ -40,15 +40,19 @@ class Course extends CourseContent {
 	static hasMany = [modules:CourseModule]
 	
 	static constraints = {
-		overview nullable:false,blank:false
-		audience nullable:false,blank:false
-		prerequisites nullable:false,blank:false
-		goal nullable:false,blank:false
-		method nullable:false,blank:false
-		format nullable:false,blank:false
+		overview nullable:false,blank:false,size:1..1000
+		audience nullable:false,blank:false,size:1..1000
+		prerequisites nullable:false,blank:false,size:1..1000
+		goal nullable:false,blank:false,size:1..1000
+		method nullable:false,blank:false,size:1..1000
+		format nullable:false,blank:false,size:1..1000
 		courseKey nullable:false,blank:false,unique:true,size:1..20
 		courseType nullable:false
 		status nullable:false
+    color blank:true,size:1..7
+    backgroundColor blank:true,size:1..7
+    borderColor blank:true,size:1..7
+    textColor blank:true,size:1..7
 	}
 	
 	static mapping = {

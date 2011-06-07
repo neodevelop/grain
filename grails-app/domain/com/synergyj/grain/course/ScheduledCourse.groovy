@@ -28,6 +28,13 @@ class ScheduledCourse{
 	
 	static constraints = {
     course nullable:false
+    beginDate nullable:false
+    limitRegistrationDate nullable:false,validator: { val, obj ->
+      if(val >= obj.beginDate )
+        return ['scheduledcourse.limitRegistrationDate.invalid']
+    }
+    costByCourse nullable: false,blank: false
+    costByModule nullable: true,blank: true
 		lastUpdated display:false
 		dateCreated display:false
 	}

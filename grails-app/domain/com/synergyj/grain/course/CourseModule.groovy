@@ -29,7 +29,7 @@ class CourseModule extends CourseContent implements Comparable<CourseModule> {
 	
 	static constraints = {
 		course nullable:false
-		order nullable:false
+		order nullable:false,range:1..15
 	}
 	
 	int compareTo(CourseModule other){

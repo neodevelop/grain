@@ -29,7 +29,7 @@ class ModuleTopic extends CourseContent implements Comparable<ModuleTopic> {
 	static constraints = {
 		module nullable:false
 		parent nullable:true
-		order nullable:false
+		order nullable:false,range:1..15
 	}
 	
 	static mapping = {

@@ -25,6 +25,7 @@ class PromotionPerRegistration {
   static hasMany = [promotionPerRegistrationProperties:PromotionPerRegistrationProperty]
 
   static constraints = {
+    promotion nullable:false
     dateCreated(display:false)
     lastUpdated(display:false)
   }
