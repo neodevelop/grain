@@ -16,7 +16,7 @@
 package com.synergyj.grain.course
 
 class Payment {
-  Double amount
+  BigDecimal amount
   String transactionId // Para DineroMail...confirmar con trx_id
   Date paymentDate
   PaymentStatus paymentStatus

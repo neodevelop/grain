@@ -18,7 +18,7 @@ package com.synergyj.grain.course
 class Promotion {
   String promotionKey
   String description
-  Double discount
+  BigDecimal discount
   KindPromotion kindPromotion
 
   Date dateCreated
