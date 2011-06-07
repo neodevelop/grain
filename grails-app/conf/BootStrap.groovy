@@ -185,6 +185,9 @@ class BootStrap {
       def about = new MenuItem(labelCode: 'menu.item.about').controller('info').action('show').id('about')
       save(about)
 
+      def calendar = new MenuItem(labelCode: 'menu.item.calendar').controller('calendar').action('index')
+      save(calendar)
+
       def services = new MenuItem(labelCode: 'menu.item.services').link(controller: 'info', action: 'show', id: 'services')
       save(services)
 
@@ -197,6 +200,9 @@ class BootStrap {
       def login = new MenuItem(labelCode: 'menu.item.login').link(mapping: 'login')
       save(login)
 
+      def logout = new MenuItem(labelCode: 'menu.item.logout').link(mapping: 'logout')
+      save(logout)
+
       def contact = new MenuItem(labelCode: 'menu.item.contact').controller('info').action('show').id('contact')
       save(contact)
 
@@ -205,23 +211,27 @@ class BootStrap {
 
       def homeOption = new MenuOption(item: home, order: 0)
       save(homeOption)
-      def aboutOption = new MenuOption(item: about, order: 1)
+      def calendarOption = new MenuOption(item: calendar, order: 1)
+      save(calendarOption)
+      def aboutOption = new MenuOption(item: about, order: 2)
       save(aboutOption)
-      def servicesOption = new MenuOption(item: services, order: 2)
+      def servicesOption = new MenuOption(item: services, order: 3)
       save(servicesOption)
-      def accountOption = new MenuOption(item: account, order: 4, permissions: 'isAuthenticated()')
-      save(accountOption)
-      def loginOption = new MenuOption(item: login, order: 5, permissions: 'isAnonymous()')
-      save(loginOption)
-      def registerOption = new MenuOption(item: register, order: 4, permissions: 'isAnonymous()')
-      save(registerOption)
-      def contactOption = new MenuOption(item: contact, order: 3)
+      def contactOption = new MenuOption(item: contact, order: 4)
       save(contactOption)
+      def accountOption = new MenuOption(item: account, order: 5, permissions: 'isAuthenticated()')
+      save(accountOption)
+      def registerOption = new MenuOption(item: register, order: 6, permissions: 'isAnonymous()')
+      save(registerOption)
+      def loginOption = new MenuOption(item: login, order: 7, permissions: 'isAnonymous()')
+      save(loginOption)
+      def logoutOption = new MenuOption(item: logout, order: 8, permissions: 'isAuthenticated()')
+      save(logoutOption)
 
       def topMenu = new Menu(name: 'top')
       save(topMenu)
-      topMenu.option(homeOption).option(aboutOption)
-      topMenu.option(contactOption).option(accountOption).option(loginOption).option(registerOption)
+      topMenu.option(homeOption).option(calendarOption)
+      topMenu.option(accountOption).option(loginOption).option(registerOption)
       save(topMenu)
 
 
