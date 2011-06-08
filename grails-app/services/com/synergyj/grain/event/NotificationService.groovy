@@ -19,6 +19,7 @@ import com.synergyj.grain.auth.RegistrationCode
 import com.synergyj.grain.auth.User
 import com.synergyj.grain.course.Registration
 import grails.util.Environment
+import com.synergyj.grain.course.ScheduledCourse
 
 class NotificationService {
 
@@ -63,5 +64,30 @@ class NotificationService {
         }
         break
     }
+  }
+
+  def sendConfirmRegistration(User user,Long scheduledCourseId){
+    // Obtenemos el curso calendarizado
+    def scheduledCourse = ScheduledCourse.get(scheduledCourseId)
+    switch(Environment.current){
+      case Environment.DEVELOPMENT:
+        log.debug("${Environment.current} - Send Confirm Registration ${user} for ${scheduledCourse}")
+        break
+      case Environment.TEST:
+        log.debug("${Environment.current} - Send Confirm Registration ${user} for ${scheduledCourse}")
+        break
+      case Environment.PRODUCTION:
+        mailService.sendMail {
+          to user.email
+          from "no-reply@synergyj.com"
+          subject "Gracias por escoger el curso: ${scheduledCourse.course}"
+          body(view:"/notification/confirmRegistration",model:[user:user,scheduledCourse:scheduledCourse])
+        }
+        break
+    }
+  }
+
+  def sendInvitation(String email, Long scheduledCourseId){
+    // TODO: En la notificación deben de ir los datos del curso y una liga para que se registre
   }
 }

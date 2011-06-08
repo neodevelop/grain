@@ -18,16 +18,11 @@ package com.synergyj.grain.course
 import grails.plugins.springsecurity.Secured
 import com.synergyj.grain.auth.RegisterUserCommand
 import grails.converters.JSON
-import com.synergyj.grain.BusinessException
-import com.synergyj.grain.UserRegistrationException
-import com.synergyj.grain.RegistrationException
-import grails.util.GrailsUtil
-import com.synergyj.grain.auth.User
 
 class LandingController {
 
-  def registrationService
   def userService
+  def notificationService
 
   @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
   def addMe = { RegisterUserCommand registerUserCommand ->
@@ -40,13 +35,11 @@ class LandingController {
     def user = userService.findUser(email)
     // Si existe entonces se le envia una notificación de que ha quedado registrado
     if(user){
-        // TODO: En la confirmación deben ir los datos del curso
-      //notificationService.sendConfirmRegistration(user,scheduledCourseId)
+      notificationService.sendConfirmRegistration(user,scheduledCourseId)
       url += "confirmRegistration?email=${user.email}&scheduledCourseId=${scheduledCourseId}"
     }else{
       // Si no existe entonces se le envía una invitación para registrarse en donde le enviamos el curso al que esta interesado
-      // TODO: En la notificación deben de ir los datos del curso y una liga para que se registre
-      //notificationService.sendInvitation(email,scheduledCourseId)
+      notificationService.sendInvitation(email,scheduledCourseId)
       url += "signup?email=${email}&scheduledCourseId=${scheduledCourseId}"
     }
 
