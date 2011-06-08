@@ -25,8 +25,8 @@
         message = "<p id='message' style='display:none;'>Una disculpa!!! No hemos podido procesar tu petici&oacute;n";
         message += "<br/><i>Por favor intentalo más tarde...</i></p>";
       }
-      $(message).insertBefore("div#loader").fadeIn('slow');
-      $('div#loader').fadeOut('slow');
+      $(message).insertAfter("div#messageInfo").fadeIn('slow');
+      $('div#messageInfo').fadeOut('slow');
     }
 
     function prepareVisualForm(formData, jqForm, options) {
@@ -35,22 +35,22 @@
       var email = $("#email").val();
       if(email != 0){
         if(isValidEmailAddress(email)){
-          $("#validEmail").css({ "background-image": "url('validYes.png')" });
+          $("#validEmail").css({ "background-image": "url('images/validYes.png')" });
           return true;
         }else{
-          $("#validEmail").css({ "background-image": "url('validNo.png')" });
-          $('div#loader').fadeOut('slow');
+          $("#validEmail").css({ "background-image": "url('images/validNo.png')" });
+          $('div#messageInfo').fadeOut('slow');
           return false;
         }
       }else{
-        $("#validEmail").css({ "background-image": "url('validNo.png')" });
-        $('div#loader').fadeOut('slow');
+        $("#validEmail").css({ "background-image": "url('images/validNo.png')" });
+        $('div#messageInfo').fadeOut('slow');
         return false;
       }
     }
 
     function completeRequest(){
-      $('div#loader').fadeOut('slow');
+      $('div#messageInfo').fadeOut('slow');
     }
 
     function isValidEmailAddress(emailAddress) {
