@@ -18,6 +18,7 @@ package com.synergyj.grain.course
 import grails.plugins.springsecurity.Secured
 import com.synergyj.grain.auth.RegisterUserCommand
 import grails.converters.JSON
+import com.synergyj.grain.auth.RegistrationCode
 
 class LandingController {
 
@@ -31,16 +32,27 @@ class LandingController {
     def scheduledCourseId = params.long("scheduledCourseId")
     // Generamos una URL alternativa para regresarla en caso de no se envíe el correo o el usuario quiera proceder sin ver el correo
     def url = request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/'
+    // Buscamos si el usuario ya se registró previamente
+    def registrationCode = RegistrationCode.findByUsernameAndScheduledCourseId(email,scheduledCourseId)
+
+    // Si no existe un código de registro lo generamos
+    if(!registrationCode){
+      registrationCode = RegistrationCode.create(email,scheduledCourseId)
+    }
+
     // Buscamos el usuario por su correo
     def user = userService.findUser(email)
-    // Si existe entonces se le envia una notificación de que ha quedado registrado
+
     if(user){
-      notificationService.sendConfirmRegistration(user,scheduledCourseId)
-      url += "confirmRegistration?email=${user.email}&scheduledCourseId=${scheduledCourseId}"
+      // Si ya existe el usuario entonces lo notificamos
+      notificationService.sendConfirmRegistration(user,scheduledCourseId,registrationCode)
+      // Creamos la URL para un usuario existente
+      url += "confirmRegistration?code=${registrationCode.token}"
     }else{
-      // Si no existe entonces se le envía una invitación para registrarse en donde le enviamos el curso al que esta interesado
-      notificationService.sendInvitation(email,scheduledCourseId)
-      url += "signup?email=${email}&scheduledCourseId=${scheduledCourseId}"
+      // Si no existe entonces lo invitamos
+      registrationCode = notificationService.sendInvitation(email,scheduledCourseId,registrationCode)
+      // Creamos la URL para que un usuario se registre
+      url += "signup?code=${registrationCode.token}"
     }
 
     // Regresamos una respuesta para el formulario de registro

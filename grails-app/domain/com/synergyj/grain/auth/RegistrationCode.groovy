@@ -16,15 +16,18 @@ package com.synergyj.grain.auth
 
 class RegistrationCode {
   String username
+  Long scheduledCourseId
   String token = UUID.randomUUID().toString().replaceAll('-', '')
   Date dateCreated
 
   static mapping = {
+    username nullable:false
+    scheduledCourseId nullable:false
     version false
   }
 
-  static RegistrationCode create(String email) {
-    def rc = new RegistrationCode(username: email)
+  static RegistrationCode create(String email,Long scheduledCourseId) {
+    def rc = new RegistrationCode(username: email,scheduledCourseId:scheduledCourseId)
     rc.save(flush: true)
     rc
   }

@@ -23,6 +23,8 @@ import com.synergyj.grain.course.ScheduledCourse
 
 class NotificationService {
 
+  // TODO: Optimizar el envío de correo para los ambientes de desarrollo y los mensajes a enviar
+
   def mailService
 
   static transactional = false
@@ -66,7 +68,7 @@ class NotificationService {
     }
   }
 
-  def sendConfirmRegistration(User user,Long scheduledCourseId){
+  def sendConfirmRegistration(User user,Long scheduledCourseId,registrationCode){
     // Obtenemos el curso calendarizado
     def scheduledCourse = ScheduledCourse.get(scheduledCourseId)
     switch(Environment.current){
@@ -81,13 +83,30 @@ class NotificationService {
           to user.email
           from "no-reply@synergyj.com"
           subject "Gracias por escoger el curso: ${scheduledCourse.course}"
-          body(view:"/notification/confirmRegistration",model:[user:user,scheduledCourse:scheduledCourse])
+          body(view:"/notification/confirmRegistration",model:[user:user,scheduledCourse:scheduledCourse,registrationCode:registrationCode])
         }
         break
     }
   }
 
-  def sendInvitation(String email, Long scheduledCourseId){
-    // TODO: En la notificación deben de ir los datos del curso y una liga para que se registre
+  def sendInvitation(String email, Long scheduledCourseId, RegistrationCode registrationCode){
+    def scheduledCourse = ScheduledCourse.get(scheduledCourseId)
+    switch(Environment.current){
+      case Environment.DEVELOPMENT:
+        log.debug("${Environment.current} - Send Invitation ${email} for ${scheduledCourse}")
+        break
+      case Environment.TEST:
+        log.debug("${Environment.current} - Send Invitation ${email} for ${scheduledCourse}")
+        break
+      case Environment.PRODUCTION:
+        mailService.sendMail {
+          to email
+          from "no-reply@synergyj.com"
+          subject "Gracias por escoger el curso: ${scheduledCourse.course}"
+          body(view:"/notification/invitation",model:[email:email,scheduledCourse:scheduledCourse,registrationCode:registrationCode])
+        }
+        break
+    }
+    registrationCode
   }
 }
