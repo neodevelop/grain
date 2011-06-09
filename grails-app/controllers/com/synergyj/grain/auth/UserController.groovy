@@ -66,7 +66,15 @@ class UserController {
 
   @Secured(['permitAll()'])
   def signup = {
-    render view: "/register/index", model: [userdata: new RegisterUserCommand()]
+    def model = [userdata: new RegisterUserCommand()]
+    // Si trae un código lo buscamos
+    if(params.code){
+      def registrationCode = RegistrationCode.findByToken(params.code)
+      model.registrationCode = registrationCode
+      // Ponemos los datos del curso calendarizado para mostrarlos
+      model.scheduledCourse = ScheduledCourse.get(registrationCode.scheduledCourseId)
+    }
+    render view: "/register/index", model:model
   }
 
   def accountLocked = {}

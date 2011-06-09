@@ -43,6 +43,14 @@
   </g:javascript>
 </head>
 <body>
+<g:if test="${scheduledCourse}">
+  <div id="floatingMessage">
+    <img src="<g:createLinkTo dir='themes/wb/images' file='icon_student.png'/>" alt="course" title="course"/>
+    <i>Curso:</i> <b>${scheduledCourse.course.name}</b><br/>
+    <img src="<g:createLinkTo dir='themes/wb/images' file='icon_calendar.png'/>" alt="course" title="course"/>
+    <i>Inicia:</i> <b><g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd 'de' MMMM 'del' yyyy"/></b>
+  </div>
+</g:if>
 <g:render template="/common/errors" model="[instance:userdata]"/>
 
 <g:form name="registerForm" action="user" method="post" controller="register">
@@ -56,7 +64,12 @@
       <ul>
         <li>
           <label for="email"><g:message code='login.username'/></label>
-          <input type="text" id="email" name="email" value="${fieldValue(bean: userdata, field: 'email')}"/>
+          <g:if test="${registrationCode}">
+            <input type="text" id="email" name="email" value="${registrationCode?.username}"/>
+          </g:if>
+          <g:else>
+            <input type="text" id="email" name="email" value="${fieldValue(bean: userdata, field: 'email')}"/>
+          </g:else>
         </li>
         <li>
           <label for="password"><g:message code='login.password'/></label><br/>
@@ -76,12 +89,15 @@
           <div class="submit">
             <input class="sendButton" name="sendButton" type="submit" value="${g.message(code: 'login.register')}"/>
           </div>
-
         </li>
       </ul>
-
     </div>
-
   </div>
+  <g:if test="${scheduledCourse}">
+    <g:hiddenField name="scheduledCourseId" value="${scheduledCourse.id}"/>
+  </g:if>
+  <g:if test="${registrationCode}">
+    <g:hiddenField name="registrationCode" value="${registrationCode.token}"/>
+  </g:if>
 </g:form>
 </body>
