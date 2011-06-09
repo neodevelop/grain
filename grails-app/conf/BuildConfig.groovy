@@ -23,6 +23,7 @@ grails.project.dependency.resolution = {
     runtime 'org.grails.plugins:settings:1.4'
     runtime 'org.grails.plugins:jquery:1.6'
     runtime 'org.grails.plugins:jquery-ui:1.8.11'
+    runtime 'org.grails.plugins:avatar:0.5'
 	  //runtime 'org.grails.plugins:jquery-validation:1.7'
     //runtime 'org.grails.plugins:jquery-validation-ui:1.1'
     //runtime 'org.grails.plugins:constraints:0.5.1'

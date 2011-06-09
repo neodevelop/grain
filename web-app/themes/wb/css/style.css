@@ -471,12 +471,11 @@ form input[type='checkbox'] {
 }
 form input[type='text'], input[type='password'] {
 	padding: 6px;
-	width: 320px;
 	background: #FFFFFF;
 	border: 1px solid #242636;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 18px;
-    font-weight: 200;
+  font-weight: 200;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 form fieldset.submit li {
 	width: 590px;
@@ -642,9 +641,6 @@ form.button-to {
 	width: 640px;
 }
 
-
-
-
 #content .form-wrapper {
 	width: 680px;
 	margin: 0 auto;
@@ -654,7 +650,7 @@ form.button-to {
 	background: url(../img/external/form-gradient.png) repeat-x #c26d1a;
 }
 #content .form-wrapper#signup { height: 470px; }
-#content .form-wrapper#login, #content form, #content .form-wrapper#resetpw { height: 460px; }
+#content .form-wrapper#login, #content form, #content .form-wrapper#resetpw { height:100%; }
 #content .form-wrapper#forgotpw { height: 370px; }
 #content .form-wrapper#pendingact { height: 370px; }
 #content #sign-up, #content #log-in, #content #forgot-pw, #content #pending-act, #content #reset-pw {
@@ -922,6 +918,65 @@ form.button-to {
   background: -ms-linear-gradient(top, #f8ffe8 0%,#e3f5ab 33%,#b7df2d 100%); /* IE10+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8ffe8', endColorstr='#b7df2d',GradientType=0 ); /* IE6-9 */
   background: linear-gradient(top, #f8ffe8 0%,#e3f5ab 33%,#b7df2d 100%); /* W3C */
+}
+
+#content #left #leftbox{
+  width:350px;
+  padding: 10px 30px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-box-shadow: 0 0 10px rgb(255,255,255);
+  -moz-box-shadow: 0 0 10px rgb(255,255,255);
+  box-shadow: 0 0 10px rgb(255,255,255);
+  background: rgb(255,175,75); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,175,75,1)), color-stop(100%,rgba(255,146,10,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(255,175,75,1) 0%,rgba(255,146,10,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(255,175,75,1) 0%,rgba(255,146,10,1) 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, rgba(255,175,75,1) 0%,rgba(255,146,10,1) 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff920a',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, rgba(255,175,75,1) 0%,rgba(255,146,10,1) 100%); /* W3C */
+}
+
+#content #left #leftbox #uservatar{
+  float: right;
+}
+
+#content #left #leftbox #loggedas{
+  font-size: 16px;
+  color: #ffffff;
+}
+
+#content #left #leftbox #username{
+  font-size: 24px;
+  color: #f1da36;
+  text-align: center;
+  padding: 10px;
+  text-shadow: 0px 1px #2c3035;
+}
+
+#content #left #leftbox #notyou{
+  font-size: 14px;
+  text-align: center;
+  padding: 5px;
+}
+
+#content #right #rightbox{
+  width:350px;
+  padding: 10px 30px;
+  -webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+  -webkit-box-shadow: 0 0 10px rgb(255,255,255);
+  -moz-box-shadow: 0 0 10px rgb(255,255,255);
+  box-shadow: 0 0 10px rgb(255,255,255);
+  background: rgb(96,108,136); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(96,108,136,1) 0%, rgba(63,76,107,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96,108,136,1)), color-stop(100%,rgba(63,76,107,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
 }
 
 div#floatingMessage{

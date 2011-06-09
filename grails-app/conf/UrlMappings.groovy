@@ -48,6 +48,10 @@ class UrlMappings {
       controller = 'calendar'
       action = 'index'
     }
+    name confirmRegistration:"/confirmRegistration"{
+      controller = "registration"
+      action = "confirm"
+    }
     name content: "/$id" {
       controller = 'page'
       action = 'show'

@@ -27,6 +27,11 @@ class RegistrationController {
 
   //static allowedMethods = [addMeFromLanding: "POST"]
 
+  def confirm = {
+    //
+
+  }
+
   @Secured(['isAuthenticated()'])
   def index = {
     def scheduledCoursesForRegistration = ScheduledCourse.findAllByScheduledCourseStatus(ScheduledCourseStatus.SCHEDULED)

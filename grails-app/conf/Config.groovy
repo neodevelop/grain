@@ -201,3 +201,8 @@ grails {
         "mail.smtp.socketFactory.fallback":"false"]
   }
 }
+
+avatarPlugin {
+	defaultGravatarUrl="""http://synergyj.com/user_anonymous.png"""
+	gravatarRating="G"
+}
