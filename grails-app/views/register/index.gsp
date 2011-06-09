@@ -97,8 +97,5 @@
   <g:if test="${scheduledCourse}">
     <g:hiddenField name="scheduledCourseId" value="${scheduledCourse.id}"/>
   </g:if>
-  <g:if test="${registrationCode}">
-    <g:hiddenField name="registrationCode" value="${registrationCode.token}"/>
-  </g:if>
 </g:form>
 </body>

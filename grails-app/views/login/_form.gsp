@@ -1,9 +1,15 @@
   <form action='${postUrl}' method='POST' id="loginForm" name="loginForm" autocomplete='off'>
       <h1><g:message code='login.signin'/></h1>
+      <div id="loginMessage" class="ui-state-error ui-corner-all" style="padding: 0px; border: 0px;display: none;">
+        <p>
+          <span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+          <strong>Alerta:</strong><span id="jsonMessage"></span>
+        </p>
+      </div>
       <table>
         <tr>
           <td><label for="username"><g:message code='login.username'/></label></td>
-          <td><input name="j_username" type="text" id="username" size="30"/></td>
+          <td><input name="j_username" type="text" id="username" size="30" value="${email}"/></td>
         </tr>
         <tr>
           <td><label for="password"><g:message code='login.password'/></label></td>

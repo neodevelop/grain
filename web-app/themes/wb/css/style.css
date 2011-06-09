@@ -840,6 +840,11 @@ form.button-to {
   text-align:left;
 }
 
+#content #left #confirm{
+  text-align: center;
+  padding: 50px 0px 0px 0px;
+}
+
 #content #right a.button{
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -888,6 +893,10 @@ form.button-to {
   height:50px;
   padding:10px;
   border: 2px solid #61c419;
+
+  -webkit-box-shadow: 0 0 10px rgb(255,255,255);
+  -moz-box-shadow: 0 0 10px rgb(255,255,255);
+  box-shadow: 0 0 10px rgb(255,255,255);
 
   background: #b4e391; /* Old browsers */
   background: -moz-linear-gradient(top, #b4e391 0%, #61c419 50%, #b4e391 100%); /* FF3.6+ */
@@ -947,7 +956,7 @@ form.button-to {
   color: #ffffff;
 }
 
-#content #left #leftbox #username{
+#content #left #leftbox #useremail{
   font-size: 24px;
   color: #f1da36;
   text-align: center;
@@ -977,6 +986,36 @@ form.button-to {
   background: -ms-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
   background: linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
+}
+
+#content #right #rightbox h1{
+  text-align: right;
+  color: #ffffff;
+  font-size:20px;
+}
+
+#content #right #rightbox h2{
+  text-align: center;
+  color: #b3dced;
+  line-height: 25px;
+  font-size:24px;
+  padding:10px;
+  text-shadow: 0px 1px #333333;
+}
+
+#content #right #rightbox .info{
+  text-align: left;
+  color: #ffffff;
+  font-size:14px;
+  padding:10px;
+}
+
+#content #right #rightbox #price{
+  text-align: center;
+  color: #8fc800;
+  font-size:16px;
+  padding:10px;
+  text-shadow: 0px 1px #333333;
 }
 
 div#floatingMessage{
