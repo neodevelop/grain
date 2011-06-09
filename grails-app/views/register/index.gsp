@@ -65,7 +65,8 @@
         <li>
           <label for="email"><g:message code='login.username'/></label>
           <g:if test="${registrationCode}">
-            <input type="text" id="email" name="email" value="${registrationCode?.username}"/>
+            <input type="text" id="emailShow" name="emailShow" value="${registrationCode?.username}" disabled="disabled"/>
+            <input type="hidden" id="email" name="email" value="${registrationCode?.username}"/>
           </g:if>
           <g:else>
             <input type="text" id="email" name="email" value="${fieldValue(bean: userdata, field: 'email')}"/>

@@ -18,28 +18,39 @@ package com.synergyj.grain.auth
 import grails.plugins.springsecurity.Secured
 
 import com.synergyj.grain.BusinessException
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 @Secured(['permitAll'])
 class RegisterController {
   def userService
+  def springSecurityService
 
   def index = { }
 
+  //Usamos un command para recibir el formulario
   def user = { RegisterUserCommand userdata ->
-    def user
-    if (userdata.hasErrors()) {
+    try {
+      // Creamos el usuario
+      def user = userService.createUser(userdata)
+      // Autenticamos directamente al usuario
+      springSecurityService.reauthenticate(user.email,user.password)
+    } catch (BusinessException be) {
+      // Si existe un error, tomamos la ex y la mandamos en el flash
+      flash.error = g.message(code: be.message, args: [userdata.email])
+      // Redireccionamos a la vista de registro con el error
       userdata.password = ''
       render view: "/register/index", model: [userdata: userdata]
-    } else {
-      try {
-        user = userService.createUser(userdata)
-      } catch (BusinessException be) {
-        flash.error = g.message(code: be.message, args: [userdata.email])
-        render view: "/register/index", model: [userdata: userdata]
-        return
-      }
-      render view:"success",model:[user:user]
+      return
     }
+    // Obtenemos la uri default para la seguridad
+    def uri = SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
+    // Pero si trae un parámetro de suscripción
+    if(params?.scheduledCourseId){
+      // Lo mandamos a otra vista para mostrarle su registro
+      uri = "/confirmRegistration?scheduledCourseId=${params.scheduledCourseId}"
+    }
+    // Redireccionamos
+    redirect uri:uri
   }
 
 }

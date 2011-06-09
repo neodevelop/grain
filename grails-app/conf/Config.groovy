@@ -178,6 +178,7 @@ grails.plugins.springsecurity.errors.login.disabled = "security.login.disabled"
 grails.plugins.springsecurity.errors.login.locked = "security.login.locked"
 grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 grails.plugins.springsecurity.useSessionFixationPrevention = true
+grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/me'
 
 grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/themes/**': ['permitAll'],

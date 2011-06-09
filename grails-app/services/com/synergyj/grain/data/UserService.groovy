@@ -35,12 +35,8 @@ class UserService {
   }
 
   def createUser(userCommand) throws BusinessException {
-    def userFound = findUser(userCommand.email)
-    if (userFound) { return userFound }
-
     def user = new User(userCommand.properties)
     String salt = userCommand.email
-
     user.password = user.password.toLowerCase()
     user.enabled = true
     user.accountExpired = false
