@@ -1,6 +1,7 @@
-  <form action='${postUrl}' method='POST' id="loginForm" name="loginForm" autocomplete='off'>
+<div id="loginForm" style="display:<sec:ifLoggedIn>none</sec:ifLoggedIn><sec:ifNotLoggedIn>block</sec:ifNotLoggedIn>;">
+  <form action='${postUrl}' method='POST' id="auth" name="auth" autocomplete='off'>
       <h1><g:message code='login.signin'/></h1>
-      <div id="loginMessage" class="ui-state-error ui-corner-all" style="padding: 0px; border: 0px;display: none;">
+      <div id="loginMessage" class="ui-state-error ui-corner-all" style="padding: 0px; display: none; text-align: center;">
         <p>
           <span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
           <strong>Alerta:</strong><span id="jsonMessage"></span>
@@ -32,3 +33,4 @@
         </tr>
       </table>
   </form>
+</div>

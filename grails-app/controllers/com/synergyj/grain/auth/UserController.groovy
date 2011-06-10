@@ -78,4 +78,9 @@ class UserController {
   }
 
   def accountLocked = {}
+
+  @Secured(['isAuthenticated()'])
+  def simpleProfile = {
+
+  }
 }
