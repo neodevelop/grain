@@ -51,7 +51,7 @@
     </div>
 
     <div id="confirm" style="display:<sec:ifLoggedIn>block</sec:ifLoggedIn><sec:ifNotLoggedIn>none</sec:ifNotLoggedIn>;">
-      <g:link controller="registration" params="[scheduledCourseId:scheduledCourse.id]" class="button">Confirmar registro</g:link>
+      <g:link controller="registration" action="addMeToCourse" params="[scheduledCourseId:scheduledCourse.id]" class="button">Confirmar registro</g:link>
     </div>
 
   </div>

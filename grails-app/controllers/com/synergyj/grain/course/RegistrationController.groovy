@@ -61,16 +61,16 @@ class RegistrationController {
   @Secured(['isAuthenticated()'])
   def addMeToCourse = {
     def user = springSecurityService.currentUser
-    def scheduleCourseId = params.long('id')
+    def scheduleCourseId = params.long('scheduledCourseId')
     def registration
     try{
       registration =  registrationService.addUserToScheduledCourse(user,scheduleCourseId)
     }catch(RegistrationException ex){
       def result = ['message':g.message(code:ex.message,default:'No te puedes registrar a este curso(varias causas)'),'registration':ex.registration]
-      render(result as JSON)
+      redirect action:'confirm',params: [scheduleCourseId:scheduleCourseId]
     }
     if(registration){
-      render(registration as JSON)
+      redirect uri:'/me'
     }
   }
 }
