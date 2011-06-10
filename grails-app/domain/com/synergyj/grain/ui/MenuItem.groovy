@@ -33,6 +33,7 @@ class MenuItem implements Serializable {
   static mapping = {
     table 'gr_menues_items'
     cache true
+    linkParams cache: true, lazy: false
   }
 
   public String toString() {

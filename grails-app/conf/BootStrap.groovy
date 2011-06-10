@@ -230,7 +230,7 @@ class BootStrap {
 
       def topMenu = new Menu(name: 'top')
       save(topMenu)
-      topMenu.option(homeOption).option(calendarOption)
+      topMenu.option(homeOption).option(calendarOption).option(logoutOption)
       topMenu.option(accountOption).option(loginOption).option(registerOption)
       save(topMenu)
 

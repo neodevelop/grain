@@ -33,6 +33,7 @@ class MenuOption implements Serializable {
     order column: 'menu_option_order'
     table 'gr_menues_options'
     cache true
+    item cache: true, lazy: false
   }
 
   public String toString() {
