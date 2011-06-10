@@ -34,6 +34,7 @@
         $("a#notme").live('click',function(){
           $("#profile").hide();
           $("#loginForm").show();
+          $("#confirm").hide();
           return false;
         });
 
