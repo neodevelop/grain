@@ -1039,3 +1039,7 @@ div#floatingMessage{
   height: 75px;
   padding: 10px;
 }
+
+#content #right #rightbox ul#promotions{
+  color:#ffffff;
+}

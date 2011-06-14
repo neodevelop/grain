@@ -1,149 +1,63 @@
-<%@ page import="com.synergyj.grain.course.KindPromotion; com.synergyj.grain.course.RegistrationStatus" %>
+8<%@ page import="com.synergyj.grain.course.KindPromotion; com.synergyj.grain.course.RegistrationStatus" %>
 <head>
   <title><g:message code='payment.info' default="Payment info"/></title>
   <meta name='layout' content='wb'/>
   <parameter name="pageHeader" value="${g.message(code: 'payment.info', default: 'Payment info')}"/>
   <g:javascript>
     $(function(){
-      var totalDiscount = 0;
-      var totalPayment = $(":input[name:'totalAmount']").val();
-      var totalPaymentWithDiscount = totalPayment;
-
-      $("div#tabs").tabs();
-
-      $(":checkbox[name*='discount']").change(function(){
-        if(!$(this).is(":checked")){
-          $("div#withDiscount").hide();
-        }
-        totalDiscount = 0;
-        $(":checked[name*='discount']").each(function(){
-          $("div#withDiscount").show();
-          var id = $(this).attr("id").substring(8);
-          var kind = $("input[name='kindPromotion"+id+"']").val();
-          if(kind=='DISCOUNT'){
-            totalDiscount += ($(this).val()*1);
-          }
-          if(kind=='GIFT'){
-            // Todo confirmar el regalo con alguna imagen
-          }
-          if(kind=='RECOMMENDATION'){
-            totalDiscount += ($(this).val()*1);
-
-          }
-        });
-        totalPaymentWithDiscount = (totalPayment*(1-(totalDiscount*.01)));
-        $("div#withDiscount > h3 > span#priceWithDiscount").html(" "+ totalPaymentWithDiscount );
-        if($(":checkbox[name='needInvoice']").is(":checked")){
-          calculateIva(totalPaymentWithDiscount);
-        }else{
-          $("span#finalAmount").html( totalPaymentWithDiscount );
+      $("input[name^=email]").keyup(function(){
+        var email = $(this).val();
+        if(isValidEmailAddress(email)){
+          $(this).siblings(":checkbox").attr('checked', true);
         }
       });
-
-      $(":checkbox[name='needInvoice']").change(function(){
-        if($(this).is(':checked')){
-          // Se agrega el IVA
-          calculateIva(totalPaymentWithDiscount);
-          $("div#invoice").show();
-        }else{
-          // Se muestra la cantidad original
-          $("span#finalAmount").html( totalPaymentWithDiscount );
-          $("div#invoice").hide();
-        }
-      });
-
     });
 
-    function calculateIva(totalPaymentNoIva){
-      $('span#IVA').html(totalPaymentNoIva * 0.16);
-      var totalPaymentPlusIva = totalPaymentNoIva * 1.16;
-      totalPaymentPlusIva = Math.round(totalPaymentPlusIva)
-      $("span#finalAmount").html( totalPaymentPlusIva );
-    }
-
-    function putPriceInHidden(){
-      $(":input[name='finalAmount']").val($("span#finalAmount").text());
-    }
-
-    function disabledOptions(){
-      $(":checkbox, :radio").attr('disabled',true);
-      $(":input[name='confirmPayment']").hide();
+    function isValidEmailAddress(emailAddress) {
+      var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+      return pattern.test(emailAddress);
     }
   </g:javascript>
 </head>
 <body>
 <div id="left">
-  <h4>Course:</h4>
-  <h3>${registration.scheduledCourse.course}</h3>
-  <br>
-  <h4>Registration on:</h4>
-  <h3><g:formatDate date="${registration.dateCreated}" format="EEEE dd-MMMM-yyyy"/></h3>
-  <br>
-  <h4>Original Price:</h4>
-  <h3>
-      $ ${registration.scheduledCourse.costByCourse}
-  </h3>
-  <div id="withDiscount" style="display:none;">
-  <h4>Price with discount:</h4>
-  <h3>
-      $ <span id="priceWithDiscount">${registration.scheduledCourse.costByCourse}</span>
-  </h3>
-  </div>
-  <div id="invoice" style="display: none;">
-    <h5>IVA: $ <span id="IVA">${registration.scheduledCourse.costByCourse * 0.16}</span></h5>
-  </div>
-  <h2>Final price:</h2>
-  <h1>
-    $ <span id="finalAmount"> ${registration.scheduledCourse.costByCourse}</span>
-    <g:hiddenField name="totalAmount" value="${registration.scheduledCourse.costByCourse}"/>
-  </h1>
-  <br/><br/>
-  <div id="paymentConfirmation">
-  </div>
+  <g:render template="/registration/simpleShow" model="[registration:registration]"/>
 </div>
 <div id="right">
-  <div id="tabs" style="width:450px;">
-      <ul>
-        <li><a href="#tabs-1">Promotions for this course</a></li>
+  <div id="rightbox">
+    <h1>Promotions for this course</h1>
+    <g:formRemote name="recalculate" url="[action:'recalculate']" update="left">
+    <g:if test="promotionsPerCourse">
+      <h2>Estas son las promociones disponibles para ti</h2>
+      <ul id="promotions">
+        <g:each in="${promotionsPerCourse}" var="promotionPerCourse">
+          <li>
+          <g:if test="${promotionPerCourse.promotion.kindPromotion == KindPromotion.GIFT || promotionPerCourse.promotion.kindPromotion == KindPromotion.RECOMMENDATION }">
+            <g:set var="isDisabled" value="disabled='disabled'"/>
+          </g:if>
+          <g:else>
+            <g:set var="isDisabled" value=""/>
+          </g:else>
+          <g:if test="${promotionPerCourse.promotion.kindPromotion == KindPromotion.GIFT}">
+            <g:set var="isChecked" value="checked='checked'"/>
+          </g:if>
+          <g:else>
+            <g:set var="isChecked" value=""/>
+          </g:else>
+          <input type="checkbox" id="discount" name="discount" value="${promotionPerCourse.id}" ${isDisabled ?: ''} ${isChecked ?: ''} />
+					${promotionPerCourse?.promotion?.description}
+          <g:if test="${promotionPerCourse.promotion.kindPromotion == KindPromotion.RECOMMENDATION}">
+            <br/>Correo: <input type="text" name="emailFrom${promotionPerCourse.id}" size="30"/>
+          </g:if>
+          </li>
+        </g:each>
       </ul>
-      <div id="tabs-1">
-        <g:formRemote name="makePayments" after="disabledOptions()" before="putPriceInHidden()" url="[action:'confirm']" update="paymentConfirmation">
-        <ul id="promotions">
-          <g:each in="${promotionsPerCourse}" var="promotionPerCourse" status="i">
-            <g:if test="${promotionPerCourse.hasNotExpired() }">
-            <li>
-              <g:checkBox name="discount${i}" value="${promotionPerCourse.promotion.discount}" checked="false"/>
-              <g:hiddenField name="kindPromotion${i}" value="${promotionPerCourse.promotion.kindPromotion}"/>
-              ${promotionPerCourse.promotion.description}
-            </li>
-            <ul id="extraInfo${i}" class="extraInfo">
-              <li>Válido hasta: <g:formatDate date="${promotionPerCourse.validUntil}" format="dd-MM-yy"/></li>
-              <g:if test="${promotionPerCourse.promotion.kindPromotion == KindPromotion.RECOMMENDATION}">
-                <li>
-                  Email de la persona que te recomienda<br/>
-                  <g:textField name="recommendationFrom"/>
-                </li>
-              </g:if>
-            </ul>
-            </g:if>
-          </g:each>
-          <li>
-            <g:checkBox name="needInvoice" checked="false"/><i>Necesitarás factura?</i>
-          </li>
-          <li>
-            ¿Cuántos pagos deseas presentar para cubrir el costo del curso?<br/>
-            <i>(Esto NO aplica a Tárjetas de Crédito, <br/>solo a depositos en efectivo o transferencias)</i><br/>
-            <g:radioGroup name="paymentNumber" labels="['Uno','Dos']" values="[1,2]" value="1">
-              ${it.radio} ${it.label}<br/>
-            </g:radioGroup>
-          </li>
-        </ul>
-        <g:hiddenField name="finalAmount" value=""/>
-        <div width="100%" style="position: relative; float: right;">
-          <input type="submit" id="confirmPayment" name="confirmPayment" value="Confirmar el pago" class="button"/>
-        </div>
-        </g:formRemote>
-      </div>
+    </g:if>
+    <input type="checkbox" id="invoice" name="invoice"/> Necesitaré factura
+    <div style="clear: both;"></div>
+    <input type="submit" value="Aprovechar estas promociones" name="recalc" />
+    </g:formRemote>
+    <div style="clear: both;"></div>
   </div>
 </div>
 </body>
