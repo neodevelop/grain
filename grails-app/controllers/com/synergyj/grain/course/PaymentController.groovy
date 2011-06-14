@@ -44,6 +44,7 @@ class PaymentController {
   }
 
   def recalculate = {
+    println params
     def model = [:]
     def scheduledCourse = session.registration.scheduledCourse
     // Obtenemos los descuentso y recalculamos el precio
