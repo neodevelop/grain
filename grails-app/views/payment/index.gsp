@@ -31,9 +31,6 @@
       return pattern.test(emailAddress);
     }
 
-    function enabledCheckboxes(){
-      $(":checkbox").attr("disabled",false);
-    }
   </g:javascript>
 </head>
 <body>
@@ -43,7 +40,7 @@
 <div id="right">
   <div id="rightbox">
     <h1>Promotions for this course</h1>
-    <g:formRemote name="recalculate" url="[action:'recalculate']" update="left" before="enabledCheckboxes()">
+    <g:formRemote name="recalculate" url="[action:'recalculate']" update="left">
     <g:if test="promotionsPerCourse">
       <h2>Estas son las promociones disponibles para ti</h2>
       <ul id="promotions">
