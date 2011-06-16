@@ -53,9 +53,9 @@
   </div>
   <div style="clear: both;"></div>
   <div id="confirm">
-    <a href="#" class="button">Págalo ahora</a>
+    <g:link action="chooseForm" class="button">Págalo ahora</g:link>
     <p id="reset">
-      <g:remoteLink action="resetPromotions" update="rightbox">Comenzar de nuevo...</g:remoteLink>
+      <g:remoteLink action="resetPromotions" update="rightbox">Escoger de nuevo las promociones...</g:remoteLink>
     </p>
   </div>
 </div>
