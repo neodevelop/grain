@@ -56,8 +56,21 @@ class PaymentController {
       params.discount.each{ discountId ->
         // buscamos en la lista de promociones en la sesion el descuento
         def promotionPerCourse = (session.promotionsPerCourse).find { it.id >= Long.valueOf(discountId) }
+        // Generamos el objeto de promoción por registro
+        def promotionPerRegistration = new PromotionPerRegistration(
+          promotion:promotionPerCourse.promotion,
+          registration:session.registration
+        )
+        // Si escogió la recomendación
+        if(promotionPerRegistration.promotion.kindPromotion == KindPromotion.RECOMMENDATION){
+          // Creamos el objeto para tomar el valor, en este caso el correo
+          def promotionPerRegistrationProperty = new PromotionPerRegistrationProperty()
+          promotionPerRegistrationProperty.propertyKey = "email"
+          promotionPerRegistrationProperty.propertyValue = params."emailFrom${discountId}"
+          promotionPerRegistration.promotionPerRegistrationProperties = [promotionPerRegistrationProperty]
+        }
         //Agregamos la promoción a la lista
-        session.choosedPromotions << promotionPerCourse
+        session.choosedPromotions << promotionPerRegistration
         // Sumamos los descuentos
         model.discount += (scheduledCourse.costByCourse * (promotionPerCourse.promotion.discount/100))
       }
