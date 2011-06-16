@@ -335,8 +335,6 @@ form input[type='submit'] {
 	font-size: 13px;
 	text-shadow: 0px 1px #ffc59b;
 	padding: 6px 10px 7px;
-	display: block;
-	float: left;
 	line-height: 20px;
 	height: 33px;
 	margin-right: 5px;
@@ -459,11 +457,7 @@ form.button-to div input:hover {
 	-moz-box-shadow: inset 0px 1px 0px #eaeaea;
 	background-color:#cdcdcd;
 }
-form input[type='checkbox'] {
-	height: 30px;
-	float: left;
-	margin: -5px 4px 0px 0px;
-}
+
 form input[type='text'], input[type='password'] {
 	padding: 6px;
 	background: #FFFFFF;
@@ -965,6 +959,64 @@ form.button-to {
   padding: 5px;
 }
 
+#content #left #breakdown{
+  width:350px;
+  padding: 10px 30px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-box-shadow: 0 0 10px rgb(255,255,255);
+  -moz-box-shadow: 0 0 10px rgb(255,255,255);
+  box-shadow: 0 0 10px rgb(255,255,255);
+  background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
+}
+
+#content #left #breakdown table#breakDownDetail{
+  width: 100%;
+  text-align: right;
+  font-size: 20px;
+}
+
+#content #left #breakdown table#breakDownDetail tr{
+
+}
+
+#content #left #breakdown table#breakDownDetail tr.discount{
+  color:#FF5151;
+}
+
+#content #left #breakdown table#breakDownDetail tr.priceWithDiscount{
+  color:#009AA5;
+}
+
+#content #left #breakdown table#breakDownDetail tr.taxIva{
+  color:#606060;
+}
+
+#content #left #breakdown table#breakDownDetail tr.finalPrice{
+  color:#3A662F;
+  font-weight:bolder;
+}
+
+#content #left #breakdown table#breakDownDetail td{
+  padding:10px;
+}
+
+#content #left #breakdown table#breakDownDetail td.finalAmount{
+  color:#FFFFFF;
+  background-color:#3A662F;
+  -webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+  -webkit-box-shadow: 0 0 10px rgb(100,100,100);
+  -moz-box-shadow: 0 0 10px rgb(100,100,100);
+  box-shadow: 0 0 10px rgb(100,100,100);
+}
+
 #content #right #rightbox{
   width:350px;
   padding: 10px 30px;
@@ -1091,6 +1143,7 @@ div#floatingMessage{
   margin: 10px;
   padding: 10px;
   list-style: none;
+  cursor: pointer;
   background: rgb(255,232,204); /* Old browsers */
   background: -moz-linear-gradient(top, rgba(255,232,204,1) 0%, rgba(249,177,89,1) 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,232,204,1)), color-stop(100%,rgba(249,177,89,1))); /* Chrome,Safari4+ */
@@ -1099,4 +1152,12 @@ div#floatingMessage{
   background: -ms-linear-gradient(top, rgba(255,232,204,1) 0%,rgba(249,177,89,1) 100%); /* IE10+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffe8cc', endColorstr='#f9b159',GradientType=0 ); /* IE6-9 */
   background: linear-gradient(top, rgba(255,232,204,1) 0%,rgba(249,177,89,1) 100%); /* W3C */
+}
+
+#content #right #rightbox div#needInvoice{
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bolder;
+  text-align: center;
+  margin:10px;
 }

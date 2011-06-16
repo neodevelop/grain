@@ -38,35 +38,55 @@ class PaymentController {
       }
       session.promotionsPerCourse = promotionsForThisUser
     }
-    // TODO: Recuerda quitar estos de sesión
+    session.finalAmountWithTax = session.registration.scheduledCourse.costByCourse
+    // TODO: Recuerda quitar estos de sesión "promotionsPerCourse" "registration" "choosedPromotions" "finalAmountWithTax"
     // Regresamos sus cursos para presentar el detalle y las promociones a escoger
     [registration:session.registration,promotionsPerCourse:session.promotionsPerCourse]
   }
 
   def recalculate = {
-    println params
     def model = [:]
     def scheduledCourse = session.registration.scheduledCourse
-    // Obtenemos los descuentso y recalculamos el precio
+    // Creamos una lista para las promociones que aplican o escogió
+    session.choosedPromotions = []
+    // Obtenemos los descuentos y recalculamos el precio
     if(params.discount){
       model.discount = 0
       // Aplicamos los descuentos de las promociones
       params.discount.each{ discountId ->
         // buscamos en la lista de promociones en la sesion el descuento
         def promotionPerCourse = (session.promotionsPerCourse).find { it.id >= Long.valueOf(discountId) }
+        //Agregamos la promoción a la lista
+        session.choosedPromotions << promotionPerCourse
         // Sumamos los descuentos
         model.discount += (scheduledCourse.costByCourse * (promotionPerCourse.promotion.discount/100))
       }
     }
+
+    model.finalAmount = scheduledCourse.costByCourse - model.discount
+
     // Si necesita factura le agregamos el IVA
     if(params.invoice){
+      // El IVA unicamente para mostrarlo
       model.iva = (scheduledCourse.costByCourse-model.discount) * 0.16
+      // El precio más IVA
+      model.finalAmountWithTax = model.finalAmount * 1.16
+      // Indicamos que si necesitará factura
+      session.invoice = true
+    }else{
+      model.iva = 0
+      model.finalAmountWithTax = model.finalAmount
+      session.removeAttribute("invoice")
     }
-    model.finalAmount = scheduledCourse.costByCourse - model.discount
-    model.finalAmountWithTax = model.finalAmount * 1.16
+    // Agregamos el monto final
+    session.finalAmountWithTax = model.finalAmountWithTax
     // Agregamos el registro a la sesión
     model.registration = session.registration
     render template: '/registration/simpleShow',model:model
+  }
+
+  def resetPromotions = {
+    render(template:'/promotion/showForPayment',model:[promotionsPerCourse:session.promotionsPerCourse,resetPromotions:true])
   }
 
   def confirm = {
