@@ -36,14 +36,6 @@ p {
 	padding-left: 10px;
 	display: block;
 }
-#content a, #iconbar a {
-	color: #174c7d;
-	text-decoration: none;
-}
-#content a:hover, #iconbar a:hover {
-	color: #174c7d;
-	text-decoration: underline;
-}
 /* === Text Styles === */
 h1 {
 	font-family: Arial, Helvetica, sans-serif;
@@ -831,10 +823,11 @@ form.button-to {
 
 #content #left #confirm{
   text-align: center;
-  padding: 50px 0px 0px 0px;
+  margin: 30px 0px 0px 0px;
 }
 
 #content #right a.button{
+  border:1px solid #F1E767;
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	color: #924800;
@@ -857,6 +850,7 @@ form.button-to {
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	color: #343144;
+  border:#FEB645;
 	font-size: 24px;
   text-shadow: 0px 1px #A2E9FF;
   height:50px;
@@ -873,15 +867,15 @@ form.button-to {
   background: linear-gradient(top, #f6f8f9 0%,#e5ebee 37%,#d7dee3 60%,#f5f7f9 100%); /* W3C */
 }
 
-#content #left a.button{
+#content #left input[type=button].confirm,a.button{
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	color: #006633;
 	font-size: 24px;
 	text-shadow: 0px 1px #ffffff;
-  height:50px;
   padding:10px;
   border: 2px solid #61c419;
+  text-decoration: none;
 
   -webkit-box-shadow: 0 0 10px rgb(255,255,255);
   -moz-box-shadow: 0 0 10px rgb(255,255,255);
@@ -897,16 +891,16 @@ form.button-to {
   background: linear-gradient(top, #b4e391 0%,#61c419 50%,#b4e391 100%); /* W3C */
 }
 
-#content #left a.button:hover{
+#content #left input[type=button].confirm:hover,a.button:hover{
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
-	color: #339900;
+	color: #006633;
 	font-size: 24px;
   text-shadow: 0px 1px #ffffff;
-  height:50px;
   padding:10px;
   text-decoration: none;
   border: 2px solid #61c419;
+  text-decoration: none;
 
   background: #f8ffe8; /* Old browsers */
   background: -moz-linear-gradient(top, #f8ffe8 0%, #e3f5ab 33%, #b7df2d 100%); /* FF3.6+ */
@@ -943,6 +937,7 @@ form.button-to {
   -moz-box-shadow: 0 0 10px #924800;
   box-shadow: 0 0 10px #924800;
   color:#924800;
+  cursor: pointer;
   width:300px;
   padding:10px;
   font-size: 24px;
@@ -1058,6 +1053,26 @@ form.button-to {
   background: linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
 }
 
+#content #right #payment{
+  width:350px;
+  padding: 10px 30px;
+  margin-top: 30px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-box-shadow: 0 0 10px rgb(255,255,255);
+  -moz-box-shadow: 0 0 10px rgb(255,255,255);
+  box-shadow: 0 0 10px rgb(255,255,255);
+  background: rgb(205,235,142); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(205,235,142,1) 0%, rgba(165,201,86,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(205,235,142,1)), color-stop(100%,rgba(165,201,86,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%); /* W3C */
+}
+
+
 #content #right #rightbox .paymentOption{
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -1065,6 +1080,7 @@ form.button-to {
   -moz-box-shadow: 0 0 10px #3f4c6b;
   box-shadow: 0 0 10px #3f4c6b;
   color:#3f4c6b;
+  cursor: pointer;
   width:300px;
   padding:10px;
   font-size: 24px;

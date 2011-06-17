@@ -39,7 +39,6 @@ class PaymentController {
       session.promotionsPerCourse = promotionsForThisUser
     }
     session.finalAmountWithTax = session.registration.scheduledCourse.costByCourse
-    // TODO: Recuerda quitar estos de sesión "promotionsPerCourse" "registration" "choosedPromotions" "finalAmountWithTax"
     // Regresamos sus cursos para presentar el detalle y las promociones a escoger
     [registration:session.registration,promotionsPerCourse:session.promotionsPerCourse]
   }
@@ -103,6 +102,33 @@ class PaymentController {
   }
 
   def chooseForm = {
+    [finalAmount:session.finalAmountWithTax]
+  }
 
+  def create = {
+    // TODO: Recuerda quitar estos de sesión "promotionsPerCourse" "registration" "choosedPromotions" "finalAmountWithTax"
+    // Actualizamos el objeto registration
+    def registration = Registration.get(session.registration.id)
+    // Necesitará factura?
+    if(session?.invoice)
+      registration.invoice = session.invoice
+    // Agregamos las promociones que escogió para su registro
+    session?.choosedPromotions?.each{ promotionPerRegistration ->
+      // Si la promoción tiene alguna propiedad(el correo de la recomnedación)
+      if(promotionPerRegistration.promotionPerRegistrationProperties){
+        // Iteramos para agregarlas
+        promotionPerRegistration.promotionPerRegistrationProperties.each{ promotionProperty ->
+          // Las agregamos...
+          promotionPerRegistration.addToPromotionPerRegistrationProperties(promotionProperty)
+        }
+      }
+      registration.addToPromotions(promotionPerRegistration)
+    }
+    // Evaluamos si escogio el pago completo o dos pagos
+    // Generamos los pagos correspondientes y los asignamos al registro
+
+    println params
+    println session
+    render "hola mundo"
   }
 }
