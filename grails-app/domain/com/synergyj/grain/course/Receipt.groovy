@@ -15,22 +15,18 @@
  */
 package com.synergyj.grain.course
 
-class Payment {
+class Receipt {
+  byte[] image
   BigDecimal amount
-  String transactionId
-  Date paymentDate
-  PaymentStatus paymentStatus
 
   Date dateCreated
 	Date lastUpdated
 
-  static belongsTo = [registration:Registration]
-  static hasMany = [receipts:Receipt]
+  static belongsTo = [payment:Payment]
 
   static constraints = {
-    amount nullable:false,blank:false
-    transactionId unique: true, maxSize: 20
-    paymentDate nullable: true
+    image(nullable:false)
+    amount(nullable:false)
     dateCreated(display:false)
     dateUpdated(display:false)
   }

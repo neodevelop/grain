@@ -75,12 +75,12 @@ class PaymentController {
       }
     }
 
-    model.finalAmount = scheduledCourse.costByCourse - model.discount
+    model.finalAmount = scheduledCourse.costByCourse - (model?.discount ?: 0)
 
     // Si necesita factura le agregamos el IVA
     if(params.invoice){
       // El IVA unicamente para mostrarlo
-      model.iva = (scheduledCourse.costByCourse-model.discount) * 0.16
+      model.iva = (scheduledCourse.costByCourse-(model?.discount ?: 0)) * 0.16
       // El precio más IVA
       model.finalAmountWithTax = model.finalAmount * 1.16
       // Indicamos que si necesitará factura
@@ -106,7 +106,8 @@ class PaymentController {
   }
 
   def create = {
-    // TODO: Recuerda quitar estos de sesión "promotionsPerCourse" "registration" "choosedPromotions" "finalAmountWithTax"
+    println params
+    println session
     // Actualizamos el objeto registration
     def registration = Registration.get(session.registration.id)
     // Necesitará factura?
@@ -119,16 +120,41 @@ class PaymentController {
         // Iteramos para agregarlas
         promotionPerRegistration.promotionPerRegistrationProperties.each{ promotionProperty ->
           // Las agregamos...
-          promotionPerRegistration.addToPromotionPerRegistrationProperties(promotionProperty)
+          //promotionPerRegistration.addToPromotionPerRegistrationProperties(promotionProperty)
         }
       }
-      registration.addToPromotions(promotionPerRegistration)
+      //registration.addToPromotions(promotionPerRegistration)
     }
     // Evaluamos si escogio el pago completo o dos pagos
-    // Generamos los pagos correspondientes y los asignamos al registro
+    def currentPayment
+    switch(params.int("percentOption")){
+      case 1:
+        def payment = preparePayment(session.finalAmountWithTax)
+        currentPayment = payment
+        //registration.addToPayments(payment)
+        break;
+      case 2:
+        def payment1 = preparePayment(session.finalAmountWithTax/2)
+        def payment2 = preparePayment(session.finalAmountWithTax/2)
+        currentPayment = payment1
+        //registration.addToPayments(payment1)
+        //registration.addToPayments(payment2)
+        break;
+    }
+    def template = "spei"
+    if(params.paymentOption == 'dineromail'){
+      // Si se paga con DM entonces aqui agregamos el payment al model
+      template = "dineroMail"
+    }
+    // TODO: Recuerda quitar estos de sesión "promotionsPerCourse" "registration" "choosedPromotions" "finalAmountWithTax"
+    render template:template,model:[registration:registration,payment:currentPayment]
+  }
 
-    println params
-    println session
-    render "hola mundo"
+  def preparePayment(amount){
+    return new Payment(
+      amount:amount,
+      transactionId:UUID.randomUUID().toString().replaceAll('-', '').substring(0,20),
+      paymentStatus:PaymentStatus.REGISTERED
+    )
   }
 }
