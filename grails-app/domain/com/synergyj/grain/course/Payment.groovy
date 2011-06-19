@@ -19,6 +19,7 @@ class Payment {
   BigDecimal amount
   String transactionId
   Date paymentDate
+  String description
   PaymentStatus paymentStatus
 
   Date dateCreated

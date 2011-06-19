@@ -16,5 +16,5 @@
 package com.synergyj.grain.course
 
 enum PaymentStatus {
-  REGISTERED,PENDING,PAYED,CANCELLED
+  WAITING,PENDING,PAYED,CANCELLED,REFUND
 }
