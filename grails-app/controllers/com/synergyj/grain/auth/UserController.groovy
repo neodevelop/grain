@@ -74,7 +74,7 @@ class UserController {
       // Ponemos los datos del curso calendarizado para mostrarlos
       model.scheduledCourse = ScheduledCourse.get(registrationCode.scheduledCourseId)
     }
-    render view: "/register/index", model:model
+    model
   }
 
   def accountLocked = {}

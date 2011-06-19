@@ -39,7 +39,7 @@ class RegisterController {
       flash.error = g.message(code: be.message, args: [userdata.email])
       // Redireccionamos a la vista de registro con el error
       userdata.password = ''
-      render view: "/register/index", model: [userdata: userdata]
+      render view: "/user/signup", model: [userdata: userdata]
       return
     }
     // Obtenemos la uri default para la seguridad
