@@ -322,6 +322,7 @@ h6 {
 form input[type='submit'] {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+  border-radius:5px;
 	font-weight: bold;
 	color: #924800;
 	font-size: 13px;
@@ -457,6 +458,7 @@ form input[type='text'], input[type='password'] {
   font-weight: 200;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+  border-radius:5px;
 }
 form fieldset.submit li {
 	width: 590px;
@@ -537,7 +539,9 @@ form div.fieldWithErrors label {
 }
 #content div.errorExplanation {
 	background: #fbdddd;
+  -moz-border-radius:6px;
 	-webkit-border-radius: 6px;
+  border-radius:6px;
 	width: 100%;
 	margin: 0 0 10px 0;
 	float: left;
@@ -622,156 +626,102 @@ form.button-to {
 	width: 640px;
 }
 
-#content .form-wrapper {
-	width: 680px;
-	margin: 0 auto;
-	-webkit-border-radius: 8px;
-	border: 1px solid #d8a574;
-	-webkit-box-shadow: 0px 0px 5px #202020;
-	background: url(../img/external/form-gradient.png) repeat-x #c26d1a;
-}
-#content .form-wrapper#signup { height: 470px; }
-#content .form-wrapper#login, #content form, #content .form-wrapper#resetpw { height:100%; }
-#content .form-wrapper#forgotpw { height: 370px; }
-#content .form-wrapper#pendingact { height: 370px; }
-#content #sign-up, #content #log-in, #content #forgot-pw, #content #pending-act, #content #reset-pw {
-	background: url(../img/external/form-light.png) no-repeat top center;
-	width: 680px;
-	padding: 0px 0px;
-	float: left;
-}
-#content .form-wrapper h1 {
-	font-size: 30px;
-	color: #FFF;
-	text-shadow: 0px -1px #c75a18;
-	font-weight: bold;
-	text-align: center;
-	text-indent: -9999px;
-	margin: 10px auto 16px;
-}
-#content #sign-up h1 {
-	background: url(../img/external/headers/create-new-user.png) no-repeat;
-	width: 680px;
-	height: 33px;
+#content #bigForm{
+ text-align: center;
 }
 
-#content #log-in h1 {
-	background: url(../img/external/headers/log-in.png) no-repeat;
-	width: 394px;
-	height: 40px;
-}
-#content #forgot-pw h1 {
-	background: url(../img/external/headers/forgotten-password.png) no-repeat;
-	width: 425px;
-	height: 40px;
+#content #bigForm #signup{
+  margin:0 auto 0 auto;
+  width:600px;
+  padding: 10px;
+
+  -webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+  border-radius: 20px;
+  -webkit-box-shadow: 0 0 15px rgb(255,255,255);
+  -moz-box-shadow: 0 0 15px rgb(255,255,255);
+  box-shadow: 0 0 15px rgb(255,255,255);
+  text-align: left;
+
+  background: rgb(255,175,75); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(255,175,75,1) 0%, rgba(255,127,0,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,175,75,1)), color-stop(100%,rgba(255,127,0,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(255,175,75,1) 0%,rgba(255,127,0,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(255,175,75,1) 0%,rgba(255,127,0,1) 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, rgba(255,175,75,1) 0%,rgba(255,127,0,1) 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff7f00',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, rgba(255,175,75,1) 0%,rgba(255,127,0,1) 100%); /* W3C */
+
 }
 
-#content #pending-act h1 {
-	background: url(../img/external/headers/almost-done.png) no-repeat;
-	width: 407px;
-	height: 34px;
+#content #bigForm #signup #registrationInfo{
+  color:#fefcea;
+  font-size: 18px;
+  text-shadow: 0px 1px #A04906;
+  padding: 20px 20px;
+  text-align: center;
 }
 
-#content #reset-pw h1 {
-	background: url(../img/external/headers/change-your-password.png) no-repeat;
-	width: 480px;
-	height: 40px;
+#content #bigForm #signup .field{
+  margin:10px 10px;
 }
 
-
-#content form .form-wrapper a {
-	color: #512700;
-	text-shadow: 0px 1px #dc944f;
-	border-bottom: 1px solid #925010;}
-#content form .form-wrapper p {
-	width: 680px;
-	text-align: center;
-	margin: 0 auto;
-	color: #79420d;
-	font-weight: bold;
-	font-size: 12px;
-	line-height: 17px;
-	text-shadow: 0px 1px #dd9e61;
-	}
-#content form .form-wrapper p.alt-login {
-	font-size: 13px;
-	margin-top: 5px;
-	margin-bottom: 10px;
-}
-#openid_login_fields {
-	height: 308px; }
-.login_hidden {
-		display: none;
-}
-#content .form-wrapper .horisontal-shadow {
-	width: 520px;
-	float: left;
-	margin-top: 30px;
-	height: 39px;
-	background: url(../img/external/form-shadow.png) no-repeat top right;
-
-	}
-
-
-#content .form-wrapper ul {
-    list-style: none;
+#content #bigForm #signup .tos{
+  margin:10px 10px;
+  text-align: right;
 }
 
-#content .form-wrapper ul li {
-	width: 590px;
-	float: left;
-	margin-bottom: 0px;
+#content #bigForm #signup .submit{
+  margin:20px 10px;
+  text-align: center;
 }
 
-#content .form-wrapper  ul li label {
-	width:520px;
-	float: left;
-	font-weight: 500;
-	font-size: 15px;
-	color: #573310;
-	text-shadow: 0px 1px #dd9956;
-	padding-bottom: 7px;
+#content #bigForm #signup .tos label{
+  font-size: 16px;
+  margin: 20px;
 }
-#content .form-wrapper  ul li input[type='text'], #content .form-wrapper  ul li input[type='password'] {
-	height: 44px;
-	padding: 0px 10px;
-	background: #FFF;
-	font-weight: 200;
-	letter-spacing: normal;
-	width: 575px;
-	-webkit-box-shadow: 0px 0px 2px #FFF, 2px 2px 3px #ccc inset;
-	border: 0;
-	border: 1px solid #b3814f;
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 18px;
-	color: #505050;
+
+#content #bigForm #signup label{
+  color:#ffffff;
+  font-size: 24px;
+  margin: 30px 250px 10px 20px;
+  text-shadow: 1px 2px #C66300;
 }
-#content .form-wrapper ul li input[type='text']:focus, #content .form-wrapper ul li input[type='password']:focus {
-	background: #fffae5;
-	border: 1px solid #9e6a35;}
-#content .form-wrapper ul li div.tos {
-	width: 350px;
-	margin-top: -10px;
-	float: left;
-	padding-top: 6px;}
-#content .form-wrapper ul li div.tos input {
-	padding: 0;
-	float: left;}
-#content .form-wrapper ul li div.tos label {
-	width: 250px;
-	padding-left: 4px;
-	float: left;}
-#content .form-wrapper ul li div.submit {
-	float: right;
-	width: 150px;}
-#content .form-wrapper input[type='submit'] {
-	height: 43px;
-	cursor: pointer;
-	-webkit-box-shadow: none;
-	float: right;
-	border: 0;
+
+#content #bigForm #signup label.error{
+  -webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+  border-radius:5px;
+  background-color:#CF0404;
+  padding: 5px 10px 5px 10px;
+  color:#FFFFFF;
+  font-size: 14px;
+  font-weight: bolder;
+  margin: 30px 20px 10px 20px;
+  text-shadow: none;
 }
-#content .form-wrapper#signup input[type='submit'] {
+
+#content #bigForm #signup input[type=text]{
+  width: 90%;
+  color:#596a72;
+  font-size: 24px;
+  margin: 10px 250px 10px 20px;
+  border: none;
+}
+
+#content #bigForm #signup input[type=password]{
+  width: 90%;
+  color:#596a72;
+  font-size: 24px;
+  margin: 10px 250px 10px 20px;
+  border: none;
+}
+
+#content #bigForm #signup input[type='submit'] {
+  font-size: 18px;
+  padding: 5px 15px;
+  height:40px;
+
   background: #f1e767; /* Old browsers */
   background: -moz-linear-gradient(top, #f1e767 0%, #feb645 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f1e767), color-stop(100%,#feb645)); /* Chrome,Safari4+ */
@@ -781,7 +731,11 @@ form.button-to {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1e767', endColorstr='#feb645',GradientType=0 ); /* IE6-9 */
   background: linear-gradient(top, #f1e767 0%,#feb645 100%); /* W3C */
 }
-#content .form-wrapper#signup input[type='submit']:hover {
+#content #bigForm #signup input[type='submit']:hover {
+  font-size: 18px;
+  padding: 5px 15px;
+  height:40px;
+
   background: #f6f8f9; /* Old browsers */
   background: -moz-linear-gradient(top, #f6f8f9 0%, #e5ebee 37%, #d7dee3 60%, #f5f7f9 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f8f9), color-stop(37%,#e5ebee), color-stop(60%,#d7dee3), color-stop(100%,#f5f7f9)); /* Chrome,Safari4+ */
@@ -790,24 +744,6 @@ form.button-to {
   background: -ms-linear-gradient(top, #f6f8f9 0%,#e5ebee 37%,#d7dee3 60%,#f5f7f9 100%); /* IE10+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 ); /* IE6-9 */
   background: linear-gradient(top, #f6f8f9 0%,#e5ebee 37%,#d7dee3 60%,#f5f7f9 100%); /* W3C */
-}
-
-#content .form-wrapper#login input[type='submit'] { background: url(../img/external/sprite.png) no-repeat -2px -67px;}
-#content .form-wrapper#login input[type='submit']:active { background-position: -116px -67px;}
-
-#content .form-wrapper#forgotpw input[type='submit'] { width: 291px; background: url(../img/external/sprite.png) no-repeat -2px -127px;}
-#content .form-wrapper#forgotpw input[type='submit']:active { width: 291px; background: url(../img/external/sprite.png) no-repeat -296px -127px;}
-
-#content .form-wrapper#resetpw input[type='submit'] { width: 119px; background: url(../img/external/sprite.png) no-repeat -2px -344px;}
-#content .form-wrapper#resetpw input[type='submit']:active { width: 119px; background: url(../img/external/sprite.png) no-repeat -125px -344px;}
-
-
-#content .form-wrapper#pendingact div.pending-info p {
-		background: url(../img/external/sprite.png) no-repeat -2px -185px;
-		width: 526px;
-		height: 120px;
-		float: left;
-		text-indent: -9999px;
 }
 
 #content #left{
@@ -830,6 +766,7 @@ form.button-to {
   border:1px solid #F1E767;
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+  border-radius:5px;
 	color: #924800;
 	font-size: 24px;
 	text-shadow: 0px 1px #ffc59b;
@@ -849,6 +786,7 @@ form.button-to {
 #content #right a.button:hover{
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+  border-radius:5px;
 	color: #343144;
   border:#FEB645;
 	font-size: 24px;
@@ -870,6 +808,7 @@ form.button-to {
 #content #left input[type=button].confirm,a.button{
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+  border-radius:5px;
 	color: #006633;
 	font-size: 24px;
 	text-shadow: 0px 1px #ffffff;
@@ -894,6 +833,7 @@ form.button-to {
 #content #left input[type=button].confirm:hover,a.button:hover{
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+  border-radius:5px;
 	color: #006633;
 	font-size: 24px;
   text-shadow: 0px 1px #ffffff;
@@ -917,6 +857,7 @@ form.button-to {
   padding: 10px 30px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+  border-radius:5px;
   -webkit-box-shadow: 0 0 10px rgb(255,255,255);
   -moz-box-shadow: 0 0 10px rgb(255,255,255);
   box-shadow: 0 0 10px rgb(255,255,255);
@@ -933,6 +874,7 @@ form.button-to {
 #content #left #leftbox .percentOption{
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
+  border-radius:10px;
   -webkit-box-shadow: 0 0 10px #924800;
   -moz-box-shadow: 0 0 10px #924800;
   box-shadow: 0 0 10px #924800;
@@ -982,6 +924,7 @@ form.button-to {
   padding: 10px 30px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+  border-radius:5px;
   -webkit-box-shadow: 0 0 10px rgb(255,255,255);
   -moz-box-shadow: 0 0 10px rgb(255,255,255);
   box-shadow: 0 0 10px rgb(255,255,255);
@@ -1030,6 +973,7 @@ form.button-to {
   background-color:#3A662F;
   -webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
+  border-radius:10px;
   -webkit-box-shadow: 0 0 10px rgb(100,100,100);
   -moz-box-shadow: 0 0 10px rgb(100,100,100);
   box-shadow: 0 0 10px rgb(100,100,100);
@@ -1040,6 +984,7 @@ form.button-to {
   padding: 10px 30px;
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+  border-radius:5px;
   -webkit-box-shadow: 0 0 10px rgb(255,255,255);
   -moz-box-shadow: 0 0 10px rgb(255,255,255);
   box-shadow: 0 0 10px rgb(255,255,255);
@@ -1061,6 +1006,7 @@ form.button-to {
   margin-top: 30px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+  border-radius:5px;
   -webkit-box-shadow: 0 0 10px rgb(255,255,255);
   -moz-box-shadow: 0 0 10px rgb(255,255,255);
   box-shadow: 0 0 10px rgb(255,255,255);
@@ -1086,6 +1032,7 @@ form.button-to {
 #content #right #payment #finish a{
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+  border-radius:5px;
   -webkit-box-shadow: 0 0 10px rgb(255,255,255);
   -moz-box-shadow: 0 0 10px rgb(255,255,255);
 	color: #ffffff;
@@ -1126,6 +1073,7 @@ form.button-to {
 #content #right #rightbox .paymentOption{
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
+  border-radius:10px;
   -webkit-box-shadow: 0 0 10px #3f4c6b;
   -moz-box-shadow: 0 0 10px #3f4c6b;
   box-shadow: 0 0 10px #3f4c6b;
@@ -1180,6 +1128,7 @@ form.button-to {
 div#floatingMessage{
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+  border-radius:5px;
   -webkit-box-shadow: 0 0 10px rgb(0,0,0);
   -moz-box-shadow: 0 0 10px rgb(0,0,0);
   box-shadow: 0 0 10px rgb(0,0,0);
@@ -1206,6 +1155,7 @@ div#floatingMessage{
 #content #right #rightbox ul#promotions li.check{
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+  border-radius:5px;
   color:#006e2e;
   font-weight: bolder;
   font-size: 14px;
@@ -1228,6 +1178,7 @@ div#floatingMessage{
 #content #right #rightbox ul#promotions li.uncheck{
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+  border-radius:5px;
   color:#3F4C6B;
   font-weight: bolder;
   font-size: 14px;
@@ -1248,6 +1199,7 @@ div#floatingMessage{
 #content #right #rightbox ul#promotions li.select:hover{
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+  border-radius:5px;
   color:#CE4F00;
   font-weight: bolder;
   font-size: 14px;
@@ -1277,6 +1229,7 @@ div#floatingMessage{
 .optionSelected{
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
+  border-radius:10px;
   -webkit-box-shadow: 0 0 10px #FFFFFF;
   -moz-box-shadow: 0 0 10px #FFFFFF;
   box-shadow: 0 0 10px #FFFFFF;
@@ -1295,4 +1248,8 @@ div#floatingMessage{
   background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* IE10+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
   background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* W3C */
+}
+
+.clearer{
+  clear: both;
 }
