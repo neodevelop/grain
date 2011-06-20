@@ -14,7 +14,7 @@
 <!-- Hoja de estilo para el WYSIWYG  -->
 <link rel="stylesheet" type="text/css" href="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.css"/>
 
-<script type="text/javascript" src="${createLinkTo(dir: 'themes/wb/js', file: 'jquery.easing.min.js')}"></script>
+<script type="text/javascript" src="${createLinkTo(dir: 'themes/wb/js', file: 'jquery.easing.compatibility.js')}"></script>
 <script type="text/javascript" src="${createLinkTo(dir: 'themes/wb/js', file: 'jquery.lavalamp.min.js')}"></script>
 <script type="text/javascript">
   $(function() {
