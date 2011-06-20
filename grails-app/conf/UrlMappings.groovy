@@ -52,6 +52,10 @@ class UrlMappings {
       controller = 'calendar'
       action = 'index'
     }
+    name payment:"/payment"{
+      controller = 'payment'
+      action = 'index'
+    }
     name confirmRegistration:"/confirmRegistration"{
       controller = "registration"
       action = "confirm"
