@@ -6,14 +6,14 @@
   </div>
   <h1><g:message code='login.welcome' default="Welcome!"/></h1>
   <div id="loggedas">
-    You're logged as:
+    <g:message code='login.loggedas' default="You're logged as:"/>
   </div>
   <div id="useremail">
     <sec:loggedInUserInfo field="username"/>
   </div>
   <div id="notyou">
     <a href="#" id="notme">
-      aren't you? this is not me!
+      <g:message code='login.notyou' default="aren't you? this is not me!"/>
     </a>
   </div>
 </div>

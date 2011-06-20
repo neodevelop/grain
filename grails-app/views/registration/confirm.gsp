@@ -35,6 +35,10 @@
           $("#profile").hide();
           $("#loginForm").show();
           $("#confirm").hide();
+          $("form#auth").each(function(){
+            this.reset();
+          });
+          $("#username").focus();
           return false;
         });
 
@@ -46,25 +50,27 @@
   <div id="left">
     <div id="leftbox">
       <div id="loadProfile"></div>
-      <g:render template="/login/form" model="[email:email,postUrl:postUrl,rememberMeParameter:rememberMeParameter]"/>
+      <g:render template="/login/form" model="[email:email,postUrl:postUrl,rememberMeParameter:rememberMeParameter,scheduledCourseId:scheduledCourse.id]"/>
       <g:render template="/login/logged"/>
     </div>
 
     <div id="confirm" style="display:<sec:ifLoggedIn>block</sec:ifLoggedIn><sec:ifNotLoggedIn>none</sec:ifNotLoggedIn>;">
-      <g:link controller="registration" action="addMeToCourse" params="[scheduledCourseId:scheduledCourse.id]" class="button">Confirmar registro</g:link>
+      <g:link controller="registration" action="addMeToCourse" params="[scheduledCourseId:scheduledCourse.id]" class="button">
+        <g:message code='registration.confirm' default="Confirm registration"/>
+      </g:link>
     </div>
 
   </div>
   <div id="right">
     <div id="rightbox">
-      <h1>Información del curso</h1>
+      <h1><g:message code='course.info'/></h1>
       <h2>${scheduledCourse.course}</h2>
       <div class="info">
-        Fecha de inicio: <b><g:formatDate date="${scheduledCourse.beginDate}" format="dd - MMMM - yyyy"/></b> <br/>
-        Fecha limite de registro: <b><g:formatDate date="${scheduledCourse.limitRegistrationDate}" format="dd - MMMM - yyyy"/></b>
+        <g:message code='course.startDate'/> : <b><g:formatDate date="${scheduledCourse.beginDate}" format="dd - MMMM - yyyy"/></b> <br/>
+        <g:message code='course.limitDate'/> : <b><g:formatDate date="${scheduledCourse.limitRegistrationDate}" format="dd - MMMM - yyyy"/></b>
       </div>
       <div id="price">
-        Costo: $ <g:formatNumber number="${scheduledCourse.costByCourse}" format="#,###.00"/>
+        <g:message code='course.cost'/> : $ <g:formatNumber number="${scheduledCourse.costByCourse}" format="#,###.00"/>
       </div>
     </div>
   </div>

@@ -628,6 +628,7 @@ form.button-to {
 
 #content #bigForm{
  text-align: center;
+  margin-top: 20px;
 }
 
 #content #bigForm #signup{
@@ -917,6 +918,17 @@ form.button-to {
   font-size: 14px;
   text-align: center;
   padding: 5px;
+}
+
+#content #left #leftbox #notyou a{
+  color:#C43100;
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+#content #left #leftbox #notyou a:hover{
+  color:#EDE500;
+  text-decoration: none;
 }
 
 #content #left #breakdown{
@@ -1248,6 +1260,27 @@ div#floatingMessage{
   background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* IE10+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
   background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* W3C */
+}
+
+table#login tr.links{
+  font-size: 12px;
+}
+
+table#login tr.links a{
+  color:#B30F05;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+table#login tr.links a:hover{
+  color:#EDE500;
+  text-decoration: none;
+}
+
+table#login td.field{
+  font-size: 12px;
+  text-align: right;
+  font-weight: bold;
 }
 
 .clearer{
