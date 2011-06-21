@@ -941,46 +941,56 @@ form.button-to {
   background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
 }
 
-#content #left #breakdown table#breakDownDetail{
+#content #left #leftbox #title {
+  color: #FFFFFF;
+  font-size: 18px;
+  margin: 10px;
+  text-shadow: 0 2px #666666;
+}
+
+
+#content #left #leftbox #title #courseName {
+  font-size: 26px;
+  line-height: 28px;
+  margin: 10px;
+  text-align: center;
+}
+
+#content #left #leftbox table#breakDownDetail{
   width: 100%;
   text-align: right;
   font-size: 20px;
 }
 
-#content #left #breakdown table#breakDownDetail tr{
-
+#content #left #leftbox table#breakDownDetail tr{
+  font-weight: bold;
+  text-shadow: 0 1px #FFFFFF;
 }
 
-#content #left #breakdown table#breakDownDetail tr.discount{
-  color:#FF5151;
+#content #left #leftbox table#breakDownDetail tr.discount{
+  color:#ff1a00;
 }
 
-#content #left #breakdown table#breakDownDetail tr.priceWithDiscount{
-  color:#009AA5;
+#content #left #leftbox table#breakDownDetail tr.priceWithDiscount{
+  color:#2c539e;
 }
 
-#content #left #breakdown table#breakDownDetail tr.taxIva{
-  color:#606060;
+#content #left #leftbox table#breakDownDetail tr.taxIva{
+  color:#45484d;
 }
 
-#content #left #breakdown table#breakDownDetail tr.finalPrice{
-  color:#3A662F;
+#content #left #leftbox table#breakDownDetail tr.finalPrice{
+  color:#1f3b08;
+  font-size: 26px;
   font-weight:bolder;
 }
 
-#content #left #breakdown table#breakDownDetail td{
+#content #left #leftbox table#breakDownDetail td{
   padding:10px;
 }
 
-#content #left #breakdown table#breakDownDetail td.finalAmount{
-  color:#FFFFFF;
-  background-color:#3A662F;
-  -webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-  border-radius:10px;
-  -webkit-box-shadow: 0 0 10px rgb(100,100,100);
-  -moz-box-shadow: 0 0 10px rgb(100,100,100);
-  box-shadow: 0 0 10px rgb(100,100,100);
+#content #left #leftbox table#breakDownDetail td.finalAmount{
+  color:#1f3b08;
 }
 
 #content #right #rightbox{

@@ -1,31 +1,32 @@
-<h4><g:message code="course.name"/></h4>
-<h3>${registration.scheduledCourse.course}:</h3>
-<br>
-<h4><g:message code="course.registrationDate"/>:</h4>
-<h3><g:formatDate date="${registration.dateCreated}" format="EEEE dd-MMMM-yyyy"/></h3>
-<br>
+<div id="title">
+<g:message code="course.name"/>:
+<div id="courseName">${registration.scheduledCourse.course}</div>
+</div>
 
 <table id="breakDownDetail">
   <tr>
     <td><g:message code="course.originalPrice"/>:</td>
-    <td>$ <g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/></td>
+    <td>
+      $ <g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/>
+      <g:hiddenField name="costByCourse" value="${registration.scheduledCourse.costByCourse}"/>
+    </td>
   </tr>
 
-  <tr class="discount">
+  <tr class="discount" style="display:none;">
     <td><g:message code="course.discount"/>:</td>
     <td>
       - $ <span id="discountAmount"><g:formatNumber number="${discount}" format="#,###.##"/></span>
     </td>
   </tr>
 
-  <tr class="priceWithDiscount">
+  <tr class="priceWithDiscount" style="display:none;">
     <td><g:message code="course.priceDiscount"/>:</td>
     <td>
       $ <span id="priceWithDiscount"><g:formatNumber number="${finalAmount}" format="#,###.##"/></span>
     </td>
   </tr>
 
-  <tr class="taxIva">
+  <tr class="taxIva" style="display:none;">
     <td><g:message code="course.tax"/>:</td>
     <td>$ <span id="taxIvaAmount"><g:formatNumber number="${iva}" format="#,###.##"/></span></td>
   </tr>
