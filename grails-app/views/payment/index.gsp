@@ -14,9 +14,13 @@
         if(isValidEmailAddress(email)){
           $(this).siblings(":checkbox").attr('checked', true);
           $(this).parent().removeClass('uncheck').addClass('check');
+          $(this).siblings("span").removeClass("optionUncheck").addClass("optionCheck");
+          $(this).siblings(":checkbox").trigger("change");
         }else{
           $(this).siblings(":checkbox").attr('checked', false);
           $(this).parent().removeClass('check').addClass('uncheck');
+          $(this).siblings("span").removeClass("optionCheck").addClass("optionUncheck");
+          $(this).siblings(":checkbox").trigger("change");
         }
       });
       $("ul#promotions > li.select").click(function(){
@@ -27,8 +31,19 @@
         }
         $(this).toggleClass('uncheck');
         $(this).toggleClass('check');
+        $(this).children(":checkbox").trigger("change");
+        toggleCheckbox($(this).children("span"));
       });
-      $("p#reset").hide();
+
+      $(":checkbox").change(function(){
+        alert("cambio");
+
+      });
+    }
+
+    function toggleCheckbox(selector){
+      $(selector).toggleClass("optionUncheck");
+      $(selector).toggleClass("optionCheck");
     }
 
     function isValidEmailAddress(emailAddress) {
@@ -48,20 +63,34 @@
 </head>
 <body>
 <div id="left">
-  <div id="breakdown">
+
+  <div id="leftbox">
     <g:render template="/registration/simpleShow" model="[registration:registration]"/>
+
+
+
+    <div class="percentOption">
+      <g:radio id="half" value="2" name="percentOption"/>
+      Aparta tu lugar con el 50%<br/>( $  )
+    </div>
+    <div class="percentOption">
+      <g:radio id="full" value="1" name="percentOption"/>
+      Paga el total de tu curso<br/>( $  )
+    </div>
   </div>
-  <div style="clear: both;"></div>
-  <div id="confirm">
-    <g:link action="chooseForm" class="button">Págalo ahora</g:link>
-    <p id="reset">
-      <g:remoteLink action="resetPromotions" update="rightbox">Escoger de nuevo las promociones...</g:remoteLink>
-    </p>
-  </div>
+
 </div>
 <div id="right">
   <div id="rightbox">
     <g:render template="/promotion/showForPayment" model="[promotionsPerCourse:promotionsPerCourse]" />
+    <div class="paymentOption">
+      <g:radio id="transferencia" value="transferencia" name="paymentOption"/>
+      Transferencia electrónica
+    </div>
+    <div class="paymentOption">
+      <g:radio id="dineromail" value="dineromail" name="paymentOption"/>
+      Otros medios de pago
+    </div>
   </div>
 </div>
 </body>

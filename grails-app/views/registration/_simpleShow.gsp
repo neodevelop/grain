@@ -1,48 +1,39 @@
-  <h4>Course:</h4>
-  <h3>${registration.scheduledCourse.course}</h3>
-  <br>
-  <h4>Registration on:</h4>
-  <h3><g:formatDate date="${registration.dateCreated}" format="EEEE dd-MMMM-yyyy"/></h3>
-  <br>
+<h4><g:message code="course.name"/></h4>
+<h3>${registration.scheduledCourse.course}:</h3>
+<br>
+<h4><g:message code="course.registrationDate"/>:</h4>
+<h3><g:formatDate date="${registration.dateCreated}" format="EEEE dd-MMMM-yyyy"/></h3>
+<br>
 
-  <table id="breakDownDetail">
-    <tr>
-      <td>Original Price:</td>
-      <td>$ <g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/></td>
-    </tr>
+<table id="breakDownDetail">
+  <tr>
+    <td><g:message code="course.originalPrice"/>:</td>
+    <td>$ <g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/></td>
+  </tr>
 
-    <g:if test="${discount}">
-      <tr class="discount">
-        <td>Discount:</td>
-        <td>
-          - $ <g:formatNumber number="${discount}" format="#,###.##"/>
-        </td>
-      </tr>
-      <tr class="priceWithDiscount">
-        <td>Price with discount:</td>
-        <td>
-          $ <g:formatNumber number="${finalAmount}" format="#,###.##"/>
-        </td>
-      </tr>
-    </g:if>
+  <tr class="discount">
+    <td><g:message code="course.discount"/>:</td>
+    <td>
+      - $ <span id="discountAmount"><g:formatNumber number="${discount}" format="#,###.##"/></span>
+    </td>
+  </tr>
 
-    <g:if test="${iva}">
+  <tr class="priceWithDiscount">
+    <td><g:message code="course.priceDiscount"/>:</td>
+    <td>
+      $ <span id="priceWithDiscount"><g:formatNumber number="${finalAmount}" format="#,###.##"/></span>
+    </td>
+  </tr>
 
-    <tr class="taxIva">
-      <td>IVA:</td>
-      <td>$ <g:formatNumber number="${iva}" format="#,###.##"/></td>
-    </tr>
-    </g:if>
+  <tr class="taxIva">
+    <td><g:message code="course.tax"/>:</td>
+    <td>$ <span id="taxIvaAmount"><g:formatNumber number="${iva}" format="#,###.##"/></span></td>
+  </tr>
 
-    <tr class="finalPrice">
-      <td>Final price:</td>
-      <td class="finalAmount">
-        <g:if test="${finalAmountWithTax}">
-          $ <g:formatNumber number="${finalAmountWithTax}" format="#,###.##"/>
-        </g:if>
-        <g:else>
-          $ <g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/>
-        </g:else>
-      </td>
-    </tr>
-  </table>
+  <tr class="finalPrice">
+    <td><g:message code="course.finalPrice"/>:</td>
+    <td class="finalAmount">
+      $ <span id="finalAmount"><g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/></span>
+    </td>
+  </tr>
+</table>
