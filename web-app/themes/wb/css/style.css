@@ -991,6 +991,9 @@ form.button-to {
 
 #content #left #leftbox table#breakDownDetail td.finalAmount{
   color:#1f3b08;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius:10px;
 }
 
 #content #right #rightbox{

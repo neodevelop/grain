@@ -1,5 +1,6 @@
 $(function(){
   startOver();
+  recalculateAmounts(false);
 });
 
 function startOver(){
@@ -9,14 +10,14 @@ function startOver(){
       $(this).siblings(":checkbox").attr('checked', true);
       $(this).parent().removeClass('uncheck').addClass('check');
       $(this).siblings("span").removeClass("optionUncheck").addClass("optionCheck");
-      recalculateAmounts();
+      recalculateAmounts(true);
     }else{
       $(this).siblings(":checkbox").attr('checked', false);
       $(this).parent().removeClass('check').addClass('uncheck');
       $(this).siblings("span").removeClass("optionCheck").addClass("optionUncheck");
-      recalculateAmounts();
+      recalculateAmounts(true);
     }
-    $(this).siblings(":checkbox").trigger("change");
+    $(this).prev(":checkbox").trigger("change");
   });
 
   $("ul#promotions > li.select").click(function(){
@@ -30,7 +31,6 @@ function startOver(){
     $(this).toggleClass('uncheck');
     $(this).toggleClass('check');
     $(this).children(":checkbox").trigger("change");
-    recalculateAmounts();
   });
 
   $(":radio").hide();
@@ -48,7 +48,7 @@ function startOver(){
   });
 
   $(":checkbox").change(function(){
-    recalculateAmounts();
+    recalculateAmounts(true);
   });
 }
 
@@ -72,7 +72,7 @@ function highlight(selector,clazz,group){
   $(selector).addClass("optionSelected");
 }
 
-function recalculateAmounts(){
+function recalculateAmounts(animate){
   var costByCourse = $("#costByCourse").val();
   var finalCostCourse = costByCourse;
 
@@ -106,5 +106,27 @@ function recalculateAmounts(){
   $("span#finalAmount").text(finalCostCourse);
   $("span#totalCostByCourse").text(finalCostCourse);
   $("span#halfCostByCourse").text(finalCostCourse/2);
-
+  if(animate){
+    $("td.finalAmount").qtip({
+      content: {
+        text: 'Hey! mira...'
+      },
+      position: {
+        my: "center left", // Use the corner...
+        at: "center right", // ...and opposite corner
+        target:$("td.finalAmount")
+      },
+      show: {
+        event:false,
+        ready:true
+      },
+      hide: {
+        target:$("ul#promotions li").add("div#needInvoice")
+      },
+      style: {
+        classes: 'ui-tooltip-shadow ui-tooltip-plain'
+      }
+    });
+    $("td.finalAmount").qtip('reposition');
+  }
 }

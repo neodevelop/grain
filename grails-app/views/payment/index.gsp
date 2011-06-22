@@ -4,6 +4,8 @@
   <meta name='layout' content='wb'/>
   <parameter name="pageHeader" value="${g.message(code: 'payment.info', default: 'Payment info')}"/>
   <script type="text/javascript" src="${createLinkTo(dir:'themes/wb/js/payment',file:'index.js')}"></script>
+  <link rel="stylesheet" type="text/css" href="http://craigsworks.com/projects/qtip2/packages/latest/jquery.qtip.css" />
+  <script type="text/javascript" src="http://craigsworks.com/projects/qtip2/packages/latest/jquery.qtip.js"></script>
 </head>
 <body>
 <div id="left">
