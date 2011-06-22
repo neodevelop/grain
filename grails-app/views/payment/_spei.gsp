@@ -6,6 +6,11 @@
     Banco: <span class="data">Banorte</span><br/>
     CLABE: <span class="data">072 180 00514730161 2</span><br/>
     Correo: <span class="data">cursos@synergyj.com</span><br/>
+
+    <div id="confirmAmountSpei" class="confirmAmount">
+      Cantidad a pagar: <span class="data">$ <span id="paymentAmountSpei"></span></span>
+    </div>
+
     <div class="instrucciones">
       Una vez realizado, haz una <b>captura de la pantalla</b> con el pago realizado
       o <b>imprime</b> el comprobante expedido por el banco y <b>escanealo</b>.<br/>
@@ -13,8 +18,8 @@
       Esta operación la podrás hacer en tu perfil.
     </div>
     <div id="finish">
-      <g:link mapping="me" >Ir a mi perfil</g:link>
+      <g:link class="submit" action="create" >Haré mi pago en el portal de mi banco...</g:link>
     </div>
     <div id="sendMeInfo">
-      <g:remoteLink>Enviarme estos datos por correo</g:remoteLink>
+      Recibirás esta información por correo...
     </div>

@@ -27,7 +27,7 @@ $(function(){
       style: {
         classes: 'ui-tooltip-shadow ui-tooltip-dark'
       }
-    });
+  });
 });
 
 function startOver(){
@@ -66,12 +66,14 @@ function startOver(){
     $("div#leftbox :radio").attr("checked",false);
     $(":first",this).attr("checked",true);
     highlight(this,"percentOption",".groupOption1");
+    bothSelected();
   });
 
   $("div.paymentOption").click(function(){
     $("div#rightbox :radio").attr("checked",false);
     $(":first",this).attr("checked",true);
     highlight(this,"paymentOption",".groupOption2");
+    bothSelected();
   });
 
   $(":checkbox").change(function(){
@@ -79,17 +81,24 @@ function startOver(){
   });
 }
 
+function bothSelected(){
+  $("div.payment").hide();
+  if($("input[name='percentOption']").is(":checked") && $("input[name='paymentOption']").is(":checked")){
+    if($("input[name='paymentOption']:checked").val() == 'transferencia'){
+      $("div#paymentSpei").slideDown('slow');
+      $("span#paymentAmountSpei").text($("input[name='percentOption']:checked").val());
+      $("input[name='percentOption']")
+    }else{
+      $("div#paymentDineroMail").slideDown('slow');
+      $("span#paymentAmountDM").text($("input[name='percentOption']:checked").val());
+    }
+    $.scrollTo($(document).height(), 'fast');
+  }
+}
+
 function isValidEmailAddress(emailAddress) {
   var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
   return pattern.test(emailAddress);
-}
-
-function disabledOptions(){
-  $("div#rightbox input").attr("disabled",true);
-  $("ul#promotions > li.select").removeClass("select");
-  $("ul#promotions > li").unbind("click");
-  $("div#applyPromotions").hide();
-  $("p#reset").show();
 }
 
 function highlight(selector,clazz,group){
@@ -133,6 +142,10 @@ function recalculateAmounts(animate){
   $("span#finalAmount").text(finalCostCourse);
   $("span#totalCostByCourse").text(finalCostCourse);
   $("span#halfCostByCourse").text(finalCostCourse/2);
+
+  $("#half").val(finalCostCourse/2);
+  $("#full").val(finalCostCourse);
+
   if(animate){
     $("td.finalAmount").qtip({
       content: {
@@ -161,5 +174,9 @@ function recalculateAmounts(animate){
       }
     });
     $("td.finalAmount").qtip('reposition');
+  }
+
+  if($("div.payment").is(":visible")){
+    bothSelected();
   }
 }

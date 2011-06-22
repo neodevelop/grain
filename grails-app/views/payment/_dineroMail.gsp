@@ -1,25 +1,25 @@
 <div class="instrucciones">
-  Te facilitamos un medio de pago
+  Te facilitamos una forma de pago
 </div>
 
-<div>
-  <form action="https://mexico.dineromail.com/Shop/Shop_Ingreso.asp" method="post">
-  <input type="hidden" name="NombreItem" value="${registration?.scheduledCourse?.course?.name}">
-  <input type="hidden" name="TipoMoneda" value="1"> <input type="hidden" name="PrecioItem" value="${payment?.amount}">
-  <input type="hidden" name="E_Comercio" value="580433">
-  <input type="hidden" name="NroItem" value="${registration?.scheduledCourse?.course?.courseKey}">
-  <input type="hidden" name="DireccionExito" value="http://localhost:8080/me">
-  <input type="hidden" name="DireccionFracaso" value="http://localhost:8080/me?error=1">
-  <input type="hidden" name="DireccionEnvio" value="0">
-  <input type="hidden" name="Mensaje" value="0">
-  <input type='hidden' name='MediosPago' value='4,5,19,20,13,14,2'>
-  <input type="image" src="https://mexico.dineromail.com/imagenes/botones/pagar-tarjetas_bn.gif" border="0" name="submit" alt="Pagar con DineroMail">
-  </form>
+A través de este medio podrás pagar con cualquiera de las siguientes opciones:
+
+<div id="medios">
+  <img src="${createLinkTo(dir:'themes/wb/icon',file:'visa-icon.gif')}" title="visa" alt="visa"/>
+  <img src="${createLinkTo(dir:'themes/wb/icon',file:'mastercard-icon.gif')}" title="mastercard" alt="mastercard"/>
+  <img src="${createLinkTo(dir:'themes/wb/icon',file:'amex-icon.png')}" title="amex" alt="amex"/>
+  <img src="${createLinkTo(dir:'themes/wb/icon',file:'7-eleven-icon.png')}" title="7eleven" alt="7eleven"/>
+  <img src="${createLinkTo(dir:'themes/wb/icon',file:'oxxo-icon.gif')}" title="oxxo" alt="oxxo"/>
 </div>
 
-<div class="instrucciones">
-  Una vez realizado el pago, serás redireccionado a tu perfil.
+<div id="confirmAmountDM" class="confirmAmount">
+  Cantidad a pagar: <span class="data">$ <span id="paymentAmountDM"></span></span>
 </div>
+
 <div id="finish">
-  <g:link mapping="me" >Ir a mi perfil</g:link>
+  <g:link class="submit" action="create">Realizar mi pago en línea</g:link>
+</div>
+<div id="sendMeInfo">
+  Serás direccionado a un sitio seguro donde podrás realizar esta operación...<br/>
+  Una vez realizado el pago, estarás de vuelta con nosotros.<br/>
 </div>

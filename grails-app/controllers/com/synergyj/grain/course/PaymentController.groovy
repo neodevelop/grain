@@ -23,86 +23,19 @@ class PaymentController {
     // Obtenemos el usuario actual
     def user = springSecurityService.currentUser
     // Obtenemos sus cursos pendientes por pagar
-    if(!session.registration){
-      // Buscamos el registro del usuario a un curso calendarizado y Metemos el objeto registration en sesión
-      session.registration  = Registration.findByStudentAndRegistrationStatus(user,RegistrationStatus.REGISTERED)
-    }
+    // Buscamos el registro del usuario a un curso calendarizado y Metemos el objeto registration en sesión
+    def registration  = Registration.findByStudentAndRegistrationStatus(user,RegistrationStatus.REGISTERED)
+
     //Obtenemos las promociones de este curso calendarizado
-    if(!session.promotionsPerCourse){
-      def promotionsPerCourse = PromotionPerScheduledCourse.findAllByScheduledCourse(session.registration.scheduledCourse)
-      // Obtenemos las promociones que aún estén vigentes
-      def promotionsForThisUser = []
-      promotionsPerCourse.each { promotion ->
-        if(promotion.hasNotExpired())
-          promotionsForThisUser << promotion
-      }
-      session.promotionsPerCourse = promotionsForThisUser
+    def promotionsPerCourse = PromotionPerScheduledCourse.findAllByScheduledCourse(session.registration.scheduledCourse)
+    // Obtenemos las promociones que aún estén vigentes
+    def promotionsForThisUser = []
+    promotionsPerCourse.each { promotion ->
+      if(promotion.hasNotExpired())
+        promotionsForThisUser << promotion
     }
-    session.finalAmountWithTax = session.registration.scheduledCourse.costByCourse
     // Regresamos sus cursos para presentar el detalle y las promociones a escoger
-    [registration:session.registration,promotionsPerCourse:session.promotionsPerCourse]
-  }
-
-  def recalculate = {
-    def model = [:]
-    def scheduledCourse = session.registration.scheduledCourse
-    // Creamos una lista para las promociones que aplican o escogió
-    session.choosedPromotions = []
-    // Obtenemos los descuentos y recalculamos el precio
-    if(params.discount){
-      model.discount = 0
-      // Aplicamos los descuentos de las promociones
-      params.discount.each{ discountId ->
-        // buscamos en la lista de promociones en la sesion el descuento
-        def promotionPerCourse = (session.promotionsPerCourse).find { it.id >= Long.valueOf(discountId) }
-        // Generamos el objeto de promoción por registro
-        def promotionPerRegistration = new PromotionPerRegistration(
-          promotion:promotionPerCourse.promotion,
-          registration:session.registration
-        )
-        // Si escogió la recomendación
-        if(promotionPerRegistration.promotion.kindPromotion == KindPromotion.RECOMMENDATION){
-          // Creamos el objeto para tomar el valor, en este caso el correo
-          def promotionPerRegistrationProperty = new PromotionPerRegistrationProperty()
-          promotionPerRegistrationProperty.propertyKey = "email"
-          promotionPerRegistrationProperty.propertyValue = params."emailFrom${discountId}"
-          promotionPerRegistration.promotionPerRegistrationProperties = [promotionPerRegistrationProperty]
-        }
-        //Agregamos la promoción a la lista
-        session.choosedPromotions << promotionPerRegistration
-        // Sumamos los descuentos
-        model.discount += (scheduledCourse.costByCourse * (promotionPerCourse.promotion.discount/100))
-      }
-    }
-
-    model.finalAmount = scheduledCourse.costByCourse - (model?.discount ?: 0)
-
-    // Si necesita factura le agregamos el IVA
-    if(params.invoice){
-      // El IVA unicamente para mostrarlo
-      model.iva = (scheduledCourse.costByCourse-(model?.discount ?: 0)) * 0.16
-      // El precio más IVA
-      model.finalAmountWithTax = model.finalAmount * 1.16
-      // Indicamos que si necesitará factura
-      session.invoice = true
-    }else{
-      model.iva = 0
-      model.finalAmountWithTax = model.finalAmount
-      session.removeAttribute("invoice")
-    }
-    // Agregamos el monto final
-    session.finalAmountWithTax = model.finalAmountWithTax
-    // Agregamos el registro a la sesión
-    model.registration = session.registration
-    render template: '/registration/simpleShow',model:model
-  }
-
-  def resetPromotions = {
-    render(template:'/promotion/showForPayment',model:[promotionsPerCourse:session.promotionsPerCourse,resetPromotions:true])
-  }
-
-  def chooseForm = {
-    [finalAmount:session.finalAmountWithTax]
+    [registration:registration,promotionsPerCourse:promotionsForThisUser]
   }
 
   def create = {

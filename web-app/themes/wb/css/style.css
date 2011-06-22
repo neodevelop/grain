@@ -1015,10 +1015,9 @@ form.button-to {
   background: linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
 }
 
-#content #right #payment{
+#content div.payment{
   color:#006E2E;
   font-size: 14px;
-  width:350px;
   padding: 10px 30px;
   margin-top: 30px;
   -webkit-border-radius: 5px;
@@ -1037,16 +1036,16 @@ form.button-to {
   background: linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%); /* W3C */
 }
 
-#content #right #payment span.data{
+#content div.payment span.data{
   font-weight: bolder;
 }
 
-#content #right #payment #finish{
+#content div.payment #finish{
   text-align: center;
   margin:20px;
 }
 
-#content #right #payment #finish a{
+#content div.payment #finish a{
   -webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
   border-radius:5px;
@@ -1069,21 +1068,33 @@ form.button-to {
 
 }
 
-#content #right #payment #sendMeInfo{
+#content div.payment #sendMeInfo{
   text-align: center;
 }
 
-#content #right #payment #sendMeInfo a{
+#content div.payment #sendMeInfo a{
   margin-top: 15px;
   text-decoration: none;
   color:#487A07;
 }
 
-#content #right #payment div.instrucciones{
+#content div.payment div.instrucciones{
   font-size: 12px;
   font-style: italic;
   padding: 10px 0px;
   text-align: right;
+}
+
+#content div.payment .confirmAmount{
+  margin: 5px;
+  padding:10px;
+  text-align: center;
+  font-size: 24px;
+}
+
+#content div.payment #medios{
+  margin: 10px;
+  text-align: center;
 }
 
 
