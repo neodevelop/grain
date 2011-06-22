@@ -1,6 +1,33 @@
 $(function(){
   startOver();
   recalculateAmounts(false);
+  $("ul#promotions li").qtip({
+      content: {
+        text: 'Hey! antes de continuar checa las promociones...'
+      },
+      position: {
+        my: "bottom center", // Use the corner...
+        at: "top center", // ...and opposite corner
+        target:$("ul#promotions")
+      },
+      show: {
+        ready:true,
+        event: false,
+        effect: function(offset) {
+         $(this).fadeIn(1000);
+        }
+      },
+      hide: {
+        event:'mouseenter',
+        target:$("div#right"),
+        effect: function(offset) {
+         $(this).fadeOut(1000);
+        }
+      },
+      style: {
+        classes: 'ui-tooltip-shadow ui-tooltip-dark'
+      }
+    });
 });
 
 function startOver(){
@@ -118,10 +145,16 @@ function recalculateAmounts(animate){
       },
       show: {
         event:false,
-        ready:true
+        ready:true,
+        effect: function(offset) {
+         $(this).fadeIn(1000);
+        }
       },
       hide: {
-        target:$("ul#promotions li").add("div#needInvoice")
+        target:$("ul#promotions li").add("div#needInvoice"),
+        effect: function(offset) {
+         $(this).fadeOut(1000);
+        }
       },
       style: {
         classes: 'ui-tooltip-shadow ui-tooltip-plain'
