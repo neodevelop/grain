@@ -19,6 +19,7 @@ class PaymentController {
 
   def springSecurityService
   def paymentService
+  def notificationService
 
   def index = {
     // Obtenemos el usuario actual
@@ -86,12 +87,19 @@ class PaymentController {
     if(session.removeAttribute)
       session.removeAttribute(promotionsPerCourse)
 
-    // TODO: Validar si es SPEI o DineroMail y direccionarlo
-
     // Consultamos los pagos para el registro para mandarlos por el modelo
     def payment = Payment.findByRegistrationAndPaymentStatus(registration,PaymentStatus.WAITING,[sort:'id'])
 
-    render view:"do",model:[registration:registration,payment:payment,user:springSecurityService.currentUser]
+    // Validar si es SPEI o DineroMail y direccionarlo
+    if(paymentOption=='spei'){
+      notificationService.sendPaymentInstructions(registration,payment)
+      flash.message = "${g.message(code:'notification.send')}"
+      redirect uri:"/me?pending=${payment.transactionId}"
+      return
+    }else{
+      render view:"do",model:[registration:registration,payment:payment,user:springSecurityService.currentUser]
+    }
+
   }
 
 

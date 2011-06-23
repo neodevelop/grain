@@ -20,6 +20,7 @@ import com.synergyj.grain.auth.User
 import com.synergyj.grain.course.Registration
 import grails.util.Environment
 import com.synergyj.grain.course.ScheduledCourse
+import com.synergyj.grain.course.Payment
 
 class NotificationService {
 
@@ -108,5 +109,24 @@ class NotificationService {
         break
     }
     registrationCode
+  }
+
+  def sendPaymentInstructions(Registration registration,Payment payment){
+    switch(Environment.current){
+      case Environment.DEVELOPMENT:
+        log.debug("${Environment.current} - Send payment instructions ${payment} for ${registration}")
+        break
+      case Environment.TEST:
+        log.debug("${Environment.current} - Send payment instructions  ${payment} for ${registration}")
+        break
+      case Environment.PRODUCTION:
+        mailService.sendMail {
+          to email
+          from "no-reply@synergyj.com"
+          subject "Instrucciones de pago"
+          body(view:"/notification/paymentInstructios",model:[payment:payment,registration:registration])
+        }
+        break
+    }
   }
 }
