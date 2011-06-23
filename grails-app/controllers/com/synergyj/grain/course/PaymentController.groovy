@@ -86,6 +86,8 @@ class PaymentController {
     if(session.removeAttribute)
       session.removeAttribute(promotionsPerCourse)
 
+    // TODO: Validar si es SPEI o DineroMail y direccionarlo
+
     // Consultamos los pagos para el registro para mandarlos por el modelo
     def payment = Payment.findByRegistrationAndPaymentStatus(registration,PaymentStatus.WAITING,[sort:'id'])
 

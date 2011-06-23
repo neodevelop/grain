@@ -23,9 +23,9 @@
       });
 
       function ok(){
+        $("input[name=buyer_name]").val($("#firstName").val());
+        $("input[name=buyer_lastname]").val($("#lastName").val());
         $("#userDataForm").fadeOut(500,function(){
-          $("input[name=buyer_name]").val($("#firstName").val());
-          $("input[name=buyer_lastname]").val($("#lastName").val());
           $('#lightbox').css({width:'0',height:'0'}).fadeIn(500);
         });
         $("form#dineroMail").submit();
@@ -61,7 +61,7 @@
         <label>Tu(s) nombre(s) aqui:</label><br/>
         <input id="firstName" name="firstName" value="" class="text" tabindex="1" type="text">
         <span id="validName"></span><br/>
-        <label>Tus apelllido aqui:</label><br/>
+        <label>Tu(s) apelllido(s) aqui:</label><br/>
         <input id="lastName" name="lastName" value="" class="text" tabindex="2" type="text">
         <span id="validLastName"></span><br/>
         <div align="center">
