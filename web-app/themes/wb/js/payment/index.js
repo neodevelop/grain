@@ -7,7 +7,6 @@ $(function(){
 
 function activateSendButtons(){
   $("div#finish > a.submit").click(function(){
-    alert("enviando");
     $("form#makePayment").trigger('submit');
     return false;
   });

@@ -76,16 +76,20 @@ class PaymentController {
         promotionPerRegistrationProperty.propertyKey = "email"
         promotionPerRegistrationProperty.propertyValue = params."emailFrom${promotionId}"
         // Agregamos la propiedad a la promoción
-        promotionPerRegistration.addToPromotionPerRegistrationProperties(promotionPerRegistration)
+        promotionPerRegistration.addToPromotionPerRegistrationProperties(promotionPerRegistrationProperty)
       }
       // Agregamos la promoción que aplicó al registro
       registration.addToPromotions(promotionPerRegistration)
     }
 
     // Eliminamos los valores de la sesión
-    session.removeAttribute(promotionsPerCourse)
+    if(session.removeAttribute)
+      session.removeAttribute(promotionsPerCourse)
 
-    render "$params -------------- ${registration.dump()}"
+    // Consultamos los pagos para el registro para mandarlos por el modelo
+    def payment = Payment.findByRegistrationAndPaymentStatus(registration,PaymentStatus.WAITING,[sort:'id'])
+
+    render view:"do",model:[registration:registration,payment:payment,user:springSecurityService.currentUser]
   }
 
 

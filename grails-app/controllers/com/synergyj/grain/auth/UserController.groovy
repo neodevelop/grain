@@ -19,6 +19,7 @@ import grails.plugins.springsecurity.Secured
 import com.synergyj.grain.course.Registration
 import com.synergyj.grain.course.ScheduledCourse
 import com.synergyj.grain.course.ScheduledCourseStatus
+import grails.converters.JSON
 
 class UserController {
 
@@ -57,7 +58,12 @@ class UserController {
     def currentUser = User.findByEmail(springSecurityService.currentUser.email)
     currentUser.properties = params
     currentUser.save()
-    redirect action:'me'
+    if(params?.isAjax){
+      response.addHeader("Content-Type","	application/json;charset=UTF-8")
+      render currentUser as JSON
+    }else{
+      redirect action:'me'
+    }
   }
 
   @Secured(['permitAll()'])
