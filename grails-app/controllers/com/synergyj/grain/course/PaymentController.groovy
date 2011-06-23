@@ -18,6 +18,7 @@ package com.synergyj.grain.course
 class PaymentController {
 
   def springSecurityService
+  def paymentService
 
   def index = {
     // Obtenemos el usuario actual
@@ -27,67 +28,65 @@ class PaymentController {
     def registration  = Registration.findByStudentAndRegistrationStatus(user,RegistrationStatus.REGISTERED)
 
     //Obtenemos las promociones de este curso calendarizado
-    def promotionsPerCourse = PromotionPerScheduledCourse.findAllByScheduledCourse(session.registration.scheduledCourse)
+    def promotionsPerCourse = PromotionPerScheduledCourse.findAllByScheduledCourse(registration.scheduledCourse)
     // Obtenemos las promociones que aún estén vigentes
     def promotionsForThisUser = []
     promotionsPerCourse.each { promotion ->
       if(promotion.hasNotExpired())
         promotionsForThisUser << promotion
     }
+    session.promotionsPerCourse = promotionsForThisUser
     // Regresamos sus cursos para presentar el detalle y las promociones a escoger
     [registration:registration,promotionsPerCourse:promotionsForThisUser]
   }
 
   def create = {
-    println params
-    println session
-    // Actualizamos el objeto registration
-    def registration = Registration.get(session.registration.id)
-    // Necesitará factura?
-    if(session?.invoice)
-      registration.invoice = session.invoice
-    // Agregamos las promociones que escogió para su registro
-    session?.choosedPromotions?.each{ promotionPerRegistration ->
-      // Si la promoción tiene alguna propiedad(el correo de la recomnedación)
-      if(promotionPerRegistration.promotionPerRegistrationProperties){
-        // Iteramos para agregarlas
-        promotionPerRegistration.promotionPerRegistrationProperties.each{ promotionProperty ->
-          // Las agregamos...
-          //promotionPerRegistration.addToPromotionPerRegistrationProperties(promotionProperty)
-        }
-      }
-      //registration.addToPromotions(promotionPerRegistration)
-    }
-    // Evaluamos si escogio el pago completo o dos pagos
-    def currentPayment
-    switch(params.int("percentOption")){
-      case 1:
-        def payment = preparePayment(session.finalAmountWithTax)
-        currentPayment = payment
-        //registration.addToPayments(payment)
-        break;
-      case 2:
-        def payment1 = preparePayment(session.finalAmountWithTax/2)
-        def payment2 = preparePayment(session.finalAmountWithTax/2)
-        currentPayment = payment1
-        //registration.addToPayments(payment1)
-        //registration.addToPayments(payment2)
-        break;
-    }
-    def template = "spei"
+
+    // Conservamos la opción de pago que selecciono
+    def paymentOption = "spei"
     if(params.paymentOption == 'dineromail'){
-      // Si se paga con DM entonces aqui agregamos el payment al model
-      template = "dineroMail"
+      // Pagará con DM
+      paymentOption = "dineroMail"
     }
-    // TODO: Recuerda quitar estos de sesión "promotionsPerCourse" "registration" "choosedPromotions" "finalAmountWithTax"
-    render template:template,model:[registration:registration,payment:currentPayment]
+
+    // Creamos los pagos para el registro
+    def registration = paymentService.preparePaymentsForRegistration(
+        params.long("registrationId"),
+        new BigDecimal(params.totalToPay),
+        new BigDecimal(params.percentOption),
+        paymentOption,
+        params.invoice)
+
+    // Obtenemos las promociones que selecciono/aplico, vienen en un string separado por comas
+    def promotionsIds = params?.checkedPromotions?.tokenize(',')
+
+    // Iteramos la seleccion de promociones
+    promotionsIds.each{ promotionId ->
+      // buscamos en la lista de promociones en la sesion el descuento
+      def promotionPerCourse = (session.promotionsPerCourse).find { it.id >= promotionId.toLong() }
+      // Generamos el objeto de promoción por registro
+      def promotionPerRegistration = new PromotionPerRegistration(
+        promotion:promotionPerCourse.promotion,
+        registration:registration
+      )
+      // Si escogió la recomendación
+      if(promotionPerRegistration.promotion.kindPromotion == KindPromotion.RECOMMENDATION){
+        // Creamos el objeto para tomar el valor, en este caso el correo
+        def promotionPerRegistrationProperty = new PromotionPerRegistrationProperty()
+        promotionPerRegistrationProperty.propertyKey = "email"
+        promotionPerRegistrationProperty.propertyValue = params."emailFrom${promotionId}"
+        // Agregamos la propiedad a la promoción
+        promotionPerRegistration.addToPromotionPerRegistrationProperties(promotionPerRegistration)
+      }
+      // Agregamos la promoción que aplicó al registro
+      registration.addToPromotions(promotionPerRegistration)
+    }
+
+    // Eliminamos los valores de la sesión
+    session.removeAttribute(promotionsPerCourse)
+
+    render "$params -------------- ${registration.dump()}"
   }
 
-  def preparePayment(amount){
-    return new Payment(
-      amount:amount,
-      transactionId:UUID.randomUUID().toString().replaceAll('-', '').substring(0,20),
-      paymentStatus:PaymentStatus.REGISTERED
-    )
-  }
+
 }

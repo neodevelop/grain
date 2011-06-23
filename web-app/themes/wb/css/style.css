@@ -1086,9 +1086,9 @@ form.button-to {
 }
 
 #content div.payment .confirmAmount{
-  margin: 5px;
-  padding:10px;
-  text-align: center;
+  margin: 20px;
+  padding: 10px;
+  text-align:center;
   font-size: 24px;
 }
 

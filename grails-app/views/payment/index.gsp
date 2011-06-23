@@ -9,7 +9,7 @@
   <script type="text/javascript" src="http://flesler-plugins.googlecode.com/files/jquery.scrollTo-1.4.2-min.js"></script>
 </head>
 <body>
-<g:form action="">
+<g:form action="create" name="makePayment">
 <div id="left">
 
   <div id="leftbox">
@@ -56,5 +56,8 @@
 <div id="paymentDineroMail" class="payment">
   <g:render template="dineroMail"/>
 </div>
+<g:hiddenField name="registrationId" value="${registration.id}"/>
+<g:hiddenField name="totalToPay" value=""/>
+<g:hiddenField name="checkedPromotions" value=""/>
 </g:form>
 </body>

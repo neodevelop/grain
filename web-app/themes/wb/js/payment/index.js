@@ -1,6 +1,19 @@
 $(function(){
   startOver();
   recalculateAmounts(false);
+  highlightOnce();
+  activateSendButtons();
+});
+
+function activateSendButtons(){
+  $("div#finish > a.submit").click(function(){
+    alert("enviando");
+    $("form#makePayment").trigger('submit');
+    return false;
+  });
+}
+
+function highlightOnce(){
   $("ul#promotions li").qtip({
       content: {
         text: 'Hey! antes de continuar checa las promociones...'
@@ -28,7 +41,7 @@ $(function(){
         classes: 'ui-tooltip-shadow ui-tooltip-dark'
       }
   });
-});
+}
 
 function startOver(){
   $("input[name^=email]").blur(function(){
@@ -113,10 +126,14 @@ function recalculateAmounts(animate){
   var finalCostCourse = costByCourse;
 
   var discount = 0;
+  var discountsId = [];
 
   $.each($("input[name='discount']:checked"),function(){
     discount += ($(this).val() / 1);
+    discountsId.push(($(this).attr('id')).substring('discount'.length));
   });
+
+  $("#checkedPromotions").val(discountsId.join(','));
 
   if(discount > 0){
     var discountAmount = finalCostCourse * (discount/100);
@@ -145,6 +162,8 @@ function recalculateAmounts(animate){
 
   $("#half").val(finalCostCourse/2);
   $("#full").val(finalCostCourse);
+
+  $("#totalToPay").val(finalCostCourse);
 
   if(animate){
     $("td.finalAmount").qtip({
