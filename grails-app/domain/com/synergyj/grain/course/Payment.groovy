@@ -21,6 +21,7 @@ class Payment {
   Date paymentDate
   String description
   PaymentStatus paymentStatus
+  KindOfPayment kindOfPayment
 
   Date dateCreated
 	Date lastUpdated
@@ -33,6 +34,6 @@ class Payment {
     transactionId unique: true, maxSize: 20
     paymentDate nullable: true
     dateCreated(display:false)
-    dateUpdated(display:false)
+    lastUpdated(display:false)
   }
 }

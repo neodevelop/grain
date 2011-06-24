@@ -18,6 +18,36 @@ package com.synergyj.grain.course
 class PaymentService {
   static transactional = true
 
+  def checkPaymentAndRegistration(String status, String transactionId){
+    // Buscamos el payment
+    def payment = Payment.findByTransactionId(transactionId)
+    // Actualizamos el status del payment según el parámetro
+    switch(status){
+      case 'pending':
+        // Cambiamos el status del payment
+        payment.paymentStatus = PaymentStatus.PENDING
+        // El registro al curso aún no se paga aunque este sea el último pago, aún está pendiente de pago
+        payment.registration.registrationStatus = RegistrationStatus.PENDING_PAYMENT
+        break
+      case 'payed':
+        // Cambiamos el status del payment
+        payment.paymentStatus = PaymentStatus.PAYED
+        // Obtenemos la suma de la cantidad que tiene que pagar
+        def totalForPayment = 0
+        def totalPayed = 0
+        payment.registration.payments.each{ thisPayment ->
+          // Sumamos el total a pagar
+          total += thisPayment.amount
+          // Sumamos lo que ya pagó
+          if(thisPayment.paymentStatus == PaymentStatus.PAYED){
+            totalPayed += totalPayed
+          }
+        }
+        println "$totalForPayment - $totalPayed"
+        break
+    }
+  }
+
   def preparePaymentsForRegistration(
       Long registrationId,
       BigDecimal totalPayment,
@@ -47,12 +77,16 @@ class PaymentService {
   }
 
   private def preparePayment(amount,kindOfPayment){
-    def description = "Pago de inscripción - ${kindOfPayment}"
+    def description = "Pago de inscripción"
+    def thisKindOfPayment = KindOfPayment.SPEI
+    if(kindOfPayment == 'dineromail')
+      thisKindOfPayment = KindOfPayment.DINERO_MAIL
     return new Payment(
       amount:amount,
       transactionId:UUID.randomUUID().toString().replaceAll('-', '').substring(0,20),
       paymentStatus:PaymentStatus.WAITING,
-      description:description
+      description:description,
+      kindOfPayment: thisKindOfPayment
     )
   }
 }

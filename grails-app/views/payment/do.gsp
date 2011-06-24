@@ -80,9 +80,9 @@
     <input type="hidden" name="language" value="es" />
     <input type="hidden" name="transaction_id" value="${payment.transactionId}" />
     <input type="hidden" name="currency" value="mxn" />
-    <input type="hidden" name="ok_url" value="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath}/me?ok=${payment.transactionId}" />
-    <input type="hidden" name="error_url" value="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath}/me?error=${payment.transactionId}" />
-    <input type="hidden" name="pending_url" value="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath}/me?pending=${payment.transactionId}" />
+    <input type="hidden" name="ok_url" value="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath}/me?status=payed&trx=${payment.transactionId}" />
+    <input type="hidden" name="error_url" value="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath}/me?status=error&trx=${payment.transactionId}" />
+    <input type="hidden" name="pending_url" value="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath}/me?status=pending&trx=${payment.transactionId}" />
     <input type="hidden" name="buyer_message" value="0" />
     <input type="hidden" name="change_quantity" value="0" />
     <input type="hidden" name="display_shipping" value="0" />
@@ -95,7 +95,7 @@
     <input type="hidden" name="item_name_1" value="${registration.scheduledCourse.course}" />
     <input type="hidden" name="item_code_1" value="${registration.scheduledCourse.course.courseKey}" />
     <input type="hidden" name="item_quantity_1" value="1" />
-    <input type="hidden" name="item_ammount_1" value="${payment.amount}" />
+    <input type="hidden" name="item_ammount_1" value="${payment.amount.setScale(2, BigDecimal.ROUND_HALF_EVEN).toString()}" />
     <input type="hidden" name="item_currency_1" value="mxn" />
 
     <!-- Variables del Comprador -->
