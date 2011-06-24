@@ -42,7 +42,6 @@
           return false;
         });
 
-
       });
     </g:javascript>
   </head>
@@ -55,9 +54,17 @@
     </div>
 
     <div id="confirm" style="display:<sec:ifLoggedIn>block</sec:ifLoggedIn><sec:ifNotLoggedIn>none</sec:ifNotLoggedIn>;">
-      <g:link controller="registration" action="addMeToCourse" params="[scheduledCourseId:scheduledCourse.id]" class="button">
-        <g:message code='registration.confirm' default="Confirm registration"/>
-      </g:link>
+
+        <g:if test="${flash.message}">
+          <g:link mapping="me" class="button">
+          <g:message code='login.goMe' default="Go to my profile"/>
+          </g:link>
+        </g:if>
+        <g:else>
+          <g:link controller="registration" action="addMeToCourse" params="[scheduledCourseId:scheduledCourse.id]" class="button">
+            <g:message code='registration.confirm' default="Confirm registration"/>
+          </g:link>
+        </g:else>
     </div>
 
   </div>

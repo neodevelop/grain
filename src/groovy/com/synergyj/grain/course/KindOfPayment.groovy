@@ -15,9 +15,6 @@
  */
 package com.synergyj.grain.course
 
-enum KindPromotion {
-  DISCOUNT,
-  RECOMMENDATION,
-  COUPON,
-  GIFT
+enum KindOfPayment {
+  SPEI,DINERO_MAIL
 }

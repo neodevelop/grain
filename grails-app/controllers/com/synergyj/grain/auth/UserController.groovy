@@ -20,10 +20,13 @@ import com.synergyj.grain.course.Registration
 import com.synergyj.grain.course.ScheduledCourse
 import com.synergyj.grain.course.ScheduledCourseStatus
 import grails.converters.JSON
+import com.synergyj.grain.course.Payment
+import com.synergyj.grain.course.PaymentStatus
 
 class UserController {
 
   def springSecurityService
+  def paymentService
 
   @Secured(['isAuthenticated()'])
   def me = {
@@ -43,8 +46,15 @@ class UserController {
       }
       return [user:user,scheduledCourseList:currentScheduledCourses,registrationsPerScheduledCourse:registrationsPerScheduledCourse]
     }else{
-      def myRegisteredCourse = Registration.findByStudent(user)
-      return [user:user,myRegisteredCourse:myRegisteredCourse]
+
+      // Si traemos algún parámetro de pago
+      if(params.status && params.trx){
+        // Actualizamos el pago y el registro
+        paymentService.checkPaymentAndRegistration(params.status,params.trx)
+      }
+
+      def myRegistrations = Registration.findAllByStudent(user)
+      return [user:user,myRegistrations:myRegistrations]
     }
   }
 
