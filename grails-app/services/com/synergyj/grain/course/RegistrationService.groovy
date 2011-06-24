@@ -32,6 +32,21 @@ class RegistrationService {
   def userService
   def notificationService
 
+  def checkIsPayed(registration){
+    // Obtenemos la suma de la cantidad que tiene que pagar
+        def totalForPayment = 0
+        def totalPayed = 0
+        registration.payments.each{ thisPayment ->
+          // Sumamos el total a pagar
+          total += thisPayment.amount
+          // Sumamos lo que ya pagó
+          if(thisPayment.paymentStatus == PaymentStatus.PAYED){
+            totalPayed += totalPayed
+          }
+        }
+        println "$totalForPayment - $totalPayed"
+  }
+
   def registerFromLanding(RegisterUserCommand userCommand, Long scheduledCourseId) {
     userCommand.tos = true // TODO: Lo coloco aquí por que aún no lo tengo en la forma
     def user

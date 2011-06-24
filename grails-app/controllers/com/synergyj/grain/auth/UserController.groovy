@@ -46,13 +46,6 @@ class UserController {
       }
       return [user:user,scheduledCourseList:currentScheduledCourses,registrationsPerScheduledCourse:registrationsPerScheduledCourse]
     }else{
-
-      // Si traemos algún parámetro de pago
-      if(params.status && params.trx){
-        // Actualizamos el pago y el registro
-        paymentService.checkPaymentAndRegistration(params.status,params.trx)
-      }
-
       def myRegistrations = Registration.findAllByStudent(user)
       return [user:user,myRegistrations:myRegistrations]
     }

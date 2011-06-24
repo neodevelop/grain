@@ -80,9 +80,9 @@
     <input type="hidden" name="language" value="es" />
     <input type="hidden" name="transaction_id" value="${payment.transactionId}" />
     <input type="hidden" name="currency" value="mxn" />
-    <input type="hidden" name="ok_url" value="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath}/me?status=payed&trx=${payment.transactionId}" />
-    <input type="hidden" name="error_url" value="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath}/me?status=error&trx=${payment.transactionId}" />
-    <input type="hidden" name="pending_url" value="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath}/me?status=pending&trx=${payment.transactionId}" />
+    <input type="hidden" name="ok_url" value="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath}/receivePayment?status=payed&trx=${payment.transactionId}" />
+    <input type="hidden" name="error_url" value="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath}/receivePayment?status=error&trx=${payment.transactionId}" />
+    <input type="hidden" name="pending_url" value="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath}/receivePayment?status=pending&trx=${payment.transactionId}" />
     <input type="hidden" name="buyer_message" value="0" />
     <input type="hidden" name="change_quantity" value="0" />
     <input type="hidden" name="display_shipping" value="0" />

@@ -36,7 +36,7 @@
     <g:textField name="website" value="${user.website}"/>
   <br>
   <br/>
-  <g:submitButton name="submit" value="Update info" class="submit"/>
-  <g:link mapping="me" class="action">Cancel and return</g:link>
+  <g:submitButton name="submit" value="Actualizar" class="submit"/>
+  <g:link mapping="me" class="action">Regresar</g:link>
   </g:form>
 </body>

@@ -41,6 +41,39 @@ class PaymentController {
     [registration:registration,promotionsPerCourse:promotionsForThisUser]
   }
 
+  def receive = {
+    // Si obtenemos algún error de pago
+    if(params.status == 'error'){
+      // Ponemos un mensaje
+      flash.message = "${g.message(code:'payment.error')}"
+      // Redireccionamos
+      redirect uri:'/me'
+      return
+    }
+    // Si traemos algún parámetro de pago
+    if(params.status && params.trx){
+      // Actualizamos el pago y el registro
+      def payment = paymentService.checkPaymentAndRegistration(params.status,params.trx)
+      // Evaluamos el pago para mandar el mensaje apropiado
+      switch(payment.kindOfPayment){
+        case KindOfPayment.SPEI:
+          flash.message = "${g.message(code:'payment.waitSpei')}"
+          break
+        case KindOfPayment.DINERO_MAIL:
+          switch(payment.paymentStatus){
+            case PaymentStatus.PENDING:
+              flash.message = "${g.message(code:'payment.waitPending')}"
+              break
+            case PaymentStatus.PAYED:
+              flash.message = "${g.message(code:'payment.ispayed')}"
+              break;
+          }
+          break
+      }
+    }
+    redirect uri:'/me'
+  }
+
   def create = {
 
     // Conservamos la opción de pago que selecciono
@@ -94,7 +127,7 @@ class PaymentController {
     if(paymentOption=='spei'){
       notificationService.sendPaymentInstructions(registration,payment)
       flash.message = "${g.message(code:'notification.send')}"
-      redirect uri:"/me?status=pending&trx=${payment.transactionId}"
+      redirect uri:"/receivePayment?status=pending&trx=${payment.transactionId}"
       return
     }else{
       render view:"do",model:[registration:registration,payment:payment,user:springSecurityService.currentUser]
