@@ -1524,6 +1524,14 @@ table.registration td.cellCenter{
   padding: 20px;
 }
 
+table.registration td.paymentSection{
+  color:#3f4c6b;
+  text-align: center;
+  padding:10px;
+  font-size: 16px;
+  font-weight: bolder;
+}
+
 table.registration a.action{
   color:#002400;
   font-size: 18px;
@@ -1551,4 +1559,15 @@ table.registration a.action:hover{
   background: -ms-linear-gradient(top, #e6f0a3 0%,#d2e638 50%,#c3d825 51%,#dbf043 100%); /* IE10+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6f0a3', endColorstr='#dbf043',GradientType=0 ); /* IE6-9 */
   background: linear-gradient(top, #e6f0a3 0%,#d2e638 50%,#c3d825 51%,#dbf043 100%); /* W3C */
+}
+
+table.paymentDetail{
+  width:95%;
+  margin: 0px 10px 10px 10px;
+  font-size: 14px;
+}
+
+table.paymentDetail td.money{
+  font-weight: bolder;
+  color:#006e2e;
 }

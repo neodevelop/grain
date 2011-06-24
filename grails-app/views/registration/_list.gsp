@@ -12,18 +12,28 @@
     <tr class="content">
       <td class="contentLeft">
         <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
-        Registration: <g:formatDate date="${registration.dateCreated}" format="EEEE dd-MM-yyyy"/>
+        <g:message code="registration.date"/>: <g:formatDate date="${registration.dateCreated}" format="EEEE dd-MM-yyyy"/>
       </td>
       <td class="contentRight">
-        ${registration.registrationStatus}
-        <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-blue.png')}" alt="valid"/>
+        <g:if test="${registration.registrationStatus == RegistrationStatus.REGISTERED}">
+          <g:message code="registration.registered"/>
+          <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-blue.png')}" alt="valid"/>
+        </g:if>
+        <g:if test="${registration.registrationStatus == RegistrationStatus.PENDING_PAYMENT}">
+          <g:message code="registration.pending"/>
+          <img src="${createLinkTo(dir:'themes/wb/icon',file:'attention.png')}" alt="valid"/>
+        </g:if>
+        <g:if test="${registration.registrationStatus == RegistrationStatus.PAYED}">
+          <g:message code="registration.payed"/>
+          <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-green.png')}" alt="valid"/>
+        </g:if>
       </td>
     </tr>
 
     <tr class="content">
       <td class="contentLeft">
         <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
-        Begin date: <g:formatDate date="${registration.scheduledCourse.beginDate}" format="EEEE dd-MM-yyyy"/>
+        <g:message code="registration.beginDate"/>: <g:formatDate date="${registration.scheduledCourse.beginDate}" format="EEEE dd-MM-yyyy"/>
       </td>
       <td class="contentRight">
         &nbsp;
@@ -35,71 +45,105 @@
     <tr class="content">
       <td class="contentLeft">
         <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
-        Limit registration: <g:formatDate date="${registration.scheduledCourse.limitRegistrationDate}" format="EEEE dd-MM-yyyy"/>
+        <g:message code="registration.limitDate"/>: <g:formatDate date="${registration.scheduledCourse.limitRegistrationDate}" format="EEEE dd-MM-yyyy"/>
       </td>
       <td class="contentRight money">
-        Cost: $ ${registration.scheduledCourse.costByCourse}
+        <g:message code="registration.cost"/>: $ ${registration.scheduledCourse.costByCourse}
         <img src="${createLinkTo(dir:'themes/wb/icon',file:'money.png')}" alt="money" width="32px" height="32px"/>
       </td>
     </tr>
 
     <tr>
       <td colspan="2" class="cellCenter">
-        <g:link mapping="payment" class="action">Págalo y aprovecha nuestras promociones</g:link>
+        <g:link mapping="payment" class="action">
+          <g:message code="payment.payit"/>
+        </g:link>
       </td>
     </tr>
     </g:if>
 
     <g:if test="${registration.registrationStatus == RegistrationStatus.PENDING_PAYMENT}">
     <tr>
-      <td colspan="2" class="cellCenter">
-        Pagos del curso
+      <td colspan="2" class="paymentSection">
+        <g:message code="course.payments"/>
       </td>
     </tr>
 
     <tr class="paymentTitle">
-      <td colspan="2" class="cellCenter">
-        <table class="paymentDetail">
+      <td colspan="2" class="payments">
+        <table class="paymentDetail" cellpadding="5" cellspacing="0">
+          <thead>
+            <tr>
+              <th># <g:message code="payment.payment"/></th>
+              <th><g:message code="payment.amount"/></th>
+              <th><g:message code="payment.message"/></th>
+              <th><g:message code="payment.action"/></th>
+            </tr>
+          </thead>
+          <tbody>
           <g:each in="${registration.payments.sort()}" var="payment" status="i">
           <tr class="paymentRow">
-            <td>Payment # ${i+1}</td>
-            <td>$ ${payment.amount}</td>
-
+            <td># ${i+1}</td>
+            <td class="money">$ ${payment.amount}</td>
             <g:if test="${payment.paymentStatus == PaymentStatus.WAITING}">
-              <td>Deseo hacer este pago ahora...</td>
-              <td>Iniciar</td>
+              <td>
+                <g:message code="payment.waiting"/>
+              </td>
+              <td valign="center">
+                <g:link controller="payment" action="start" id="${payment.id}">
+                  <g:message code="payment.startPayment"/>
+                </g:link>
+              </td>
             </g:if>
             <g:if test="${payment.paymentStatus == PaymentStatus.PENDING}">
               <g:if test="${payment.receipts.size()}">
-                <td>Estamos procesando tu pago</td>
+                <td>
+                  <g:message code="payment.pendingReview"/>
+                </td>
               </g:if>
               <g:else>
-                <td>Estamos en espera de confirmación</td>
+                <td><g:message code="payment.pendingUpload"/></td>
               </g:else>
               <g:if test="${payment.kindOfPayment == KindOfPayment.SPEI}">
-                <td>Subir recibo</td>
+                <td>
+                  <g:link controller="payment" action="uploadReceipt" id="${payment.id}">
+                    <g:message code="payment.uploadReceipt"/>
+                  </g:link>
+                </td>
               </g:if>
               <g:if test="${payment.kindOfPayment == KindOfPayment.DINERO_MAIL}">
-                <td>En espera del procesamiento</td>
+                <td><g:message code="payment.waitProcess"/></td>
               </g:if>
             </g:if>
             <g:if test="${payment.paymentStatus == PaymentStatus.PAYED}">
-              <td>Pagado</td>
-              <td>Ver recibo si SPEI</td>
+              <td><g:message code="payment.payed"/></td>
+              <g:if test="${payment.kindOfPayment == KindOfPayment.SPEI}">
+                <td>
+                  <g:link controller="payment" action="seeReceipt" id="${payment.id}">
+                    <g:message code="payment.seeReceipt"/>
+                  </g:link>
+                </td>
+              </g:if>
+              <g:else>
+                <td>&nbsp;</td>
+              </g:else>
             </g:if>
             <g:if test="${payment.paymentStatus == PaymentStatus.CANCELLED}">
-              <td>Pago cancelado</td>
-              <td>Imagen</td>
+              <td><g:message code="payment.cancelled"/></td>
+              <td>&nbsp;</td>
             </g:if>
             <g:if test="${payment.paymentStatus == PaymentStatus.REFUND}">
-              <td>Reembolso de pago</td>
-              <td>Imagen</td>
+              <td><g:message code="payment.refund"/></td>
+              <td>&nbsp;</td>
             </g:if>
           </g:each>
+          </tbody>
         </table>
       </td>
     </tr>
-
+    <g:javascript>
+      $("table.paymentDetail").styleTable();
+    </g:javascript>
     </g:if>
 
   </table>

@@ -124,7 +124,7 @@ class NotificationService {
           to email
           from "no-reply@synergyj.com"
           subject "Instrucciones de pago"
-          body(view:"/notification/paymentInstructios",model:[payment:payment,registration:registration])
+          body(view:"/notification/paymentInstructions",model:[payment:payment,registration:registration])
         }
         break
     }

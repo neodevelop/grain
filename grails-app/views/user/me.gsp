@@ -3,6 +3,7 @@
   <title><g:message code='me.title' default="Me"/></title>
   <meta name='layout' content='wb'/>
   <parameter name="pageHeader" value="${g.message(code: 'me.title', default: 'This is me')}"/>
+  <script language="JavaScript" src="${createLinkTo(dir:'themes/wb/js/registration',file:'list.js')}"></script>
   <g:javascript>
     $(function(){
       $("div#tabs").tabs();
