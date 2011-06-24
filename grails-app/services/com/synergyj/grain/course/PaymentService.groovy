@@ -32,20 +32,11 @@ class PaymentService {
       case 'payed':
         // Cambiamos el status del payment
         payment.paymentStatus = PaymentStatus.PAYED
-        // Obtenemos la suma de la cantidad que tiene que pagar
-        def totalForPayment = 0
-        def totalPayed = 0
-        payment.registration.payments.each{ thisPayment ->
-          // Sumamos el total a pagar
-          total += thisPayment.amount
-          // Sumamos lo que ya pagó
-          if(thisPayment.paymentStatus == PaymentStatus.PAYED){
-            totalPayed += totalPayed
-          }
-        }
-        println "$totalForPayment - $totalPayed"
+        break
+      case 'error':
         break
     }
+    payment
   }
 
   def preparePaymentsForRegistration(
@@ -68,6 +59,9 @@ class PaymentService {
       // Agregamos el pago de la diferencia al registro
       registration.addToPayments(anotherPayment)
     }
+
+    // Cambiamos el estado del registro
+    registration.registrationStatus = RegistrationStatus.PENDING_PAYMENT
 
     // Necesitará factura?
     if(withInvoice)
