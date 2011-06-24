@@ -15,13 +15,13 @@
 <div id="left">
   <h4><g:message code="me.email"/>:</h4><h3>${user.email}</h3>
   <br>
-  <h4><g:message code="me.name"/>:</h4><h3>${user.firstName ?: 'empty'}</h3>
+  <h4><g:message code="me.name"/>:</h4><h3>${user.firstName ?: 'vacío'}</h3>
   <br>
-  <h4><g:message code="me.lastname"/>:</h4><h3>${user.lastName ?: 'empty'}</h3>
+  <h4><g:message code="me.lastname"/>:</h4><h3>${user.lastName ?: 'vacío'}</h3>
   <br>
-  <h4><g:message code="me.company"/>:</h4><h3>${user.company ?: 'empty'}</h3>
+  <h4><g:message code="me.company"/>:</h4><h3>${user.company ?: 'vacío'}</h3>
   <br>
-  <h4><g:message code="me.website"/>:</h4><h3>${user.website ?: 'empty'}</h3>
+  <h4><g:message code="me.website"/>:</h4><h3>${user.website ?: 'vacío'}</h3>
   <br>
   <br/>
   <g:link mapping="updateme" class="action">

@@ -15,20 +15,6 @@
  */
 package com.synergyj.grain.course
 
-class Receipt {
-  byte[] image
-  BigDecimal amount
-  ReceiptStatus receiptStatus
-
-  Date dateCreated
-	Date lastUpdated
-
-  static belongsTo = [payment:Payment]
-
-  static constraints = {
-    image(nullable:false)
-    amount(nullable:false)
-    dateCreated(display:false)
-    dateUpdated(display:false)
-  }
+enum ReceiptStatus {
+  RECEIVED,APROVED
 }
