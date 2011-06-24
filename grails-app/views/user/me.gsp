@@ -13,20 +13,20 @@
 </head>
 <body>
 <div id="left">
-  <g:link mapping="updateme">Change my profile</g:link>
-  <h4>e-m@il:</h4><h3>${user.email}</h3>
+  <h4><g:message code="me.email"/>:</h4><h3>${user.email}</h3>
   <br>
-  <h4>first name:</h4><h3>${user.firstName ?: 'empty'}</h3>
+  <h4><g:message code="me.name"/>:</h4><h3>${user.firstName ?: 'empty'}</h3>
   <br>
-  <h4>last name:</h4><h3>${user.lastName ?: 'empty'}</h3>
+  <h4><g:message code="me.lastname"/>:</h4><h3>${user.lastName ?: 'empty'}</h3>
   <br>
-  <h4>company:</h4><h3>${user.company ?: 'empty'}</h3>
+  <h4><g:message code="me.company"/>:</h4><h3>${user.company ?: 'empty'}</h3>
   <br>
-  <h4>website:</h4><h3>${user.website ?: 'empty'}</h3>
+  <h4><g:message code="me.website"/>:</h4><h3>${user.website ?: 'empty'}</h3>
   <br>
-  <h4>geolocation:</h4><h3>${user.geolocation ?: 'empty'}</h3>
-  <br>
-  <g:link mapping="updateme">Change my profile</g:link>
+  <br/>
+  <g:link mapping="updateme" class="action">
+    <g:message code="me.update"/>
+  </g:link>
 </div>
 <div id="right">
 
@@ -67,29 +67,9 @@
     <div id="tabs" style="width:550px;">
       <ul>
         <li><a href="#tabs-1">Estado de tus inscripciones</a></li>
-        <li><a href="#tabs-2">Datos del curso</a></li>
-        <li><a href="#tabs-3">Tus sesiones</a></li>
       </ul>
       <div id="tabs-1">
         <g:render template="/registration/list" model="[registrationList:myRegistrations]" />
-      </div>
-      <div id="tabs-2">
-        <h3>${myRegisteredCourse?.scheduledCourse?.course?.name}</h3>
-        <h4>${myRegisteredCourse?.scheduledCourse?.course?.courseKey}</h4>
-        <p>${myRegisteredCourse?.scheduledCourse?.course?.overview}</p>
-        <p>Costo del curso: <b>$ ${myRegisteredCourse?.scheduledCourse?.costByCourse} mxn</b></p>
-      </div>
-      <div id="tabs-3">
-        <h3>${myRegisteredCourse?.scheduledCourse?.course?.name}</h3>
-        <h4>${myRegisteredCourse?.scheduledCourse?.course?.courseKey}</h4>
-        <ul>
-          <g:each in="${myRegisteredCourse?.scheduledCourse?.courseSessions}" var="courseSession">
-            <li><g:formatDate date="${courseSession?.sessionStartTime}" format="EEEE dd - MMMM - yyyy"/></li>
-          </g:each>
-        </ul>
-        <p>
-          <img src="${createLinkTo(file:'gc_button6_es.gif',dir:'themes/wb/images')}" alt="calendar"/>
-        </p>
       </div>
     </div>
   </g:else>
