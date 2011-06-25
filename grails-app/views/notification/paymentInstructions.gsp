@@ -70,7 +70,7 @@
                           <tr>
                             <td height="49" width="100%" valign="middle" bgcolor="#c8cfd8" background="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/themes/mail/images/article-title-bg.jpg'}" style="vertical-align:middle; border-left-width: 1px; border-left-color: #BAC2CC; border-left-style: solid; border-right-width: 1px; border-right-color: #BAC2CC; border-right-style: solid; border-bottom-width: 1px; border-bottom-color: #98a3b4; border-bottom-style: solid; border-top-width: 1px; border-top-color: #BAC2CC; border-top-style: solid;">
                               <h3 class="textshadow" style="margin:0; margin-left: 17px; padding:0; font-size: 18px; font-weight: normal; color:#192c45;">
-                                Hola <b>${email ?: 'noname'}</b>, te informamos que...
+                                Hola <b>${registration?.student?.email ?: 'noname'}</b>, te informamos que...
                               </h3>
                             </td>
                           </tr>

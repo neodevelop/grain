@@ -60,7 +60,7 @@ class PaymentController {
     if(paymentOption==KindOfPayment.SPEI){
       notificationService.sendPaymentInstructions(payment.registration,payment)
       flash.message = "${g.message(code:'notification.send')}"
-      redirect uri:"/receivePayment?status=pending&trx=${payment.transactionId}"
+      redirect action:'receive',params:[status:'pending',trx:payment.transactionId]
       return
     }else{
       render view:"do",model:[registration:payment.registration,payment:payment,user:springSecurityService.currentUser]

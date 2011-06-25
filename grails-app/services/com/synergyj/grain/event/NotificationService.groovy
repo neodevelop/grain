@@ -121,7 +121,7 @@ class NotificationService {
         break
       case Environment.PRODUCTION:
         mailService.sendMail {
-          to email
+          to registration.student.email
           from "no-reply@synergyj.com"
           subject "Instrucciones de pago"
           body(view:"/notification/paymentInstructions",model:[payment:payment,registration:registration])
