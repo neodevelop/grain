@@ -18,7 +18,7 @@
       Esta operación la podrás hacer en tu perfil.
     </div>
     <div id="finish">
-      <g:link class="submit" action="create" >Haré mi pago en el portal de mi banco...</g:link>
+      <g:link class="submit" action="${pay ?: 'create'}" >Haré mi pago en el portal de mi banco...</g:link>
     </div>
     <div id="sendMeInfo">
       Recibirás esta información por correo...

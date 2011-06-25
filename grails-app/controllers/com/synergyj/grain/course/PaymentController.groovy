@@ -41,6 +41,32 @@ class PaymentController {
     [registration:registration,promotionsPerCourse:promotionsForThisUser]
   }
 
+  def start = {
+    println params
+    def payment = Payment.get(params.id)
+    [payment:payment]
+  }
+
+  def pay = {
+    // Conservamos la opción de pago que selecciono
+    def paymentOption = KindOfPayment.SPEI
+    if(params.paymentOption == 'dineromail'){
+      // Pagará con DM
+      paymentOption = KindOfPayment.DINERO_MAIL
+    }
+    def payment = Payment.findByTransactionId(params.transactionId)
+    payment.kindOfPayment = paymentOption
+    // Validar si es SPEI o DineroMail y direccionarlo
+    if(paymentOption==KindOfPayment.SPEI){
+      notificationService.sendPaymentInstructions(payment.registration,payment)
+      flash.message = "${g.message(code:'notification.send')}"
+      redirect uri:"/receivePayment?status=pending&trx=${payment.transactionId}"
+      return
+    }else{
+      render view:"do",model:[registration:payment.registration,payment:payment,user:springSecurityService.currentUser]
+    }
+  }
+
   def receive = {
     // Si obtenemos algún error de pago
     if(params.status == 'error'){
@@ -65,6 +91,7 @@ class PaymentController {
               flash.message = "${g.message(code:'payment.waitPending')}"
               break
             case PaymentStatus.PAYED:
+              payment.paymentDate = new Date()
               flash.message = "${g.message(code:'payment.ispayed')}"
               break;
           }

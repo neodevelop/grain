@@ -99,7 +99,6 @@ function bothSelected(){
     if($("input[name='paymentOption']:checked").val() == 'transferencia'){
       $("div#paymentSpei").slideDown('slow');
       $("span#paymentAmountSpei").text($("input[name='percentOption']:checked").val());
-      $("input[name='percentOption']")
     }else{
       $("div#paymentDineroMail").slideDown('slow');
       $("span#paymentAmountDM").text($("input[name='percentOption']:checked").val());

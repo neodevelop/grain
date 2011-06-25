@@ -17,7 +17,7 @@ A través de este medio podrás pagar con cualquiera de las siguientes opciones:
 </div>
 
 <div id="finish">
-  <g:link class="submit" action="create">Realizar mi pago en línea</g:link>
+  <g:link class="submit" action="${pay ?: 'create'}">Realizar mi pago en línea</g:link>
 </div>
 <div id="sendMeInfo">
   Serás direccionado a un sitio seguro donde podrás realizar esta operación...<br/>
