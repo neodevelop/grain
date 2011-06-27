@@ -54,7 +54,8 @@
   <div id="userDataForm">
     <div class="title"> Antes de continuar! </div>
       <div class="sub-title">
-        Necesitamos un poco m&aacute;s de informaci&oacute;n para comenzar con tu entrenamiento...
+        Necesitamos saber un poco más de ti.
+        Estos datos también nos servirán para la correcta acreditación y expedición de tu diploma.
       </div>
       <g:formRemote url="[controller:'user',action:'save']" name="updateUser" method="post" onSuccess="ok()" >
         <g:hiddenField name="isAjax" value="true"/>
