@@ -107,7 +107,7 @@
     <!-- Variables de Diseño-->
     <input type="hidden" name="header_image" value="http://synergyj.com/images/logo.gif" />
     <input type="hidden" name="header_width" value="1" />
-    <input type="hidden" name="expanded_step_PM" value="0" />
+    <input type="hidden" name="expanded_step_PM" value="1" />
     <input type="hidden" name="expanded_step_AD" value="0" />
     <input type="hidden" name="expanded_step_SC" value="0" />
     <input type="hidden" name="expanded_sale_detail" value="1" />
