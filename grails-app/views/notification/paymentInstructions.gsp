@@ -117,7 +117,7 @@
                               </p>
                               <p align="center" style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
                                 <b>ATENTAMENTE</b><br/>
-                                <b>Staff de SyergyJ.com</b>
+                                <b>Staff de SynergyJ.com</b>
                               </p>
                             </td>
                           </tr>

@@ -90,8 +90,8 @@
                               <p style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
                                 Las sesiones de este curso son:
                                 <ul style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px; padding-left:230px;">
-                                  <g:each in="${scheduledCourse?.courseSessions}" var="courseSession">
-                                    <li><g:formatDate date="${courseSession?.sessionStartTime}" format="dd-MM-yy"/></li>
+                                  <g:each in="${scheduledCourse?.courseSessions?.sort()}" var="courseSession">
+                                    <li><g:formatDate date="${courseSession?.sessionStartTime}" format="EEEE dd 'de' MMMM 'del' yyyy"/></li>
                                   </g:each>
                                 </ul>
                               </p>
@@ -111,7 +111,7 @@
                               </p>
                               <p align="center" style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
                                 <b>ATENTAMENTE</b><br/>
-                                <b>Staff de SyergyJ.com</b>
+                                <b>Staff de SynergyJ.com</b>
                               </p>
                             </td>
                           </tr>

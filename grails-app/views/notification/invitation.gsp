@@ -108,7 +108,7 @@
                               <p style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
                                 Debes prepararte para asistir a todas las sesiones del curso, por lo que te anticipamos las fechas en las cuales estaremos conviviendo contigo:
                                 <ul style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px; padding-left: 50px;">
-                                  <g:each in="${scheduledCourse?.courseSessions}" var="courseSession" status="i">
+                                  <g:each in="${scheduledCourse?.courseSessions?.sort()}" var="courseSession" status="i">
                                   <li>Sesión ${i+1}:<g:formatDate date="${courseSession?.sessionStartTime ?: new Date()}" format="EEEE dd 'de' MMMM 'del' yyyy"/> </li>
                                   </g:each>
                                 </ul>
@@ -129,7 +129,7 @@
                               </p>
                               <p align="center" style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
                                 <b>ATENTAMENTE</b><br/>
-                                <b>Staff de SyergyJ.com</b>
+                                <b>Staff de SynergyJ.com</b>
                               </p>
                             </td>
                           </tr>
