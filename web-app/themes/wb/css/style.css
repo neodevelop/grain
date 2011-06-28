@@ -1409,6 +1409,21 @@ table#login td.field{
   margin-top:5px;
 }
 
+#userDataForm input.file {
+  border: 2px solid #d6f9ff;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  color: #666666;
+  font-family: trebuchet MS;
+  font-weight: bold;
+  font-size:14px;
+  margin-bottom: 10px;
+  padding: 6px;
+  width: 250px;
+  margin-left: 20px;
+  margin-top:5px;
+}
+
 #userDataForm input.continue {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -1418,8 +1433,7 @@ table#login td.field{
   font-family: trebuchet MS;
   font-weight: bold;
   font-size:16px;
-  padding: 5px;
-  width: 130px;
+  padding: 5px 30px;
   border:none;
   text-transform:uppercase;
   cursor:pointer;
@@ -1442,8 +1456,7 @@ table#login td.field{
   font-family: trebuchet MS;
   font-weight: bold;
   font-size:16px;
-  padding: 5px;
-  width: 130px;
+  padding: 5px 30px;
   border:none;
   text-transform:uppercase;
   cursor:pointer;

@@ -106,7 +106,7 @@
               </g:else>
               <g:if test="${payment.kindOfPayment == KindOfPayment.SPEI}">
                 <td>
-                  <g:link controller="payment" action="uploadReceipt" id="${payment.id}">
+                  <g:link controller="payment" action="uploadReceipt" name="uploadReceipt${payment.id}">
                     <g:message code="payment.uploadReceipt"/>
                   </g:link>
                 </td>
@@ -119,7 +119,7 @@
               <td><g:message code="payment.payed"/></td>
               <g:if test="${payment.kindOfPayment == KindOfPayment.SPEI}">
                 <td>
-                  <g:link controller="payment" action="seeReceipt" id="${payment.id}">
+                  <g:link controller="payment" action="seeReceipt" id="seeReceipt${payment.id}">
                     <g:message code="payment.seeReceipt"/>
                   </g:link>
                 </td>

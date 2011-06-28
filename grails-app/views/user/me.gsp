@@ -4,10 +4,25 @@
   <meta name='layout' content='wb'/>
   <parameter name="pageHeader" value="${g.message(code: 'me.title', default: 'This is me')}"/>
   <script language="JavaScript" src="${createLinkTo(dir:'themes/wb/js/registration',file:'list.js')}"></script>
+  <!-- Plugin de formulario -->
+  <script src='https://github.com/malsup/form/raw/master/jquery.form.js' type='text/javascript'></script>
   <g:javascript>
     $(function(){
       $("div#tabs").tabs();
       $("#accordion").accordion({ header:'div.note' });
+      $("a[name^='uploadReceipt']").click(function(){
+        var number = $(this).attr('name').substring("uploadReceipt".length);
+        $("#paymentNumber").val(number);
+        $('#lightbox').css({width:'100%',height:'100%'}).fadeIn(500,function(){
+          $("#userDataForm").fadeIn(300);
+        });
+        return false;
+      });
+
+      $('#lightbox').click(function(){
+        $('#userDataForm').fadeOut(300);
+        $('#lightbox').effect('clip',{},500,function(){});
+      });
     });
   </g:javascript>
 </head>
@@ -56,6 +71,7 @@
   </sec:ifAllGranted>
 
   <sec:ifNotGranted roles="ROLE_ADMIN">
+
   <g:if test="${!myRegistrations}">
     <h1>Aún no te has registrado a ningún curso</h1>
     <h3>Explora nuestro calendario e inscríbete!!!</h3>
@@ -75,4 +91,30 @@
   </g:else>
   </sec:ifNotGranted>
 </div>
+
+  <div id="lightbox" style="display:none;"></div>
+  <div id="userDataForm" style="display:none;">
+    <div class="title"> Gracias por tu pago! </div>
+      <div class="sub-title">
+        Por favor, selecciona el archivo(jpeg) que comprueba tu pago
+      </div>
+      <g:form controller="payment" action="fileupload" method="POST" enctype="multipart/form-data">
+        <g:hiddenField name="paymentNumber" value=""/>
+        <label>Archivo:</label><br/>
+        <input id="file" type="file" name="file" class="file" size="30" />
+        <div align="center">
+        <input value="Subir archivo..." class="continue" tabindex="3" type="submit">
+        </div>
+        </div>
+      </g:form>
+      <div id="fileupload"></div>
+      <script type="text/javascript">
+			$(document).ready(function() {
+				$("#fileuploadForm").ajaxForm({ success: function(html) {
+						$("#fileupload").replaceWith(html);
+					}
+				});
+			});
+		  </script>
+  </div>
 </body>

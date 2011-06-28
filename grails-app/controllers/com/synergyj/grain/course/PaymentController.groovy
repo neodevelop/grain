@@ -41,6 +41,11 @@ class PaymentController {
     [registration:registration,promotionsPerCourse:promotionsForThisUser]
   }
 
+  def fileupload = {
+    println params
+    render "hola mundo"
+  }
+
   def start = {
     println params
     def payment = Payment.get(params.id)
