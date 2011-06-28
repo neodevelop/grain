@@ -20,6 +20,7 @@ class PaymentController {
   def springSecurityService
   def paymentService
   def notificationService
+  def registrationService
 
   def index = {
     // Obtenemos el usuario actual
@@ -99,7 +100,10 @@ class PaymentController {
               flash.message = "${g.message(code:'payment.waitPending')}"
               break
             case PaymentStatus.PAYED:
+              // Actualizamos la fecha de pago
               payment.paymentDate = new Date()
+              // Comprobamos si el registro al curso ya esta pagado
+              registrationService.checkIsPayed(payment.registration.id)
               flash.message = "${g.message(code:'payment.ispayed')}"
               break;
           }
@@ -162,7 +166,7 @@ class PaymentController {
     if(paymentOption=='spei'){
       notificationService.sendPaymentInstructions(registration,payment)
       flash.message = "${g.message(code:'notification.send')}"
-      redirect uri:"/receivePayment?status=pending&trx=${payment.transactionId}"
+      redirect action:'receive',params:[status:'pending',trx:payment.transactionId]
       return
     }else{
       render view:"do",model:[registration:registration,payment:payment,user:springSecurityService.currentUser]

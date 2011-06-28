@@ -32,19 +32,26 @@ class RegistrationService {
   def userService
   def notificationService
 
-  def checkIsPayed(registration){
+  def checkIsPayed(Long registrationId){
+    def registration = Registration.get(registrationId)
     // Obtenemos la suma de la cantidad que tiene que pagar
-        def totalForPayment = 0
-        def totalPayed = 0
-        registration.payments.each{ thisPayment ->
-          // Sumamos el total a pagar
-          total += thisPayment.amount
-          // Sumamos lo que ya pagó
-          if(thisPayment.paymentStatus == PaymentStatus.PAYED){
-            totalPayed += totalPayed
-          }
-        }
-        println "$totalForPayment - $totalPayed"
+    def totalForPayment = 0
+    def totalPayed = 0
+    registration.payments.each{ thisPayment ->
+      // Sumamos el total a pagar
+      totalForPayment += thisPayment.amount
+      // Sumamos lo que ya pagó
+      if(thisPayment.paymentStatus == PaymentStatus.PAYED){
+        totalPayed += totalPayed
+      }
+    }
+    // Obtenemos la deuda
+    def debt = totalForPayment - totalPayed
+    // Si no tiene deuda
+    if(!debt){
+      // Entonces actualizamos el registro y lo marcamos que ya pago
+      registration.registrationStatus = RegistrationStatus.PAYED
+    }
   }
 
   def registerFromLanding(RegisterUserCommand userCommand, Long scheduledCourseId) {

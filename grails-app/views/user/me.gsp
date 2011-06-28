@@ -63,10 +63,14 @@
   <br>
   <h4><g:message code="me.lastname"/>:</h4><h3>${user.lastName ?: 'vacío'}</h3>
   <br>
+  <g:if test="${user?.company}">
   <h4><g:message code="me.company"/>:</h4><h3>${user.company ?: 'vacío'}</h3>
   <br>
+  </g:if>
+  <g:if test="${user?.website}">
   <h4><g:message code="me.website"/>:</h4><h3>${user.website ?: 'vacío'}</h3>
   <br>
+  </g:if>
   <br/>
   <g:link mapping="updateme" class="action">
     <g:message code="me.update"/>
