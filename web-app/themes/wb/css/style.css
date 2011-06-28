@@ -1470,6 +1470,27 @@ table#login td.field{
   background: linear-gradient(top, #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* W3C */
 }
 
+#userDataForm #fileupload{
+  margin: 30px;
+  text-align: center;
+}
+
+#userDataForm #okMessage{
+  margin: 30px;
+  text-align: center;
+  color:#b6e026;
+  font-weight: bold;
+  font-size:16px;
+}
+
+#userDataForm #errorMessage{
+  margin: 30px;
+  text-align: center;
+  color:#FF9187;
+  font-weight: bold;
+  font-size:16px;
+}
+
 table.registration{
   margin: 10px;
   width:100%;

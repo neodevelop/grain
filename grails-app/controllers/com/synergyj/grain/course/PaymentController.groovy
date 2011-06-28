@@ -42,12 +42,15 @@ class PaymentController {
   }
 
   def fileupload = {
-    println params
-    render "hola mundo"
+    def payment = Payment.get(params.long('paymentNumber'))
+    def receipt = new Receipt(receiptStatus:ReceiptStatus.RECEIVED,amount:payment.amount)
+    receipt.image = params.file.getBytes()
+    payment.addToReceipts(receipt)
+    payment.paymentStatus = PaymentStatus.PENDING
+    render "${g.message(code:'receipt.received')}"
   }
 
   def start = {
-    println params
     def payment = Payment.get(params.id)
     [payment:payment]
   }

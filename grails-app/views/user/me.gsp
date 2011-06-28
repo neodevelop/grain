@@ -8,6 +8,35 @@
   <script src='https://github.com/malsup/form/raw/master/jquery.form.js' type='text/javascript'></script>
   <g:javascript>
     $(function(){
+
+      $("#fileuploadForm").submit(function(){
+        $("#okMessage").hide();
+        $("#errorMessage").hide();
+        $(this).ajaxSubmit({
+          beforeSubmit:function(formData, jqForm, options){
+            $("input.continue").hide();
+            $("#fileupload").fadeIn('slow');
+          },
+          success:function(data){
+            var linkId = $("#paymentNumber").val();
+            $("<span>${message(code:'payment.waitProcess')}</span>").insertBefore("a[name=uploadReceipt"+linkId+"]");
+            $("a[name=uploadReceipt"+linkId+"]").hide();
+            $("#okMessage").text(data);
+            $("#okMessage").fadeIn();
+            $('#userDataForm').delay(4000).fadeOut(300);
+            $('#lightbox').delay(4000).effect('clip',{},500,function(){});
+          },
+          error:function(jqXHR, textStatus, errorThrown){
+            $("#errorMessage").text(errorThrown);
+            $("#errorMessage").fadeIn();
+          },
+          complete:function(){
+            $("#fileupload").fadeOut('slow').delay(1000);
+          }
+        });
+        return false;
+      });
+
       $("div#tabs").tabs();
       $("#accordion").accordion({ header:'div.note' });
       $("a[name^='uploadReceipt']").click(function(){
@@ -95,26 +124,20 @@
   <div id="lightbox" style="display:none;"></div>
   <div id="userDataForm" style="display:none;">
     <div class="title"> Gracias por tu pago! </div>
-      <div class="sub-title">
-        Por favor, selecciona el archivo(jpeg) que comprueba tu pago
-      </div>
-      <g:form controller="payment" action="fileupload" method="POST" enctype="multipart/form-data">
-        <g:hiddenField name="paymentNumber" value=""/>
-        <label>Archivo:</label><br/>
-        <input id="file" type="file" name="file" class="file" size="30" />
-        <div align="center">
-        <input value="Subir archivo..." class="continue" tabindex="3" type="submit">
-        </div>
-        </div>
-      </g:form>
-      <div id="fileupload"></div>
-      <script type="text/javascript">
-			$(document).ready(function() {
-				$("#fileuploadForm").ajaxForm({ success: function(html) {
-						$("#fileupload").replaceWith(html);
-					}
-				});
-			});
-		  </script>
+    <div class="sub-title">
+      Por favor, selecciona el archivo(jpeg) que comprueba tu pago
+    </div>
+    <g:form name="fileuploadForm" controller="payment" action="fileupload" method="POST" enctype="multipart/form-data">
+      <g:hiddenField name="paymentNumber" value=""/>
+      <label>Archivo:</label><br/>
+      <input id="file" type="file" name="file" class="file" size="30" />
+      <div align="center">
+      <input value="Subir archivo..." class="continue" tabindex="3" type="submit">
+    </g:form>
+    <div id="fileupload" style="display: none;">
+      <img src="${createLinkTo(dir:'themes/wb/images',file:'ajax-loader.gif')}" title="progress" alt="loader"/>
+    </div>
+    <div id="okMessage" style="display:none;"></div>
+    <div id="errorMessage" style="display:none;"></div>
   </div>
 </body>

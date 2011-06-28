@@ -85,6 +85,7 @@
           <tr class="paymentRow">
             <td># ${i+1}</td>
             <td class="money">$ ${payment.amount}</td>
+
             <g:if test="${payment.paymentStatus == PaymentStatus.WAITING}">
               <td>
                 <g:message code="payment.waiting"/>
@@ -95,6 +96,7 @@
                 </g:link>
               </td>
             </g:if>
+
             <g:if test="${payment.paymentStatus == PaymentStatus.PENDING}">
               <g:if test="${payment.receipts.size()}">
                 <td>
@@ -106,15 +108,21 @@
               </g:else>
               <g:if test="${payment.kindOfPayment == KindOfPayment.SPEI}">
                 <td>
-                  <g:link controller="payment" action="uploadReceipt" name="uploadReceipt${payment.id}">
-                    <g:message code="payment.uploadReceipt"/>
-                  </g:link>
+                  <g:if test="${payment.receipts.size()}">
+                    <g:message code="payment.waitProcess"/>
+                  </g:if>
+                  <g:else>
+                    <g:link controller="payment" action="uploadReceipt" name="uploadReceipt${payment.id}">
+                      <g:message code="payment.uploadReceipt"/>
+                    </g:link>
+                  </g:else>
                 </td>
               </g:if>
               <g:if test="${payment.kindOfPayment == KindOfPayment.DINERO_MAIL}">
                 <td><g:message code="payment.waitProcess"/></td>
               </g:if>
             </g:if>
+
             <g:if test="${payment.paymentStatus == PaymentStatus.PAYED}">
               <td><g:message code="payment.payed"/></td>
               <g:if test="${payment.kindOfPayment == KindOfPayment.SPEI}">
