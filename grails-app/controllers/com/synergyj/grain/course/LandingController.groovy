@@ -26,12 +26,33 @@ class LandingController {
   def notificationService
 
   @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+  def addMeNoPost = {
+    // Recibimos el email y el id de curso calendarizado
+    // Llamamos el método privado que genera la URL
+    def actionAndRegistrationCode = obtainRegistrationCode(params.email,params.long("scheduledCourseId"))
+
+    redirect(uri: "/${actionAndRegistrationCode.myAction}?code=${actionAndRegistrationCode.registrationCode.token}")
+  }
+
+  @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
   def addMe = { RegisterUserCommand registerUserCommand ->
     // Recibimos el email y el id de curso calendarizado
-    def email = params.email
-    def scheduledCourseId = params.long("scheduledCourseId")
-    // Generamos una URL alternativa para regresarla en caso de no se envíe el correo o el usuario quiera proceder sin ver el correo
+    // Llamamos el método privado que genera la URL
+    def actionAndRegistrationCode = obtainRegistrationCode(params.email,params.long("scheduledCourseId"))
+    // Formamos la URL con el resultado
     def url = request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/'
+    url += actionAndRegistrationCode.myAction+"?code="+actionAndRegistrationCode.registrationCode.token
+    // Regresamos una respuesta para el formulario de registro
+    response.addHeader("Access-Control-Allow-Origin","*")
+    response.addHeader("Content-Type","	application/json;charset=UTF-8")
+    render([url:url] as JSON)
+  }
+
+  @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+  def create = {
+  }
+
+  private def obtainRegistrationCode(String email, Long scheduledCourseId){
     // Buscamos si el usuario ya se registró previamente
     def registrationCode = RegistrationCode.findByUsernameAndScheduledCourseId(email,scheduledCourseId)
 
@@ -42,26 +63,18 @@ class LandingController {
 
     // Buscamos el usuario por su correo
     def user = userService.findUser(email)
-
+    def myAction = ""
     if(user){
       // Si ya existe el usuario entonces lo notificamos
       notificationService.sendConfirmRegistration(user,scheduledCourseId,registrationCode)
-      // Creamos la URL para un usuario existente
-      url += "confirmRegistration?code=${registrationCode.token}"
+      // Definimos la acción
+      myAction = "confirmRegistration"
     }else{
       // Si no existe entonces lo invitamos
       registrationCode = notificationService.sendInvitation(email,scheduledCourseId,registrationCode)
-      // Creamos la URL para que un usuario se registre
-      url += "signup?code=${registrationCode.token}"
+      // Definimos la acción
+      myAction = "signup"
     }
-
-    // Regresamos una respuesta para el formulario de registro
-    response.addHeader("Access-Control-Allow-Origin","*")
-    response.addHeader("Content-Type","	application/json;charset=UTF-8")
-    render([url:url] as JSON)
-  }
-
-  @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
-  def create = {
+    [myAction:myAction,registrationCode:registrationCode]
   }
 }

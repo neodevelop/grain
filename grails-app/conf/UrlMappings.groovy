@@ -71,6 +71,9 @@ class UrlMappings {
     name addMeFromLanding: "/addMeFromLanding"(controller:"landing"){
       action = [POST:"addMe"]
     }
+    name addMeFromLandingNoPost: "/addMeFromLandingNoPost"(controller:"landing"){
+      action = [GET:"addMeNoPost"]
+    }
     "500"(controller: 'error')
   }
 }
