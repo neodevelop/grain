@@ -1326,6 +1326,15 @@ table#login td.field{
 	z-index: 99998;
 }
 
+#imageReceipt{
+  position:fixed;
+  left:0;
+	top:0;
+  z-index:99999;
+  width:440px;
+	height:300px;
+}
+
 #userDataForm{
   width:440px;
 	height:300px;

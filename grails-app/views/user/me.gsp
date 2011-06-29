@@ -1,59 +1,12 @@
-<%@ page import="com.synergyj.grain.course.RegistrationStatus" %>
+<%@ page import="com.synergyj.grain.course.ReceiptStatus; com.synergyj.grain.course.KindOfPayment; com.synergyj.grain.course.PaymentStatus; com.synergyj.grain.course.RegistrationStatus" %>
 <head>
   <title><g:message code='me.title' default="Me"/></title>
   <meta name='layout' content='wb'/>
   <parameter name="pageHeader" value="${g.message(code: 'me.title', default: 'This is me')}"/>
   <script language="JavaScript" src="${createLinkTo(dir:'themes/wb/js/registration',file:'list.js')}"></script>
+  <script language="JavaScript" src="${createLinkTo(dir:'themes/wb/js/user',file:'me.js')}"></script>
   <!-- Plugin de formulario -->
   <script src='https://github.com/malsup/form/raw/master/jquery.form.js' type='text/javascript'></script>
-  <g:javascript>
-    $(function(){
-
-      $("#fileuploadForm").submit(function(){
-        $("#okMessage").hide();
-        $("#errorMessage").hide();
-        $(this).ajaxSubmit({
-          beforeSubmit:function(formData, jqForm, options){
-            $("input.continue").hide();
-            $("#fileupload").fadeIn('slow');
-          },
-          success:function(data){
-            var linkId = $("#paymentNumber").val();
-            $("<span>${message(code:'payment.waitProcess')}</span>").insertBefore("a[name=uploadReceipt"+linkId+"]");
-            $("a[name=uploadReceipt"+linkId+"]").hide();
-            $("#okMessage").text(data);
-            $("#okMessage").fadeIn();
-            $('#userDataForm').delay(4000).fadeOut(300);
-            $('#lightbox').delay(4000).effect('clip',{},500,function(){});
-          },
-          error:function(jqXHR, textStatus, errorThrown){
-            $("#errorMessage").text(errorThrown);
-            $("#errorMessage").fadeIn();
-          },
-          complete:function(){
-            $("#fileupload").fadeOut('slow').delay(1000);
-          }
-        });
-        return false;
-      });
-
-      $("div#tabs").tabs();
-      $("#accordion").accordion({ header:'div.note' });
-      $("a[name^='uploadReceipt']").click(function(){
-        var number = $(this).attr('name').substring("uploadReceipt".length);
-        $("#paymentNumber").val(number);
-        $('#lightbox').css({width:'100%',height:'100%'}).fadeIn(500,function(){
-          $("#userDataForm").fadeIn(300);
-        });
-        return false;
-      });
-
-      $('#lightbox').click(function(){
-        $('#userDataForm').fadeOut(300);
-        $('#lightbox').effect('clip',{},500,function(){});
-      });
-    });
-  </g:javascript>
 </head>
 <body>
 <div id="left">
@@ -93,7 +46,33 @@
       <h3>Comienza: <g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd-MM-yy"/> </h3>
       <ul id="registrations">
       <g:each in="${registrationsPerScheduledCourse[scheduledCourse.course.courseKey]}" var="registration">
-        <li><b>${registration?.student?.firstName ?: ''} ${registration?.student?.lastName ?: ''}</b> ${registration?.student?.email} - ${registration.registrationStatus}</li>
+        <li>
+          <b>${registration?.student?.firstName ?: ''}
+            ${registration?.student?.lastName ?: ''}</b>
+          ${registration?.student?.email} -
+          ${registration.registrationStatus}
+          <g:if test="${registration?.payments?.size()}">
+          <ul>
+            <g:each in="${registration?.payments}" var="payment">
+            <li>
+              $ ${payment.amount}
+              - ${payment.paymentStatus}
+              <g:if test="${payment?.receipts?.size()}">
+                <ul>
+                  <g:each in="${payment?.receipts}" var="receipt">
+                    <li>
+                      ${receipt.receiptStatus} -
+                      <g:link controller="receipt" action="showImage" id="${receipt.id}" class="seeReceipt">Ver Recibo </g:link>
+                      <g:if test="${receipt.receiptStatus == ReceiptStatus.RECEIVED}">- Aprobar</g:if>
+                    </li>
+                  </g:each>
+                </ul>
+              </g:if>
+            </li>
+            </g:each>
+          </ul>
+          </g:if>
+        </li>
       </g:each>
       </ul>
     </div>
@@ -126,6 +105,9 @@
 </div>
 
   <div id="lightbox" style="display:none;"></div>
+  <div id="imageReceipt" style="display:none;">
+
+  </div>
   <div id="userDataForm" style="display:none;">
     <div class="title"> Gracias por tu pago! </div>
     <div class="sub-title">
