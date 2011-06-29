@@ -42,7 +42,7 @@ class RegistrationService {
       totalForPayment += thisPayment.amount
       // Sumamos lo que ya pagó
       if(thisPayment.paymentStatus == PaymentStatus.PAYED){
-        totalPayed += totalPayed
+        totalPayed += thisPayment.amount
       }
     }
     // Obtenemos la deuda
@@ -52,6 +52,7 @@ class RegistrationService {
       // Entonces actualizamos el registro y lo marcamos que ya pago
       registration.registrationStatus = RegistrationStatus.PAYED
     }
+
   }
 
   def registerFromLanding(RegisterUserCommand userCommand, Long scheduledCourseId) {

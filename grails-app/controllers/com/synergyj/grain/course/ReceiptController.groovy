@@ -16,11 +16,24 @@
 package com.synergyj.grain.course
 
 class ReceiptController {
+
+  def registrationService
+
   def showImage = {
     def receipt = Receipt.get(params.id)
     response.contentType = 'image/jpeg'
     response.outputStream << receipt.image
     response.outputStream.flush()
     return;
+  }
+  def approve = {
+    def receipt = Receipt.get(params.id)
+    receipt.receiptStatus = ReceiptStatus.APROVED
+    // Refactor
+    def payment = Payment.get(receipt.payment.id)
+    payment.paymentStatus = PaymentStatus.PAYED
+    payment.save(flush:true)
+    registrationService.checkIsPayed(receipt.payment.registration.id)
+    render "Aprobado!!!"
   }
 }

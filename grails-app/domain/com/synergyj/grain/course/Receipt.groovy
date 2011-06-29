@@ -29,6 +29,6 @@ class Receipt {
     image(nullable:false)
     amount(nullable:false)
     dateCreated(display:false)
-    dateUpdated(display:false)
+    lastUpdated(display:false)
   }
 }
