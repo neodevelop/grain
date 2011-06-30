@@ -44,8 +44,12 @@ environments {
 	}
 	production {
 		dataSource {
-			dbCreate = "update"
-			url = "jdbc:hsqldb:file:prodDB;shutdown=true"
+			pooled = true
+      dbCreate = "create-drop"
+      url = "jdbc:mysql://localhost/grain"
+      driverClassName = "com.mysql.jdbc.Driver"
+      username = ""
+      password = ""
 		}
 	}
 }
