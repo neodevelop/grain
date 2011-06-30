@@ -20,7 +20,4 @@ class NewsItem extends AbstractBaseContent {
 	
 	static hasMany = [comments:Comment]
 		
-	static mapping = {
-		cache true
-	}
 }

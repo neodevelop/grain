@@ -31,6 +31,8 @@ abstract class AbstractBaseContent implements Serializable {
     cache true
     body type: "text"
     tablePerHierarchy false
+    key column: 'ab_content_key'
+    type column: 'ab_content_type'
   }
 
   static constraints = {

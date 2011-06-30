@@ -20,5 +20,9 @@ class Content extends AbstractBaseContent {
   static mapping = {
     table 'gr_generic_content'
     cache true
+    body type: "text"
+    tablePerHierarchy false
+    key column: 'c_content_key'
+    type column: 'c_content_type'
   }
 }

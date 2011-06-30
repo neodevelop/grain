@@ -18,8 +18,4 @@ package com.synergyj.grain.content
 class Version extends AbstractBaseContent {
 	Integer number
 	Content current
-	
-	static mapping = {
-		cache usage:'read-only'
-	}
 }
