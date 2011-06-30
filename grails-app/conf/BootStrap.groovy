@@ -258,38 +258,58 @@ class BootStrap {
     if (c == 0) {
       def iconboxHtml = '''
 <div class="iconbox">
-    <img src="themes/wb/images/icon1.png" alt="" width="48" height="47" class="leftimage" /><h1>Business</h1><br />
-    <span class="smalltitle">Duis autem vel eum iriure dolor</span> in hendrerit in vulputate velit esse  dolore eu feugiat nula facilisis at vero eros et accumsa. <span class="smalltitle"><a href="#">More</a></span><img src="themes/wb/images/arrow.png" width="11" height="10" alt="" /></div>
+    <img src="themes/wb/images/icon1.png" alt="" width="48" height="47" class="leftimage" /><h1>Cursos</h1><br />
+    <span class="smalltitle">En cursos de desarrollo de software</span> estamos convencidos que nuestra experiencia y la práctica del conocimiento será lo que te dará la mayor satisfacción. <img src="themes/wb/images/arrow.png" width="11" height="10" alt="" /></div>
     <div class="iconline"></div>
 
    <div class="iconbox">
     <img src="themes/wb/images/icon2.png" alt="" width="39" height="47" class="leftimage" />
-    <h1>Security</h1><br />
-    <span class="smalltitle">Duis autem vel eum iriure dolor</span> in hendrerit in vulputate velit esse  dolore eu feugiat nula facilisis at vero eros et accumsa. <span class="smalltitle"><a href="#">More</a></span><img src="themes/wb/images/arrow.png" width="11" height="10" alt="" /></div>
+    <h1>Comunidad</h1><br />
+    <span class="smalltitle">No serás sólo un alumno,</span> cuando asistes a nuestros cursos, te conviertes en parte de la comunidad de desarrolladores que realmente hacen diferencia en su profesión. <img src="themes/wb/images/arrow.png" width="11" height="10" alt="" /></div>
     <div class="iconline"></div>
 
       <div class="iconbox">
     <img src="themes/wb/images/icon3.png" alt="" width="43" height="47" class="leftimage" />
-    <h1>License</h1><br />
-    <span class="smalltitle">Duis autem vel eum iriure dolor</span> in hendrerit in vulputate velit esse  dolore eu feugiat nula facilisis at vero eros et accumsa. <span class="smalltitle"><a href="#">More</a></span><img src="themes/wb/images/arrow.png" width="11" height="10" alt="" /></div>
+    <h1>Acercate</h1><br />
+    <span class="smalltitle">Nuestros instructores</span> son referencias internacionales de desarrollo de software, conócelos.<span class="smalltitle">
+    <br><a href="http://springhispano.org">SpringHispano.org</a>
+    <br><a href="http://grails.org.mx">GrailsMX</a>
+    <br><a href="http://artesanos.de/software">Artesanos de Software</a>
+    <br><a href="http://vivecodigo.org">ViveCodigo.org</a>
+    </span><img src="themes/wb/images/arrow.png" width="11" height="10" alt="" /></div>
     <div class="iconline"></div>
 
       <div class="iconbox">
     <img src="themes/wb/images/icon4.png" alt="" width="46" height="47" class="leftimage" />
-    <h1>Support</h1><br />
-    <span class="smalltitle">Duis autem vel eum iriure dolor</span> in hendrerit in vulputate velit esse  dolore eu feugiat nula facilisis at vero eros et accumsa. <span class="smalltitle"><a href="#">More</a></span><img src="themes/wb/images/arrow.png" width="11" height="10" alt="" /></div>
+    <h1>Inscíbete</h1><br />
+    <span class="smalltitle">Es gratis!</span> Mantente actualizado, recibe promociones y alístate para ser parte de la comunidad de desarrolladores en constante evolucion. <img src="themes/wb/images/arrow.png" width="11" height="10" alt="" /></div>
 '''
       def iconbox = new Content(title: 'iconbox', body: iconboxHtml, language: 'es', key: 'iconbox', type: ContentType.HTML)
       save(iconbox)
 
       def homeHtml = '''
-<h2>Bienvenidos a Grain</h2>
-  <h3>La plataforma de e-learning de SynergyJ</h3>
+    <h2>Bienvenidos a este sitio</h2>
+  <h3>Desde aquí podrás ser parte del entrenamiento impartido por SynergyJ</h3>
 
-  <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nula facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdie. doming id quod. mazim placerat facer possim assum vel eum iriure dolor in hendrerit in vulputate velit esse molestie cons.<br/>
-    <br/>
-    Equat, vel illum dolore eu feugiat nulla facilisis at vero autem vel eum iriure dolor in hendrerit in vulputate. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nula facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent.</p>
-  <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nula facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdie. doming id quod. mazim placerat facer possim assum vel eum iriure dolor in hendrerit in vulputate velit esse molestie cons.</p>
+  <p>Es momento de potenciar tu desempeño y atender tu plan de carrera de desarrollador de la mejor manera, para ello, hemos puesto a tu disposición esta aplicación, donde podras administrar los cursos que deseas tomar y planear la adquisicion de los skills necesarios en esta rama tan competida.
+   Desde aquí podrás:.<br/>
+    <ul>
+      <li>Inscribirte a un curso</li>
+      <li>Pagar tu curso</li>
+      <li>Subir tus comprobantes de pago</li>
+      <li>Recoger tu diploma</li>
+      <li>Obtener toda la información para inscribirte</li>
+      <li>Ver nuestro calendario de cursos y eventos</li>
+    </ul>
+    </p>
+  <p>Próximamente podrás:</p>
+    <ul>
+      <li>Recomendar este curso para recibir descuentos</li>
+      <li>Tener tu historial académico con nosotros</li>
+      <li>Enviar comentarios</li>
+      <li>Enviar tu diploma</li>
+      <li>Y algunas otras cosas más...</li>
+    </ul>
 '''
       def home = new Content(title: 'home', body: homeHtml, language: 'es', key: 'home', type: ContentType.HTML)
       save(home)
@@ -300,8 +320,8 @@ class BootStrap {
         <img src="themes/wb/images/icon5.png" width="48" height="50" alt=""/>
       </div>
       <div style="width:220px; float:left;">
-        <h5>Corporate Info</h5>
-        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nula facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril.
+        <h5>Acerca de nosotros</h5>
+        SynergyJ es una empresa formada por un grupo de expertos en tecnologías y metodologías ágiles para el desarrollo de software que provee soluciones de negocio, usando herramientas efectivas y basados en la experiencia de la implementación de software productivo.
       </div>
     </div>
     <div id="recentnews">
@@ -309,17 +329,12 @@ class BootStrap {
         <img src="themes/wb/images/icon5_.png" width="49" height="50" alt=""/>
       </div>
       <div style="width:220px; float:left;">
-        <h5>Recent News</h5>
-        <ul>
-          <li><a href="#">Autem vel eum iriure dolor in henderit</a></li>
-          <li><a href="#">Vel illum dolore eu feugiat nula</a></li>
-          <li><a href="#">Facilisis at vero eros et accumsan et</a></li>
-          <li><a href="#">Lusto odio dignissim qui blandit</a></li>
-        </ul>
+        <h5>Nuestra misión</h5>
+        Implementar las mejores soluciones de desarrollo de software de acuerdo a las necesidades empresariales, basándonos en el éxito obtenido en las implementeaciones previas, aprovechando al máximo los recursos humanos, financieros y tecnológicos.
       </div>
     </div>
     <div id="connect">
-      <h5>Connect With Us</h5>
+      <h5>Conéctate con nosotros</h5>
       <br/><a href="http://twitter.com/synergyj"><img src="themes/wb/images/icon6.png" alt="" width="39" height="49" class="leftimage"/></a><a href="http://facebook.com/synergyj"><img src="themes/wb/images/icon7.png" alt="" width="46" height="49" class="leftimage"/></a> <a href="http://linkedin.com/synergyj"><img src="themes/wb/images/icon8.png" alt="" width="52" height="49" class="leftimage"/></a><img src="themes/wb/images/icon9.png" alt="" width="34" height="49" class="leftimage"/></div>
 '''
       def footerContent = new Content(title: 'footerContent', body: footerContentHtml, language: 'es', key: 'footerContent', type: ContentType.HTML)
@@ -332,10 +347,10 @@ class BootStrap {
       save(copyright)
 
       def latestnewsHtml = '''
-        <h1>Latest News</h1><h4>What’s happening with us</h4>
-  <p><img src="themes/wb/images/pic01.gif" alt="" width="67" height="67" vspace="5" class="leftimage"/><span class="smalltitle">Autem vel eum iriure dolor in</span> hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu.<span class="smalltitle"><a href="#">More</a></span><img src="themes/wb/images/arrow.png" width="11" height="10" alt=""/></p>
-  <p><img src="themes/wb/images/pic02.gif" alt="" width="67" height="67" vspace="5" class="leftimage"/><span class="smalltitle">Autem vel eum iriure dolor in</span> hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu.<span class="smalltitle"><a href="#">More</a></span><img src="themes/wb/images/arrow.png" width="11" height="10" alt=""/></p>
-  <p><img src="themes/wb/images/pic08.jpg" alt="" width="67" height="67" vspace="5" class="leftimage"/><span class="smalltitle">Autem vel eum iriure dolor in</span> hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu.<span class="smalltitle"><a href="#">More</a></span><img src="themes/wb/images/arrow.png" width="11" height="10" alt=""/></p>
+        <h1>Testimonios</h1><h4>Que dicen de nosotros?</h4>
+  <p><img src="themes/wb/images/pic01.gif" alt="" width="67" height="67" vspace="5" class="leftimage"/><span class="smalltitle">Miguel Angel Huerta ( PortoMX )</span> "...Hicieron una muy buena seleccion de los temas al dar más que un curso extenso una vision sobre lo que se puede hacer con spring..."<img src="themes/wb/images/arrow.png" width="11" height="10" alt=""/></p>
+  <p><img src="themes/wb/images/pic02.gif" alt="" width="67" height="67" vspace="5" class="leftimage"/><span class="smalltitle">Gerardo Javier Montes Solache ( Sictel ECM )</span> "...El curso estubo bien, de facil conprención, y los expositores considero que tienen el nivel necesario para poder dar las bases de spring..." <img src="themes/wb/images/arrow.png" width="11" height="10" alt=""/></p>
+  <p><img src="themes/wb/images/pic08.jpg" alt="" width="67" height="67" vspace="5" class="leftimage"/><span class="smalltitle">Roberto Salvador Olguín Lozano ( Bursatec )</span> "...El taller fue muy bueno, hablaron de todo sin caer en exceso en algún tema, me parecio de mucha ayuda y quiero seguir conociendo de sus reuniones, GRACIAS..." <img src="themes/wb/images/arrow.png" width="11" height="10" alt=""/></p>
       '''
       def latestnews = new Content(title: 'latestnews', body: latestnewsHtml, language: 'es', key: 'latestnews', type: ContentType.HTML)
       save(latestnews)
