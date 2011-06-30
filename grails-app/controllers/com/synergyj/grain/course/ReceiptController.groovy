@@ -29,11 +29,8 @@ class ReceiptController {
   def approve = {
     def receipt = Receipt.get(params.id)
     receipt.receiptStatus = ReceiptStatus.APROVED
-    // Refactor
-    def payment = Payment.get(receipt.payment.id)
-    payment.paymentStatus = PaymentStatus.PAYED
-    payment.save(flush:true)
+    receipt.payment.paymentStatus = PaymentStatus.PAYED
     registrationService.checkIsPayed(receipt.payment.registration.id)
-    render "Aprobado!!!"
+    render "${message(code:'payment.aproved')}"
   }
 }

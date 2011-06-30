@@ -10,7 +10,7 @@ $(function(){
           },
           success:function(data){
             var linkId = $("#paymentNumber").val();
-            $("<span>${message(code:'payment.waitProcess')}</span>").insertBefore("a[name=uploadReceipt"+linkId+"]");
+            $("<span>Procesando</span>").insertBefore("a[name=uploadReceipt"+linkId+"]");
             $("a[name=uploadReceipt"+linkId+"]").hide();
             $("#okMessage").text(data);
             $("#okMessage").fadeIn();
