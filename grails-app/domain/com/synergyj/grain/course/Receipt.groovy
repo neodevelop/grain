@@ -33,6 +33,6 @@ class Receipt {
   }
 
   static mapping = {
-    image sqlType: "blob"
+    image sqlType: "mediumblob"
   }
 }
