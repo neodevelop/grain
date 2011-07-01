@@ -42,7 +42,7 @@ abstract class CourseContent {
 	
 	static constraints = {
 		name blank:false,nullable:false,size:1..100
-		content blank:false,nullable:false
+		content blank:false,nullable:false,size:1..1000
 		contentType nullable:false
 		
 		lastUpdated display:false
