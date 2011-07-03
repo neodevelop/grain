@@ -5,9 +5,9 @@
 
 <table id="breakDownDetail">
   <tr>
-    <td><g:message code="course.originalPrice"/>:</td>
+    <td width="50%"><g:message code="course.originalPrice"/>:</td>
     <td>
-      $ <g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/>
+      $ <span id="originalPrice"><g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/></span>
       <g:hiddenField name="costByCourse" value="${registration.scheduledCourse.costByCourse}"/>
     </td>
   </tr>

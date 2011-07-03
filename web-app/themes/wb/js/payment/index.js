@@ -122,6 +122,7 @@ function highlight(selector,clazz,group){
 function recalculateAmounts(animate){
   var costByCourse = $("#costByCourse").val();
   var finalCostCourse = costByCourse;
+  $("#originalPrice").text((costByCourse*1).toFixed(2));
 
   var discount = 0;
   var discountsId = [];
@@ -136,8 +137,8 @@ function recalculateAmounts(animate){
   if(discount > 0){
     var discountAmount = finalCostCourse * (discount/100);
     var priceWithDiscount = finalCostCourse - discountAmount;
-    $("span#discountAmount").text(discountAmount);
-    $("span#priceWithDiscount").text(priceWithDiscount);
+    $("span#discountAmount").text((discountAmount*1).toFixed(2));
+    $("span#priceWithDiscount").text((priceWithDiscount*1).toFixed(2));
     finalCostCourse = priceWithDiscount;
     $("tr.discount").fadeIn('slow').add("tr.priceWithDiscount").fadeIn('slow');
   }else{
@@ -148,15 +149,15 @@ function recalculateAmounts(animate){
   if($("input[name='invoice']").is(":checked")){
     var taxIvaAmount = (finalCostCourse * 0.16);
     finalCostCourse = (finalCostCourse*1) + (taxIvaAmount*1);
-    $("span#taxIvaAmount").text(taxIvaAmount);
+    $("span#taxIvaAmount").text((taxIvaAmount*1).toFixed(2));
     $("tr.taxIva").fadeIn('slow');
   }else{
     $("tr.taxIva").fadeOut('slow');
   }
 
-  $("span#finalAmount").text(finalCostCourse);
-  $("span#totalCostByCourse").text(finalCostCourse);
-  $("span#halfCostByCourse").text(finalCostCourse/2);
+  $("span#finalAmount").text((finalCostCourse*1).toFixed(2));
+  $("span#totalCostByCourse").text((finalCostCourse*1).toFixed(2));
+  $("span#halfCostByCourse").text(((finalCostCourse/2)*1).toFixed(2));
 
   $("#half").val(finalCostCourse/2);
   $("#full").val(finalCostCourse);

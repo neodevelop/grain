@@ -26,13 +26,10 @@ class Receipt {
   static belongsTo = [payment:Payment]
 
   static constraints = {
-    image(nullable:false,maxSize:2048000)
+    image(nullable:false,maxSize:16384000)
     amount(nullable:false)
     dateCreated(display:false)
     lastUpdated(display:false)
   }
 
-  static mapping = {
-    image sqlType: "mediumblob"
-  }
 }
