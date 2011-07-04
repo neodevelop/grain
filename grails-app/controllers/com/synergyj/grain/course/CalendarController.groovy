@@ -38,7 +38,7 @@ class CalendarController {
           title:"${sc.course.name} - Sesión ${contador++}",
           start:courseSession.sessionStartTime,
           end:courseSession.sessionEndTime,
-          url:g.createLink(controller:"scheduledCourse", action:"show", id:sc.id),
+          url:sc?.course?.urlLandingPage ?: "http://synergyj.com",
           backgroundColor:sc.course.backgroundColor,
           borderColor:sc.course.borderColor,
           textColor:sc.course.textColor

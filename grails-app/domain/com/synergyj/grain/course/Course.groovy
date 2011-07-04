@@ -27,6 +27,7 @@ class Course extends CourseContent {
 	String method
 	String format
 	String courseKey
+  String urlLandingPage
 	CourseType courseType
 	Status status
 	SortedSet modules
@@ -47,6 +48,7 @@ class Course extends CourseContent {
 		method nullable:false,blank:false,size:1..1000
 		format nullable:false,blank:false,size:1..1000
 		courseKey nullable:false,blank:false,unique:true,size:1..20
+    urlLandingPage url:true,size:1..100
 		courseType nullable:false
 		status nullable:false
     color blank:true,size:1..7

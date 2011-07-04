@@ -26,6 +26,15 @@
 
         <tr class="prop">
           <td valign="top" class="name">
+            <label for="urlLandingPage"><g:message code="course.url" default="URL Landing" />:</label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'urlLandingPage', 'errors')}">
+            <g:textField name="urlLandingPage" maxlength="50" value="${fieldValue(bean: courseInstance, field: 'urlLandingPage')}" />
+          </td>
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name">
             <label for="status"><g:message code="course.color" default="Color" />:</label>
           </td>
           <td valign="top" class="value ${hasErrors(bean: courseInstance, field: 'color', 'errors')}">

@@ -12,6 +12,7 @@
         </div>
         <div class="content">
             <h1>${fieldValue(bean: courseInstance, field: "name")}</h1>
+            <h3>${fieldValue(bean: courseInstance, field: "urlLandingPage")}</h3>
             <g:if test="${flash.message}">
             <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
             </g:if>
@@ -44,7 +45,7 @@
                             
                             <tr class="prop">
                                 <td valign="top" class="name"><g:message code="course.dateCreated" default="Date Created" />:</td>
-                                
+
                                 <td valign="top" class="value"><g:formatDate date="${courseInstance?.dateCreated}" format="dd-MM-yy" /></td>
                                 
                             </tr>
