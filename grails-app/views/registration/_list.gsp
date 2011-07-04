@@ -127,9 +127,7 @@
               <td><g:message code="payment.payed"/></td>
               <g:if test="${payment.kindOfPayment == KindOfPayment.SPEI}">
                 <td>
-                  <g:link controller="payment" action="seeReceipt" id="seeReceipt${payment.id}">
-                    <g:message code="payment.seeReceipt"/>
-                  </g:link>
+                  <g:message code="payment.thanks"/>
                 </td>
               </g:if>
               <g:else>
