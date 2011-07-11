@@ -20,53 +20,53 @@ import com.synergyj.grain.course.Status
 import com.synergyj.grain.course.CourseModule
 
 class Course extends CourseContent {
-	String overview
-	String audience
-	String prerequisites
-	String goal
-	String method
-	String format
-	String courseKey
+  String overview
+  String audience
+  String prerequisites
+  String goal
+  String method
+  String format
+  String courseKey
   String urlLandingPage
-	CourseType courseType
-	Status status
-	SortedSet modules
+  CourseType courseType
+  Status status
+  SortedSet modules
 
   // Colores para eventos de calendario
   String color
   String backgroundColor
   String borderColor
   String textColor
-	
-	static hasMany = [modules:CourseModule]
-	
-	static constraints = {
-		overview nullable:false,blank:false,size:1..1000
-		audience nullable:false,blank:false,size:1..1000
-		prerequisites nullable:false,blank:false,size:1..1000
-		goal nullable:false,blank:false,size:1..1000
-		method nullable:false,blank:false,size:1..1000
-		format nullable:false,blank:false,size:1..1000
-		courseKey nullable:false,blank:false,unique:true,size:1..20
+
+  static hasMany = [modules:CourseModule]
+
+  static constraints = {
+    overview nullable:false,blank:false,size:1..1000
+    audience nullable:false,blank:false,size:1..1000
+    prerequisites nullable:false,blank:false,size:1..1000
+    goal nullable:false,blank:false,size:1..1000
+    method nullable:false,blank:false,size:1..1000
+    format nullable:false,blank:false,size:1..1000
+    courseKey nullable:false,blank:false,unique:true,size:1..20
     urlLandingPage url:true,size:1..100
-		courseType nullable:false
-		status nullable:false
+    courseType nullable:false
+    status nullable:false
     color blank:true,size:1..7
     backgroundColor blank:true,size:1..7
     borderColor blank:true,size:1..7
     textColor blank:true,size:1..7
-	}
-	
-	static mapping = {
-		overview type:"text"
-		audience type:"text"
-		prerequisites type:"text"
-		goal type:"text"
-		method type:"text"
-		format type:"text"
-	}
-	
-	String toString() {
-		name
-	}
+  }
+
+  static mapping = {
+    overview type:"text"
+    audience type:"text"
+    prerequisites type:"text"
+    goal type:"text"
+    method type:"text"
+    format type:"text"
+  }
+
+  String toString() {
+    name
+  }
 }

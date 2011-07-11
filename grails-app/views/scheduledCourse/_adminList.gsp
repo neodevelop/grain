@@ -10,7 +10,7 @@
       <h1>Lista de inscritos</h1>
       <h3>Comienza: <g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd-MM-yy"/> </h3>
       <ul id="registrations">
-      <g:each in="${registrationsPerScheduledCourse[scheduledCourse.course.courseKey]}" var="registration">
+      <g:each in="${registrationsPerScheduledCourse[scheduledCourse.course.courseKey]}" var="registration" status="j">
         <li>
           <b>${registration?.student?.firstName ?: ''}
             ${registration?.student?.lastName ?: ''}</b>
@@ -18,20 +18,23 @@
           ${registration.registrationStatus}
           <g:if test="${registration?.payments?.size()}">
           <ul>
-            <g:each in="${registration?.payments}" var="payment">
+            <g:each in="${registration?.payments}" var="payment" status="k">
             <li>
               $ ${payment.amount}
               - ${payment.paymentStatus}
               <g:if test="${payment?.receipts?.size()}">
                 <ul>
                   <g:each in="${payment?.receipts}" var="receipt">
-                    <li>
+                    <li id="receipt${receipt.id}">
                       ${receipt.receiptStatus} -
                       <g:link controller="receipt" action="showImage" id="${receipt.id}" class="seeReceipt">Ver Recibo </g:link>
                       <g:if test="${receipt.receiptStatus == ReceiptStatus.RECEIVED}">
                         -
                         <g:remoteLink update="approveResult${receipt.id}" controller="receipt" action="approve" id="${receipt.id}">
                           <span id="approveResult${receipt.id}">Aprobar</span>
+                        </g:remoteLink>
+                        <g:remoteLink controller="receipt" action="delete" id="${receipt.id}" onSuccess="removeReceipt(${receipt.id})">
+                          &nbsp;-&nbsp; Borrar
                         </g:remoteLink>
                       </g:if>
                     </li>

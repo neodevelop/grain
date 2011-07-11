@@ -59,3 +59,7 @@ $(function(){
     $('#lightbox').effect('clip',{},500,function(){});
   });
 });
+
+function removeReceipt(receiptId){
+  $("#receipt"+receiptId).fadeOut('slow');
+}

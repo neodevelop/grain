@@ -33,4 +33,10 @@ class ReceiptController {
     registrationService.checkIsPayed(receipt.payment.registration.id)
     render "${message(code:'payment.aproved')}"
   }
+
+  def delete = {
+    def receipt = Receipt.get(params.id)
+    receipt.delete()
+    render ""
+  }
 }
