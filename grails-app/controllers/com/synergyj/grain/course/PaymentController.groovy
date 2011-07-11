@@ -174,5 +174,27 @@ class PaymentController {
 
   }
 
+  def edit = {
+    def payment = Payment.get(params.id)
+    [payment:payment]
+  }
+
+  def update = {
+    def payment = Payment.get(params.id)
+    payment.properties = params
+    if(payment.save()){
+      flash.message = "${message(code:'default.updated.message',args:[payment.class.name,payment.id])}"
+    }else{
+      flash.message = "${message(code:'default.optimistic.locking.failure',args:[payment.class.name,payment.id])}"
+    }
+    redirect uri:'/me'
+  }
+
+  def delete = {
+    def payment = Payment.get(params.id)
+    payment.delete()
+    flash.message = "${message(code:'default.deleted.message',args:[payment.class.name,payment.id])}"
+    redirect uri:'/me'
+  }
 
 }

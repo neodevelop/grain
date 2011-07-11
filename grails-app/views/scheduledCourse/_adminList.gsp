@@ -1,4 +1,4 @@
-<%@ page import="com.synergyj.grain.course.ReceiptStatus" %>
+<%@ page import="com.synergyj.grain.course.PaymentStatus; com.synergyj.grain.course.ReceiptStatus" %>
     <ul>
       <g:each in="${scheduledCourseList}" var="scheduledCourse" status="i">
         <li><a href="#sc-${i}">${scheduledCourse.course.courseKey}</a></li>
@@ -22,6 +22,11 @@
             <li>
               $ ${payment.amount}
               - ${payment.paymentStatus}
+              - <g:if test="${payment.paymentStatus == PaymentStatus.PENDING || payment.paymentStatus == PaymentStatus.WAITING}">
+                <g:link controller="payment" action="edit" id="${payment.id}">
+                  Modificar
+                </g:link>
+                </g:if>
               <g:if test="${payment?.receipts?.size()}">
                 <ul>
                   <g:each in="${payment?.receipts}" var="receipt">
