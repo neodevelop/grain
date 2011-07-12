@@ -73,4 +73,10 @@ class RegistrationController {
       redirect uri:'/payment'
     }
   }
+
+  def delete = {
+    def registration = Registration.get(params.id)
+    registration.delete()
+    render ""
+  }
 }

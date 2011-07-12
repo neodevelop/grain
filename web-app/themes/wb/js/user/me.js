@@ -63,3 +63,7 @@ $(function(){
 function removeReceipt(receiptId){
   $("#receipt"+receiptId).fadeOut('slow');
 }
+
+function removeRegistration(registrationId){
+  $("#registration"+registrationId).fadeOut('slow');
+}

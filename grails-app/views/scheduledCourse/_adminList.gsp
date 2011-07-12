@@ -1,4 +1,4 @@
-<%@ page import="com.synergyj.grain.course.PaymentStatus; com.synergyj.grain.course.ReceiptStatus" %>
+<%@ page import="com.synergyj.grain.course.RegistrationStatus; com.synergyj.grain.course.PaymentStatus; com.synergyj.grain.course.ReceiptStatus" %>
     <ul>
       <g:each in="${scheduledCourseList}" var="scheduledCourse" status="i">
         <li><a href="#sc-${i}">${scheduledCourse.course.courseKey}</a></li>
@@ -11,11 +11,15 @@
       <h3>Comienza: <g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd-MM-yy"/> </h3>
       <ul id="registrations">
       <g:each in="${registrationsPerScheduledCourse[scheduledCourse.course.courseKey]}" var="registration" status="j">
-        <li>
+        <li id="registration${registration.id}">
           <b>${registration?.student?.firstName ?: ''}
             ${registration?.student?.lastName ?: ''}</b>
           ${registration?.student?.email} -
           ${registration.registrationStatus}
+          <g:if test="${registration.registrationStatus == RegistrationStatus.REGISTERED || registration.registrationStatus == RegistrationStatus.PENDING_PAYMENT}">
+            - <g:remoteLink controller="registration" action="delete" id="${registration.id}" onSuccess="removeRegistration(${registration.id})">Borrar</g:remoteLink>
+          </g:if>
+
           <g:if test="${registration?.payments?.size()}">
           <ul>
             <g:each in="${registration?.payments}" var="payment" status="k">
