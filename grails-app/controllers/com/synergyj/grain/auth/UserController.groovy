@@ -84,7 +84,7 @@ class UserController {
       forgotPasswordCode.save(flush:true)
       // Enviarlo por correo
       notificationService.sendResetPassword(forgotPasswordCode)
-      println "${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/resetPassword?code='+forgotPasswordCode?.token}"
+      // println "${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/resetPassword?code='+forgotPasswordCode?.token}"
       flash.message = "${message(code:'user.found',args:[params.email])}"
     }else{
       flash.message = "${message(code:'user.notfound',args:[params.email])}"
