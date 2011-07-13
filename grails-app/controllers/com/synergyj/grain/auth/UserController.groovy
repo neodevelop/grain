@@ -92,4 +92,16 @@ class UserController {
   def simpleProfile = {
 
   }
+
+  @Secured(['isAuthenticated()'])
+  def changePassword = { }
+
+  @Secured(['isAuthenticated()'])
+  def updatePassword = {
+    def user = springSecurityService.currentUser
+    String salt = user.email
+    user.password = springSecurityService.encodePassword(params.password, salt)
+    flash.message = "${message(code:'login.passwordUpdated')}"
+    redirect uri:'/me'
+  }
 }

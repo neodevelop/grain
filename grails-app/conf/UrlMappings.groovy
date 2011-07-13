@@ -36,6 +36,10 @@ class UrlMappings {
       controller = 'user'
       action = 'edit'
     }
+    name changePassword: '/changePassword' {
+      controller = 'user'
+      action = 'changePassword'
+    }
     name home: '/' {
       controller = 'home'
       action = 'index'

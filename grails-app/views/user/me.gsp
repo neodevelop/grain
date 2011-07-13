@@ -28,6 +28,10 @@
   <g:link mapping="updateme" class="action">
     <g:message code="me.update"/>
   </g:link>
+  <br/><br/><br/>
+  <g:link mapping="changePassword" class="action">
+    <g:message code="me.changePassword"/>
+  </g:link>
 </div>
 <div id="right">
 
