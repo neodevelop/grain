@@ -48,6 +48,10 @@ class UrlMappings {
       controller = 'user'
       action = 'forgotPassword'
     }
+    name resetPassword: '/resetPassword' {
+      controller = 'user'
+      action = 'resetPassword'
+    }
     name signup: '/signup' {
       controller = 'user'
       action = 'signup'

@@ -22,11 +22,13 @@ import com.synergyj.grain.course.ScheduledCourseStatus
 import grails.converters.JSON
 import com.synergyj.grain.course.Payment
 import com.synergyj.grain.course.PaymentStatus
+import org.grails.mail.MailService
 
 class UserController {
 
   def springSecurityService
   def paymentService
+  def notificationService
 
   @Secured(['isAuthenticated()'])
   def me = {
@@ -74,6 +76,28 @@ class UserController {
   }
 
   @Secured(['permitAll()'])
+  def sendResetInstructions = {
+    def user = User.findByEmail(params.email)
+    if(user){
+      // Generar un código de recuperación
+      def forgotPasswordCode = new ForgotPasswordCode(user:user)
+      forgotPasswordCode.save(flush:true)
+      // Enviarlo por correo
+      notificationService.sendResetPassword(forgotPasswordCode)
+      println "${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/resetPassword?code='+forgotPasswordCode?.token}"
+      flash.message = "${message(code:'user.found',args:[params.email])}"
+    }else{
+      flash.message = "${message(code:'user.notfound',args:[params.email])}"
+    }
+    redirect action: 'forgotPassword'
+  }
+
+  @Secured(['permitAll()'])
+  def resetPassword = {
+    redirect action:'changePassword',id:params.code
+  }
+
+  @Secured(['permitAll()'])
   def signup = {
     def model = [userdata: new RegisterUserCommand()]
     // Si trae un código lo buscamos
@@ -90,18 +114,37 @@ class UserController {
 
   @Secured(['isAuthenticated()'])
   def simpleProfile = {
-
   }
 
-  @Secured(['isAuthenticated()'])
-  def changePassword = { }
+  @Secured(['permitAll()'])
+  def changePassword = {
+    def model = [:]
+    if(params?.id){
+      def forgotPasswordCode = ForgotPasswordCode.findByToken(params.id)
+      if(forgotPasswordCode){
+        forgotPasswordCode.used = true
+        model.email = forgotPasswordCode.user.email
+      }else{
+        flash.message = "${message(code:'forgotPasswordCode.notfound')}"
+        redirect action: 'forgotPassword'
+      }
+    }
+    return model
+  }
 
-  @Secured(['isAuthenticated()'])
+  @Secured(['permitAll()'])
   def updatePassword = {
     def user = springSecurityService.currentUser
+    if(!user && params?.email)
+      user = User.findByEmail(params.email)
+    else{
+      redirect action: 'forgotPassword'
+      return
+    }
     String salt = user.email
     user.password = springSecurityService.encodePassword(params.password, salt)
     flash.message = "${message(code:'login.passwordUpdated')}"
-    redirect uri:'/me'
+    redirect controller: 'login', action: 'auth'
   }
+
 }

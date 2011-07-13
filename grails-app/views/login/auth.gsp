@@ -5,6 +5,6 @@
 </head>
 <body>
 <div id="log-in">
-  <g:render template="form" model="[postUrl:postUrl,rememberMeParameter:rememberMeParameter]"/>
+  <g:render template="/login/form" model="[postUrl:postUrl,rememberMeParameter:rememberMeParameter]"/>
 </div>
 </body>

@@ -49,6 +49,10 @@
          <input type="password" maxlength="25" id="oldPassword" name="oldPassword" value=""/>
       </div-->
 
+      <g:if test="${email}">
+        <g:hiddenField name="email" value="${email}"/>
+      </g:if>
+
       <div class="field">
         <label for="password"><g:message code='login.newPassword'/></label><br/>
         <input type="password" maxlength="25" id="password" name="password" value=""/>

@@ -21,6 +21,7 @@ import com.synergyj.grain.course.Registration
 import grails.util.Environment
 import com.synergyj.grain.course.ScheduledCourse
 import com.synergyj.grain.course.Payment
+import com.synergyj.grain.auth.ForgotPasswordCode
 
 class NotificationService {
 
@@ -125,6 +126,25 @@ class NotificationService {
           from "no-reply@synergyj.com"
           subject "Instrucciones de pago"
           body(view:"/notification/paymentInstructions",model:[payment:payment,registration:registration])
+        }
+        break
+    }
+  }
+
+  def sendResetPassword(ForgotPasswordCode forgotPasswordCode) {
+     switch(Environment.current){
+      case Environment.DEVELOPMENT:
+        log.debug("${Environment.current} - Send reset password email")
+        break
+      case Environment.TEST:
+        log.debug("${Environment.current} - Send reset password email")
+        break
+      case Environment.PRODUCTION:
+        mailService.sendMail {
+          to forgotPasswordCode.user.email
+          from "no-reply@synergyj.com"
+          subject "Instrucciones para restablecer tu contraseña"
+          body(view:"/notification/resetPassword",model:[forgotPasswordCode:forgotPasswordCode])
         }
         break
     }
