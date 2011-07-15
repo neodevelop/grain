@@ -7,15 +7,18 @@
           <strong>Alerta:</strong><span id="jsonMessage"></span>
         </p>
       </div>
+
+        <div class="field">
+          <label for="username"><g:message code='login.username'/></label>
+          <input name="j_username" type="text" id="username" size="30" value="${email}"/>
+        </div>
+
+        <div class="field">
+          <label for="password"><g:message code='login.password'/></label>
+          <input type="password" name="j_password" id="password" size="30"/>
+        </div>
+
       <table id="login">
-        <tr>
-          <td class="field"><label for="username"><g:message code='login.username'/></label></td>
-          <td><input name="j_username" type="text" id="username" size="30" value="${email}"/></td>
-        </tr>
-        <tr>
-          <td class="field"><label for="password"><g:message code='login.password'/></label></td>
-          <td><input type="password" name="j_password" id="password" size="30"/></td>
-        </tr>
         <tr class="links">
           <td colspan='2' align="center">
             <input type="checkbox" class="checkbox" name="${rememberMeParameter}" id="remember_me" checked="checked"/>
