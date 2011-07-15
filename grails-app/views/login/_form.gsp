@@ -9,12 +9,12 @@
       </div>
 
         <div class="field">
-          <label for="username"><g:message code='login.username'/></label>
+          <label for="username"><g:message code='login.username'/>:</label>
           <input name="j_username" type="text" id="username" size="30" value="${email}"/>
         </div>
 
         <div class="field">
-          <label for="password"><g:message code='login.password'/></label>
+          <label for="password"><g:message code='login.password'/>:</label>
           <input type="password" name="j_password" id="password" size="30"/>
         </div>
 
