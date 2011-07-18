@@ -206,3 +206,5 @@ avatarPlugin {
 	defaultGravatarUrl="""http://synergyj.com/user_anonymous.png"""
 	gravatarRating="G"
 }
+
+google.analytics.webPropertyID = "UA-xxxxxx-x"
