@@ -9,6 +9,26 @@
     <div id="sc-${i}">
       <h1>Lista de inscritos</h1>
       <h3>Comienza: <g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd-MM-yy"/> </h3>
+      <g:each in="${RegistrationStatus.values()}" var="registrationStatus">
+      <table id="registrations_${registrationStatus}">
+        <tbody>
+        <g:findAll in="${registrationsPerScheduledCourse[scheduledCourse.course.courseKey]}" expr="it.registrationStatus == registrationStatus">
+          <tr>
+            <td>
+              ${it?.student?.email}
+            </td>
+            <td>
+              ${it?.student?.firstName ?: ''} ${it?.student?.lastName ?: ''}
+            </td>
+            <td>
+              ${it?.registrationStatus}
+            </td>
+
+          </tr>
+        </g:findAll>
+        </tbody>
+      </table>
+      </g:each>
       <ul id="registrations">
       <g:each in="${registrationsPerScheduledCourse[scheduledCourse.course.courseKey]}" var="registration" status="j">
         <li id="registration${registration.id}">
