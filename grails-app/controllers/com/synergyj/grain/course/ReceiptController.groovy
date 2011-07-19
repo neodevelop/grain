@@ -31,7 +31,9 @@ class ReceiptController {
     receipt.receiptStatus = ReceiptStatus.APROVED
     receipt.payment.paymentStatus = PaymentStatus.PAYED
     registrationService.checkIsPayed(receipt.payment.registration.id)
-    render "${message(code:'payment.aproved')}"
+    render """
+      <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-green.png')}" width="24" height="24" />
+    """
   }
 
   def delete = {

@@ -10,72 +10,110 @@
       <h1>Lista de inscritos</h1>
       <h3>Comienza: <g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd-MM-yy"/> </h3>
       <g:each in="${RegistrationStatus.values()}" var="registrationStatus">
-      <table id="registrations_${registrationStatus}">
+      <table id="registrations_${registrationStatus}" width="100%" class="registrationsDetail">
+        <thead>
+          <tr>
+            <th>${registrationStatus}</th>
+          </tr>
+        </thead>
         <tbody>
         <g:findAll in="${registrationsPerScheduledCourse[scheduledCourse.course.courseKey]}" expr="it.registrationStatus == registrationStatus">
-          <tr>
+          <tr class="registrationRow" id="registration${it?.id}">
             <td>
               ${it?.student?.email}
+              <g:if test="${it?.student?.firstName && it?.student?.lastName}">
+                <br/>( ${it?.student?.firstName ?: ''} ${it?.student?.lastName ?: ''} )
+              </g:if>
             </td>
             <td>
-              ${it?.student?.firstName ?: ''} ${it?.student?.lastName ?: ''}
+              <g:if test="${it.registrationStatus == RegistrationStatus.REGISTERED || it.registrationStatus == RegistrationStatus.PENDING_PAYMENT}">
+                <g:remoteLink controller="registration" action="delete" id="${it.id}" onSuccess="removeRegistration(${it.id})">
+                  <img src="${createLinkTo(dir:'themes/wb/icon',file:'cancel.png')}" width="24" height="24" />
+                </g:remoteLink>
+              </g:if>
+              <g:else>
+                &nbsp
+              </g:else>
+            </td>
+            <g:if test="${it?.payments?.size()}">
+            <td>
+              <table>
+                <g:each in="${it?.payments}" var="payment" status="k">
+                  <tr>
+                    <td>$ ${payment.amount}</td>
+                    <td>${payment.paymentStatus}</td>
+                    <td>
+                      <g:if test="${payment.paymentStatus == PaymentStatus.PENDING || payment.paymentStatus == PaymentStatus.WAITING}">
+                        <g:link controller="payment" action="edit" id="${payment.id}">
+                        <img src="${createLinkTo(dir:'themes/wb/icon',file:'edit-icon.png')}" width="24" height="24" />
+                        </g:link>
+                      </g:if>
+                      <g:else>
+                        &nbsp;
+                      </g:else>
+                    </td>
+                    <td>
+                      <g:if test="${payment?.receipts?.size()}">
+                        <table>
+                          <tbody>
+                            <g:each in="${payment?.receipts}" var="receipt">
+                            <tr id="receipt${receipt.id}">
+                              <td>${receipt.receiptStatus}</td>
+                              <td>
+                                <g:link controller="receipt" action="showImage" id="${receipt.id}" class="seeReceipt">
+                                  <img src="${createLinkTo(dir:'themes/wb/icon',file:'search.png')}" width="24" height="24" />
+                                </g:link>
+                              </td>
+                              <g:if test="${receipt.receiptStatus == ReceiptStatus.RECEIVED}">
+                                <td>
+                                  <g:remoteLink update="approveResult${receipt.id}" controller="receipt" action="approve" id="${receipt.id}">
+                                    <span id="approveResult${receipt.id}">
+                                      <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-blue.png')}" width="24" height="24" />
+                                    </span>
+                                  </g:remoteLink>
+                                </td>
+                                <td>
+                                  <g:remoteLink controller="receipt" action="delete" id="${receipt.id}" onSuccess="removeReceipt(${receipt.id})">
+                                    <img src="${createLinkTo(dir:'themes/wb/icon',file:'remove-red.png')}" width="24" height="24" />
+                                  </g:remoteLink>
+                                </td>
+                              </g:if>
+                              </td>
+                            </tr>
+                            </g:each>
+                          </tbody>
+                        </table>
+                      </g:if>
+                      <g:else>
+                        &nbsp;
+                      </g:else>
+                    </td>
+                  </tr>
+                </g:each>
+              </table>
+            </td>
+            </g:if>
+            <td>
+              <g:if test="${it.invoice}">
+                <img src="${createLinkTo(dir:'themes/wb/icon',file:'invoice.png')}" width="24" height="24" />
+              </g:if>
+              <g:else>
+                &nbsp;
+              </g:else>
             </td>
             <td>
-              ${it?.registrationStatus}
+              <table>
+              <g:each in="${it.promotions}" var="promotionPerRegistration">
+                <tr>
+                  <td>${promotionPerRegistration.promotion}</td>
+                </tr>
+              </g:each>
+              </table>
             </td>
-
           </tr>
         </g:findAll>
         </tbody>
       </table>
       </g:each>
-      <ul id="registrations">
-      <g:each in="${registrationsPerScheduledCourse[scheduledCourse.course.courseKey]}" var="registration" status="j">
-        <li id="registration${registration.id}">
-          <b>${registration?.student?.firstName ?: ''}
-            ${registration?.student?.lastName ?: ''}</b>
-          ${registration?.student?.email} -
-          ${registration.registrationStatus}
-          <g:if test="${registration.registrationStatus == RegistrationStatus.REGISTERED || registration.registrationStatus == RegistrationStatus.PENDING_PAYMENT}">
-            - <g:remoteLink controller="registration" action="delete" id="${registration.id}" onSuccess="removeRegistration(${registration.id})">Borrar</g:remoteLink>
-          </g:if>
-
-          <g:if test="${registration?.payments?.size()}">
-          <ul>
-            <g:each in="${registration?.payments}" var="payment" status="k">
-            <li>
-              $ ${payment.amount}
-              - ${payment.paymentStatus}
-              - <g:if test="${payment.paymentStatus == PaymentStatus.PENDING || payment.paymentStatus == PaymentStatus.WAITING}">
-                <g:link controller="payment" action="edit" id="${payment.id}">
-                  Modificar
-                </g:link>
-                </g:if>
-              <g:if test="${payment?.receipts?.size()}">
-                <ul>
-                  <g:each in="${payment?.receipts}" var="receipt">
-                    <li id="receipt${receipt.id}">
-                      ${receipt.receiptStatus} -
-                      <g:link controller="receipt" action="showImage" id="${receipt.id}" class="seeReceipt">Ver Recibo </g:link>
-                      <g:if test="${receipt.receiptStatus == ReceiptStatus.RECEIVED}">
-                        -
-                        <g:remoteLink update="approveResult${receipt.id}" controller="receipt" action="approve" id="${receipt.id}">
-                          <span id="approveResult${receipt.id}">Aprobar</span>
-                        </g:remoteLink>
-                        <g:remoteLink controller="receipt" action="delete" id="${receipt.id}" onSuccess="removeReceipt(${receipt.id})">
-                          &nbsp;-&nbsp; Borrar
-                        </g:remoteLink>
-                      </g:if>
-                    </li>
-                  </g:each>
-                </ul>
-              </g:if>
-            </li>
-            </g:each>
-          </ul>
-          </g:if>
-        </li>
-      </g:each>
-      </ul>
     </div>
     </g:each>
