@@ -15,7 +15,7 @@
  */
 package com.synergyj.grain.course
 
-class Payment {
+class Payment implements Comparable{
   BigDecimal amount
   String transactionId
   Date paymentDate
@@ -35,5 +35,9 @@ class Payment {
     paymentDate nullable: true
     dateCreated(display:false)
     lastUpdated(display:false)
+  }
+
+  int compareTo(obj) {
+    dateCreated.compareTo(obj.dateCreated)
   }
 }

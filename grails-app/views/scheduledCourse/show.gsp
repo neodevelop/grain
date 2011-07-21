@@ -112,7 +112,7 @@
           <td  valign="top" style="text-align: left;" class="value">
             <div id="sessionList">
             <ul>
-              <g:each in="${scheduledCourseInstance?.courseSessions}" var="courseSessionInstance">
+              <g:each in="${scheduledCourseInstance?.courseSessions?.sort()}" var="courseSessionInstance">
                 <li id="sessionCourse${courseSessionInstance.id}">
                   ${courseSessionInstance?.encodeAsHTML()}
                   <a class="deleteSession" href="${createLink(controller:'courseSession',action:'deleteAsync',id:courseSessionInstance.id)}">

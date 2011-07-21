@@ -16,11 +16,9 @@
 package com.synergyj.grain.course
 
 import com.synergyj.grain.auth.User
-import com.synergyj.grain.course.CourseModule
-import com.synergyj.grain.course.ScheduledCourse
 import java.text.SimpleDateFormat
 
-class CourseSession{
+class CourseSession implements Comparable{
   Date sessionStartTime
   Date sessionEndTime
 	CourseModule module
@@ -43,4 +41,8 @@ class CourseSession{
 	String toString(){
     dateFormat.format(this.sessionStartTime)
 	}
+
+  int compareTo(obj){
+    sessionStartTime.compareTo(obj.sessionStartTime)
+  }
 }
