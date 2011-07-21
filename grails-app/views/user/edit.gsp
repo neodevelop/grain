@@ -3,7 +3,7 @@
   <meta name='layout' content='wb'/>
   <parameter name="pageHeader" value="${g.message(code: 'me.title', default: 'This is me')}"/>
   <script src="http://jquery.bassistance.de/validate/jquery.validate.js" type="text/javascript"></script>
-  <g:javascript>
+  <script language="javascript">
   $(function(){
     $("form#userInfo").validate({
       rules:{
@@ -16,9 +16,10 @@
       }
     });
   });
-  </g:javascript>
+  </script>
 </head>
 <body>
+<div id="left">
   <g:form action="save" class="form" name="userInfo" id="userInfo">
   <h4><g:message code="me.email"/>:</h4>
   <h3>${user.email}</h3>
@@ -36,7 +37,12 @@
     <g:textField name="website" value="${user.website}"/>
   <br>
   <br/>
+  <g:hiddenField name="geolocation" value="${user?.geolocation}"/>
   <g:submitButton name="submit" value="Actualizar" class="submit"/>
   <g:link mapping="me" class="action">Regresar</g:link>
   </g:form>
+</div>
+<div id="right">
+  <g:render template="/common/map" model="[refField:'geolocation',width:600,height:300]" />
+</div>
 </body>

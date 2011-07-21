@@ -332,11 +332,9 @@ form input[type='submit'] {
 
 form#new_project {
 	float: left;
-	width: 610px;
 }
 
 .form {
-	width: 610px;
 	float: left;
 	-webkit-border-radius: 6px;
 }
@@ -1858,4 +1856,13 @@ table#registrations_CANCELLED{
 
 tr.registrationRow > td{
   border-bottom: 1px #2c3035 dashed;
+}
+
+#map_canvas{
+  -webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+  border-radius: 20px;
+  -webkit-box-shadow: 0 0 15px rgb(255,255,255);
+  -moz-box-shadow: 0 0 15px rgb(255,255,255);
+  box-shadow: 0 0 15px rgb(255,255,255);
 }
