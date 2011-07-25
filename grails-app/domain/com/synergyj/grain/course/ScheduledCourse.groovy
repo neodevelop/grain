@@ -22,6 +22,8 @@ class ScheduledCourse{
 	BigDecimal costByCourse
 	BigDecimal costByModule
   ScheduledCourseStatus scheduledCourseStatus
+  String geolocation = ''
+  String fullAddress = ''
 	
 	Date dateCreated
 	Date lastUpdated
@@ -37,6 +39,8 @@ class ScheduledCourse{
     costByModule nullable: true,blank: true
 		lastUpdated display:false
 		dateCreated display:false
+    geolocation nullable: true, blank: true, size: 0..200
+    fullAddress nullable: true, blank: true, size: 0..1000
 	}
 	
 	static hasMany = [courseSessions:CourseSession,promotions:PromotionPerScheduledCourse]
