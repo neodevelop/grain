@@ -107,6 +107,25 @@
         </tr>
 
         <tr class="prop">
+          <td valign="top" class="name">
+            <g:message code="scheduledCourse.fullAddress" default="Full Address" />:
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'fullAddress', 'errors')}">
+            ${scheduledCourseInstance.fullAddress ?: 'Dirección'}
+          </td>
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name">
+            <g:message code="scheduledCourse.geolocation" default="Geolocation" />:
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'geolocation', 'errors')}">
+            <g:hiddenField name="geolocation" value="${scheduledCourseInstance?.geolocation}"/>
+            <g:render template="/common/map" model="[refField:'geolocation',width:480,height:240]" />
+          </td>
+        </tr>
+
+        <tr class="prop">
           <td valign="top" class="name"><g:message code="scheduledCourse.courseSessions" default="Course Sessions" />:</td>
 
           <td  valign="top" style="text-align: left;" class="value">
