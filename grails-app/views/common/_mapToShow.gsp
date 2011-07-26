@@ -25,7 +25,7 @@
       position: initialLocation,
       map: map,
       draggable:false,
-      icon:'http://localhost:8080/themes/wb/icon/university.png'
+      icon:'${createLinkTo(dir:'themes/wb/icon',file:'university.png')}'
     });
 
     var metLatLng = meGeolocation.split( "," );
@@ -34,7 +34,7 @@
       position: meLocation,
       map: map,
       draggable:false,
-      icon:'http://localhost:8080/themes/wb/icon/home.png'
+      icon:'${createLinkTo(dir:'themes/wb/icon',file:'home.png')}'
     });
 
   }
