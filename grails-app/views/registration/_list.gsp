@@ -30,6 +30,8 @@
       </td>
     </tr>
 
+
+    <g:if test="${registration.registrationStatus == RegistrationStatus.REGISTERED || registration.registrationStatus == RegistrationStatus.PENDING_PAYMENT}">
     <tr class="content">
       <td class="contentLeft">
         <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
@@ -39,6 +41,31 @@
         &nbsp;
       </td>
     </tr>
+    </g:if>
+    <g:else>
+    <tr class="content">
+      <td class="contentLeft" width="60%">
+        <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
+        <g:message code="registration.sessions"/>
+        <ul>
+        <g:each in="${registration.scheduledCourse.courseSessions.sort()}" var="courseSession">
+          <li><g:formatDate date="${courseSession?.sessionStartTime}" format="EEEE dd 'de' MMMM 'del' yyyy"/></li>
+        </g:each>
+        </ul>
+      </td>
+      <td class="contentLeft">
+        <g:if test="${registration?.promotions}">
+          Promociones:
+          <ul>
+            <g:each in="${registration?.promotions}" var="promotionPerCourse">
+              <li>${promotionPerCourse?.promotion?.description}</li>
+            </g:each>
+          </ul>
+        </g:if>
+        &nbsp;
+      </td>
+    </tr>
+    </g:else>
 
 
     <g:if test="${registration.registrationStatus == RegistrationStatus.REGISTERED}">
@@ -151,6 +178,25 @@
       $("table.paymentDetail").styleTable();
     </g:javascript>
     </g:if>
+  </table>
 
+  <table class="registration" cellpadding="0" cellspacing="0">
+    <tr class="content">
+      <td class="contentLeft">
+        <g:message code="scheduledcourse.fullAddress"/>
+      </td>
+    </tr>
+
+    <tr class="content">
+      <td class="contentLeft">
+        ${registration?.scheduledCourse?.fullAddress}
+      </td>
+    </tr>
+
+    <tr class="content">
+      <td class="contentLeft">
+        <g:render template="/common/mapToShow" model="[width:480,height:240,courseGeolocation:registration?.scheduledCourse?.geolocation,meGeolocation:registration?.student?.geolocation]" />
+      </td>
+    </tr>
   </table>
 </g:each>
