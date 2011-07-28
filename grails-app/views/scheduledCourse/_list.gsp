@@ -50,9 +50,11 @@
             Ver grupo
           </g:if>
           <g:else>
-            <g:remoteLink controller="studentsGroup" action="create" id="${scheduledCourse.id}">
+            <div id="actionStudentsGroup${scheduledCourse.id}">
+            <g:remoteLink controller="studentsGroup" action="create" id="${scheduledCourse.id}" update="actionStudentsGroup${scheduledCourse.id}">
               <g:message code="studentsGroup.create" default="Create group" />
             </g:remoteLink>
+            </div>
           </g:else>
         </td>
 

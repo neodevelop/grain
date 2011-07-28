@@ -24,8 +24,9 @@ class StudentsGroupController {
     def months = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE']
     def key = "${scheduledCourse.course.courseKey}-${months[scheduledCourse.beginDate.month - 1]}"
     if(!scheduledCourse.studentsGroup){
-      scheduledCourse.studentsGroup = new StudentsGroup(scheduledCourse: scheduledCourse,key: key)
+        println "Grupo creado"
+      //scheduledCourse.studentsGroup = new StudentsGroup(scheduledCourse: scheduledCourse,key: key)
     }
-    println scheduledCourse.studentsGroup
+    render "${g.createLink(controller:'studentsGroup',action:'show')}"
   }
 }
