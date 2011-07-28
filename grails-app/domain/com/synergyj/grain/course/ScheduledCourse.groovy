@@ -41,9 +41,11 @@ class ScheduledCourse{
 		dateCreated display:false
     geolocation nullable: true, blank: true, size: 0..200
     fullAddress nullable: true, blank: true, size: 0..1000
+    studentsGroup nullable: true
 	}
 	
 	static hasMany = [courseSessions:CourseSession,promotions:PromotionPerScheduledCourse]
+  static hasOne = [studentsGroup:StudentsGroup]
 
   String toString(){
     "${course} : ${beginDate} : ${scheduledCourseStatus}"

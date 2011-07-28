@@ -11,11 +11,9 @@
 
       <g:sortableColumn property="costByCourse" title="Cost By Course" titleKey="scheduledCourse.costByCourse" />
 
-      <sec:ifAllGranted roles="ROLE_USER">
-        <sec:ifNotGranted roles="ROLE_ADMIN">
-          <th>&nbsp;</th>
-        </sec:ifNotGranted>
-      </sec:ifAllGranted>
+      <g:sortableColumn property="scheduledCourseStatus" title="Status" titleKey="scheduledCourse.scheduledCourseStatus" />
+
+      <th>&nbsp;</th>
 
     </tr>
     </thead>
@@ -45,27 +43,18 @@
 
         <td>$ <g:formatNumber number="${scheduledCourse.costByCourse}" format="#,##0.00;(#,##0.00)" /></td>
 
-        <sec:ifAllGranted roles="ROLE_USER">
-          <sec:ifNotGranted roles="ROLE_ADMIN">
-            <th>
-              <div id="registration${i}">
-                <g:remoteLink action="addMeToCourse" controller="registration" id="${scheduledCourse.id}" onSuccess="registered(data,${i})">
-                  <g:message code="registration.register" default="Register here..." />
-                </g:remoteLink>
-                <g:javascript>
-                  function registered(registration,index){
-                    $("div#registration"+index +" > a").hide();
-                    if(registration.message){
-                      $("<span id='fail"+index+"'>"+registration.message+"</span>").appendTo("div#registration"+index);
-                    }else{
-                      $("<span id='ok"+index+"'>${message(code:'registration.ok',default:'Haz quedado registrado!!!')}</span>").appendTo("div#registration"+index);
-                    }
-                  }
-                </g:javascript>
-              </div>
-            </th>
-          </sec:ifNotGranted>
-        </sec:ifAllGranted>
+        <td>${scheduledCourse.scheduledCourseStatus}</td>
+
+        <td>
+          <g:if test="${scheduledCourse?.studentsGroup}">
+            Ver grupo
+          </g:if>
+          <g:else>
+            <g:remoteLink controller="studentsGroup" action="create" id="${scheduledCourse.id}">
+              <g:message code="studentsGroup.create" default="Create group" />
+            </g:remoteLink>
+          </g:else>
+        </td>
 
       </tr>
     </g:each>
