@@ -47,7 +47,9 @@
 
         <td>
           <g:if test="${scheduledCourse?.studentsGroup}">
-            Ver grupo
+            <g:link controller="studentsGroup" action="show" id="${scheduledCourse?.studentsGroup?.id}">
+              <g:message code="studentsGroup.show" default="See group" />
+            </g:link>
           </g:if>
           <g:else>
             <div id="actionStudentsGroup${scheduledCourse.id}">
