@@ -51,7 +51,19 @@ class StudentsGroupController {
       if(!userFound)
        studentsNoGroup << user
     }
-    [studentsGroup:studentsGroup,studentsInGroup:studentsInGroup,studentsNoGroup:studentsNoGroup ]
+
+    // Obtenemos los registros que SI están en un grupo
+    def registrationsInGroup = []
+    studentsInGroup.each { student ->
+      def registrationFound = registrations.find { it.student.email == student.email }
+      if(registrationFound)
+        registrationsInGroup << registrationFound
+    }
+
+    // Obtenemos los registros que NO están en un grupo
+    def registrationsNoGroup = registrations - registrationsInGroup
+
+    [studentsGroup:studentsGroup,registrationsInGroup:registrationsInGroup,registrationsNoGroup:registrationsNoGroup ]
   }
 
   def addStudent = {
@@ -61,7 +73,6 @@ class StudentsGroupController {
   }
 
   def removeStudent = {
-    println "Remover estudiante ${params.id} al grupo ${params.studentsGroupId}"
     def studentsGroup = StudentsGroup.get(params.long("studentsGroupId"))
     def user = User.get(params.id)
     studentsGroup.removeFromStudents(user)
