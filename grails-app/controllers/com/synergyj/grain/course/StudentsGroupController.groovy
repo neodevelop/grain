@@ -21,11 +21,11 @@ import com.synergyj.grain.auth.User
 @Secured(["hasRole('ROLE_ADMIN')"])
 class StudentsGroupController {
   def create = {
-    def scheduledCourse =  ScheduledCourse.get(params.id)
+    def scheduledCourse = ScheduledCourse.get(params.id)
     def months = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE']
-    def key = "${scheduledCourse.course.courseKey}-${months[scheduledCourse.beginDate.month - 1]}"
+    def keyStudentsGroup = "${scheduledCourse.course.courseKey}-${months[scheduledCourse.beginDate.month - 1]}"
     if(!scheduledCourse.studentsGroup){
-      scheduledCourse.studentsGroup = new StudentsGroup(scheduledCourse: scheduledCourse,key: key)
+      scheduledCourse.studentsGroup = new StudentsGroup(scheduledCourse: scheduledCourse,keyStudentsGroup: keyStudentsGroup)
       scheduledCourse.save(flush:true)
     }
     render """

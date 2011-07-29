@@ -19,7 +19,7 @@ import com.synergyj.grain.auth.User
 
 class StudentsGroup {
 
-  String key
+  String keyStudentsGroup 
   static hasMany = [students:User]
   static belongsTo = [scheduledCourse:ScheduledCourse]
 
@@ -27,7 +27,7 @@ class StudentsGroup {
   Date lastUpdated
 
   static constraints = {
-    key nullable: false,blank: false, size: 1..30
+    keyStudentsGroup  nullable: false,blank: false, size: 1..30
     lastUpdated display: false, nullable: true
     dateCreated display: false, nullable: true
   }

@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="content">
-  <h3>${studentsGroup.key}</h3>
+  <h3>${studentsGroup.keyStudentsGroup}</h3>
 
   <h4>Usuarios en el grupo</h4>
   <g:render template="detail" model="[tableName:'studentsInGroup',registrationGroup:registrationsInGroup,action:'removeStudent']" />
