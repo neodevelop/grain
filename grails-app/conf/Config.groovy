@@ -47,6 +47,9 @@ grails.mime.types = [
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.cache.maxsize = 1000
 
+// What URL patterns should be processed by the resources plugin
+grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*','/themes/*  ']
+
 // The default codec used to encode data with ${}
 grails.views.default.codec = "none" // none, html, base64
 grails.views.gsp.encoding = "UTF-8"
@@ -64,6 +67,11 @@ grails.enable.native2ascii = true
 grails.logging.jul.usebridge = true
 // packages to include in Spring bean scanning
 grails.spring.bean.packages = []
+// whether to disable processing of multi part requests
+grails.web.disable.multipart=false
+
+// request parameters to mask when logging exceptions
+grails.exceptionresolver.params.exclude = ['password']
 
 grails.views.javascript.library = "jquery"
 jqueryUi.cdn = 'googlecode'
@@ -71,9 +79,11 @@ jqueryUi.cdn = 'googlecode'
 // set per-environment serverURL stem for creating absolute links
 environments {
   production {
-    grails.serverURL = "http://www.changeme.com"
+    grails.logging.jul.usebridge = false
+    grails.serverURL = "http://entrenamiento.synergyj.com"
   }
   development {
+    grails.logging.jul.usebridge = true
     grails.serverURL = "http://localhost:8080/${appName}"
   }
   test {
@@ -177,6 +187,7 @@ grails.plugins.springsecurity.errors.login.passwordExpired = "security.login.pas
 grails.plugins.springsecurity.errors.login.disabled = "security.login.disabled"
 grails.plugins.springsecurity.errors.login.locked = "security.login.locked"
 grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
+grails.plugins.springsecurity.password.encodeHashAsBase64 = true
 grails.plugins.springsecurity.useSessionFixationPrevention = true
 grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/me'
 

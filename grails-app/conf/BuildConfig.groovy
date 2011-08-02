@@ -1,4 +1,4 @@
-grails.project.plugins.dir = "${userHome}/.grails/1.3.7/grain/plugins"
+grails.servlet.version = "2.5" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
@@ -10,18 +10,25 @@ grails.project.dependency.resolution = {
     // excludes 'ehcache'
   }
   log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+  checksums true // Whether to verify checksums on resolve
+
   repositories {
+    inherits true // Whether to inherit repository definitions from plugins
     grailsPlugins()
     grailsHome()
     grailsCentral()
-    mavenCentral()
   }
 
   plugins {
-    runtime 'org.grails.plugins:spring-security-core:1.1.2'
+    compile ":hibernate:$grailsVersion"
+    runtime ":jquery:1.6.1.1"
+    compile ":resources:1.0.2"
+
+    build ":tomcat:$grailsVersion"
+
+    runtime 'org.grails.plugins:spring-security-core:1.2'
     runtime 'org.grails.plugins:mail:0.9'
     runtime 'org.grails.plugins:settings:1.4'
-    runtime 'org.grails.plugins:jquery:1.6'
     runtime 'org.grails.plugins:jquery-ui:1.8.11'
     runtime 'org.grails.plugins:avatar:0.5'
     runtime 'org.grails.plugins:google-analytics:1.0'

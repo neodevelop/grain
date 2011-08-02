@@ -15,7 +15,7 @@
  */
 dataSource {
     pooled = true
-    driverClassName = "org.hsqldb.jdbcDriver"
+    driverClassName = "org.h2.Driver"
     username = "sa"
     password = ""
 }
@@ -28,7 +28,7 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			url = "jdbc:hsqldb:file:devDB"
+			url = "jdbc:h2:devDB"
 			dbCreate = "update" // one of 'create', 'create-drop','update'
 		}
     hibernate {
@@ -39,7 +39,7 @@ environments {
 	test {
 		dataSource {
 			dbCreate = "create"
-			url = "jdbc:hsqldb:mem:testDB"
+			url = "jdbc:h2:mem:testDB"
 		}
 	}
 	production {
