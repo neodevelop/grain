@@ -13,7 +13,6 @@ grails.project.dependency.resolution = {
   checksums true // Whether to verify checksums on resolve
 
   repositories {
-    inherits true // Whether to inherit repository definitions from plugins
     grailsPlugins()
     grailsHome()
     grailsCentral()
@@ -26,7 +25,7 @@ grails.project.dependency.resolution = {
 
     build ":tomcat:$grailsVersion"
 
-    runtime 'org.grails.plugins:spring-security-core:1.2'
+    runtime 'org.grails.plugins:spring-security-core:1.1.2'
     runtime 'org.grails.plugins:mail:0.9'
     runtime 'org.grails.plugins:settings:1.4'
     runtime 'org.grails.plugins:jquery-ui:1.8.11'
