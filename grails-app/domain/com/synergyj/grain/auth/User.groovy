@@ -17,7 +17,7 @@ package com.synergyj.grain.auth
 
 class User {
 
-  def springSecurityService
+  transient springSecurityService
 
   Date dateCreated
   Date lastUpdated
@@ -68,4 +68,18 @@ class User {
   String toString() {
     "${firstName} ${lastName}"
   }
+  
+  def beforeInsert() {
+		encodePassword()
+	}
+
+	def beforeUpdate() {
+		if (isDirty('password')) {
+			encodePassword()
+		}
+	}
+
+	protected void encodePassword() {
+		password = springSecurityService.encodePassword(password)
+	}
 }
