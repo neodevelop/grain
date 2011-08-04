@@ -17,8 +17,6 @@ package com.synergyj.grain.auth
 
 class User {
 
-  def springSecurityService
-
   Date dateCreated
   Date lastUpdated
 
