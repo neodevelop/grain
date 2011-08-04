@@ -36,14 +36,13 @@ class UserService {
 
   def createUser(userCommand) throws BusinessException {
     def user = new User(userCommand.properties)
-    String salt = userCommand.email
+
     user.password = user.password.toLowerCase()
     user.enabled = true
     user.accountExpired = false
     user.accountLocked = false
     user.emailShow = true
     user.passwordExpired = false
-    user.password = springSecurityService.encodePassword(user.password, salt)
 
     if (user.validate() && user.save(flush: true)) {
       // Notificación de la creación de la cuenta del usuario

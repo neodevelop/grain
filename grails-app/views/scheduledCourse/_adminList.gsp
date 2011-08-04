@@ -32,7 +32,7 @@
                 </g:remoteLink>
               </g:if>
               <g:else>
-                &nbsp
+                &nbsp;
               </g:else>
             </td>
             <g:if test="${it?.payments?.size()}">

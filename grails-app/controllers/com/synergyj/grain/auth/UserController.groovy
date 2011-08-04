@@ -141,8 +141,7 @@ class UserController {
       redirect action: 'forgotPassword'
       return
     }
-    String salt = user.email
-    user.password = springSecurityService.encodePassword(params.password, salt)
+    user.password = params.password
     flash.message = "${message(code:'login.passwordUpdated')}"
     redirect controller: 'login', action: 'auth'
   }
