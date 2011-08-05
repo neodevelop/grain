@@ -17,6 +17,7 @@ package com.synergyj.grain.course
 
 class Payment implements Comparable{
   BigDecimal amount
+  BigDecimal commission = 0
   String transactionId
   Date paymentDate
   String description
@@ -31,6 +32,7 @@ class Payment implements Comparable{
 
   static constraints = {
     amount nullable:false,blank:false
+    commission nullable:true
     transactionId unique: true, maxSize: 20
     paymentDate nullable: true
     dateCreated(display:false)
