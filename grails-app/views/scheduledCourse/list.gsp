@@ -7,11 +7,11 @@
   <title><g:message code="scheduledCourse.list" default="Scheduled Course List" /></title>
   <parameter name="pageHeader" value="${g.message(code: 'scheduledCourse.list', default: 'Scheduled Course List')}"/>
   <script type="text/javascript" language="javascript" src="${createLinkTo(dir:'js',file:'tables.js')}"></script>
-  <g:javascript>
+  <script language="javascript">
     $(function(){
       $("div.list table").styleTable();
     });
-  </g:javascript>
+  </script>
 </head>
 <body>
 <div class="nav">

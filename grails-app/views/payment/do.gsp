@@ -4,7 +4,7 @@
   <meta name='layout' content='wb'/>
   <parameter name="pageHeader" value="${g.message(code: 'payment.do', default: 'Making payment')}"/>
   <script type="text/javascript" src="${createLinkTo(dir:'themes/wb/js/payment',file:'do.js')}"></script>
-  <g:javascript>
+  <script language="javascript">
     <g:if test="${!user?.firstName || !user?.lastName }">
       $(function(){
         $('#lightbox').css({width:'100%',height:'100%'}).fadeIn(500,function(){
@@ -38,7 +38,7 @@
         $("#waitMessage").fadeIn('slow');
       });
     </g:else>
-  </g:javascript>
+  </script>
 </head>
 <body>
 <div id="progress" align="center" style="height:250px;">

@@ -2,12 +2,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="layout" content="wb"/>
   <parameter name="pageHeader" value="${g.message(code: 'user.create.success', default: 'Signup Success')}"/>
-  <g:javascript>
+  <script language="javascript">
   function leave() {
     window.location = "${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/login'}";
   }
   setTimeout("leave()", 5000);
-  </g:javascript>
+  </script>
 </head>
 <body>
   <g:if test="${user.id}">

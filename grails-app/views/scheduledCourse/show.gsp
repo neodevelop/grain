@@ -4,7 +4,7 @@
   <meta name="layout" content="wb" />
   <title><g:message code="scheduledCourse.show" default="Show ScheduledCourse" /></title>
   <parameter name="pageHeader" value="${g.message(code: 'scheduledCourse.show', default: 'Scheduled Course Info')}"/>
-  <g:javascript>
+  <script language="javascript">
     $(function(){
       $('#sessionStartTime').datepicker({ dateFormat:"dd/mm/yy" });
 
@@ -43,7 +43,7 @@
       var link = "<a class='deleteSession' id='"+e.id+"' href='${createLink(controller:'courseSession',action:'deleteAsync')}/"+e.id+"'>Delete</a>";
       $("<li id='sessionCourse"+e.id+"'>"+stringdate+" "+link+"</li>").appendTo("div#sessionList > ul");
     }
-  </g:javascript>
+  </script>
 
 </head>
 <body>

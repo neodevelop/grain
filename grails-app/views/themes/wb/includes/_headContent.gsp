@@ -45,9 +45,9 @@
 <!-- Script para el WYSIWYG -->
 <script type="text/javascript" src="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.js"></script>
 <!-- Aplicamos el wysiwyg a los textarea y button al menu -->
-<g:javascript>
+<script language="javascript">
   $(function(){
     $('textarea').wysiwyg();
     $("div.nav a").button();
   });
-</g:javascript>
+</script>

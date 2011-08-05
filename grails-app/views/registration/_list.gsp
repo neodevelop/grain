@@ -174,9 +174,9 @@
         </table>
       </td>
     </tr>
-    <g:javascript>
+    <script language="javascript">
       $("table.paymentDetail").styleTable();
-    </g:javascript>
+    </script>
     </g:if>
   </table>
 

@@ -1,9 +1,8 @@
 <head>
   <meta name="layout" content="wb"/>
   <parameter name="pageHeader" value="${g.message(code: 'user.signup', default: 'Signup')}"/>
-  <g:javascript library="jquery" plugin="jquery"/>
   <script type="text/javascript" src="http://jquery.bassistance.de/validate/jquery.validate.js"></script>
-  <g:javascript>
+  <script language="javascript">
     $(function(){
       <g:if test="${registrationCode}">
         $("#password").focus();
@@ -46,7 +45,7 @@
         }
       });
     });
-  </g:javascript>
+  </script>
 </head>
 <body>
 <g:if test="${scheduledCourse}">

@@ -15,9 +15,9 @@
             <strong>Oye!</strong> ${flash.message}
           </p>
         </div>
-        <g:javascript>
+        <script language="javascript">
           $("#flashMessage").delay(500).effect("highlight", {}, 2000).delay(2000).slideUp('slow');
-        </g:javascript>
+        </script>
       </g:if>
       <g:if test="${flash.error}">
         <div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">

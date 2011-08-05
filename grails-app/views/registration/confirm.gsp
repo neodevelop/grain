@@ -4,7 +4,7 @@
     <title><g:message code="registration.confirm" default="Confirm registration" /></title>
     <parameter name="pageHeader" value="${g.message(code: 'registration.confirm', default: 'Confirm Registration')}"/>
     <script type="text/javascript" src="https://raw.github.com/malsup/form/master/jquery.form.js"></script>
-    <g:javascript>
+    <script language="javascript">
       $(function(){
         $("form#auth").ajaxForm({
           dataType:'json',
@@ -43,7 +43,7 @@
         });
 
       });
-    </g:javascript>
+    </script>
   </head>
   <body>
   <div id="left">
