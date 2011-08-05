@@ -38,9 +38,7 @@
   <sec:ifAllGranted roles="ROLE_ADMIN">
 
   <div id="tabs" style="width:650px;">
-
     <g:render template="/scheduledCourse/adminList" model="[scheduledCourseList:scheduledCourseList]"/>
-
   </div>
 
   </sec:ifAllGranted>

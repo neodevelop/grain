@@ -112,7 +112,11 @@
                         </table>
                       </g:if>
                       <g:else>
-                        &nbsp;
+                        <g:if test="${payment?.kindOfPayment == KindOfPayment.SPEI}">
+                          <g:link controller="payment" action="uploadReceipt" name="uploadReceipt${payment.id}">
+                            <img src="${createLinkTo(dir:'themes/wb/icon',file:'upload.png')}" width="24" height="24" />
+                          </g:link>
+                        </g:if>
                       </g:else>
                     </td>
                   </tr>
