@@ -40,6 +40,14 @@
         <g:select name="kindOfPayment" from="${com.synergyj.grain.course.KindOfPayment?.values()}" value="${payment?.kindOfPayment}"  />
       </td>
     </tr>
+    <tr class="prop">
+      <td valign="top" class="name">
+        <label for="commission"><g:message code="payment.commission" default="Commission" />:</label>
+      </td>
+      <td valign="top" class="name">
+        <g:textField name="commission" value="${payment.commission}"/>
+      </td>
+    </tr>
     </tbody>
   </table>
   <g:hiddenField name="id" value="${payment.id}"/>

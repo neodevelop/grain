@@ -80,7 +80,8 @@ class PaymentService {
       transactionId:UUID.randomUUID().toString().replaceAll('-', '').substring(0,20),
       paymentStatus:PaymentStatus.WAITING,
       description:description,
-      kindOfPayment: thisKindOfPayment
+      kindOfPayment: thisKindOfPayment,
+      commission: 0.0
     )
   }
 }

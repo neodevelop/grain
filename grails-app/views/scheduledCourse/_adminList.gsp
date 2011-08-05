@@ -1,4 +1,4 @@
-<%@ page import="com.synergyj.grain.course.RegistrationStatus; com.synergyj.grain.course.PaymentStatus; com.synergyj.grain.course.ReceiptStatus" %>
+<%@ page import="com.synergyj.grain.course.KindOfPayment; com.synergyj.grain.course.RegistrationStatus; com.synergyj.grain.course.PaymentStatus; com.synergyj.grain.course.ReceiptStatus" %>
     <ul>
       <g:each in="${scheduledCourseList}" var="scheduledCourse" status="i">
         <li><a href="#sc-${i}">${scheduledCourse.course.courseKey}</a></li>
@@ -35,6 +35,25 @@
                 &nbsp;
               </g:else>
             </td>
+
+            <g:if test="${it.registrationStatus == RegistrationStatus.REGISTERED}">
+            <td>
+              <span id="generatePayment${it.id}">
+                <g:set var="registrationId" value="${it.id}"/>
+                <g:formRemote name="addPaymentToRegistration" url="[controller:'payment',action:'createForRegistration']" update="generatePayment${registrationId}">
+                  <g:hiddenField name="registrationId" value="${registrationId}"/>
+                  <g:hiddenField name="costByCourse" value="${scheduledCourse.costByCourse}"/>
+                  <g:message code="payment.needInvoice"/>
+                  <g:checkBox name="invoice" />
+                  # <g:message code="payment.payment"/>s
+                  <g:select from="${1..2}" name="percentOption" />
+                  <g:select from="${KindOfPayment.values()}" name="paymentOption"/>
+                  <g:submitButton name="submit" value="Create"/>
+                </g:formRemote>
+              </span>
+            </td>
+            </g:if>
+
             <g:if test="${it?.payments?.size()}">
             <td>
               <table>
@@ -42,8 +61,9 @@
                   <tr>
                     <td>$ ${payment.amount}</td>
                     <td>${payment.paymentStatus}</td>
+                    <td>${payment.kindOfPayment}</td>
                     <td>
-                      <g:if test="${payment.paymentStatus == PaymentStatus.PENDING || payment.paymentStatus == PaymentStatus.WAITING}">
+                      <g:if test="${payment.paymentStatus == PaymentStatus.PENDING || payment.paymentStatus == PaymentStatus.WAITING || payment.paymentStatus == PaymentStatus.PAYED}">
                         <g:link controller="payment" action="edit" id="${payment.id}">
                         <img src="${createLinkTo(dir:'themes/wb/icon',file:'edit-icon.png')}" width="24" height="24" />
                         </g:link>
@@ -53,6 +73,13 @@
                       </g:else>
                     </td>
                     <td>
+                      <g:if test="${ payment.paymentStatus == PaymentStatus.PENDING  && payment.kindOfPayment == KindOfPayment.DINERO_MAIL }">
+                        <g:remoteLink update="approvePayment${payment.id}" controller="receipt" action="approveDineroMail" id="${payment.id}">
+                          <span id="approvePayment${payment.id}">
+                            <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-blue.png')}" width="24" height="24" />
+                          </span>
+                        </g:remoteLink>
+                      </g:if>
                       <g:if test="${payment?.receipts?.size()}">
                         <table>
                           <tbody>

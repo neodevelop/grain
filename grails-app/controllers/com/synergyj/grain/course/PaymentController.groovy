@@ -197,4 +197,30 @@ class PaymentController {
     redirect uri:'/me'
   }
 
+  def createForRegistration = {
+    //def registration = Registration.get(params.id)
+    def paymentOption = "spei"
+    if(params.paymentOption == "DINERO_MAIL"){
+      // Pagará con DM
+      paymentOption = "dineromail"
+    }
+    def totalToPay =  new BigDecimal(params.costByCourse)
+    if(params.invoice)
+      totalToPay =  totalToPay * 1.16
+
+    def thisPayment = totalToPay / (new BigDecimal(params.percentOption))
+
+    // Creamos los pagos para el registro
+    paymentService.preparePaymentsForRegistration(
+        params.long("registrationId"),
+        totalToPay,
+        thisPayment,
+        paymentOption,
+        params.invoice)
+
+    render """
+      <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-green.png')}" width="24" height="24" />
+    """
+  }
+
 }

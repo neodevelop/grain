@@ -23,14 +23,7 @@
           </g:remoteLink>
         </td>
         <td>
-          <g:if test="${registration?.registrationStatus == RegistrationStatus.REGISTERED}">
-
-            Generar pago
-
-          </g:if>
-          <g:else>
-            ${registration.registrationStatus}
-          </g:else>
+          ${registration.registrationStatus}
         </td>
         <td>
           <g:formatBoolean boolean="${registration?.invoice}" true="Yes" false="No"/>
@@ -54,20 +47,6 @@
               <td>${payment?.kindOfPayment}</td>
               <td>$ ${payment?.amount}</td>
               <td>-$ ${payment?.commission}</td>
-              <td>
-                <g:if test="${payment?.kindOfPayment == KindOfPayment.DINERO_MAIL}">
-                  Aprobar pago
-                </g:if>
-                <g:else>
-                  <g:if test="${payment.paymentStatus == PaymentStatus.WAITING}">
-                    Comenzar pago
-                  </g:if>
-                  <g:if test="${payment.paymentStatus == PaymentStatus.PENDING}">
-                    Subir recibo
-                  </g:if>
-                </g:else>
-                &nbsp;
-              </td>
             </tr>
             <g:set var="totalAmount" value="${totalAmount + payment.amount}"/>
             <g:set var="totalCommission" value="${totalCommission?.plus(payment?.commission ?: 0)}"/>

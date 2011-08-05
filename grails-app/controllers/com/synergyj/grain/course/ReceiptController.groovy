@@ -36,6 +36,15 @@ class ReceiptController {
     """
   }
 
+  def approveDineroMail = {
+    def payment = Payment.get(params.id)
+    payment.paymentStatus = PaymentStatus.PAYED
+    registrationService.checkIsPayed(payment.registration.id)
+    render """
+      <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-green.png')}" width="24" height="24" />
+    """
+  }
+
   def delete = {
     def receipt = Receipt.get(params.id)
     receipt.delete()
