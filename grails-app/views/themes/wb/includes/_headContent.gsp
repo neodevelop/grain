@@ -1,9 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<!-- Hola mundo2!!! -->
-<!--g:javascript library="jquery" /-->
-<script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
-<!-- Hola mundo2!!! -->
+<g:javascript library="jquery" plugin="jquery"/>
 <!-- Hoja de estilo y js para jquery-ui -->
 <jqui:resources plugin="jquery-ui" themeCss="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/overcast/jquery-ui.css" />
 
