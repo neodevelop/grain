@@ -45,10 +45,10 @@ environments {
 	production {
 		dataSource {
 			pooled = true
-      dbCreate = "create-drop"
+      dbCreate = "update"
       url = "jdbc:mysql://localhost/grain"
       driverClassName = "com.mysql.jdbc.Driver"
-      username = ""
+      username = "root"
       password = ""
 		}
 	}
