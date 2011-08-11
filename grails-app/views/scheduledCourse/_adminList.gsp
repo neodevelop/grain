@@ -30,6 +30,13 @@
                 <g:remoteLink controller="registration" action="delete" id="${it.id}" onSuccess="removeRegistration(${it.id})">
                   <img src="${createLinkTo(dir:'themes/wb/icon',file:'cancel.png')}" width="24" height="24" />
                 </g:remoteLink>
+                <g:set var="registrationId" value="${it.id}"/>
+                <g:remoteLink controller="registration" action="cancel" id="${it.id}" update="cancelRegistration${it.id}">
+                  <span id="cancelRegistration${registrationId}">
+                  <img src="${createLinkTo(dir:'themes/wb/icon',file:'graphite.png')}" width="24" height="24" />
+                  </span>
+                </g:remoteLink>
+                  <img src="${createLinkTo(dir:'themes/wb/icon',file:'edit-icon.png')}" width="24" height="24" />
               </g:if>
               <g:else>
                 &nbsp;

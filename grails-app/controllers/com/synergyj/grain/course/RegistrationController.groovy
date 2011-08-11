@@ -79,4 +79,12 @@ class RegistrationController {
     registration.delete()
     render ""
   }
+
+  def cancel = {
+    def registration = Registration.get(params.id)
+    registration.registrationStatus = RegistrationStatus.CANCELLED
+    render """
+      <img src="${createLinkTo(dir:'themes/wb/icon',file:'purple.png')}" width="24" height="24" />
+    """
+  }
 }

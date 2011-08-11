@@ -27,11 +27,15 @@
           <g:message code="registration.payed"/>
           <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-green.png')}" alt="valid"/>
         </g:if>
+        <g:if test="${registration.registrationStatus == RegistrationStatus.CANCELLED}">
+          <g:message code="registration.cancelled"/>
+          <img src="${createLinkTo(dir:'themes/wb/icon',file:'graphite.png')}" alt="valid"/>
+        </g:if>
       </td>
     </tr>
 
 
-    <g:if test="${registration.registrationStatus == RegistrationStatus.REGISTERED || registration.registrationStatus == RegistrationStatus.PENDING_PAYMENT}">
+    <g:if test="${registration.registrationStatus == RegistrationStatus.REGISTERED || registration.registrationStatus == RegistrationStatus.PENDING_PAYMENT || registration.registrationStatus == RegistrationStatus.CANCELLED}">
     <tr class="content">
       <td class="contentLeft">
         <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
@@ -180,6 +184,7 @@
     </g:if>
   </table>
 
+  <g:if test="${!registration.registrationStatus == RegistrationStatus.CANCELLED}">
   <table class="registration" cellpadding="0" cellspacing="0">
     <tr class="content">
       <td class="contentLeft">
@@ -199,4 +204,5 @@
       </td>
     </tr>
   </table>
+  </g:if>
 </g:each>
