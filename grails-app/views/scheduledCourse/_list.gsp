@@ -15,6 +15,8 @@
 
       <th>&nbsp;</th>
 
+      <th>&nbsp;</th>
+
     </tr>
     </thead>
     <tbody>
@@ -58,6 +60,12 @@
             </g:remoteLink>
             </div>
           </g:else>
+        </td>
+
+        <td>
+          <g:link controller="studentsGroup" action="attendance" id="${scheduledCourse?.studentsGroup?.id}">
+            <g:message code="studentsGroup.attendance" default="Attendance"/>
+          </g:link>
         </td>
 
       </tr>
