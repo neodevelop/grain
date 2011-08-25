@@ -38,6 +38,7 @@ grails.mime.types = [
     atom: 'application/atom+xml',
     css: 'text/css',
     csv: 'text/csv',
+    pdf: 'application/pdf',
     all: '*/*',
     json: ['application/json', 'text/json'],
     form: 'application/x-www-form-urlencoded',

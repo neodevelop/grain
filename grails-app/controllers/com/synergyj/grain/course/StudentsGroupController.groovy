@@ -120,6 +120,17 @@ class StudentsGroupController {
     response.addHeader("Access-Control-Allow-Origin","*")
     response.addHeader("Content-Type","	application/json;charset=UTF-8")
     render([attended:courseSessionPerRegistration.attended] as JSON)
+  }
 
+  def createCertificate = {
+    def studentsGroup = StudentsGroup.get(params.id)
+    def studentsGroupReport = []
+    studentsGroup.students.each{ student ->
+      def n = new Expando()
+      n.email = student.email
+      studentsGroupReport << n
+    }
+    params._format = "PDF"
+    chain(controller:"jasper",action:"index",model:[data:studentsGroup.students],params:params)
   }
 }
