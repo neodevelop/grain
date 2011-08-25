@@ -15,7 +15,7 @@
  */
 package com.synergyj.grain.course
 
-class CourseSessionPerRegistration {
+class CourseSessionPerRegistration implements Comparable{
 
   CourseSession courseSession
   Boolean attended = false
@@ -30,4 +30,7 @@ class CourseSessionPerRegistration {
     dateCreated display: false, nullable: true
   }
 
+  int compareTo(obj){
+    courseSession.sessionStartTime.compareTo(obj.courseSession.sessionStartTime)
+  }
 }

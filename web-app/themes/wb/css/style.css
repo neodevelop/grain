@@ -1940,3 +1940,8 @@ table tbody tr.totalPerGroup{
   text-align: center;
   font-size: 14px;
 }
+
+table > tbody > tr a{
+  text-decoration: none;
+}
+

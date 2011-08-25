@@ -17,6 +17,7 @@ package com.synergyj.grain.course
 
 import grails.plugins.springsecurity.Secured
 import com.synergyj.grain.auth.User
+import grails.converters.JSON
 
 @Secured(["hasRole('ROLE_ADMIN')"])
 class StudentsGroupController {
@@ -107,5 +108,18 @@ class StudentsGroupController {
       registrations << registration
     }
     [studentsGroup:studentsGroup,registrations:registrations]
+  }
+
+  def checkAttendance = {
+    def courseSessionPerRegistration = CourseSessionPerRegistration.get(params.id)
+    if(courseSessionPerRegistration.attended)
+      courseSessionPerRegistration.attended = false
+    else
+      courseSessionPerRegistration.attended = true
+
+    response.addHeader("Access-Control-Allow-Origin","*")
+    response.addHeader("Content-Type","	application/json;charset=UTF-8")
+    render([attended:courseSessionPerRegistration.attended] as JSON)
+
   }
 }
