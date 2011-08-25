@@ -1,4 +1,4 @@
-<%@ page import="com.synergyj.grain.course.Course" %>
+<%@ page import="com.synergyj.grain.course.RegistrationStatus; com.synergyj.grain.course.Course" %>
 <html>
 <head>
   <meta name="layout" content="wb" />
@@ -23,6 +23,9 @@
             ${courseSession}
           </th>
           </g:each>
+          <th>
+            <g:message code="course.certified" default="Certificate"/>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -46,6 +49,19 @@
             </g:remoteLink>
           </td>
           </g:each>
+          <td>
+            <g:remoteLink controller="registration" action="toggleFinished" id="${registration.id}" onSuccess="changeRegistrationStatus(data,${registration.id});">
+            <span id="registration${registration.id}">
+            <g:if test="${!(registration.registrationStatus == RegistrationStatus.FINISHED)}">
+              <img src="${createLinkTo(dir:'themes/wb/icon',file:'shuffle-off.png')}" width="24" height="24"/>
+            </g:if>
+            <g:else>
+              <img src="${createLinkTo(dir:'themes/wb/icon',file:'shuffle-on.png')}" width="24" height="24"/>
+            </g:else>
+            </span>
+            <g:message code="registration.generateCertificate" default="Generate"/>
+            </g:remoteLink>
+          </td>
         </tr>
         </g:each>
       </tbody>

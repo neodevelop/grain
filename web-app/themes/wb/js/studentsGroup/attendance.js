@@ -13,3 +13,9 @@ function changeAttendanceStatus(data,elementId){
   }
   imgElement.attr("src",newSrc);
 }
+
+function changeRegistrationStatus(data,elementId){
+  var imgElement = $("span#registration"+elementId+" > img");
+  var src = imgElement.attr("src");
+  imgElement.attr("src",src.replace("shuffle-off","shuffle-on"));
+}

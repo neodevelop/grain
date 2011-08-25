@@ -87,4 +87,12 @@ class RegistrationController {
       <img src="${createLinkTo(dir:'themes/wb/icon',file:'purple.png')}" width="24" height="24" />
     """
   }
+
+  def toggleFinished = {
+    def registration = Registration.get(params.id)
+    registration.registrationStatus = RegistrationStatus.FINISHED
+    response.addHeader("Access-Control-Allow-Origin","*")
+    response.addHeader("Content-Type","	application/json;charset=UTF-8")
+    render([finished:true] as JSON)
+  }
 }

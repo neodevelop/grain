@@ -1830,7 +1830,7 @@ table#registrations_PAYED{
   background: linear-gradient(top, #cadd82 2%,#f8ffe8 99%); /* W3C */
 }
 
-table#registrations_IN_COURSE{
+table#registrations_FINISHED{
   color:#135299;
   background: #add9e4; /* Old browsers */
   background: -moz-linear-gradient(top, #add9e4 0%, #f7fbfc 99%); /* FF3.6+ */
@@ -1903,7 +1903,7 @@ table tbody tr.registration_PAYED{
   background: linear-gradient(top, #cadd82 2%,#f8ffe8 99%); /* W3C */
 }
 
-table tbody tr.registration_IN_COURSE{
+table tbody tr.registration_FINISHED{
   color:#135299;
   background: #add9e4; /* Old browsers */
   background: -moz-linear-gradient(top, #add9e4 0%, #f7fbfc 99%); /* FF3.6+ */
