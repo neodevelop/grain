@@ -68,14 +68,9 @@
     </table>
   </div>
   <br/>
-  <g:jasperReport action="createCertificate" controller="studentsGroup" jasper="certificates" format="PDF">
-    <g:hiddenField name="id" value="${studentsGroup.id}"/>
-  </g:jasperReport>
-  <br/>
-  <g:jasperForm action="createCertificate" controller="studentsGroup" id="${studentsGroup.id}" jasper="certificates">
-    <g:jasperButton format="PDF" jasper="certificates" text="PDF"></g:jasperButton>
-    <g:submitButton name="submit" value="Generate" />
-  </g:jasperForm>
+  <g:link controller="studentsGroup" action="createCertificate" id="${studentsGroup.id}" class="action">
+    Diplomas
+  </g:link>
 
 </div>
 </body>

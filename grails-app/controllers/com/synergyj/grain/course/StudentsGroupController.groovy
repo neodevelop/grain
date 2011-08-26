@@ -18,9 +18,15 @@ package com.synergyj.grain.course
 import grails.plugins.springsecurity.Secured
 import com.synergyj.grain.auth.User
 import grails.converters.JSON
+import org.codehaus.groovy.grails.plugins.jasper.JasperExportFormat
+import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
+import java.text.SimpleDateFormat
 
 @Secured(["hasRole('ROLE_ADMIN')"])
 class StudentsGroupController {
+
+  def jasperService
+
   def create = {
     def scheduledCourse = ScheduledCourse.get(params.id)
     def months = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE']
@@ -123,14 +129,58 @@ class StudentsGroupController {
   }
 
   def createCertificate = {
+    // Obtenemos el grupo completo
     def studentsGroup = StudentsGroup.get(params.id)
-    def studentsGroupReport = []
-    studentsGroup.students.each{ student ->
-      def n = new Expando()
-      n.email = student.email
-      studentsGroupReport << n
+    // Buscamos los registros para ese grupo
+    def criteria = Registration.createCriteria()
+    def registrations = criteria.list {
+      eq "scheduledCourse",studentsGroup.scheduledCourse
+      eq "registrationStatus",RegistrationStatus.FINISHED
     }
-    params._format = "PDF"
-    chain(controller:"jasper",action:"index",model:[data:studentsGroup.students],params:params)
+
+    // Inicializamos la lista que se va al reporte
+    def reportData = []
+    // Iteramos a los estudiantes
+    (registrations*.student).each{ student ->
+      // Creamos un objeto certificado
+      def certificate = new Certificate()
+      // Le ponemos nombre a su diploma
+      certificate.fullName = "$student?.firstName $student?.lastName"
+      // Ponemos el nombre del curso
+      certificate.courseName = "${studentsGroup.scheduledCourse.course.name}"
+      // Indicamos la duración del curso
+      // TODO: Este debe venir del curso
+      certificate.duration = "40"
+      // Obtenemos la fecha de inicio
+      def startDate = studentsGroup.scheduledCourse.beginDate
+      // Usamos un formateador para la primera parte de la fecha
+      def dateFormat = new SimpleDateFormat("dd 'de' MMMMM")
+      // La asignamos al valor del certificado
+      certificate.dateRange = "Del ${dateFormat.format(startDate)} "
+      // Cambiamos el formateador
+      dateFormat = new SimpleDateFormat("'al' dd 'de' MMMMMM 'del' yyyy")
+      // Obtenemos la última sesion
+      def lastSession = (studentsGroup.scheduledCourse.courseSessions.max()).sessionStartTime
+      // Concatenamos la fecha con el uso del formateador
+      certificate.dateRange += "${dateFormat.format(lastSession)}"
+      // Agregamos los instructores
+      // TODO: Asignar instructores por curso
+      certificate.mainInstructor = "Domingo Suárez Torres"
+      certificate.secondaryInstructor = "José Juan Reyes Zuñiga"
+      // Agregamos el objeto a la lista
+      reportData << certificate
+    }
+
+    // Generamos la definición del reporte
+    def reportDef = new JasperReportDef(
+      name:'certificates.jasper',
+      fileFormat:JasperExportFormat.PDF_FORMAT,
+      reportData:reportData,
+      parameters:[:]
+    )
+    // Mandamos un nombre de archivo a la salida
+    response.setHeader("Content-disposition", "attachment; filename=certificates.pdf" )
+    // Mandamos el reporte al response
+    response.outputStream << jasperService.generateReport(reportDef).toByteArray()
   }
 }
