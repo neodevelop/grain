@@ -183,4 +183,44 @@ class StudentsGroupController {
     // Mandamos el reporte al response
     response.outputStream << jasperService.generateReport(reportDef).toByteArray()
   }
+
+  @Secured(["hasRole('ROLE_USER')"])
+  def certificate = {
+    def registration = Registration.get(params.id)
+    Certificate certificate = new Certificate()
+    certificate.fullName = "${registration.student.firstName} ${registration.student.lastName}"
+    certificate.courseName = "${registration.scheduledCourse.course.name}"
+    certificate.duration = "40"
+    def startDate = registration.scheduledCourse.beginDate
+    // Usamos un formateador para la primera parte de la fecha
+    def dateFormat = new SimpleDateFormat("dd 'de' MMMMM")
+    // La asignamos al valor del certificado
+    certificate.dateRange = "Del ${dateFormat.format(startDate)} "
+    // Cambiamos el formateador
+    dateFormat = new SimpleDateFormat("'al' dd 'de' MMMMMM 'del' yyyy")
+    // Obtenemos la última sesion
+    def lastSession = (registration.scheduledCourse.courseSessions.max()).sessionStartTime
+    // Concatenamos la fecha con el uso del formateador
+    certificate.dateRange += "${dateFormat.format(lastSession)}"
+    certificate.mainInstructor = "Domingo Suárez Torres"
+    certificate.secondaryInstructor = "José Juan Reyes Zuñiga"
+
+    println servletContext.properties
+
+    def reportData = []
+    reportData << certificate
+
+    // Generamos la definición del reporte
+    def reportDef = new JasperReportDef(
+      name:'certificate_image.jasper', // La imagen tiene una rut absoluta
+      fileFormat:JasperExportFormat.PDF_FORMAT,
+      reportData:reportData,
+      parameters:[:]
+    )
+
+    // Mandamos un nombre de archivo a la salida
+    response.setHeader("Content-disposition", "attachment; filename=${registration.scheduledCourse.course.courseKey}-${registration.student.email}.pdf" )
+    // Mandamos el reporte al response
+    response.outputStream << jasperService.generateReport(reportDef).toByteArray()
+  }
 }

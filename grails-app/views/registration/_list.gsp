@@ -31,6 +31,10 @@
           <g:message code="registration.cancelled"/>
           <img src="${createLinkTo(dir:'themes/wb/icon',file:'graphite.png')}" alt="valid"/>
         </g:if>
+        <g:if test="${registration.registrationStatus == RegistrationStatus.FINISHED}">
+
+          <img src="${createLinkTo(dir:'themes/wb/icon',file:'medal.png')}" alt="valid"/>
+        </g:if>
       </td>
     </tr>
 
@@ -182,6 +186,17 @@
       $("table.paymentDetail").styleTable();
     </script>
     </g:if>
+
+    <g:if test="${registration.registrationStatus == RegistrationStatus.FINISHED}">
+    <tr>
+      <td colspan="2" class="cellCenter">
+        <g:link controller="studentsGroup" action="certificate" id="${registration.id}" class="action">
+          <g:message code="registration.certificate"/>
+        </g:link>
+      </td>
+    </tr>
+    </g:if>
+
   </table>
 
   <g:if test="${!registration.registrationStatus == RegistrationStatus.CANCELLED}">
@@ -205,4 +220,5 @@
     </tr>
   </table>
   </g:if>
+
 </g:each>
