@@ -145,7 +145,7 @@ class StudentsGroupController {
       // Creamos un objeto certificado
       def certificate = new Certificate()
       // Le ponemos nombre a su diploma
-      certificate.fullName = "$student?.firstName $student?.lastName"
+      certificate.fullName = "${student?.firstName} ${student?.lastName}"
       // Ponemos el nombre del curso
       certificate.courseName = "${studentsGroup.scheduledCourse.course.name}"
       // Indicamos la duración del curso
