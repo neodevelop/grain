@@ -154,11 +154,12 @@ class StudentsGroupController {
       // Obtenemos la fecha de inicio
       def startDate = studentsGroup.scheduledCourse.beginDate
       // Usamos un formateador para la primera parte de la fecha
-      def dateFormat = new SimpleDateFormat("dd 'de' MMMMM")
+      def locale = new Locale("es")
+      def dateFormat = new SimpleDateFormat("dd 'de' MMMMM",locale)
       // La asignamos al valor del certificado
       certificate.dateRange = "Del ${dateFormat.format(startDate)} "
       // Cambiamos el formateador
-      dateFormat = new SimpleDateFormat("'al' dd 'de' MMMMMM 'del' yyyy")
+      dateFormat = new SimpleDateFormat("'al' dd 'de' MMMMMM 'del' yyyy",locale)
       // Obtenemos la última sesion
       def lastSession = (studentsGroup.scheduledCourse.courseSessions.max()).sessionStartTime
       // Concatenamos la fecha con el uso del formateador
@@ -193,19 +194,18 @@ class StudentsGroupController {
     certificate.duration = "40"
     def startDate = registration.scheduledCourse.beginDate
     // Usamos un formateador para la primera parte de la fecha
-    def dateFormat = new SimpleDateFormat("dd 'de' MMMMM")
+    def locale = new Locale("es")
+    def dateFormat = new SimpleDateFormat("dd 'de' MMMMM",locale)
     // La asignamos al valor del certificado
     certificate.dateRange = "Del ${dateFormat.format(startDate)} "
     // Cambiamos el formateador
-    dateFormat = new SimpleDateFormat("'al' dd 'de' MMMMMM 'del' yyyy")
+    dateFormat = new SimpleDateFormat("'al' dd 'de' MMMMMM 'del' yyyy",locale)
     // Obtenemos la última sesion
     def lastSession = (registration.scheduledCourse.courseSessions.max()).sessionStartTime
     // Concatenamos la fecha con el uso del formateador
     certificate.dateRange += "${dateFormat.format(lastSession)}"
     certificate.mainInstructor = "Domingo Suárez Torres"
     certificate.secondaryInstructor = "José Juan Reyes Zuñiga"
-
-    println servletContext.properties
 
     def reportData = []
     reportData << certificate
