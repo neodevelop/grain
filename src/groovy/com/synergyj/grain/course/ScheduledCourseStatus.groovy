@@ -24,6 +24,6 @@ enum ScheduledCourseStatus {
   PROGRESS
 
   static List<ScheduledCourseStatus> publicCourses() {
-    [PLANNING, SCHEDULED, PROGRESS]
+    [PLANNING, SCHEDULED, PROGRESS, FINISHED]
   }
 }
