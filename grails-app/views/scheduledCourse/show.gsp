@@ -101,9 +101,12 @@
 
         <tr class="prop">
           <td valign="top" class="name"><g:message code="scheduledCourse.status" default="Status:" />:</td>
-
           <td valign="top" class="value">${scheduledCourseInstance.scheduledCourseStatus}</td>
+        </tr>
 
+        <tr class="prop">
+          <td valign="top" class="name"><g:message code="scheduledCourse.durationInHours" default="Duration In Hours" />:</td>
+          <td valign="top" class="value">${scheduledCourseInstance?.durationInHours}</td>
         </tr>
 
         <tr class="prop">

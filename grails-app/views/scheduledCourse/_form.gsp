@@ -61,7 +61,15 @@
       </td>
       <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'limitRegistrationDate', 'errors')}">
         <g:datePicker name="limitRegistrationDate" value="${scheduledCourseInstance?.limitRegistrationDate}" precision="day"  />
+      </td>
+    </tr>
 
+    <tr class="prop">
+      <td valign="top" class="name">
+        <label for="durationInHours"><g:message code="scheduledCourse.durationInHours" default="Duration in Hours" />:</label>
+      </td>
+      <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'durationInHours', 'errors')}">
+        <g:textField name="durationInHours" value="${fieldValue(bean: scheduledCourseInstance, field: 'durationInHours')}" />
       </td>
     </tr>
 

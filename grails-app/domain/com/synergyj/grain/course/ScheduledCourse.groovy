@@ -24,6 +24,8 @@ class ScheduledCourse{
   ScheduledCourseStatus scheduledCourseStatus
   String geolocation = ''
   String fullAddress = ''
+  Integer durationInHours
+  // Agregamos la duración aquí por que pueden existir cursos que pidan solo ciertos módulos
 	
 	Date dateCreated
 	Date lastUpdated
@@ -41,6 +43,7 @@ class ScheduledCourse{
 		dateCreated display:false
     geolocation nullable: true, blank: true, size: 0..200
     fullAddress nullable: true, blank: true, size: 0..1000
+    durationInHours nullable: false,blank: false
     studentsGroup nullable: true
 	}
 	
