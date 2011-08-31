@@ -191,6 +191,7 @@ class StudentsGroupController {
     Certificate certificate = new Certificate()
     certificate.fullName = "${registration.student.firstName} ${registration.student.lastName}"
     certificate.courseName = "${registration.scheduledCourse.course.name}"
+    certificate.email = "${registration.student.email}"
     certificate.duration = "40"
     def startDate = registration.scheduledCourse.beginDate
     // Usamos un formateador para la primera parte de la fecha

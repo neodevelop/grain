@@ -17,6 +17,7 @@ package com.synergyj.grain.course
 
 class Certificate {
   String fullName
+  String email
   String courseName
   String dateRange
   String duration

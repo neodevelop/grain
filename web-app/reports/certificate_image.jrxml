@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="diplomas" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="792" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="144"/>
+	<property name="ireport.y" value="309"/>
 	<property name="ireport.layers" value="##Fri Aug 26 01:48:35 CDT 2011\nlayer.1.name=fields\nlayer.1.visible=true\nlayer.1.id=1\nlayer.0.name=Background\nlayer.0.visible=true\nlayer.0.id=0"/>
 	<queryString language="SQL">
 		<![CDATA[]]>
@@ -13,6 +13,7 @@
 	<field name="duration" class="java.lang.String"/>
 	<field name="mainInstructor" class="java.lang.String"/>
 	<field name="secondaryInstructor" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -68,6 +69,13 @@
 				<reportElement x="242" y="485" width="160" height="20"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{secondaryInstructor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="302" y="346" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{email}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
