@@ -1945,3 +1945,16 @@ table > tbody > tr a{
   text-decoration: none;
 }
 
+table > tbody > tr.content > td.contentLeft > ul{
+  font-size: 12px;
+}
+
+table > tbody > tr > td.address{
+  text-align: center;
+  font-style: italic;
+  padding: 0px 0px 10px 0px;
+}
+
+table > tbody > tr > td.map{
+  padding-left: 15px;
+}

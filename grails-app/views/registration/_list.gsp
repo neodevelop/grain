@@ -12,7 +12,9 @@
     <tr class="content">
       <td class="contentLeft">
         <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
-        <g:message code="registration.date"/>: <g:formatDate date="${registration.dateCreated}" format="EEEE dd-MM-yyyy"/>
+        <g:message code="registration.date"/>:<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <g:formatDate date="${registration.dateCreated}" format="EEEE dd/MMMM/yyyy"/>
       </td>
       <td class="contentRight">
         <g:if test="${registration.registrationStatus == RegistrationStatus.REGISTERED}">
@@ -43,7 +45,7 @@
     <tr class="content">
       <td class="contentLeft">
         <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
-        <g:message code="registration.beginDate"/>: <g:formatDate date="${registration.scheduledCourse.beginDate}" format="EEEE dd-MM-yyyy"/>
+        <g:message code="registration.beginDate"/>: <g:formatDate date="${registration.scheduledCourse.beginDate}" format="EEEE dd/MMMM/yyyy"/>
       </td>
       <td class="contentRight">
         &nbsp;
@@ -52,12 +54,20 @@
     </g:if>
     <g:else>
     <tr class="content">
-      <td class="contentLeft" width="60%">
+      <td class="contentLeft">
         <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
         <g:message code="registration.sessions"/>
         <ul>
         <g:each in="${registration.scheduledCourse.courseSessions.sort()}" var="courseSession">
-          <li><g:formatDate date="${courseSession?.sessionStartTime}" format="EEEE dd 'de' MMMM 'del' yyyy"/></li>
+          <li>
+            <g:formatDate date="${courseSession?.sessionStartTime}" format="EEEE 'de' MMMM 'del' yyyy"/>
+            <ul>
+              <li>
+                <g:formatDate date="${courseSession?.sessionStartTime}" format="HH:mm"/>
+                -
+                <g:formatDate date="${courseSession?.sessionEndTime}" format="HH:mm"/></li>
+            </ul>
+          </li>
         </g:each>
         </ul>
       </td>
@@ -80,7 +90,7 @@
     <tr class="content">
       <td class="contentLeft">
         <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
-        <g:message code="registration.limitDate"/>: <g:formatDate date="${registration.scheduledCourse.limitRegistrationDate}" format="EEEE dd-MM-yyyy"/>
+        <g:message code="registration.limitDate"/>: <g:formatDate date="${registration.scheduledCourse.limitRegistrationDate}" format="EEEE dd/MMMM/yyyy"/>
       </td>
       <td class="contentRight money">
         <g:message code="registration.cost"/>: $ ${registration.scheduledCourse.costByCourse}
@@ -119,7 +129,7 @@
           <g:each in="${registration.payments.sort()}" var="payment" status="i">
           <tr class="paymentRow">
             <td># ${i+1}</td>
-            <td class="money">$ ${payment.amount}</td>
+            <td class="money">$ <g:formatNumber number="${payment.amount}" format="#,##0.00" locale="MX"/> </td>
 
             <g:if test="${payment.paymentStatus == PaymentStatus.WAITING}">
               <td>
@@ -197,28 +207,24 @@
     </tr>
     </g:if>
 
-  </table>
-
-  <g:if test="${!registration.registrationStatus == RegistrationStatus.CANCELLED}">
-  <table class="registration" cellpadding="0" cellspacing="0">
-    <tr class="content">
-      <td class="contentLeft">
+    <g:if test="${!(registration.registrationStatus == RegistrationStatus.CANCELLED || registration.registrationStatus == RegistrationStatus.FINISHED)}">
+    <tr>
+      <td colspan="2" class="address">
         <g:message code="scheduledcourse.fullAddress"/>
       </td>
     </tr>
-
-    <tr class="content">
-      <td class="contentLeft">
-        ${registration?.scheduledCourse?.fullAddress}
-      </td>
-    </tr>
-
-    <tr class="content">
-      <td class="contentLeft">
+    <tr>
+      <td colspan="2" class="address map">
         <g:render template="/common/mapToShow" model="[width:480,height:240,courseGeolocation:registration?.scheduledCourse?.geolocation,meGeolocation:registration?.student?.geolocation]" />
       </td>
     </tr>
+    <tr>
+      <td colspan="2" class="address">
+        ${registration?.scheduledCourse?.fullAddress}
+      </td>
+    </tr>
+    </g:if>
+
   </table>
-  </g:if>
 
 </g:each>

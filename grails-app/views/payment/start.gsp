@@ -23,7 +23,7 @@
       <tr class="finalPrice">
         <td><g:message code="payment.amount"/>:</td>
         <td class="finalAmount">
-          $ <span id="finalAmount"><g:formatNumber number="${payment.amount}" format="#,###.##"/></span>
+          $ <span id="finalAmount"><g:formatNumber number="${payment.amount}" format="#,###.00" locale="MX"/></span>
         </td>
       </tr>
     </table>
