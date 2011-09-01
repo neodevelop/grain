@@ -74,28 +74,28 @@
         <tr class="prop">
           <td valign="top" class="name"><g:message code="scheduledCourse.costByCourse" default="Cost By Course" />:</td>
 
-          <td valign="top" class="value">$ <g:formatNumber number="${scheduledCourseInstance?.costByCourse}" format="#,##0.00;(#,##0.00)" /></td>
+          <td valign="top" class="value">$ ${scheduledCourseInstance?.costByCourse}</td>
 
         </tr>
 
         <tr class="prop">
           <td valign="top" class="name"><g:message code="scheduledCourse.costByModule" default="Cost By Module" />:</td>
 
-          <td valign="top" class="value">$ <g:formatNumber number="${scheduledCourseInstance?.costByModule}" format="#,##0.00;(#,##0.00)" /></td>
+          <td valign="top" class="value">$ ${scheduledCourseInstance?.costByModule}</td>
 
         </tr>
 
         <tr class="prop">
           <td valign="top" class="name"><g:message code="scheduledCourse.beginDate" default="Begin Date" />:</td>
 
-          <td valign="top" class="value"><g:formatDate date="${scheduledCourseInstance?.beginDate}" format="dd-MMMM-yy" /></td>
+          <td valign="top" class="value">${scheduledCourseInstance?.beginDate}</td>
 
         </tr>
 
         <tr class="prop">
           <td valign="top" class="name"><g:message code="scheduledCourse.limitRegistrationDate" default="Limit Registration Date" />:</td>
 
-          <td valign="top" class="value"><g:formatDate date="${scheduledCourseInstance?.limitRegistrationDate}" format="dd-MMMM-yy" /></td>
+          <td valign="top" class="value">${scheduledCourseInstance?.limitRegistrationDate}</td>
 
         </tr>
 

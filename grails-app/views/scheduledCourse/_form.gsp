@@ -17,8 +17,7 @@
         <label for="costByCourse"><g:message code="scheduledCourse.costByCourse" default="Cost By Course" />:</label>
       </td>
       <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'costByCourse', 'errors')}">
-        <g:textField name="costByCourse" value="${fieldValue(bean: scheduledCourseInstance, field: 'costByCourse')}" />
-
+        <g:textField name="costByCourse" value="${scheduledCourseInstance?.costByCourse}" />
       </td>
     </tr>
 
@@ -27,8 +26,7 @@
         <label for="costByModule"><g:message code="scheduledCourse.costByModule" default="Cost By Module" />:</label>
       </td>
       <td valign="top" class="value ${hasErrors(bean: scheduledCourseInstance, field: 'costByModule', 'errors')}">
-        <g:textField name="costByModule" value="${fieldValue(bean: scheduledCourseInstance, field: 'costByModule')}" />
-
+        <input type="text" name="costByModule" id="costByModule" value="${scheduledCourseInstance?.costByModule}"/>
       </td>
     </tr>
 

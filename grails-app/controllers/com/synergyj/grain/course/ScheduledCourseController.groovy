@@ -44,19 +44,18 @@ class ScheduledCourseController {
   }
 
   def create = {
-    def scheduledCourseInstance = new ScheduledCourse()
-    scheduledCourseInstance.properties = params
-    return [scheduledCourseInstance: scheduledCourseInstance]
+    def scheduledCourseInstance = bind(new ScheduledCourse())
+    return [scheduledCourseInstance: wrapBean(scheduledCourseInstance)]
   }
 
   def save = {
-    def scheduledCourseInstance = new ScheduledCourse(params)
+    def scheduledCourseInstance = bind(new ScheduledCourse())
     if (!scheduledCourseInstance.hasErrors() && scheduledCourseInstance.save(flush:true)) {
       try{
         def courseSession = courseSessionService.createSession4ScheduledCourse(scheduledCourseInstance.id,scheduledCourseInstance.beginDate)
       }catch(ScheduledCourseException e){
         flash.defaultMessage = "Course session was not created"
-        render(view: "create", model: [scheduledCourseInstance: scheduledCourseInstance])
+        render(view: "create", model: [scheduledCourseInstance: wrapBean(scheduledCourseInstance)])
       }
       flash.message = "scheduledCourse.created"
       flash.args = [scheduledCourseInstance.id]
@@ -64,7 +63,7 @@ class ScheduledCourseController {
       redirect(action: "show", id: scheduledCourseInstance.id)
     }
     else {
-      render(view: "create", model: [scheduledCourseInstance: scheduledCourseInstance])
+      render(view: "create", model: [scheduledCourseInstance: wrapBean(scheduledCourseInstance)])
     }
   }
 
@@ -77,7 +76,7 @@ class ScheduledCourseController {
       redirect(action: "list")
     }
     else {
-      return [scheduledCourseInstance: scheduledCourseInstance]
+      return [scheduledCourseInstance: wrapBean(scheduledCourseInstance)]
     }
   }
 
@@ -106,7 +105,7 @@ class ScheduledCourseController {
           return
         }
       }
-      scheduledCourseInstance.properties = params
+      bind(scheduledCourseInstance)
       if (!scheduledCourseInstance.hasErrors() && scheduledCourseInstance.save()) {
         flash.message = "scheduledCourse.updated"
         flash.args = [params.id]
@@ -114,7 +113,7 @@ class ScheduledCourseController {
         redirect(action: "show", id: scheduledCourseInstance.id)
       }
       else {
-        render(view: "edit", model: [scheduledCourseInstance: scheduledCourseInstance])
+        render(view: "edit", model: [scheduledCourseInstance: wrapBean(scheduledCourseInstance)])
       }
     }
     else {
