@@ -17,4 +17,5 @@
 // Place your Spring DSL code here
 beans = {
   userDetailsService(com.synergyj.grain.auth.GrainUserDetailsService)
+  myEditorRegistrar(GlobalPropertyEditorConfig)
 }

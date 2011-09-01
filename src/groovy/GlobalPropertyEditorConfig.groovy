@@ -1,10 +1,3 @@
-import org.springframework.beans.BeanWrapperImpl
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
-import org.springframework.beans.propertyeditors.CustomNumberEditor
-import java.text.SimpleDateFormat
-import org.springframework.beans.propertyeditors.CustomDateEditor
-
 /*
 * Copyright 2002-2010 the original author or authors.
 *
@@ -20,26 +13,23 @@ import org.springframework.beans.propertyeditors.CustomDateEditor
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-class GlobalPropertyEditorConfig {
-  static newDataBinder = { request, object ->
-    def binder = GrailsDataBinder.createBinder(object, GrailsDataBinder.DEFAULT_OBJECT_NAME, request)
-    registerCustomEditors(request, binder)
-    return binder
-  }
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import org.springframework.beans.propertyeditors.CustomNumberEditor
+import java.text.SimpleDateFormat
+import org.springframework.beans.propertyeditors.CustomDateEditor
+import org.springframework.beans.PropertyEditorRegistry
+import org.springframework.beans.PropertyEditorRegistrar
 
-  static newBeanWrapper = { request, object ->
-    def beanWrapper = new BeanWrapperImpl(object)
-    registerCustomEditors(request, beanWrapper)
-    return beanWrapper
-  }
+class GlobalPropertyEditorConfig implements PropertyEditorRegistrar{
 
-  private static void registerCustomEditors(request, binder) {
-    def numberFormat = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(request.locale))
-    binder.registerCustomEditor(BigDecimal.class, new CustomNumberEditor(BigDecimal.class, numberFormat, true))
+  public void registerCustomEditors(PropertyEditorRegistry propertyEditorRegistry) {
+    def numberFormat = new DecimalFormat("#,##0.##", new DecimalFormatSymbols(new Locale('es','MX')))
+    propertyEditorRegistry.registerCustomEditor(BigDecimal.class, new CustomNumberEditor(BigDecimal.class, numberFormat, true))
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH:mm")
 		dateFormat.setLenient(false)
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+		propertyEditorRegistry.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
   }
 
 }

@@ -60,9 +60,6 @@ class BootStrap {
       return it?.format("yyyy-MM-dd'T'HH:mm:ss'Z'")
     }
 
-    servletContext.setAttribute("newDataBinder", GlobalPropertyEditorConfig.&newDataBinder)
-	  servletContext.setAttribute("newBeanWrapper", GlobalPropertyEditorConfig.&newBeanWrapper)
-
     if(!Role.count()){
       def adminRole = new Role(authority:'ROLE_ADMIN',description:'Administrador').save(flush:true)
       def userRole = new Role(authority:'ROLE_USER',description:'Usuario').save(flush:true)

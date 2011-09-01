@@ -44,18 +44,19 @@ class ScheduledCourseController {
   }
 
   def create = {
-    def scheduledCourseInstance = bind(new ScheduledCourse())
-    return [scheduledCourseInstance: wrapBean(scheduledCourseInstance)]
+    def scheduledCourseInstance = new ScheduledCourse()
+    scheduledCourseInstance.properties = params
+    return [scheduledCourseInstance: scheduledCourseInstance]
   }
 
   def save = {
-    def scheduledCourseInstance = bind(new ScheduledCourse())
+    def scheduledCourseInstance = new ScheduledCourse(params)
     if (!scheduledCourseInstance.hasErrors() && scheduledCourseInstance.save(flush:true)) {
       try{
         def courseSession = courseSessionService.createSession4ScheduledCourse(scheduledCourseInstance.id,scheduledCourseInstance.beginDate)
       }catch(ScheduledCourseException e){
         flash.defaultMessage = "Course session was not created"
-        render(view: "create", model: [scheduledCourseInstance: wrapBean(scheduledCourseInstance)])
+        render(view: "create", model: [scheduledCourseInstance: scheduledCourseInstance])
       }
       flash.message = "scheduledCourse.created"
       flash.args = [scheduledCourseInstance.id]
@@ -63,7 +64,7 @@ class ScheduledCourseController {
       redirect(action: "show", id: scheduledCourseInstance.id)
     }
     else {
-      render(view: "create", model: [scheduledCourseInstance: wrapBean(scheduledCourseInstance)])
+      render(view: "create", model: [scheduledCourseInstance: scheduledCourseInstance])
     }
   }
 
@@ -76,7 +77,7 @@ class ScheduledCourseController {
       redirect(action: "list")
     }
     else {
-      return [scheduledCourseInstance: wrapBean(scheduledCourseInstance)]
+      return [scheduledCourseInstance: scheduledCourseInstance]
     }
   }
 
@@ -95,6 +96,8 @@ class ScheduledCourseController {
 
   def update = {
     def scheduledCourseInstance = ScheduledCourse.get(params.id)
+    println "Valor de base de datos:" + scheduledCourseInstance.costByModule
+    println "Valor del formulario:" + params.costByModule
     if (scheduledCourseInstance) {
       if (params.version) {
         def version = params.version.toLong()
@@ -105,7 +108,7 @@ class ScheduledCourseController {
           return
         }
       }
-      bind(scheduledCourseInstance)
+      scheduledCourseInstance.properties = params
       if (!scheduledCourseInstance.hasErrors() && scheduledCourseInstance.save()) {
         flash.message = "scheduledCourse.updated"
         flash.args = [params.id]
@@ -113,7 +116,7 @@ class ScheduledCourseController {
         redirect(action: "show", id: scheduledCourseInstance.id)
       }
       else {
-        render(view: "edit", model: [scheduledCourseInstance: wrapBean(scheduledCourseInstance)])
+        render(view: "edit", model: [scheduledCourseInstance: scheduledCourseInstance])
       }
     }
     else {
