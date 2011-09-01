@@ -28,7 +28,7 @@ class CourseSession implements Comparable{
 	static hasMany = [teachers:User]
 	static belongsTo = [scheduledCourse:ScheduledCourse]
 
-  static dateFormat = new SimpleDateFormat("dd-MM-yyyy")
+  static dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm")
 	
 	static constraints = {
     sessionStartTime nullable:false

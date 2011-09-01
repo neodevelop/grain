@@ -4,45 +4,9 @@
   <meta name="layout" content="wb" />
   <title><g:message code="scheduledCourse.show" default="Show ScheduledCourse" /></title>
   <parameter name="pageHeader" value="${g.message(code: 'scheduledCourse.show', default: 'Scheduled Course Info')}"/>
-  <script language="javascript">
-    $(function(){
-      $('#sessionStartTime').datepicker({ dateFormat:"dd/mm/yy" });
-
-      $('#showAddCourseSession').click(function(){
-        $('#newSessionCourse').show();
-        $('#showAddCourseSession').hide();
-      });
-
-      $("a.deleteSession").live("click",function(){
-        var splitLink = this.href.split('/')
-        var index = splitLink[splitLink.length - 1];
-        //alert(index);
-        $.ajax({
-          type:'POST',
-          url:this.href,
-          success:function(data){
-            $("li#sessionCourse"+index).fadeOut('slow');
-          },
-          error:function(){
-            alert("Couldn't delete session");
-          }
-        });
-
-        return false;
-      });
-    });
-
-    function restoreLink(){
-      $('#newSessionCourse').hide();
-      $('#showAddCourseSession').show();
-      return false;
-    }
-    function reacting(e){
-      var date = new Date(e.sessionStartTime)
-      var stringdate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
-      var link = "<a class='deleteSession' id='"+e.id+"' href='${createLink(controller:'courseSession',action:'deleteAsync')}/"+e.id+"'>Delete</a>";
-      $("<li id='sessionCourse"+e.id+"'>"+stringdate+" "+link+"</li>").appendTo("div#sessionList > ul");
-    }
+  <script type="text/javascript" src="https://raw.github.com/fgelinas/timepicker/master/jquery.ui.timepicker.js"></script>
+  <link rel="stylesheet" href="https://raw.github.com/fgelinas/timepicker/master/jquery-ui-timepicker.css"/>
+  <script language="javascript" src="${createLinkTo(dir:'themes/wb/js/scheduledCourse',file:'show.js')}">
   </script>
 
 </head>
@@ -136,7 +100,14 @@
             <ul>
               <g:each in="${scheduledCourseInstance?.courseSessions?.sort()}" var="courseSessionInstance">
                 <li id="sessionCourse${courseSessionInstance.id}">
-                  ${courseSessionInstance?.encodeAsHTML()}
+                  <span id="sessionCourseValue${courseSessionInstance.id}">${courseSessionInstance?.encodeAsHTML()}</span>
+                  &nbsp;-&nbsp;
+                  <span id="sessionCourseEndTime${courseSessionInstance.id}">
+                    <g:formatDate date="${courseSessionInstance?.sessionEndTime}" format="HH:mm"/>
+                  </span>
+                  <a class="updateSession" href="${createLink(controller:'courseSession',action:'updateAsync',id:courseSessionInstance.id)}">
+                    Update
+                  </a>
                   <a class="deleteSession" href="${createLink(controller:'courseSession',action:'deleteAsync',id:courseSessionInstance.id)}">
                     Delete
                   </a>
@@ -172,7 +143,10 @@
       onSuccess="reacting(data)"
       onComplete="restoreLink()" style="height:100%;" >
     <g:hiddenField name="scheduledCourseId" value="${scheduledCourseInstance.id}"/>
-    Fecha de la Sessión: <g:textField name="sessionStartTime" />
+    <g:hiddenField name="courseSessionId" value="0"/>
+    Fecha de la Sesión: <g:textField name="sessionStartTime" />
+    Hora de inicio: <g:textField name="sessionHourStartTime" />
+    Duración(hrs.): <g:select from="${2..9}" name="duration" value="9" />
     <input type="submit" value="Add Session to Course" id="addSession" name="addSession"/>
   </g:formRemote>
 </div>

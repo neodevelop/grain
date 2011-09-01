@@ -17,5 +17,6 @@
 // Place your Spring DSL code here
 beans = {
   userDetailsService(com.synergyj.grain.auth.GrainUserDetailsService)
+  // Agregamos la configuración para el Binding de BigDecimal, vease src/groovy
   myEditorRegistrar(GlobalPropertyEditorConfig)
 }

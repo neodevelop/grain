@@ -29,9 +29,14 @@ class ScheduledCourseController {
 
   def newSessionToCourse = {
     def scheduledCourseId = params.scheduledCourseId as Long
-    def dateFormat = new SimpleDateFormat("dd/MM/yy")
-    def sessionStartTime = dateFormat.parse(params.sessionStartTime as String) as Date
-    def courseSession = courseSessionService.createSession4ScheduledCourse(scheduledCourseId,sessionStartTime)
+    def dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm")
+    def sessionStartTime = dateFormat.parse("${params.sessionStartTime} ${params.sessionHourStartTime}") as Date
+    def courseSession = courseSessionService.createSession4ScheduledCourse(
+      scheduledCourseId,
+      sessionStartTime,
+      params.int('duration'),
+      params.long('courseSessionId')
+    )
     render courseSession as JSON
   }
 
