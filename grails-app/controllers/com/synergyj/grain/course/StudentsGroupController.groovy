@@ -96,8 +96,8 @@ class StudentsGroupController {
     def registrations = []
     // Iteramos a los alumnos para ver si tienen esas sesiones
     studentsGroup.students.each{ student ->
-      // Buscamos el registro del curso para un estudiante
-      def registration = Registration.findByStudent(student)
+      // Buscamos el registro del curso para un estudiante y curso calendarizado
+      def registration = Registration.findByStudentAndScheduledCourse(student,scheduledCourse)
       // Si no tiene sesiones de curso entonces
       if(!registration.courseSessions.size()){
         // Iteramos las sesiones del curso calendarizado
