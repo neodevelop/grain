@@ -1654,6 +1654,8 @@ table.registration tr.content{
 table.registration tr.content td.contentLeft{
   text-align: left;
   padding: 5px 15px;
+  width:55%;
+  vertical-align: text-top;
 }
 
 table.registration tr.content td.contentRight{
