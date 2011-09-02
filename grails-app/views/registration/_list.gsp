@@ -60,7 +60,7 @@
         <ul>
         <g:each in="${registration.scheduledCourse.courseSessions.sort()}" var="courseSession">
           <li>
-            <g:formatDate date="${courseSession?.sessionStartTime}" format="EEEE 'de' MMMM 'del' yyyy"/>
+            <g:formatDate date="${courseSession?.sessionStartTime}" format="EEEE dd 'de' MMMM 'del' yyyy"/>
             <ul>
               <li>
                 <g:formatDate date="${courseSession?.sessionStartTime}" format="HH:mm"/>

@@ -32,6 +32,38 @@
   <g:link mapping="changePassword" class="action">
     <g:message code="me.changePassword"/>
   </g:link>
+  <sec:ifAnyGranted roles="ROLE_ADMIN" >
+    <br/><br/><br/>
+    <g:link controller="course" class="action">
+      <g:message code="course.label" default="Courses"/>
+    </g:link>
+    <br/><br/><br/>
+    <g:link controller="scheduledCourse" class="action">
+      <g:message code="scheduledcourse.label" default="Scheduled Courses"/>
+    </g:link>
+    <br/><br/><br/>
+    <g:link controller="promotion" class="action">
+      <g:message code="promotion.label" default="Promotions"/>
+    </g:link>
+    <br/><br/><br/>
+    <g:link controller="promotionPerScheduledCourse" class="action">
+      <g:message code="promotionPerScheduledCourse.label" default="Promotion Per Course"/>
+    </g:link>
+    <br/><br/><br/>
+    <g:link controller="content" class="action">
+      <g:message code="content.label" default="Contents"/>
+    </g:link>
+    <br/><br/><br/>
+    <g:link controller="newsItem" class="action">
+      <g:message code="newsItem.label" default="News Item"/>
+    </g:link>
+    <br/><br/><br/>
+    <g:link controller="notification" class="action">
+      <g:message code="notification.label" default="Notifications"/>
+    </g:link>
+  </sec:ifAnyGranted>
+
+
 </div>
 <div id="right">
 
