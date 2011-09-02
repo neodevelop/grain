@@ -14,7 +14,7 @@
  */
 package com.synergyj.grain.auth
 
-class RegistrationCode {
+class RegistrationCodeForScheduledCourse {
   String username
   Long scheduledCourseId
   String token = UUID.randomUUID().toString().replaceAll('-', '')
@@ -26,8 +26,8 @@ class RegistrationCode {
     version false
   }
 
-  static RegistrationCode create(String email,Long scheduledCourseId) {
-    def rc = new RegistrationCode(username: email,scheduledCourseId:scheduledCourseId)
+  static RegistrationCodeForScheduledCourse create(String email,Long scheduledCourseId) {
+    def rc = new RegistrationCodeForScheduledCourse(username: email,scheduledCourseId:scheduledCourseId)
     rc.save(flush: true)
     rc
   }

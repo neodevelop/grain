@@ -17,11 +17,8 @@ package com.synergyj.grain.data
 
 import com.synergyj.grain.BusinessException
 import com.synergyj.grain.UserRegistrationException
-import com.synergyj.grain.auth.RegisterUserCommand
-import com.synergyj.grain.auth.RegistrationCode
+
 import com.synergyj.grain.auth.User
-import com.synergyj.grain.UserAlreadyExistsException
-import javax.naming.directory.SearchControls
 
 class UserService {
 

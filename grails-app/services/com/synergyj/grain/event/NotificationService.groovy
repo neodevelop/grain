@@ -15,7 +15,7 @@
  */
 package com.synergyj.grain.event
 
-import com.synergyj.grain.auth.RegistrationCode
+import com.synergyj.grain.auth.RegistrationCodeForScheduledCourse
 import com.synergyj.grain.auth.User
 import com.synergyj.grain.course.Registration
 import grails.util.Environment
@@ -91,7 +91,7 @@ class NotificationService {
     }
   }
 
-  def sendInvitation(String email, Long scheduledCourseId, RegistrationCode registrationCode){
+  def sendInvitation(String email, Long scheduledCourseId, RegistrationCodeForScheduledCourse registrationCode){
     def scheduledCourse = ScheduledCourse.get(scheduledCourseId)
     switch(Environment.current){
       case Environment.DEVELOPMENT:

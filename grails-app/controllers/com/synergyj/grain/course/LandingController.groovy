@@ -18,7 +18,7 @@ package com.synergyj.grain.course
 import grails.plugins.springsecurity.Secured
 import com.synergyj.grain.auth.RegisterUserCommand
 import grails.converters.JSON
-import com.synergyj.grain.auth.RegistrationCode
+import com.synergyj.grain.auth.RegistrationCodeForScheduledCourse
 
 class LandingController {
 
@@ -54,11 +54,11 @@ class LandingController {
 
   private def obtainRegistrationCode(String email, Long scheduledCourseId){
     // Buscamos si el usuario ya se registró previamente
-    def registrationCode = RegistrationCode.findByUsernameAndScheduledCourseId(email,scheduledCourseId)
+    def registrationCode = RegistrationCodeForScheduledCourse.findByUsernameAndScheduledCourseId(email,scheduledCourseId)
 
     // Si no existe un código de registro lo generamos
     if(!registrationCode){
-      registrationCode = RegistrationCode.create(email,scheduledCourseId)
+      registrationCode = RegistrationCodeForScheduledCourse.create(email,scheduledCourseId)
     }
 
     // Buscamos el usuario por su correo

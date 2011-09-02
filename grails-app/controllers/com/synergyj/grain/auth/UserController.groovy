@@ -20,9 +20,6 @@ import com.synergyj.grain.course.Registration
 import com.synergyj.grain.course.ScheduledCourse
 import com.synergyj.grain.course.ScheduledCourseStatus
 import grails.converters.JSON
-import com.synergyj.grain.course.Payment
-import com.synergyj.grain.course.PaymentStatus
-import org.grails.mail.MailService
 
 class UserController {
 
@@ -102,7 +99,7 @@ class UserController {
     def model = [userdata: new RegisterUserCommand()]
     // Si trae un código lo buscamos
     if(params.code){
-      def registrationCode = RegistrationCode.findByToken(params.code)
+      def registrationCode = RegistrationCodeForScheduledCourse.findByToken(params.code)
       model.registrationCode = registrationCode
       // Ponemos los datos del curso calendarizado para mostrarlos
       model.scheduledCourse = ScheduledCourse.get(registrationCode.scheduledCourseId)
