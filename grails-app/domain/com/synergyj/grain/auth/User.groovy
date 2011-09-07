@@ -82,4 +82,8 @@ class User {
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password,email)
 	}
+
+  def getUsername(){
+    this.email
+  }
 }

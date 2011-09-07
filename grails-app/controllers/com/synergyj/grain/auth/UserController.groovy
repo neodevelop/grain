@@ -21,8 +21,8 @@ import com.synergyj.grain.course.ScheduledCourse
 import com.synergyj.grain.course.ScheduledCourseStatus
 import grails.converters.JSON
 
-class UserController {
-
+@Secured(['ROLE_ADMIN'])
+class UserController extends grails.plugins.springsecurity.ui.UserController {
   def springSecurityService
   def paymentService
   def notificationService
@@ -51,7 +51,7 @@ class UserController {
   }
 
   @Secured(['isAuthenticated()'])
-  def edit = {
+  def changeMyInfo = {
     [user:springSecurityService.currentUser]
   }
 
@@ -142,5 +142,4 @@ class UserController {
     flash.message = "${message(code:'login.passwordUpdated')}"
     redirect controller: 'login', action: 'auth'
   }
-
 }

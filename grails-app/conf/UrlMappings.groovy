@@ -34,7 +34,7 @@ class UrlMappings {
     }
     name updateme: '/updateme' {
       controller = 'user'
-      action = 'edit'
+      action = 'changeMyInfo'
     }
     name changePassword: '/changePassword' {
       controller = 'user'
