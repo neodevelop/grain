@@ -48,6 +48,16 @@
         <g:textField name="commission" value="${payment.commission}"/>
       </td>
     </tr>
+    <g:if test="${payment.paymentDate}">
+    <tr>
+      <td valign="top" class="name">
+        <label for="paymentDate"><g:message code="payment.paymentDate" default="Payment Date" />:</label>
+      </td>
+      <td valign="top" class="name">
+        <g:formatDate date="${payment.paymentDate}" format="EEEE dd/MM/yyyy hh:mm"/>
+      </td>
+    </tr>
+    </g:if>
     </tbody>
   </table>
   <g:hiddenField name="id" value="${payment.id}"/>

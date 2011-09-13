@@ -30,6 +30,7 @@ class ReceiptController {
     def receipt = Receipt.get(params.id)
     receipt.receiptStatus = ReceiptStatus.APROVED
     receipt.payment.paymentStatus = PaymentStatus.PAYED
+    receipt.payment.paymentDate = new Date()
     registrationService.checkIsPayed(receipt.payment.registration.id)
     render """
       <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-green.png')}" width="24" height="24" />
@@ -39,6 +40,7 @@ class ReceiptController {
   def approveDineroMail = {
     def payment = Payment.get(params.id)
     payment.paymentStatus = PaymentStatus.PAYED
+    receipt.payment.paymentDate = new Date()
     registrationService.checkIsPayed(payment.registration.id)
     render """
       <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-green.png')}" width="24" height="24" />

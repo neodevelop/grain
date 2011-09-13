@@ -30,6 +30,8 @@ class PaymentService {
         payment.registration.registrationStatus = RegistrationStatus.PENDING_PAYMENT
         break
       case 'payed':
+        // Actualizamos la fecha del payment
+        payment.paymentDate = new Date()
         // Cambiamos el status del payment
         payment.paymentStatus = PaymentStatus.PAYED
         break
