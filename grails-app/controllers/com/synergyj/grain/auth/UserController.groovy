@@ -41,7 +41,7 @@ class UserController extends grails.plugins.springsecurity.ui.UserController {
         // Obtenemos los registros por curso
         def registrations = Registration.findAllByScheduledCourse(scheduledCourse)
         // Creamos una entrada en el mapa con el key CourseKey y el Value la lista de Registrations
-        registrationsPerScheduledCourse."${scheduledCourse.course.courseKey}" = registrations
+        registrationsPerScheduledCourse."${scheduledCourse.course.courseKey}${scheduledCourse.id}" = registrations
       }
       return [user:user,scheduledCourseList:currentScheduledCourses,registrationsPerScheduledCourse:registrationsPerScheduledCourse]
     }else{

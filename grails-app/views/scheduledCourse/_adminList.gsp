@@ -17,7 +17,8 @@
           </tr>
         </thead>
         <tbody>
-        <g:findAll in="${registrationsPerScheduledCourse[scheduledCourse.course.courseKey]}" expr="it.registrationStatus == registrationStatus">
+        <g:set var="identifierForScheduledCourse" value="${scheduledCourse.course.courseKey}${scheduledCourse.id}"/>
+        <g:findAll in="${registrationsPerScheduledCourse[identifierForScheduledCourse]}" expr="it.registrationStatus == registrationStatus">
           <tr class="registrationRow" id="registration${it?.id}">
             <td>
               ${it?.student?.email}
