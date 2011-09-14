@@ -24,6 +24,7 @@ class LandingController {
 
   def userService
   def notificationService
+  def scheduledCourseService
 
   @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
   def addMeNoPost = {
@@ -36,16 +37,24 @@ class LandingController {
 
   @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
   def addMe = { RegisterUserCommand registerUserCommand ->
+    // Determinamos si en este curso se puede inscribir
+    response.addHeader("Access-Control-Allow-Origin","*")
+    response.addHeader("Content-Type","	application/json;charset=UTF-8")
     // Recibimos el email y el id de curso calendarizado
     // Llamamos el método privado que genera la URL
     def actionAndRegistrationCode = obtainRegistrationCode(params.email,params.long("scheduledCourseId"))
-    // Formamos la URL con el resultado
-    def url = request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/'
-    url += actionAndRegistrationCode.myAction+"?code="+actionAndRegistrationCode.registrationCode.token
-    // Regresamos una respuesta para el formulario de registro
-    response.addHeader("Access-Control-Allow-Origin","*")
-    response.addHeader("Content-Type","	application/json;charset=UTF-8")
-    render([url:url] as JSON)
+    // Checamos si el curso está disponible
+    if(scheduledCourseService.isAvailableToRegister(params.long("scheduledCourseId"))){
+      // Formamos la URL con el resultado
+      def url = request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/'
+      url += actionAndRegistrationCode.myAction+"?code="+actionAndRegistrationCode.registrationCode.token
+      // Regresamos una respuesta para el formulario de registro
+      render([url:url] as JSON)
+    }else{
+      // Mensaje de no disponibilidad
+      render([message:message(code:'scheduledCourse.not.available')] as JSON)
+    }
+
   }
 
   @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
