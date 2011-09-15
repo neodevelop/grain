@@ -99,16 +99,20 @@ class StudentsGroupController {
       // Buscamos el registro del curso para un estudiante y curso calendarizado
       def registration = Registration.findByStudentAndScheduledCourse(student,scheduledCourse)
       // Si no tiene sesiones de curso entonces
-      if(!registration.courseSessions.size()){
-        // Iteramos las sesiones del curso calendarizado
-        scheduledCourseSessions.each{ scheduledCourseSession ->
-          // Las replicamos a cada alumno
-          def courseSessionPerRegistration = new CourseSessionPerRegistration(
-            registration:registration,
-            courseSession:scheduledCourseSession
-          )
-          // Agregamos la sesión de curso calendarizado al estudiante
-          registration.addToCourseSessions(courseSessionPerRegistration)
+      if(!registration){
+        studentsGroup.removeFromStudents(student)
+      }else{
+        if(!registration.courseSessions.size()){
+          // Iteramos las sesiones del curso calendarizado
+          scheduledCourseSessions.each{ scheduledCourseSession ->
+            // Las replicamos a cada alumno
+            def courseSessionPerRegistration = new CourseSessionPerRegistration(
+              registration:registration,
+              courseSession:scheduledCourseSession
+            )
+            // Agregamos la sesión de curso calendarizado al estudiante
+            registration.addToCourseSessions(courseSessionPerRegistration)
+          }
         }
       }
       registrations << registration
