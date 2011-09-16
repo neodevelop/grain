@@ -15,22 +15,23 @@
  */
 package com.synergyj.grain.event
 
+import grails.util.Environment
+
 class QueueForMailService {
 
   static rabbitQueue = 'myQueue'
+
   def mailService
 
   void handleMessage(Map message){
     switch(Environment.current){
       case Environment.DEVELOPMENT:
-        println "Mandando mensaje"
-        println message
+        // Que huevos!!!
         Thread.sleep(5000)
-        println "Te lo mande"
-        log.debug("${Environment.current} - Mail con Objeto: ${user}")
+        log.debug("${Environment.current} - ${message}")
         break
       case Environment.TEST:
-        log.debug("${Environment.current} Correo de registro...")
+        log.debug("${Environment.current} - ${message}")
         break
       case Environment.PRODUCTION:
         mailService.sendMail {
