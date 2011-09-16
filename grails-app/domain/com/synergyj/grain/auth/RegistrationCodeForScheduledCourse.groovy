@@ -14,7 +14,10 @@
  */
 package com.synergyj.grain.auth
 
-class RegistrationCodeForScheduledCourse {
+class RegistrationCodeForScheduledCourse implements Serializable{
+
+  transient private static final long serialVersionUID = -1L
+
   String username
   Long scheduledCourseId
   String token = UUID.randomUUID().toString().replaceAll('-', '')

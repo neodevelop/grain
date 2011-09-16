@@ -75,7 +75,7 @@ class LandingController {
     def myAction = ""
     if(user){
       // Si ya existe el usuario entonces lo notificamos
-      notificationService.sendConfirmRegistration(user,scheduledCourseId,registrationCode)
+      notificationService.sendConfirmRegistration(user.email,scheduledCourseId,registrationCode)
       // Definimos la acción
       myAction = "confirmRegistration"
     }else{

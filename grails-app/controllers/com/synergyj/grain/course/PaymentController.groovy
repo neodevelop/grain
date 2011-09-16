@@ -67,7 +67,7 @@ class PaymentController {
     payment.kindOfPayment = paymentOption
     // Validar si es SPEI o DineroMail y direccionarlo
     if(paymentOption==KindOfPayment.SPEI){
-      notificationService.sendPaymentInstructions(payment.registration,payment)
+      notificationService.sendPaymentInstructions(payment.id)
       flash.message = "${g.message(code:'notification.send')}"
       redirect action:'receive',params:[status:'pending',trx:payment.transactionId]
       return
@@ -164,7 +164,7 @@ class PaymentController {
 
     // Validar si es SPEI o DineroMail y direccionarlo
     if(paymentOption=='spei'){
-      notificationService.sendPaymentInstructions(registration,payment)
+      notificationService.sendPaymentInstructions(payment.id)
       flash.message = "${g.message(code:'notification.send')}"
       redirect action:'receive',params:[status:'pending',trx:payment.transactionId]
       return

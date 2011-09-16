@@ -80,7 +80,7 @@ class UserController extends grails.plugins.springsecurity.ui.UserController {
       def forgotPasswordCode = new ForgotPasswordCode(user:user)
       forgotPasswordCode.save(flush:true)
       // Enviarlo por correo
-      notificationService.sendResetPassword(forgotPasswordCode)
+      notificationService.sendResetPassword(forgotPasswordCode.id)
       // println "${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/resetPassword?code='+forgotPasswordCode?.token}"
       flash.message = "${message(code:'user.found',args:[params.email])}"
     }else{

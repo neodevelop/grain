@@ -62,7 +62,7 @@ class RegistrationController {
   def addMeToCourse = {
     def user = springSecurityService.currentUser
     def scheduledCourseId = params.long('scheduledCourseId')
-    def registration
+    def registration = null
     try{
       registration =  registrationService.addUserToScheduledCourse(user,scheduledCourseId)
     }catch(RegistrationException ex){

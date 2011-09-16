@@ -85,7 +85,6 @@ class RegistrationService {
     def registration = new Registration(
         student: user,
         scheduledCourse: scheduledCourse,
-        completeCourse: false,
         registrationStatus: RegistrationStatus.REGISTERED
     )
     // Buscamos si ya esta registrado a este curso
@@ -135,7 +134,7 @@ class RegistrationService {
     registration.save(flush: true)
 
     // Notificamos al usuario que se ha inscrito al curso
-    notificationService.sendCourseRegistration(registration)
+    notificationService.sendCourseRegistration(registration.id)
 
     // Regresamos el registro recientemente guardado...
     registration
