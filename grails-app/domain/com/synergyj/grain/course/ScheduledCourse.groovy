@@ -15,7 +15,10 @@
  */
 package com.synergyj.grain.course
 
-class ScheduledCourse{
+class ScheduledCourse implements Serializable{
+
+  transient private static final long serialVersionUID = -1L
+
 	Course course
 	Date beginDate
 	Date limitRegistrationDate
@@ -51,6 +54,6 @@ class ScheduledCourse{
   static hasOne = [studentsGroup:StudentsGroup]
 
   String toString(){
-    "${course} : ${beginDate} : ${scheduledCourseStatus}"
+    "(${id} : ${beginDate} : ${scheduledCourseStatus})"
   }
 }

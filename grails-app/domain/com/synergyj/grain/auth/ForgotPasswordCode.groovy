@@ -14,7 +14,9 @@
  */
 package com.synergyj.grain.auth
 
-class ForgotPasswordCode {
+class ForgotPasswordCode implements Serializable{
+
+  transient private static final long serialVersionUID = -1L
 
   String token = UUID.randomUUID().toString().replaceAll('-', '')
   User user

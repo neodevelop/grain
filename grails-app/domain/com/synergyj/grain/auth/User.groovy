@@ -15,7 +15,9 @@
  */
 package com.synergyj.grain.auth
 
-class User {
+class User implements Serializable{
+
+  transient private static final long serialVersionUID = -1L
 
   transient springSecurityService
 
@@ -66,7 +68,7 @@ class User {
   }
 
   String toString() {
-    "${firstName} ${lastName}"
+    "${firstName} ${lastName} ${email}"
   }
   
   def beforeInsert() {

@@ -16,9 +16,11 @@
 package com.synergyj.grain.course
 
 import com.synergyj.grain.auth.User
-import com.synergyj.grain.course.ScheduledCourse
 
-class Registration {
+class Registration implements Serializable {
+
+  transient private static final long serialVersionUID = -1L
+
   Date dateCreated
   Date lastUpdated
   User student

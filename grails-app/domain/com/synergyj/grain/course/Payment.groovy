@@ -15,7 +15,10 @@
  */
 package com.synergyj.grain.course
 
-class Payment implements Comparable{
+class Payment implements Comparable,Serializable{
+
+  transient private static final long serialVersionUID = -1L
+
   BigDecimal amount
   BigDecimal commission = 0
   String transactionId
