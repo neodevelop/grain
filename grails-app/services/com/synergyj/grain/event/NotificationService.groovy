@@ -21,6 +21,7 @@ import com.synergyj.grain.course.Registration
 import com.synergyj.grain.course.ScheduledCourse
 import com.synergyj.grain.course.Payment
 import com.synergyj.grain.auth.ForgotPasswordCode
+import org.hibernate.FetchMode as FM
 
 class NotificationService {
 
@@ -41,13 +42,24 @@ class NotificationService {
   }
   // Recibir ir en lugar del objeto
   def sendCourseRegistration(Long registrationId){
-    def registration = Registration.get(registrationId)
+    def criteria = Registration.createCriteria()
+    def registration = criteria.get{
+      eq 'id',registrationId
+      fetchMode "promotions",FM.EAGER
+    }
+    // TODO: Solucionar esto con el fetch de 'promotions'
+    registration.promotions.collect { promotionPerCourse -> promotionPerCourse.promotion.description  }
+    def scheduledCourse = registration.scheduledCourse
+    scheduledCourse.courseSessions.collect{ courseSession -> courseSession.sessionStartTime  }
+    scheduledCourse.course.name = scheduledCourse.course.name
+    def user = registration.student
+
     def mailParams = [
       to:registration.student.email,
       from:"no-reply@synergyj.com",
       subject:"Te has inscrito a un curso en SynergyJ.com",
       view:"/notification/scheduledCourse",
-      model:[user:registration.student,scheduledCourse:registration.scheduledCourse]
+      model:[user:user,scheduledCourse:scheduledCourse]
     ]
     rabbitSend 'myQueue', mailParams
   }
@@ -55,7 +67,14 @@ class NotificationService {
   def sendConfirmRegistration(String email,Long scheduledCourseId,registrationCode){
     // Obtenemos el curso calendarizado
     def user = User.findByEmail(email)
-    def scheduledCourse = ScheduledCourse.get(scheduledCourseId)
+    def criteria = ScheduledCourse.createCriteria()
+    def scheduledCourse = criteria.get{
+        eq 'id',scheduledCourseId
+        fetchMode "promotions",FM.EAGER
+        fetchMode "courseSessions",FM.EAGER
+    }
+    // TODO: Solucionar esto con el fetch de 'promotions'
+    scheduledCourse.promotions.collect{ promotionPerCourse -> promotionPerCourse.promotion.description  }
     def mailParams = [
       to:user.email,
       from:"no-reply@synergyj.com",
@@ -67,7 +86,14 @@ class NotificationService {
   }
 
   def sendInvitation(String email, Long scheduledCourseId, RegistrationCodeForScheduledCourse registrationCode){
-    def scheduledCourse = ScheduledCourse.get(scheduledCourseId)
+    def criteria = ScheduledCourse.createCriteria()
+    def scheduledCourse = criteria.get{
+        eq 'id',scheduledCourseId
+        fetchMode "promotions",FM.EAGER
+        fetchMode "courseSessions",FM.EAGER
+    }
+    // TODO: Solucionar esto con el fetch de 'promotions'
+    scheduledCourse.promotions.collect{ promotionPerCourse -> promotionPerCourse.promotion.description  }
     def mailParams = [
       to:email,
       from:"no-reply@synergyj.com",

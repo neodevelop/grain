@@ -18,6 +18,8 @@ package com.synergyj.grain.event
 import grails.util.Environment
 
 class QueueForMailService {
+  
+  static transactional = true
 
   static rabbitQueue = 'myQueue'
 
