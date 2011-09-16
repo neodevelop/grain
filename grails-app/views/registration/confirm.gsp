@@ -71,7 +71,7 @@
   <div id="right">
     <div id="rightbox">
       <h1><g:message code='course.info'/></h1>
-      <h2>${scheduledCourse.course}</h2>
+      <h2>${scheduledCourse.course.name}</h2>
       <div class="info">
         <g:message code='course.startDate'/> : <b><g:formatDate date="${scheduledCourse.beginDate}" format="dd - MMMM - yyyy"/></b> <br/>
         <g:message code='course.limitDate'/> : <b><g:formatDate date="${scheduledCourse.limitRegistrationDate}" format="dd - MMMM - yyyy"/></b>

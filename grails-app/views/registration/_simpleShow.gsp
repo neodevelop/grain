@@ -1,6 +1,6 @@
 <div id="title">
 <g:message code="course.name"/>:
-<div id="courseName">${registration.scheduledCourse.course}</div>
+<div id="courseName">${registration.scheduledCourse.course.name}</div>
 </div>
 
 <table id="breakDownDetail">
