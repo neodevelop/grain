@@ -15,7 +15,9 @@
  */
 package com.synergyj.grain.course
 
-class PromotionPerScheduledCourse {
+class PromotionPerScheduledCourse implements Serializable {
+  
+  transient private static final long serialVersionUID = -1L
 
   Promotion promotion
   Date validUntil

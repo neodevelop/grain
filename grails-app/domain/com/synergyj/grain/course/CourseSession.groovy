@@ -18,7 +18,10 @@ package com.synergyj.grain.course
 import com.synergyj.grain.auth.User
 import java.text.SimpleDateFormat
 
-class CourseSession implements Comparable{
+class CourseSession implements Comparable,Serializable{
+  
+  transient private static final long serialVersionUID = -1L
+  
   Date sessionStartTime
   Date sessionEndTime
 	CourseModule module

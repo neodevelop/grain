@@ -15,7 +15,10 @@
  */
 package com.synergyj.grain.course
 
-class Promotion {
+class Promotion implements Serializable {
+  
+  transient private static final long serialVersionUID = -1L
+  
   String promotionKey
   String description
   BigDecimal discount
