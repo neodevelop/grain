@@ -88,7 +88,7 @@
                                 Ya has iniciado el proceso de pago, y a través de este correo te adjuntamos los datos que necesitas para hacer una transferencia electrónica.
                               </p>
                               <p style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
-                                Te informamos que para el curso <b>${registration?.scheduledCourse?.course ?: 'Nombre del curso'}</b>, el cual comienza el
+                                Te informamos que para el curso <b>${registration?.scheduledCourse?.course?.name ?: 'Nombre del curso'}</b>, el cual comienza el
                                 <b><g:formatDate date="${registration?.scheduledCourse?.beginDate ?: new Date()}" format="EEEE dd 'de' MMMM 'del' yyyy"/></b>,
                                 tienes como fecha límite <b><g:formatDate date="${registration?.scheduledCourse?.limitRegistrationDate ?: new Date()}" format="EEEE dd 'de' MMMM 'del' yyyy"/></b>
                               para que puedas saldar el total del costo.<br/>

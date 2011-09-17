@@ -106,7 +106,19 @@ class NotificationService {
   }
 
   def sendPaymentInstructions(Long paymentId){
-    def payment = Payment.get(paymentId)
+    def criteria = Payment.createCriteria()
+    def payment = criteria.get{
+      eq 'id',paymentId
+      join 'registration'{
+        join 'student'
+        join 'scheduledCourse'{
+          join 'course'
+        }
+      }
+    }
+    // Forzamos el obtener las demás relaciones
+    payment?.registration?.scheduledCourse?.course?.name?.toString()
+    payment?.registration?.student?.email?.toString()
     def mailParams = [
       to:payment.registration.student.email,
       from:"no-reply@synergyj.com",
