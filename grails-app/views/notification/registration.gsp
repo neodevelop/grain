@@ -34,7 +34,7 @@
               <tbody>
               <tr>
                 <td valign="middle" width="36" style="vertical-align:middle; text-align: left;">
-                  <img src="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/themes/mail/images/logo.jpg'}"  alt=""  />
+                  <img src="${grailsApplication.config.grails.serverURL+'/themes/mail/images/logo.jpg'}"  alt=""  />
                 </td>
                 <td valign="middle" style="vertical-align: middle; text-align: left;">
                   <h1 class="title" style="margin:0; padding:0; font-size:30px; font-weight: normal; color: #192c45;">
@@ -68,7 +68,7 @@
                         <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
                           <tbody>
                           <tr>
-                            <td height="49" width="100%" valign="middle" bgcolor="#c8cfd8" background="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/themes/mail/images/article-title-bg.jpg'}" style="vertical-align:middle; border-left-width: 1px; border-left-color: #BAC2CC; border-left-style: solid; border-right-width: 1px; border-right-color: #BAC2CC; border-right-style: solid; border-bottom-width: 1px; border-bottom-color: #98a3b4; border-bottom-style: solid; border-top-width: 1px; border-top-color: #BAC2CC; border-top-style: solid;">
+                            <td height="49" width="100%" valign="middle" bgcolor="#c8cfd8" background="${grailsApplication.config.grails.serverURL+'/themes/mail/images/article-title-bg.jpg'}" style="vertical-align:middle; border-left-width: 1px; border-left-color: #BAC2CC; border-left-style: solid; border-right-width: 1px; border-right-color: #BAC2CC; border-right-style: solid; border-bottom-width: 1px; border-bottom-color: #98a3b4; border-bottom-style: solid; border-top-width: 1px; border-top-color: #BAC2CC; border-top-style: solid;">
                               <h3 class="textshadow" style="margin:0; margin-left: 17px; padding:0; font-size: 18px; font-weight: normal; color:#192c45;">
                                 Hola <b>${user?.email ?: 'noname'}</b>, bienvenido a tu cuenta
                               </h3>
@@ -80,7 +80,7 @@
                                 <tr>
                                   <td valign="top" style="padding-right: 20px;">
                                     <img width="164" height="164" src="
-                                    ${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/themes/mail/images/hello.jpg'}" alt="istockphoto" align="left" style="border-width: 3px; border-style: solid; border-color: #ffffff;" />
+                                    ${grailsApplication.config.grails.serverURL+'/themes/mail/images/hello.jpg'}" alt="istockphoto" align="left" style="border-width: 3px; border-style: solid; border-color: #ffffff;" />
                                   </td>
                                 </tr>
                               </table>
@@ -91,8 +91,8 @@
                                 A partir de este momento te hemos proveído de <b>una cuenta que puedes acceder con el correo y el password que ingresaste</b>; desde esta aplicación te mantendremos al tanto de las actividades que estaremos realizando para darte una mejor calidad en el servicio.<br/>
                                 Te pedimos de favor que completes tu perfil, lo cuál lo puedes hacer desde la siguiente dirección:
                                 <div align="center" style="font-size: 12px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
-                                  <a href="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/login'}">
-                                    ${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/login'}
+                                  <a href="${grailsApplication.config.grails.serverURL+'/login'}">
+                                    ${grailsApplication.config.grails.serverURL+'/login'}
                                   </a>
                                 </div>
                               </p>

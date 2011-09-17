@@ -116,7 +116,7 @@
                               <p style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
                                 Adicionalmente, hemos detectado que a&uacute;n no est&aacute;s registrado con nosotros, sin embargo, es muy simple, solo da clic en el siguiente v&iacute;nculo
                                 <div align="center" style="font-size: 12px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
-                                  <a href="${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/signup?code='+registrationCode?.token}">
+                                  <a href="${requestgrailsApplication.config.grails.serverURL+'/signup?code='+registrationCode?.token}">
                                     ${request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/signup?code='+registrationCode?.token}
                                   </a>
                                 </div>

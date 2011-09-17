@@ -72,10 +72,10 @@ jqueryUi.cdn = 'googlecode'
 // set per-environment serverURL stem for creating absolute links
 environments {
   production {
-    grails.serverURL = "http://www.changeme.com"
+    grails.serverURL = "http://entrenamiento.synergyj.com"
   }
   development {
-    grails.serverURL = "http://localhost:8080/${appName}"
+    grails.serverURL = "http://localhost:8080/grain"
   }
   test {
     grails.serverURL = "http://localhost:8080/${appName}"
