@@ -89,7 +89,7 @@
                               </p>
                               <p style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
                                 Te informamos que para el curso <b>${registration?.scheduledCourse?.course?.name ?: 'Nombre del curso'}</b>, el cual comienza el
-                                <b><g:formatDate date="${registration?.scheduledCourse?.beginDate ?: new Date()}" format="EEEE dd 'de' MMMM 'del' yyyy"/></b>,
+                                <b><g:formatDate date="${registration?.scheduledCourse?.beginDate ?: new Date()}" format="EEEE dd 'de' MMMM 'del' yyyy" locale="es"/></b>,
                                 tienes como fecha límite <b><g:formatDate date="${registration?.scheduledCourse?.limitRegistrationDate ?: new Date()}" format="EEEE dd 'de' MMMM 'del' yyyy"/></b>
                               para que puedas saldar el total del costo.<br/>
                               </p>
