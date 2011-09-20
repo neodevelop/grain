@@ -23,6 +23,8 @@ class QueueForMailService {
 
   static rabbitQueue = 'myQueue'
 
+  static throwExceptions = false
+
   def mailService
 
   void handleMessage(Map message){
