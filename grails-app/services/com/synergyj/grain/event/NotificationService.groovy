@@ -51,7 +51,7 @@ class NotificationService {
     registration.promotions.collect { promotionPerCourse -> promotionPerCourse.promotion.description  }
     def scheduledCourse = registration.scheduledCourse
     scheduledCourse.courseSessions.collect{ courseSession -> courseSession.sessionStartTime  }
-    scheduledCourse.course.name = scheduledCourse.course.name
+    scheduledCourse.course.name.toString()
     def user = registration.student
 
     def mailParams = [
@@ -117,8 +117,9 @@ class NotificationService {
       }
     }
     // Forzamos el obtener las demás relaciones
-    payment?.registration?.scheduledCourse?.course?.name?.toString()
-    payment?.registration?.student?.email?.toString()
+    def courseName = payment?.registration?.scheduledCourse?.course?.name
+    def email = payment?.registration?.student?.email
+
     def mailParams = [
       to:payment.registration.student.email,
       from:"no-reply@synergyj.com",

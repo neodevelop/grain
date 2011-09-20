@@ -88,8 +88,8 @@
                                 Te damos la más cordial bienvenida a nuestros cursos, a partir de ahora puedes ser parte de una de las mejores redes de conocimiento que te ofrecerá entrenamiento de calidad en desarrollo de software basado en la plataforma Java.
                               </p>
                               <p style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
-                                Agradecemos tu interés por el curso <b>${scheduledCourse?.course ?: 'Nombre del curso'}</b>, el cual comienza el
-                                <b><g:formatDate date="${scheduledCourse?.beginDate ?: new Date()}" format="EEEE dd 'de' MMMM 'del' yyyy" locale="es"/></b>.<br/>
+                                Agradecemos tu interés por el curso <b>${scheduledCourse?.course?.name ?: 'Nombre del curso'}</b>, el cual comienza el
+                                <b><g:formatDate date="${scheduledCourse?.beginDate ?: new Date()}" format="EEEE dd 'de' MMMM 'del' yyyy" locale="MX"/></b>.<br/>
                               </p>
                               <p style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
                                 Tambi&eacute;n te ofrecemos varias formas de pago, las cuáles podrás acceder y ocupar desde nuestro portal;
