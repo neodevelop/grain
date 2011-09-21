@@ -34,7 +34,7 @@ class Payment implements Comparable,Serializable{
   static hasMany = [receipts:Receipt]
 
   static constraints = {
-    amount nullable:false,blank:false
+    amount nullable:false
     commission nullable:true
     transactionId unique: true, maxSize: 20
     paymentDate nullable: true

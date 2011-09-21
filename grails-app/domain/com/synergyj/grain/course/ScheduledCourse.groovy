@@ -15,49 +15,49 @@
  */
 package com.synergyj.grain.course
 
-class ScheduledCourse implements Serializable{
+class ScheduledCourse implements Serializable {
 
   transient private static final long serialVersionUID = -1L
 
-	Course course
-	Date beginDate
-	Date limitRegistrationDate
-	BigDecimal costByCourse
-	BigDecimal costByModule
+  Course course
+  Date beginDate
+  Date limitRegistrationDate
+  BigDecimal costByCourse
+  BigDecimal costByModule
   ScheduledCourseStatus scheduledCourseStatus
   String geolocation = ''
   String fullAddress = ''
-  Integer durationInHours
   // Agregamos la duración aquí por que pueden existir cursos que pidan solo ciertos módulos
-	
-	Date dateCreated
-	Date lastUpdated
-	
-	static constraints = {
-    course nullable:false
-    beginDate nullable:false
-    limitRegistrationDate nullable:false,validator: { val, obj ->
-      if(val >= obj.beginDate )
-        return ['scheduledcourse.limitRegistrationDate.invalid']
+  Integer durationInHours
+
+  Date dateCreated
+  Date lastUpdated
+
+  static constraints = {
+    course nullable: false
+    beginDate nullable: false
+    limitRegistrationDate nullable: false, validator: { val, obj ->
+      if (val >= obj.beginDate)
+        return 'scheduledcourse.limitRegistrationDate.invalid'
     }
-    costByCourse nullable: false,blank: false
-    costByModule nullable: true,blank: true
-		lastUpdated display:false
-		dateCreated display:false
+    costByCourse nullable: false
+    costByModule nullable: true
+    lastUpdated display: false
+    dateCreated display: false
     geolocation nullable: true, blank: true, size: 0..200
     fullAddress nullable: true, blank: true, size: 0..1000
-    durationInHours nullable: false,blank: false
+    durationInHours nullable: false
     studentsGroup nullable: true
-	}
-	
-	static hasMany = [courseSessions:CourseSession,promotions:PromotionPerScheduledCourse]
-  static hasOne = [studentsGroup:StudentsGroup]
+  }
 
-  String toString(){
+  static hasMany = [courseSessions: CourseSession, promotions: PromotionPerScheduledCourse]
+  static hasOne = [studentsGroup: StudentsGroup]
+
+  String toString() {
     "(${id} : ${beginDate} : ${scheduledCourseStatus})"
   }
 
   static mapping = {
-    studentsGroup lazy:true
+    studentsGroup lazy: true
   }
 }
