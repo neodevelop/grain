@@ -26,6 +26,7 @@ import org.hibernate.FetchMode as FM
 class NotificationService {
 
   static transactional = false
+  public static final String MAIL_QUEUE_NOTIFICATION = 'grain_mail_notification'
 
   def sendUserRegistration(String email) {
     //Se le envía un correo con la liga para que haga login con los datos que acaba de ingresar
@@ -37,7 +38,7 @@ class NotificationService {
       view:'/notification/registration',
       model:[user:user]
     ]
-    rabbitSend 'myQueue', mailParams
+    rabbitSend MAIL_QUEUE_NOTIFICATION, mailParams
 
   }
   // Recibir ir en lugar del objeto
@@ -61,7 +62,7 @@ class NotificationService {
       view:"/notification/scheduledCourse",
       model:[user:user,scheduledCourse:scheduledCourse]
     ]
-    rabbitSend 'myQueue', mailParams
+    rabbitSend MAIL_QUEUE_NOTIFICATION, mailParams
   }
 
   def sendConfirmRegistration(String email,Long scheduledCourseId,registrationCode){
@@ -82,7 +83,7 @@ class NotificationService {
       view:"/notification/confirmRegistration",
       model:[user:user,scheduledCourse:scheduledCourse,registrationCode:registrationCode]
     ]
-    rabbitSend 'myQueue', mailParams
+    rabbitSend MAIL_QUEUE_NOTIFICATION, mailParams
   }
 
   def sendInvitation(String email, Long scheduledCourseId, RegistrationCodeForScheduledCourse registrationCode){
@@ -101,7 +102,7 @@ class NotificationService {
       view:"/notification/invitation",
       model:[email:email,scheduledCourse:scheduledCourse,registrationCode:registrationCode]
     ]
-    rabbitSend 'myQueue', mailParams
+    rabbitSend MAIL_QUEUE_NOTIFICATION, mailParams
     registrationCode
   }
 
@@ -127,7 +128,7 @@ class NotificationService {
       view:"/notification/paymentInstructions",
       model:[payment:payment,registration:payment.registration]
     ]
-    rabbitSend 'myQueue', mailParams
+    rabbitSend MAIL_QUEUE_NOTIFICATION, mailParams
   }
 
   def sendResetPassword(Long forgotPasswordCodeId) {
@@ -139,6 +140,6 @@ class NotificationService {
       view:"/notification/resetPassword",
       model:[forgotPasswordCode:forgotPasswordCode]
     ]
-    rabbitSend 'myQueue', mailParams
+    rabbitSend MAIL_QUEUE_NOTIFICATION, mailParams
   }
 }

@@ -212,6 +212,6 @@ rabbitmq {
     hostname = 'localhost'
   }
   queues = {
-    myQueue()
+    grain_mail_notification()
   }
 }

@@ -21,7 +21,7 @@ class QueueForMailService {
   
   static transactional = true
 
-  static rabbitQueue = 'myQueue'
+  static rabbitQueue = NotificationService.MAIL_QUEUE_NOTIFICATION
 
   static throwExceptions = false
 
