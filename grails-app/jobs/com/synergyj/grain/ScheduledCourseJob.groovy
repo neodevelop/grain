@@ -28,7 +28,7 @@ class ScheduledCourseJob {
   def mailService
 
   static triggers = {
-    cron name: 'scheduledCourseTrigger', cronExpression: "0 0/3 * * * ?"
+    cron name: 'scheduledCourseTrigger', cronExpression: "0 0 0 * * ?"
   }
 
   def group = "ScheduledCourseGroup"

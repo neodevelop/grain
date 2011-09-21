@@ -193,7 +193,8 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/js/**': ['permitAll'],
     '/images/**': ['permitAll'],
     '/plugins/**': ['permitAll'],
-    '/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY']
+    '/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+    '/monitoring/**': ["hasRole('ROLE_ADMIN')"]
 ]
 
 // Temporalmente agregado para usar el flujo de registro
