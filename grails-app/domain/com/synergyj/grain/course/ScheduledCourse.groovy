@@ -56,4 +56,8 @@ class ScheduledCourse implements Serializable{
   String toString(){
     "(${id} : ${beginDate} : ${scheduledCourseStatus})"
   }
+
+  static mapping = {
+    studentsGroup lazy:true
+  }
 }

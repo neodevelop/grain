@@ -15,10 +15,6 @@
  */
 package com.synergyj.grain.course
 
-import com.synergyj.grain.course.CourseType
-import com.synergyj.grain.course.Status
-import com.synergyj.grain.course.CourseModule
-
 class Course extends CourseContent implements Serializable{
 
   transient private static final long serialVersionUID = -1L

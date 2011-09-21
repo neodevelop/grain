@@ -33,4 +33,8 @@ class StudentsGroup implements Serializable{
     lastUpdated display: false, nullable: true
     dateCreated display: false, nullable: true
   }
+
+  static mapping = {
+    scheduledCourse lazy:true
+  }
 }
