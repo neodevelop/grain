@@ -1,18 +1,18 @@
 /*
- * Copyright 2002-2008 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+* Copyright 2002-2008 the original author or authors.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 package com.synergyj.grain
 
 import com.synergyj.grain.course.ScheduledCourse
@@ -21,6 +21,7 @@ import com.synergyj.grain.course.Registration
 import com.synergyj.grain.auth.RegistrationCodeForScheduledCourse
 import com.synergyj.grain.course.Payment
 import com.synergyj.grain.course.PaymentStatus
+import java.text.SimpleDateFormat
 import grails.util.Environment
 
 class ScheduledCourseJob {
@@ -34,7 +35,6 @@ class ScheduledCourseJob {
   def group = "ScheduledCourseGroup"
 
   def execute(){
-    // Obtener los cursos calendarizados
     def scheduledCourses = ScheduledCourse.findAllByScheduledCourseStatus(ScheduledCourseStatus.SCHEDULED)
     def message = ""
     scheduledCourses.each{ scheduledCourse ->
@@ -57,10 +57,14 @@ class ScheduledCourseJob {
         payment.paymentStatus == PaymentStatus.PAYED
       }
 
+
+      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm")
+
       message += """
-      Del curso ${scheduledCourse.course.name} que comienza el ${scheduledCourse.beginDate}
+      Del curso ${scheduledCourse.course.name} que comienza el ${dateFormat.format(scheduledCourse.beginDate)}
       Se han registrado en la Landing ${registrationsCodesForScheduledCourse.size()} personas en total
       Han confirmado su registro ${registrations.size()} personas
+      Asitirán ${scheduledCourse?.studentsGroup?.students?.size() ?: 0} personas
       El numero de personas registradas hace 24 horas es: ${registrationsFromToday.size()}
       Existen generados ${payments.size()} pagos de los cuales,
       hay ${waitingAndPendingPayments.size()} pagos en espera o pendientes,
@@ -71,21 +75,19 @@ class ScheduledCourseJob {
     }
 
     switch(Environment.current){
-        case Environment.DEVELOPMENT:
-          println message
-          break
-        case Environment.TEST:
-          break
-        case Environment.PRODUCTION:
-          mailService.sendMail {
-            //to "synergiers@googlegroups.com"
-            to "jjuan.reyes@synergyj.com"
-            from "cursos@synergyj.com"
-            subject "Resumen de cursos a las ${new Date()}"
-            body message
-          }
-          break
-      }
-
+      case Environment.DEVELOPMENT:
+        log.debug message
+        break
+      case Environment.TEST:
+        break
+      case Environment.PRODUCTION:
+        mailService.sendMail {
+          to "synergiers@googlegroups.com"
+          from "cursos@synergyj.com"
+          subject "Resumen de cursos a las ${dateFormat.format(new Date())}"
+          body message
+        }
+      break
+    }
   }
 }

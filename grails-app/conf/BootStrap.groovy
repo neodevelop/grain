@@ -65,9 +65,8 @@ class BootStrap {
       def userRole = new Role(authority:'ROLE_USER',description:'Usuario').save(flush:true)
       def guestUser = new Role()
       log.debug "Roles creados ${adminRole},${userRole}"
-      String password = springSecurityService.encodePassword('password', 'user@user.com')
+      String password = 'password'
       def user = new User(email:'user@user.com',password:password).save(flush:true)
-      password = springSecurityService.encodePassword('password', 'admin@admin.com')
       def admin = new User(email:'admin@admin.com',password:password).save(flush:true)
       log.debug "Usuarios creados: ${user.email},${admin.email}"
       PersonAuthority.create user, userRole, true
@@ -147,7 +146,8 @@ class BootStrap {
           costByCourse:7000,
           costByModule:2000,
           scheduledCourseStatus:ScheduledCourseStatus.SCHEDULED,
-          course:Course.get(1L)
+          course:Course.get(1L),
+          durationInHours:40
         ).save(flush:true)
 
         def sc2 = new ScheduledCourse(
@@ -156,7 +156,8 @@ class BootStrap {
           costByCourse:7000,
           costByModule:2000,
           scheduledCourseStatus:ScheduledCourseStatus.SCHEDULED,
-          course:Course.get(2L)
+          course:Course.get(2L),
+          durationInHours:40
         ).save(flush:true)
 
         def sc3 = new ScheduledCourse(
@@ -165,7 +166,8 @@ class BootStrap {
           costByCourse:7000,
           costByModule:2000,
           scheduledCourseStatus:ScheduledCourseStatus.SCHEDULED,
-          course:Course.get(3L)
+          course:Course.get(3L),
+          durationInHours:40
         ).save(flush:true)
 
         //Creamos sesiones para todos los cursos
