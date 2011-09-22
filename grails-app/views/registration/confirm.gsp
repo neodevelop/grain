@@ -2,7 +2,7 @@
   <head>
     <meta name="layout" content="wb" />
     <title><g:message code="registration.confirm" default="Confirm registration" /></title>
-    <parameter name="pageHeader" value="${g.message(code: 'registration.confirm', default: 'Confirm Registration')}"/>
+    <parameter name="pageHeader" value="${g.message(code: 'course.info', default: 'Confirm Info')}"/>
     <script type="text/javascript" src="https://raw.github.com/malsup/form/master/jquery.form.js"></script>
     <script language="javascript">
       $(function(){
@@ -70,7 +70,7 @@
   </div>
   <div id="right">
     <div id="rightbox">
-      <h1><g:message code='course.info'/></h1>
+
       <h2>${scheduledCourse.course.name}</h2>
       <div class="info">
         <g:message code='course.startDate'/> : <b><g:formatDate date="${scheduledCourse.beginDate}" format="dd - MMMM - yyyy"/></b> <br/>

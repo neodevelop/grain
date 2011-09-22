@@ -17,24 +17,24 @@ package com.synergyj.grain.course
 
 import com.synergyj.grain.auth.User
 
-class StudentsGroup implements Serializable{
-  
+class StudentsGroup implements Serializable {
+
   transient private static final long serialVersionUID = -1L
 
-  String keyStudentsGroup 
-  static hasMany = [students:User]
-  static belongsTo = [scheduledCourse:ScheduledCourse]
+  String keyStudentsGroup
+  static hasMany = [students: User]
+  static belongsTo = [scheduledCourse: ScheduledCourse]
 
   Date dateCreated
   Date lastUpdated
 
   static constraints = {
-    keyStudentsGroup  nullable: false,blank: false, size: 1..30
+    keyStudentsGroup nullable: false, blank: false, size: 1..30
     lastUpdated display: false, nullable: true
     dateCreated display: false, nullable: true
   }
 
   static mapping = {
-    scheduledCourse lazy:true
+    scheduledCourse lazy: true
   }
 }
