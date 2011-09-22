@@ -94,35 +94,36 @@ environments {
 }
 
 log4j = {
-    warn 'org.codehaus.groovy.grails.web.servlet',  //  controllers
-          'org.codehaus.groovy.grails.web.pages', //  GSP
-          'org.codehaus.groovy.grails.web.sitemesh', //  layouts
-          'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-          'org.codehaus.groovy.grails.web.mapping', // URL mapping
-          'org.codehaus.groovy.grails.commons', // core / classloading
-          'org.codehaus.groovy.grails.plugins', // plugins
-          'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
-          'org.springframework',
-          'org.hibernate'
+  warn 'org.codehaus.groovy.grails.web.servlet',  //  controllers
+      'org.codehaus.groovy.grails.web.pages', //  GSP
+      'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+      'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+      'org.codehaus.groovy.grails.web.mapping', // URL mapping
+      'org.codehaus.groovy.grails.commons', // core / classloading
+      'org.codehaus.groovy.grails.plugins', // plugins
+      'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+      'org.springframework',
+      'org.hibernate'
 
-      warn 'org.mortbay.log'
+  warn 'org.mortbay.log'
 
-      debug  'grails.app.controllers.com.synergyj'
-      debug  'grails.app.taglib.com.synergyj'
-      debug  'grails.app.services.com.synergyj'
-      debug  'grails.app.domain.com.synergyj'
-      debug  'grails.app.conf'
+  debug 'grails.app.controllers.com.synergyj'
+  debug 'grails.app.taglib.com.synergyj'
+  debug 'grails.app.services.com.synergyj'
+  debug 'grails.app.domain.com.synergyj'
+  debug 'grails.app.conf'
 
-    error 'org.codehaus',
-          'org.springframework',
-          'org.hibernate',
-          'net.sf',
-          'org.terracotta',
-          'org.quartz',
-          'org.apache',
-          'net.bull',
-          'grails.spring',
-        'net.sf.ehcache.hibernate'
+  error 'org.codehaus',
+      'org.springframework',
+      'org.hibernate',
+      'net.sf',
+      'org.terracotta',
+      'org.quartz',
+      'org.apache',
+      'net.bull',
+      'grails.spring',
+      'net.sf.ehcache.hibernate',
+      'org.grails.tomcat'
 
   appenders {
     console name: 'stdout', layout: pattern(conversionPattern: '%d{ISO8601}\t%p\t%c:%L\t%m%n'), threshold: org.apache.log4j.Level.ERROR
@@ -136,7 +137,6 @@ log4j = {
   }
 
 }
-
 
 /*
 * Spring Security Config
@@ -187,23 +187,23 @@ grails {
     port = 465
     username = "cursos@synergyj.com"
     password = ""
-    props = ["mail.smtp.auth":"true",
-        "mail.smtp.socketFactory.port":"465",
-        "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
-        "mail.smtp.socketFactory.fallback":"false"]
+    props = ["mail.smtp.auth": "true",
+        "mail.smtp.socketFactory.port": "465",
+        "mail.smtp.socketFactory.class": "javax.net.ssl.SSLSocketFactory",
+        "mail.smtp.socketFactory.fallback": "false"]
   }
 }
 
 avatarPlugin {
-	defaultGravatarUrl="""http://synergyj.com/user_anonymous.png"""
-	gravatarRating="G"
+  defaultGravatarUrl = """http://synergyj.com/user_anonymous.png"""
+  gravatarRating = "G"
 }
 
 google.analytics.webPropertyID = "UA-xxxxxx-x"
 
-tomcat.deploy.username="tomcat"
-tomcat.deploy.password="secret"
-tomcat.deploy.url="http://localhost:8080/manager/text"
+tomcat.deploy.username = "tomcat"
+tomcat.deploy.password = "secret"
+tomcat.deploy.url = "http://localhost:8080/manager/text"
 
 rabbitmq {
   connectionfactory {
