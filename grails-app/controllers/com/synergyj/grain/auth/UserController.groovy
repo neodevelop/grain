@@ -33,7 +33,7 @@ class UserController extends grails.plugins.springsecurity.ui.UserController {
     def roleAdmin = user.authorities.find { it.authority == "ROLE_ADMIN" }
     if(roleAdmin){
       // Obtenemos los cursos con el status SCHEDULED, los que se van a abrir
-      def currentScheduledCourses = ScheduledCourse.findAllByScheduledCourseStatus(ScheduledCourseStatus.SCHEDULED)
+      def currentScheduledCourses = ScheduledCourse.findAllByScheduledCourseStatusInList([ScheduledCourseStatus.SCHEDULED,ScheduledCourseStatus.PROGRESS] as List)
       // Obtenemos los registros(Registration) de cada curso calendarizado
       def registrationsPerScheduledCourse = [:]
       // Iteramos los cursos calendarizados
