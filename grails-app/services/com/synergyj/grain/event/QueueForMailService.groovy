@@ -68,24 +68,22 @@ class QueueForMailService {
           def out = new StringWriter();
           def originalOut = requestAttributes.getOut()
           requestAttributes.setOut(out)
-          try {
-            if (message.model instanceof Map) {
-              t.make(message.model).writeTo(out)
-            }
-            else {
-              t.make().writeTo(out)
-            }
+
+          if (message.model instanceof Map) {
+            t.make(message.model).writeTo(out)
           }
-          finally {
-            requestAttributes.setOut(originalOut)
-            if (unbindRequest) {
-              RequestContextHolder.setRequestAttributes(null)
-            }
+          else {
+            t.make().writeTo(out)
           }
-          println out
-          log.debug("${Environment.current} - ${message}")
+
+          requestAttributes.setOut(originalOut)
+          if (unbindRequest) {
+            RequestContextHolder.setRequestAttributes(null)
+          }
+
+          log.debug("${Environment.current} - ${out}")
         } catch (Exception e) {
-          println e.message
+          log.debug e.message
         }
         break
       case Environment.TEST:
@@ -118,7 +116,7 @@ class QueueForMailService {
     }
     else {
       if (!request) throw new IllegalArgumentException(
-        "Mail views cannot be loaded from relative view paths where there is no current HTTP request")
+          "Mail views cannot be loaded from relative view paths where there is no current HTTP request")
       def grailsAttributes = new DefaultGrailsApplicationAttributes(request.servletContext)
       buf << "${grailsAttributes.getControllerUri(request)}/${viewName}"
 
