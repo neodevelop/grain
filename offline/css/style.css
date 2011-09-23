@@ -12,17 +12,6 @@
 	border:3px solid #66cc00;
 }
 
-#close-lightbox {
-	width:35px;
-	height:35px;
-	background: url('../images/sprite.png') -66px -68px no-repeat;
-	display:block;
-	float:right;
-	margin-top:5px;
-	margin-right:5px;
-	cursor:pointer;
-}
-
 #inscription-form .title {
 	color: #666666;
     font-family: trebuchet MS,sans-serif;
@@ -131,69 +120,4 @@
   position: absolute;
   width: 16px;
   height: 16px;
-}
-
-#agenda{
-  display:none;
-  width:320px;
-	height:425px;
-	position:fixed;
-	left:50%;
-	top:50%;
-	margin:-125px 0 0 -120px;
-	background:#ffffff;
-	z-index:99999;
-	padding:10px;
-	font-family: trebuchet MS,sans-serif;
-	-webkit-border-radius: 15px;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
-	border:3px solid #66cc00;
-	background: #cdeb8e; /* Old browsers */
-  background: -moz-linear-gradient(top, #cdeb8e 0%, #a5c956 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cdeb8e), color-stop(100%,#a5c956)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* Opera11.10+ */
-  background: -ms-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* IE10+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=0 ); /* IE6-9 */
-  background: linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* W3C */
-}
-
-#agenda #agenda-title{
-  text-align: center;
-  font-size:24px;
-  color:#299a0b;
-  font-weight:bold;
-  text-shadow:0px 1px #FFFFFF;
-}
-
-#agenda #topics{
-
-}
-
-
-#agenda #topics ul{
-  list-style-type: square;
-}
-
-#agenda #topics li{
-  margin: 0;
-  padding: 0.25em;
-  color:#1f3b08;
-}
-
-#agenda #seeComplete{
-  text-align:center;
-}
-
-#agenda #seeComplete a{
-  text-decoration:none;
-  color:#002400;
-  text-shadow:0px 1px #d2ff52;
-  font-size:20px;
-}
-
-#agenda #seeComplete a:hover{
-  color:#299a0b;
-  text-shadow:0px 1px #FFFFFF;
 }
