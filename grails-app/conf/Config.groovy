@@ -72,58 +72,25 @@ grails.views.javascript.library = "jquery"
 jqueryUi.cdn = 'googlecode'
 
 // set per-environment serverURL stem for creating absolute links
+def logDirectory = "target/" // Directorio de Log4J
 environments {
-  production {
-    grails.serverURL = "http://entrenamiento.synergyj.com"
-  }
   development {
     grails.serverURL = "http://localhost:8080/grain"
   }
   test {
     grails.serverURL = "http://localhost:8080/${appName}"
+    grails.plugins.springsecurity.portMapper.httpPort = 80 // Spring Security Config
+    grails.plugins.springsecurity.portMapper.httpsPort = 80 // Spring Security Config
   }
-
-}
-
-def logDirectory = "target/"
-environments {
-
   production {
-    logDirectory = "logs/"
+    grails.serverURL = "http://entrenamiento.synergyj.com"
+    logDirectory = "logs/" // Directorio de Log4J
+    grails.plugins.springsecurity.portMapper.httpPort = 80 // Spring Security Config
+    grails.plugins.springsecurity.portMapper.httpsPort = 443 // Spring Security Config
   }
 }
 
 log4j = {
-  warn 'org.codehaus.groovy.grails.web.servlet',  //  controllers
-      'org.codehaus.groovy.grails.web.pages', //  GSP
-      'org.codehaus.groovy.grails.web.sitemesh', //  layouts
-      'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-      'org.codehaus.groovy.grails.web.mapping', // URL mapping
-      'org.codehaus.groovy.grails.commons', // core / classloading
-      'org.codehaus.groovy.grails.plugins', // plugins
-      'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
-      'org.springframework',
-      'org.hibernate'
-
-  warn 'org.mortbay.log'
-
-  debug 'grails.app.controllers.com.synergyj'
-  debug 'grails.app.taglib.com.synergyj'
-  debug 'grails.app.services.com.synergyj'
-  debug 'grails.app.domain.com.synergyj'
-  debug 'grails.app.conf'
-
-  error 'org.codehaus',
-      'org.springframework',
-      'org.hibernate',
-      'net.sf',
-      'org.terracotta',
-      'org.quartz',
-      'org.apache',
-      'net.bull',
-      'grails.spring',
-      'net.sf.ehcache.hibernate',
-      'org.grails.tomcat'
 
   appenders {
     console name: 'stdout', layout: pattern(conversionPattern: '%d{ISO8601}\t%p\t%c:%L\t%m%n'), threshold: org.apache.log4j.Level.ERROR
@@ -136,22 +103,46 @@ log4j = {
     additivity = true
   }
 
-}
+  debug 'grails.app.controllers.com.synergyj',
+        'grails.app.taglib.com.synergyj',
+        'grails.app.services.com.synergyj',
+        'grails.app.domain.com.synergyj',
+        'grails.app.conf'
 
-/*
-* Spring Security Config
-*/
-environments {
-  test {
-    grails.plugins.springsecurity.portMapper.httpPort = 80
-    grails.plugins.springsecurity.portMapper.httpsPort = 80
-  }
-  production {
-    grails.plugins.springsecurity.portMapper.httpPort = 80
-    grails.plugins.springsecurity.portMapper.httpsPort = 443
-  }
-}
+  warn 'org.codehaus.groovy.grails.web.servlet',  //  controllers
+      'org.codehaus.groovy.grails.web.pages', //  GSP
+      'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+      'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+      'org.codehaus.groovy.grails.web.mapping', // URL mapping
+      'org.codehaus.groovy.grails.commons', // core / classloading
+      'org.codehaus.groovy.grails.plugins', // plugins
+      'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+      'org.codehaus',
+      'org.springframework',
+      'org.hibernate',
+      'org.mortbay.log',
+      'net.sf',
+      'org.terracotta',
+      'org.quartz',
+      'org.apache',
+      'net.bull',
+      'grails.spring',
+      'net.sf.ehcache.hibernate',
+      'org.grails.tomcat'
 
+  error 'net.sf.ehcache','net.sf.ehcache.hibernate', 'org.hibernate'
+
+  environments {
+    production {
+      // Override previous setting
+      error "grails",
+          "org",
+          "net",
+          "com"
+    }
+  }
+
+}
 
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.synergyj.grain.auth.User'
 grails.plugins.springsecurity.userLookup.usernamePropertyName = 'email'
