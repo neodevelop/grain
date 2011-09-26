@@ -45,8 +45,15 @@ class UserController extends grails.plugins.springsecurity.ui.UserController {
       }
       return [user:user,scheduledCourseList:currentScheduledCourses,registrationsPerScheduledCourse:registrationsPerScheduledCourse]
     }else{
+      // Obtenemos los registros confirmados de este usuario
       def myRegistrations = Registration.findAllByStudent(user)
-      return [user:user,myRegistrations:myRegistrations]
+      // Obtenemos los registros de este usuario a la LP que no sean iguales a los ya confirmados
+      def registrationsCodeForScheduledCourses = []
+      if(!myRegistrations)
+        registrationsCodeForScheduledCourses = RegistrationCodeForScheduledCourse.findAllByUsername(user.email)
+      else
+        registrationsCodeForScheduledCourses = RegistrationCodeForScheduledCourse.findAllByUsernameAndScheduledCourseIdNotInList(user.email,myRegistrations*.scheduledCourse*.id)
+      return [user:user,myRegistrations:myRegistrations,registrationsCodeForScheduledCourses:registrationsCodeForScheduledCourses]
     }
   }
 
