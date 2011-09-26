@@ -77,7 +77,7 @@
 
   <sec:ifNotGranted roles="ROLE_ADMIN">
 
-  <g:if test="${!myRegistrations}">
+  <g:if test="${!myRegistrations && !registrationsCodeForScheduledCourses}">
     <h1>Aún no te has registrado a ningún curso</h1>
     <h3>Explora nuestro calendario e inscríbete!!!</h3>
     <p>
@@ -90,6 +90,7 @@
         <li><a href="#tabs-1">Estado de tus inscripciones</a></li>
       </ul>
       <div id="tabs-1">
+        <g:render template="/registration/codes" model="[registrationsCodeForScheduledCourses:registrationsCodeForScheduledCourses]"/>
         <g:render template="/registration/list" model="[registrationList:myRegistrations]" />
       </div>
     </div>
