@@ -14,6 +14,8 @@
  */
 package com.synergyj.grain.auth
 
+import com.synergyj.grain.course.ScheduledCourse
+
 class RegistrationCodeForScheduledCourse implements Serializable{
 
   transient private static final long serialVersionUID = -1L
@@ -33,5 +35,9 @@ class RegistrationCodeForScheduledCourse implements Serializable{
     def rc = new RegistrationCodeForScheduledCourse(username: email,scheduledCourseId:scheduledCourseId)
     rc.save(flush: true)
     rc
+  }
+
+  def getScheduledCourseForCurrent(){
+    ScheduledCourse.get(scheduledCourseId)
   }
 }
