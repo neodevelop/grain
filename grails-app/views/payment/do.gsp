@@ -93,7 +93,7 @@
     <input type="hidden" name="payment_method_1" value="" />
     <!-- Variables del Producto/Item -->
     <!-- Item 1 -->
-    <input type="hidden" name="item_name_1" value="${registration.scheduledCourse.course}" />
+    <input type="hidden" name="item_name_1" value="${registration.scheduledCourse.course.name}" />
     <input type="hidden" name="item_code_1" value="${registration.scheduledCourse.course.courseKey}" />
     <input type="hidden" name="item_quantity_1" value="1" />
     <input type="hidden" name="item_ammount_1" value="${payment.amount.setScale(2, BigDecimal.ROUND_HALF_EVEN).toString()}" />
