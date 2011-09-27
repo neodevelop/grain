@@ -1881,7 +1881,7 @@ table tbody tr.registration_REGISTERED{
   background: linear-gradient(top, #ff9999 0%,#febbbb 97%); /* W3C */
 }
 
-table tbody tr.registration_PENDING_PAYMENT{
+table tbody tr.registration_INSCRIBED_AND_WITH_DEBTH{
   color:#6d0019;
   background: #fcc97e; /* Old browsers */
   background: -moz-linear-gradient(top, #fcc97e 0%, #efe9aa 99%); /* FF3.6+ */
@@ -1893,7 +1893,7 @@ table tbody tr.registration_PENDING_PAYMENT{
   background: linear-gradient(top, #fcc97e 0%,#efe9aa 99%); /* W3C */
 }
 
-table tbody tr.registration_PAYED{
+table tbody tr.registration_INSCRIBED_AND_PAYED{
   color:#1f3b08;
   background: #cadd82; /* Old browsers */
   background: -moz-linear-gradient(top, #cadd82 2%, #f8ffe8 99%); /* FF3.6+ */

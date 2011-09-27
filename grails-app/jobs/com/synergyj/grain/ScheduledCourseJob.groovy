@@ -64,7 +64,7 @@ class ScheduledCourseJob {
       Del curso ${scheduledCourse.course.name} que comienza el ${dateFormat.format(scheduledCourse.beginDate)}
       Se han registrado en la Landing ${registrationsCodesForScheduledCourse.size()} personas en total
       Han confirmado su registro ${registrations.size()} personas
-      Asitirán ${scheduledCourse?.studentsGroup?.students?.size() ?: 0} personas
+      Asitirán ${scheduledCourse?.studentsGroup?.registrations?.size() ?: 0} personas
       El numero de personas registradas hace 24 horas es: ${registrationsFromToday.size()}
       Existen generados ${payments.size()} pagos de los cuales,
       hay ${waitingAndPendingPayments.size()} pagos en espera o pendientes,

@@ -14,11 +14,11 @@
     <tbody>
       <g:set var="totalPerGroup" value="${new BigDecimal(0)}"/>
       <g:each in="${registrationGroup}" var="registration">
-      <tr id="student${registration?.student?.id}" class="registration_${registration?.registrationStatus}">
+      <tr id="student${registration?.id}" class="registration_${registration?.registrationStatus}">
         <td>${registration?.student?.email}</td>
         <td>${registration?.student?.firstName} ${registration?.student?.lastName}</td>
         <td>
-          <g:remoteLink controller="studentsGroup" action="${action}" id="${registration?.student?.id}" params="[studentsGroupId:studentsGroup?.id]" onSuccess="${action}(${registration?.student?.id})">
+          <g:remoteLink controller="studentsGroup" action="${action}" id="${registration?.id}" onSuccess="${action}(${registration?.id})">
             <g:message code="studentsGroup.move" />
           </g:remoteLink>
         </td>

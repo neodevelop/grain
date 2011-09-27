@@ -21,6 +21,7 @@ import grails.converters.JSON
 import org.codehaus.groovy.grails.plugins.jasper.JasperExportFormat
 import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
 import java.text.SimpleDateFormat
+import org.hibernate.FetchMode as FM
 
 @Secured(["hasRole('ROLE_ADMIN')"])
 class StudentsGroupController {
@@ -31,43 +32,39 @@ class StudentsGroupController {
     // Obtenemos el grupo de estudiantes
     def scheduledCourse = ScheduledCourse.get(params.id)
     // Buscamos los registros al curso calendarizado
-    def registrations = Registration.findAllByScheduledCourse(scheduledCourse)
-    // Obtenemos los usuarios de todos los registros
-    def users = registrations*.student
+    def criteria = Registration.createCriteria()
+    def registrations = criteria.listDistinct {
+      eq 'scheduledCourse',scheduledCourse
+      join "student"
+      fetchMode "promotions", FM.EAGER
+      fetchMode "payments", FM.EAGER
+    }
     // Obtenemos los usuarios que SI están en el grupo
-    def studentsInGroup = scheduledCourse.students
-    // Obtenemos los usuarios que NO están en el grupo
-    def studentsNoGroup = []
-    users.each{ user ->
-      def userFound = studentsInGroup.find { it.email == user.email }
-      if(!userFound)
-       studentsNoGroup << user
+    def registrationsInGroup = registrations.findAll { registration ->
+      registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED_IN_GROUP || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH_IN_GROUP
     }
-
-    // Obtenemos los registros que SI están en un grupo
-    def registrationsInGroup = []
-    studentsInGroup.each { student ->
-      def registrationFound = registrations.find { it.student.email == student.email }
-      if(registrationFound)
-        registrationsInGroup << registrationFound
-    }
-
     // Obtenemos los registros que NO están en un grupo
-    def registrationsNoGroup = registrations - registrationsInGroup
+    def registrationsNoGroup = registrations.findAll { registration ->
+      registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH  || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED
+    }
 
-    [studentsGroup:scheduledCourse.students,registrationsInGroup:registrationsInGroup,registrationsNoGroup:registrationsNoGroup ]
+    [scheduledCourse: scheduledCourse, registrationsInGroup: registrationsInGroup, registrationsNoGroup: registrationsNoGroup]
   }
 
   def addStudent = {
-    def scheduledCourse = ScheduledCourse.get(params.long("studentsGroupId"))
-    def user = User.get(params.id)
-    scheduledCourse.addToStudents(user)
+    def registration = Registration.get(params.id)
+    if(registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH)
+      registration.registrationStatus = RegistrationStatus.INSCRIBED_AND_WITH_DEBTH_IN_GROUP
+    if(registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED)
+      registration.registrationStatus = RegistrationStatus.INSCRIBED_AND_PAYED_IN_GROUP
   }
 
   def removeStudent = {
-    def scheduledCourse = ScheduledCourse.get(params.long("studentsGroupId"))
-    def user = User.get(params.id)
-    scheduledCourse.removeFromStudents(user)
+    def registration = Registration.get(params.id)
+    if (registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH_IN_GROUP)
+      registration.registrationStatus = RegistrationStatus.INSCRIBED_AND_WITH_DEBTH
+    if (registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED_IN_GROUP)
+      registration.registrationStatus = RegistrationStatus.INSCRIBED_AND_PAYED
   }
 
   def attendance = {
@@ -78,20 +75,20 @@ class StudentsGroupController {
     // Preparamos los registrations a mandar a la vista
     def registrations = []
     // Iteramos a los alumnos para ver si tienen esas sesiones
-    scheduledCourse.students.each{ student ->
+    scheduledCourse.registrations.each { student ->
       // Buscamos el registro del curso para un estudiante y curso calendarizado
-      def registration = Registration.findByStudentAndScheduledCourse(student,scheduledCourse)
+      def registration = Registration.findByStudentAndScheduledCourse(student, scheduledCourse)
       // Si no tiene sesiones de curso entonces
-      if(!registration){
-        scheduledCourse.removeFromStudents(student)
-      }else{
-        if(!registration.courseSessions.size()){
+      if (!registration) {
+        scheduledCourse.removeFromRegistrations(student)
+      } else {
+        if (!registration.courseSessions.size()) {
           // Iteramos las sesiones del curso calendarizado
-          scheduledCourseSessions.each{ scheduledCourseSession ->
+          scheduledCourseSessions.each { scheduledCourseSession ->
             // Las replicamos a cada alumno
             def courseSessionPerRegistration = new CourseSessionPerRegistration(
-              registration:registration,
-              courseSession:scheduledCourseSession
+                registration: registration,
+                courseSession: scheduledCourseSession
             )
             // Agregamos la sesión de curso calendarizado al estudiante
             registration.addToCourseSessions(courseSessionPerRegistration)
@@ -100,19 +97,19 @@ class StudentsGroupController {
       }
       registrations << registration
     }
-    [studentsGroup:scheduledCourse.students,registrations:registrations]
+    [studentsGroup: scheduledCourse.registrations, registrations: registrations]
   }
 
   def checkAttendance = {
     def courseSessionPerRegistration = CourseSessionPerRegistration.get(params.id)
-    if(courseSessionPerRegistration.attended)
+    if (courseSessionPerRegistration.attended)
       courseSessionPerRegistration.attended = false
     else
       courseSessionPerRegistration.attended = true
 
-    response.addHeader("Access-Control-Allow-Origin","*")
-    response.addHeader("Content-Type","	application/json;charset=UTF-8")
-    render([attended:courseSessionPerRegistration.attended] as JSON)
+    response.addHeader("Access-Control-Allow-Origin", "*")
+    response.addHeader("Content-Type", "	application/json;charset=UTF-8")
+    render([attended: courseSessionPerRegistration.attended] as JSON)
   }
 
   def createCertificate = {
@@ -121,14 +118,14 @@ class StudentsGroupController {
     // Buscamos los registros para ese grupo
     def criteria = Registration.createCriteria()
     def registrations = criteria.list {
-      eq "scheduledCourse",scheduledCourse
-      eq "registrationStatus",RegistrationStatus.FINISHED
+      eq "scheduledCourse", scheduledCourse
+      eq "registrationStatus", RegistrationStatus.FINISHED
     }
 
     // Inicializamos la lista que se va al reporte
     def reportData = []
     // Iteramos a los estudiantes
-    (registrations*.student).each{ student ->
+    (registrations*.student).each { student ->
       // Creamos un objeto certificado
       def certificate = new Certificate()
       // Le ponemos nombre a su diploma
@@ -142,11 +139,11 @@ class StudentsGroupController {
       def startDate = studentsGroup.scheduledCourse.beginDate
       // Usamos un formateador para la primera parte de la fecha
       def locale = new Locale("es")
-      def dateFormat = new SimpleDateFormat("dd 'de' MMMMM",locale)
+      def dateFormat = new SimpleDateFormat("dd 'de' MMMMM", locale)
       // La asignamos al valor del certificado
       certificate.dateRange = "Del ${dateFormat.format(startDate)} "
       // Cambiamos el formateador
-      dateFormat = new SimpleDateFormat("'al' dd 'de' MMMMMM 'del' yyyy",locale)
+      dateFormat = new SimpleDateFormat("'al' dd 'de' MMMMMM 'del' yyyy", locale)
       // Obtenemos la última sesion
       def lastSession = (studentsGroup.scheduledCourse.courseSessions.max()).sessionStartTime
       // Concatenamos la fecha con el uso del formateador
@@ -161,13 +158,13 @@ class StudentsGroupController {
 
     // Generamos la definición del reporte
     def reportDef = new JasperReportDef(
-      name:'certificates.jasper',
-      fileFormat:JasperExportFormat.PDF_FORMAT,
-      reportData:reportData,
-      parameters:[:]
+        name: 'certificates.jasper',
+        fileFormat: JasperExportFormat.PDF_FORMAT,
+        reportData: reportData,
+        parameters: [:]
     )
     // Mandamos un nombre de archivo a la salida
-    response.setHeader("Content-disposition", "attachment; filename=certificates.pdf" )
+    response.setHeader("Content-disposition", "attachment; filename=certificates.pdf")
     // Mandamos el reporte al response
     response.outputStream << jasperService.generateReport(reportDef).toByteArray()
   }
@@ -183,11 +180,11 @@ class StudentsGroupController {
     def startDate = registration.scheduledCourse.beginDate
     // Usamos un formateador para la primera parte de la fecha
     def locale = new Locale("es")
-    def dateFormat = new SimpleDateFormat("dd 'de' MMMMM",locale)
+    def dateFormat = new SimpleDateFormat("dd 'de' MMMMM", locale)
     // La asignamos al valor del certificado
     certificate.dateRange = "Del ${dateFormat.format(startDate)} "
     // Cambiamos el formateador
-    dateFormat = new SimpleDateFormat("'al' dd 'de' MMMMMM 'del' yyyy",locale)
+    dateFormat = new SimpleDateFormat("'al' dd 'de' MMMMMM 'del' yyyy", locale)
     // Obtenemos la última sesion
     def lastSession = (registration.scheduledCourse.courseSessions.max()).sessionStartTime
     // Concatenamos la fecha con el uso del formateador
@@ -200,14 +197,14 @@ class StudentsGroupController {
 
     // Generamos la definición del reporte
     def reportDef = new JasperReportDef(
-      name:'certificate_image.jasper', // La imagen tiene una rut absoluta
-      fileFormat:JasperExportFormat.PDF_FORMAT,
-      reportData:reportData,
-      parameters:[:]
+        name: 'certificate_image.jasper', // La imagen tiene una rut absoluta
+        fileFormat: JasperExportFormat.PDF_FORMAT,
+        reportData: reportData,
+        parameters: [:]
     )
 
     // Mandamos un nombre de archivo a la salida
-    response.setHeader("Content-disposition", "attachment; filename=${registration.scheduledCourse.course.courseKey}-${registration.student.email}.pdf" )
+    response.setHeader("Content-disposition", "attachment; filename=${registration.scheduledCourse.course.courseKey}-${registration.student.email}.pdf")
     // Mandamos el reporte al response
     response.outputStream << jasperService.generateReport(reportDef).toByteArray()
   }
