@@ -15,6 +15,8 @@
  */
 package com.synergyj.grain.course
 
+import com.synergyj.grain.auth.User
+
 class ScheduledCourse implements Serializable {
 
   transient private static final long serialVersionUID = -1L
@@ -47,17 +49,12 @@ class ScheduledCourse implements Serializable {
     geolocation nullable: true, blank: true, size: 0..200
     fullAddress nullable: true, blank: true, size: 0..1000
     durationInHours nullable: false
-    studentsGroup nullable: true
   }
 
-  static hasMany = [courseSessions: CourseSession, promotions: PromotionPerScheduledCourse]
-  static hasOne = [studentsGroup: StudentsGroup]
+  static hasMany = [courseSessions: CourseSession, promotions: PromotionPerScheduledCourse,students:User]
 
   String toString() {
     "(${id} : ${beginDate} : ${scheduledCourseStatus})"
   }
 
-  static mapping = {
-    studentsGroup lazy: true
-  }
 }

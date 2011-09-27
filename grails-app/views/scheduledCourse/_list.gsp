@@ -44,31 +44,22 @@
 
         </td>
 
-        <td><g:formatDate date="${scheduledCourse.beginDate}" format="dd-MMMM-yy" /></td>
+        <td><g:formatDate date="${scheduledCourse.beginDate}" format="dd-MMMM-yy" locale="es"/></td>
 
-        <td><g:formatDate date="${scheduledCourse.limitRegistrationDate}" format="dd-MMMM-yy" /></td>
+        <td><g:formatDate date="${scheduledCourse.limitRegistrationDate}" format="dd-MMMM-yy" locale="es" /></td>
 
         <td>$ <g:formatNumber number="${scheduledCourse.costByCourse}" format="#,##0.00;(#,##0.00)" /></td>
 
         <td>${scheduledCourse.scheduledCourseStatus}</td>
 
         <td>
-          <g:if test="${scheduledCourse?.studentsGroup}">
-            <g:link controller="studentsGroup" action="show" id="${scheduledCourse?.studentsGroup?.id}">
-              <g:message code="studentsGroup.show" default="See group" />
-            </g:link>
-          </g:if>
-          <g:else>
-            <div id="actionStudentsGroup${scheduledCourse.id}">
-            <g:remoteLink controller="studentsGroup" action="create" id="${scheduledCourse.id}" update="actionStudentsGroup${scheduledCourse.id}">
-              <g:message code="studentsGroup.create" default="Create group" />
-            </g:remoteLink>
-            </div>
-          </g:else>
+          <g:link controller="studentsGroup" action="show" id="${scheduledCourse?.id}">
+            <g:message code="studentsGroup.show" default="See group"/>
+          </g:link>
         </td>
 
         <td>
-          <g:link controller="studentsGroup" action="attendance" id="${scheduledCourse?.studentsGroup?.id}">
+          <g:link controller="studentsGroup" action="attendance" id="${scheduledCourse?.id}">
             <g:message code="studentsGroup.attendance" default="Attendance"/>
           </g:link>
         </td>

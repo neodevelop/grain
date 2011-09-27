@@ -27,30 +27,15 @@ class StudentsGroupController {
 
   def jasperService
 
-  def create = {
-    def scheduledCourse = ScheduledCourse.get(params.id)
-    def months = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE']
-    def keyStudentsGroup = "${scheduledCourse.course.courseKey}-${months[scheduledCourse.beginDate.month - 1]}"
-    if(!scheduledCourse.studentsGroup){
-      scheduledCourse.studentsGroup = new StudentsGroup(scheduledCourse: scheduledCourse,keyStudentsGroup: keyStudentsGroup)
-      scheduledCourse.save(flush:true)
-    }
-    render """
-      <a href='${g.createLink(controller:'studentsGroup',action:'show',id:scheduledCourse?.studentsGroup?.id)}'>
-        ${g.message(code:'studentsGroup.show',default:'See group')}
-      </a>
-    """
-  }
-
   def show = {
     // Obtenemos el grupo de estudiantes
-    def studentsGroup = StudentsGroup.get(params.id)
+    def scheduledCourse = ScheduledCourse.get(params.id)
     // Buscamos los registros al curso calendarizado
-    def registrations = Registration.findAllByScheduledCourse(studentsGroup.scheduledCourse)
+    def registrations = Registration.findAllByScheduledCourse(scheduledCourse)
     // Obtenemos los usuarios de todos los registros
     def users = registrations*.student
     // Obtenemos los usuarios que SI están en el grupo
-    def studentsInGroup = studentsGroup.students
+    def studentsInGroup = scheduledCourse.students
     // Obtenemos los usuarios que NO están en el grupo
     def studentsNoGroup = []
     users.each{ user ->
@@ -70,37 +55,35 @@ class StudentsGroupController {
     // Obtenemos los registros que NO están en un grupo
     def registrationsNoGroup = registrations - registrationsInGroup
 
-    [studentsGroup:studentsGroup,registrationsInGroup:registrationsInGroup,registrationsNoGroup:registrationsNoGroup ]
+    [studentsGroup:scheduledCourse.students,registrationsInGroup:registrationsInGroup,registrationsNoGroup:registrationsNoGroup ]
   }
 
   def addStudent = {
-    def studentsGroup = StudentsGroup.get(params.long("studentsGroupId"))
+    def scheduledCourse = ScheduledCourse.get(params.long("studentsGroupId"))
     def user = User.get(params.id)
-    studentsGroup.addToStudents(user)
+    scheduledCourse.addToStudents(user)
   }
 
   def removeStudent = {
-    def studentsGroup = StudentsGroup.get(params.long("studentsGroupId"))
+    def scheduledCourse = ScheduledCourse.get(params.long("studentsGroupId"))
     def user = User.get(params.id)
-    studentsGroup.removeFromStudents(user)
+    scheduledCourse.removeFromStudents(user)
   }
 
   def attendance = {
-    // Obtenemos el grupo de estudiantes
-    def studentsGroup = StudentsGroup.get(params.id)
     // Obtenemos el curso calendarizado
-    def scheduledCourse = studentsGroup.scheduledCourse
+    def scheduledCourse = ScheduledCourse.get(params.id)
     // Obtenemos las sesiones del curso calendarizado
     def scheduledCourseSessions = scheduledCourse.courseSessions
     // Preparamos los registrations a mandar a la vista
     def registrations = []
     // Iteramos a los alumnos para ver si tienen esas sesiones
-    studentsGroup.students.each{ student ->
+    scheduledCourse.students.each{ student ->
       // Buscamos el registro del curso para un estudiante y curso calendarizado
       def registration = Registration.findByStudentAndScheduledCourse(student,scheduledCourse)
       // Si no tiene sesiones de curso entonces
       if(!registration){
-        studentsGroup.removeFromStudents(student)
+        scheduledCourse.removeFromStudents(student)
       }else{
         if(!registration.courseSessions.size()){
           // Iteramos las sesiones del curso calendarizado
@@ -117,7 +100,7 @@ class StudentsGroupController {
       }
       registrations << registration
     }
-    [studentsGroup:studentsGroup,registrations:registrations]
+    [studentsGroup:scheduledCourse.students,registrations:registrations]
   }
 
   def checkAttendance = {
@@ -134,11 +117,11 @@ class StudentsGroupController {
 
   def createCertificate = {
     // Obtenemos el grupo completo
-    def studentsGroup = StudentsGroup.get(params.id)
+    def scheduledCourse = ScheduledCourse.get(params.id)
     // Buscamos los registros para ese grupo
     def criteria = Registration.createCriteria()
     def registrations = criteria.list {
-      eq "scheduledCourse",studentsGroup.scheduledCourse
+      eq "scheduledCourse",scheduledCourse
       eq "registrationStatus",RegistrationStatus.FINISHED
     }
 
