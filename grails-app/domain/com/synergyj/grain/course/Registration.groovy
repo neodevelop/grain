@@ -24,11 +24,11 @@ class Registration implements Serializable {
   Date dateCreated
   Date lastUpdated
   User student
-  ScheduledCourse scheduledCourse
   RegistrationStatus registrationStatus
   Boolean invoice = false
 
   static hasMany = [promotions: PromotionPerRegistration, payments: Payment, courseSessions:CourseSessionPerRegistration]
+  static belongsTo = [scheduledCourse:ScheduledCourse]
 
   static constraints = {
     lastUpdated display: false, nullable: true
