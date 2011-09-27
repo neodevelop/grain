@@ -27,6 +27,11 @@
           <sec:ifAllGranted roles="ROLE_ADMIN">
             <g:link controller="scheduledCourse" action="show" id="${scheduledCourse.id}">
               ${fieldValue(bean: scheduledCourse, field: "course")}
+              <g:set var="mapId" value="sc${scheduledCourse.id}"/>
+              <g:if test="${hasPendingPayments[mapId]}">
+                <img src="${resource(dir:'themes/wb/icon',file:'money.png')}" width="16" height="16" />
+                <b/><g:message code="payment.awaiting"/></b>
+              </g:if>
             </g:link>
           </sec:ifAllGranted>
 

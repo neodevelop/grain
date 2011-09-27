@@ -23,7 +23,7 @@
     <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
   </g:if>
 
-  <g:render template="list" model="[scheduledCourseList:scheduledCourseInstanceList]"/>
+  <g:render template="list" model="[scheduledCourseList:scheduledCourseInstanceList,hasPendingPayments:hasPendingPayments]"/>
 
   <div class="paginateButtons">
     <g:paginate total="${scheduledCourseInstanceTotal}" />

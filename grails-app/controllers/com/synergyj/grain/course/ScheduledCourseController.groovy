@@ -32,10 +32,10 @@ class ScheduledCourseController {
     def dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm")
     def sessionStartTime = dateFormat.parse("${params.sessionStartTime} ${params.sessionHourStartTime}") as Date
     def courseSession = courseSessionService.createSession4ScheduledCourse(
-      scheduledCourseId,
-      sessionStartTime,
-      params.int('duration'),
-      params.long('courseSessionId')
+        scheduledCourseId,
+        sessionStartTime,
+        params.int('duration'),
+        params.long('courseSessionId')
     )
     render courseSession as JSON
   }
@@ -44,8 +44,23 @@ class ScheduledCourseController {
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
   def list = {
-    params.max = Math.min(params.max ? params.max.toInteger() : 10,  100)
-    [scheduledCourseInstanceList: ScheduledCourse.list(params), scheduledCourseInstanceTotal: ScheduledCourse.count()]
+    params.max = Math.min(params.max ? params.max.toInteger() : 10, 100)
+    params.fetch = [course:"eager"]
+    def scheduledCourseInstanceList = ScheduledCourse.list(params)
+    def hasPendingPayments = [:]
+    scheduledCourseInstanceList.each { scheduledCourse ->
+      if (scheduledCourse.scheduledCourseStatus != ScheduledCourseStatus.CANCELLED) {
+        def criteria = Registration.createCriteria()
+        def pendingPaymentRegistrations = criteria.count {
+          eq 'scheduledCourse', scheduledCourse
+          eq 'registrationStatus', RegistrationStatus.PENDING_PAYMENT
+        }
+        if(pendingPaymentRegistrations)
+          hasPendingPayments."sc${scheduledCourse.id}" = pendingPaymentRegistrations
+      }
+
+    }
+    [scheduledCourseInstanceList: scheduledCourseInstanceList, scheduledCourseInstanceTotal: ScheduledCourse.count(), hasPendingPayments:hasPendingPayments]
   }
 
   def create = {
@@ -56,10 +71,10 @@ class ScheduledCourseController {
 
   def save = {
     def scheduledCourseInstance = new ScheduledCourse(params)
-    if (!scheduledCourseInstance.hasErrors() && scheduledCourseInstance.save(flush:true)) {
-      try{
-        def courseSession = courseSessionService.createSession4ScheduledCourse(scheduledCourseInstance.id,scheduledCourseInstance.beginDate)
-      }catch(ScheduledCourseException e){
+    if (!scheduledCourseInstance.hasErrors() && scheduledCourseInstance.save(flush: true)) {
+      try {
+        def courseSession = courseSessionService.createSession4ScheduledCourse(scheduledCourseInstance.id, scheduledCourseInstance.beginDate)
+      } catch (ScheduledCourseException e) {
         flash.defaultMessage = "Course session was not created"
         render(view: "create", model: [scheduledCourseInstance: scheduledCourseInstance])
       }
