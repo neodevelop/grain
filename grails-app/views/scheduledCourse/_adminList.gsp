@@ -27,7 +27,7 @@
               </g:if>
             </td>
             <td>
-              <g:if test="${it.registrationStatus == RegistrationStatus.REGISTERED || it.registrationStatus == RegistrationStatus.PENDING_PAYMENT}">
+              <g:if test="${it.registrationStatus == RegistrationStatus.REGISTERED || it.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH}">
                 <g:remoteLink controller="registration" action="delete" id="${it.id}" onSuccess="removeRegistration(${it.id})">
                   <img src="${createLinkTo(dir:'themes/wb/icon',file:'cancel.png')}" width="24" height="24" />
                 </g:remoteLink>

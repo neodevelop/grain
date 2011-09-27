@@ -27,7 +27,7 @@ class PaymentService {
         // Cambiamos el status del payment
         payment.paymentStatus = PaymentStatus.PENDING
         // El registro al curso aún no se paga aunque este sea el último pago, aún está pendiente de pago
-        payment.registration.registrationStatus = RegistrationStatus.PENDING_PAYMENT
+        payment.registration.registrationStatus = RegistrationStatus.INSCRIBED_AND_WITH_DEBTH
         break
       case 'payed':
         // Actualizamos la fecha del payment
@@ -63,7 +63,7 @@ class PaymentService {
     }
 
     // Cambiamos el estado del registro
-    registration.registrationStatus = RegistrationStatus.PENDING_PAYMENT
+    registration.registrationStatus = RegistrationStatus.INSCRIBED_AND_WITH_DEBTH
 
     // Necesitará factura?
     if(withInvoice)

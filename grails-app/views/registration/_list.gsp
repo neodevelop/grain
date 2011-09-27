@@ -21,11 +21,11 @@
           <g:message code="registration.registered"/>
           <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-blue.png')}" alt="valid"/>
         </g:if>
-        <g:if test="${registration.registrationStatus == RegistrationStatus.PENDING_PAYMENT}">
+        <g:if test="${registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH}">
           <g:message code="registration.pending"/>
           <img src="${createLinkTo(dir:'themes/wb/icon',file:'attention.png')}" alt="valid"/>
         </g:if>
-        <g:if test="${registration.registrationStatus == RegistrationStatus.PAYED}">
+        <g:if test="${registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED}">
           <g:message code="registration.payed"/>
           <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-green.png')}" alt="valid"/>
         </g:if>
@@ -41,7 +41,7 @@
     </tr>
 
 
-    <g:if test="${registration.registrationStatus == RegistrationStatus.REGISTERED || registration.registrationStatus == RegistrationStatus.PENDING_PAYMENT || registration.registrationStatus == RegistrationStatus.CANCELLED}">
+    <g:if test="${registration.registrationStatus == RegistrationStatus.REGISTERED || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH || registration.registrationStatus == RegistrationStatus.CANCELLED}">
     <tr class="content">
       <td class="contentLeft">
         <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
@@ -107,7 +107,7 @@
     </tr>
     </g:if>
 
-    <g:if test="${registration.registrationStatus == RegistrationStatus.PENDING_PAYMENT}">
+    <g:if test="${registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH}">
     <tr>
       <td colspan="2" class="paymentSection">
         <g:message code="course.payments"/>
