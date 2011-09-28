@@ -128,12 +128,12 @@ class StudentsGroupController {
       // Le ponemos nombre a su diploma
       certificate.fullName = "${student?.firstName} ${student?.lastName}"
       // Ponemos el nombre del curso
-      certificate.courseName = "${studentsGroup.scheduledCourse.course.name}"
+      certificate.courseName = "${scheduledCourse.course.name}"
       // Indicamos la duración del curso
       // TODO: Este debe venir del curso
       certificate.duration = "40"
       // Obtenemos la fecha de inicio
-      def startDate = studentsGroup.scheduledCourse.beginDate
+      def startDate = scheduledCourse.beginDate
       // Usamos un formateador para la primera parte de la fecha
       def locale = new Locale("es")
       def dateFormat = new SimpleDateFormat("dd 'de' MMMMM", locale)
@@ -142,7 +142,7 @@ class StudentsGroupController {
       // Cambiamos el formateador
       dateFormat = new SimpleDateFormat("'al' dd 'de' MMMMMM 'del' yyyy", locale)
       // Obtenemos la última sesion
-      def lastSession = (studentsGroup.scheduledCourse.courseSessions.max()).sessionStartTime
+      def lastSession = (scheduledCourse.courseSessions.max()).sessionStartTime
       // Concatenamos la fecha con el uso del formateador
       certificate.dateRange += "${dateFormat.format(lastSession)}"
       // Agregamos los instructores
@@ -173,7 +173,7 @@ class StudentsGroupController {
     certificate.fullName = "${registration.student.firstName} ${registration.student.lastName}"
     certificate.courseName = "${registration.scheduledCourse.course.name}"
     certificate.email = "${registration.student.email}"
-    certificate.duration = "40"
+    certificate.duration = "${registration.scheduledCourse.durationInHours}"
     def startDate = registration.scheduledCourse.beginDate
     // Usamos un formateador para la primera parte de la fecha
     def locale = new Locale("es")
