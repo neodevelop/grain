@@ -2,10 +2,7 @@
       En el portal de tu banco realiza tu pago por la cantidad
       que escogiste, a la siguiente cuenta.
     </div>
-    Nombre: <span class="data">José Juan Reyes Zuñiga</span><br/>
-    Banco: <span class="data">Banorte</span><br/>
-    CLABE: <span class="data">072 180 00514730161 2</span><br/>
-    Correo: <span class="data">cursos@synergyj.com</span><br/>
+    <content:body key="spei" language="es"/>
 
     <div id="confirmAmountSpei" class="confirmAmount">
       Cantidad a pagar: <span class="data">$ <span id="paymentAmountSpei"></span></span>
