@@ -72,16 +72,9 @@ class StudentsGroupController {
     def scheduledCourse = ScheduledCourse.get(params.id)
     // Obtenemos las sesiones del curso calendarizado
     def scheduledCourseSessions = scheduledCourse.courseSessions
-    // Preparamos los registrations a mandar a la vista
-    def registrations = []
     // Iteramos a los alumnos para ver si tienen esas sesiones
-    scheduledCourse.registrations.each { student ->
-      // Buscamos el registro del curso para un estudiante y curso calendarizado
-      def registration = Registration.findByStudentAndScheduledCourse(student, scheduledCourse)
-      // Si no tiene sesiones de curso entonces
-      if (!registration) {
-        scheduledCourse.removeFromRegistrations(student)
-      } else {
+    scheduledCourse.registrations.each { registration ->
+      if (registration.registrationStatus == RegistrationStatus.FINISHED || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED_IN_GROUP || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH_IN_GROUP) {
         if (!registration.courseSessions.size()) {
           // Iteramos las sesiones del curso calendarizado
           scheduledCourseSessions.each { scheduledCourseSession ->
@@ -94,10 +87,14 @@ class StudentsGroupController {
             registration.addToCourseSessions(courseSessionPerRegistration)
           }
         }
+      }else{
+        if(registration?.courseSessions?.size()){
+          // Borramos las sesiones de este registro para este curso
+          CourseSessionPerRegistration.executeUpdate("delete CourseSessionPerRegistration cpr where cpr.registration = :registration",[registration:registration])
+        }
       }
-      registrations << registration
     }
-    [studentsGroup: scheduledCourse.registrations, registrations: registrations]
+    [scheduledCourse: scheduledCourse]
   }
 
   def checkAttendance = {

@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="content">
-  <h3>${studentsGroup.keyStudentsGroup}</h3>
+  <h3>${scheduledCourse.course} / ${formatDate(date: scheduledCourse.beginDate, format: "dd - MMMM - yyyy")}</h3>
 
   <div class="list">
     <table cellpadding="5" cellspacing="0" border="0" width="100%">
@@ -18,7 +18,7 @@
           <th>
             <g:message code="login.username"/>
           </th>
-          <g:each in="${studentsGroup?.scheduledCourse?.courseSessions?.sort()}" var="courseSession">
+          <g:each in="${scheduledCourse?.courseSessions?.sort()}" var="courseSession">
           <th>
             ${courseSession}
           </th>
@@ -29,10 +29,11 @@
         </tr>
       </thead>
       <tbody>
-        <g:each in="${registrations}" var="registration">
+        <g:each in="${scheduledCourse.registrations}" var="registration">
+        <g:if test="${registration.registrationStatus == RegistrationStatus.FINISHED || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED_IN_GROUP || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH_IN_GROUP}">
         <tr>
           <td>${registration.student.email}<br/>${registration.student.firstName} ${registration.student.lastName} </td>
-          <g:each in="${registration?.courseSessions.sort()}" var="courseSession">
+          <g:each in="${registration?.courseSessions?.sort()}" var="courseSession">
           <td valign="middle">
             <g:remoteLink controller="studentsGroup" action="checkAttendance" id="${courseSession.id}" onSuccess="changeAttendanceStatus(data,${courseSession.id});">
             <g:if test="${courseSession.attended}">
@@ -63,12 +64,13 @@
             </g:remoteLink>
           </td>
         </tr>
+        </g:if>
         </g:each>
       </tbody>
     </table>
   </div>
   <br/>
-  <g:link controller="studentsGroup" action="createCertificate" id="${studentsGroup.id}" class="action">
+  <g:link controller="studentsGroup" action="createCertificate" id="${scheduledCourse.id}" class="action">
     Diplomas
   </g:link>
 

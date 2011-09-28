@@ -31,9 +31,9 @@ class ErrorController {
   }
 
   def internalError = {
-    def errorCode = request.'javax.servlet.error.status_code'
-    def exception = request.exception
-    flash.error = "${message(code:'error.internalError',args:[errorCode,exception.message])}"
+    def errorCode = request?.'javax.servlet.error.status_code'
+    def exception = request?.exception
+    flash.error = "${message(code:'error.internalError',args:[errorCode,exception?.message])}"
     redirect(uri:'/')
   }
 
