@@ -18,6 +18,7 @@ package com.synergyj.grain.course
 class ReceiptController {
 
   def registrationService
+  def dineroMailService
 
   def showImage = {
     def receipt = Receipt.get(params.id)
@@ -27,11 +28,7 @@ class ReceiptController {
     return;
   }
   def approve = {
-    def receipt = Receipt.get(params.id)
-    receipt.receiptStatus = ReceiptStatus.APROVED
-    receipt.payment.paymentStatus = PaymentStatus.PAYED
-    receipt.payment.paymentDate = new Date()
-    registrationService.checkIsPayed(receipt.payment.registration.id)
+    dineroMailService.verifyPayment(params.id)
     render """
       <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-green.png')}" width="24" height="24" />
     """
@@ -39,10 +36,8 @@ class ReceiptController {
 
   def approveDineroMail = {
     def payment = Payment.get(params.id)
-    //log.debug(payment.dump())
-    //payment.paymentStatus = PaymentStatus.PAYED
-    //payment.paymentDate = new Date()
-    //registrationService.checkIsPayed(payment.registration.id)
+    dineroMailService.verifyPayment(payment.transactionId)
+
     render """
       <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-green.png')}" width="24" height="24" />
     """
