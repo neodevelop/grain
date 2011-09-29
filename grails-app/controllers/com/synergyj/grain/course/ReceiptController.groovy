@@ -28,19 +28,35 @@ class ReceiptController {
     return;
   }
   def approve = {
-    dineroMailService.verifyPayment(params.id)
+    def receipt = Receipt.get(params.id)
+    receipt.receiptStatus = ReceiptStatus.APROVED
+    receipt.payment.paymentStatus = PaymentStatus.PAYED
+    receipt.payment.paymentDate = new Date()
+    registrationService.checkIsPayed(receipt.payment.registration.id)
     render """
-      <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-green.png')}" width="24" height="24" />
+      <img src="${createLinkTo(dir: 'themes/wb/icon', file: 'valid-green.png')}" width="24" height="24" />
     """
   }
 
   def approveDineroMail = {
-    def payment = Payment.get(params.id)
-    dineroMailService.verifyPayment(payment.transactionId)
+    try {
+      if (dineroMailService.verifyPayment(params.long('id'))) {
+        registrationService.checkIsPayed(params.long('registrationId'))
+        render """
+              <img src="${createLinkTo(dir: 'themes/wb/icon', file: 'remove.png')}" width="24" height="24" />
+            """
+      } else {
+        render """
+              <img src="${createLinkTo(dir: 'themes/wb/icon', file: 'remove-red.png')}" width="24" height="24" />
+            """
+      }
+    } catch (RuntimeException e) {
+      log.error(e.message)
+      render """
+            <img src="${createLinkTo(dir: 'themes/wb/icon', file: 'help.png')}" width="24" height="24" />
+          """
+    }
 
-    render """
-      <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-green.png')}" width="24" height="24" />
-    """
   }
 
   def delete = {

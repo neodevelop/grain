@@ -20,6 +20,8 @@ import groovyx.net.http.HTTPBuilder
 import static groovyx.net.http.ContentType.XML
 import static groovyx.net.http.Method.GET
 import com.synergyj.grain.course.Payment
+import java.text.SimpleDateFormat
+import com.synergyj.grain.course.PaymentStatus
 
 class DineroMailService {
 
@@ -29,14 +31,41 @@ class DineroMailService {
   static ipnPassword = '1234abcd.'
   static accountNumber = '580433'
   static timeoutDM = 1000 * 60 * 5
+  static messageCodes = [
+      '0': 'Código invalido',
+      '1': "Correcto",
+      '2': "XML mal formado",
+      '3': "Número de cuenta ${accountNumber} inválido",
+      '4': "Clave inválida ${ipnPassword}",
+      '5': "Tipo de consulta inválido",
+      '6': "ID de operación inválido",
+      '7': "Número d cuenta o clave inválido",
+      '8': "No se encontraron operaciones a reportar"
+  ]
+  static statusOperation = [
+      '0': 'FLAGGED',
+      '1': 'PENDING',
+      '2': 'PAID',
+      '3': 'CANCELLED'
+  ]
+  static paymentMethods = [
+      '1':'Fondos DineroMail',
+      '2':'Efectivo en Banco',
+      '3':'Tarjeta de crédito',
+      '4':'Transaferencia bancaria',
+      '5':'Efectivo en Oxxo y 7Eleven',
+      '0':'No categorizado'
+  ]
 
   def verifyPayment(Long paymentId) {
+    def isPayed = false
     // Obtenemos el pago que vamos a consultar
     def payment = Payment.get(paymentId)
     // Generamos el cuerpo de la petición con el id de TX
     def requestData = prepareXml(payment.transactionId)
     // Creamos un objeto HTTPBuilder con la url de DM - IPN
     def http = new HTTPBuilder(urlIPN)
+
     // Ejecutamos la petición con el documento
     http.request(GET, XML) { req ->
       req.getParams().setParameter("http.connection.timeout", new Integer(timeoutDM))
@@ -46,15 +75,15 @@ class DineroMailService {
 
       // Manejamos la respuesta satisfactoria
       response.success = {resp, data ->
-        result = handleResponse(resp, data)
+        isPayed = handleResponse(resp, data, payment)
       }
 
       // Manejamos la respuesta en errores
       response.failure = { resp ->
-        //result = "Unexpected error: ${resp.statusLine.statusCode} : ${resp.statusLine.reasonPhrase}"
-        //throw new RuntimeException(result)
+        throw new RuntimeException("Unexpected error: ${resp.statusLine.statusCode} : ${resp.statusLine.reasonPhrase}")
       }
     }
+    isPayed
   }
 
   def prepareXml(String txId) {
@@ -75,81 +104,54 @@ class DineroMailService {
     writer.toString()
   }
 
-  def handleResponse(resp, data) {
-    def result = ''
-    def transactionsResult = [:]
-    def response = verifyStatus(data.ESTADOREPORTE)
-    def status = response.status
-    if (status == '1') {
+  private def handleResponse(resp, data, Payment payment) {
+    def thisPaymentIsPayed = false
+    // Sacamos el estado del reporte
+    def statusReport = data.ESTADOREPORTE
+    // Obtenemos el mensaje según el código
+    def response = messageCodes."${statusReport ?: '0'}"
+    // Si el reporte es correcto
+    if (statusReport == '1') {
+      // Creamos la lista de operaciones realizadas para la TX's
+      def operationsForTransaction = []
+      // Iteramos las operaciones obtenidas de esta transacción
       data.DETALLE.OPERACIONES.OPERACION.each {operation ->
-        def idTx = operation.ID.text()
-        def statusOperacion = convertStatus(operation.ESTADO.text())
-        transactionsResult.put(idTx, statusOperacion)
+        def tx = new Expando()
+        // Obtenemos el ID de la TX
+        tx.id = operation.ID.text()
+        // Obtenemos el status
+        tx.statusOperation = statusOperation["${operation.ESTADO.text() ?: '0'}"]
+        // Obtenemos la fecha
+        def sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa")
+        tx.operationDate = sdf.parse(operation.FECHA.text())
+        // Obtenemos el monto
+        tx.amount = new BigDecimal(operation.MONTO.text())
+        // Obtenemos el monto total
+        tx.totalAmount = new BigDecimal(operation.MONTONETO.text())
+        // Obtenemos el método de pago
+        tx.paymentMethod = paymentMethods["${operation.METODOPAGO.text() ?: '0'}"]
+        operationsForTransaction << tx
       }
-      //Corroborar los pagos
-
+      // Buscamos si entre las operaciones existe el pago
+      def operationPayed = operationsForTransaction.find{ operation ->
+        operation.statusOperation == statusOperation['2']
+      }
+      // Si la operación esta pagada
+      if(operationPayed){
+        // Asignamos los valores del pago proveidos por DM a nuestro pago
+        payment.paymentDate = operationPayed.operationDate
+        payment.commission = operationPayed.amount - operationPayed.totalAmount
+        payment.paymentStatus = PaymentStatus.PAYED
+        payment.description += " / ${operationPayed.paymentMethod}"
+        thisPaymentIsPayed = true
+      }
     } else {
-      if ((status == '6' || status == '8')) {
-        result = "No operation Found with TransactionId: '${purchase.transactionReference}' in DineroMail. Deleted from the system."
-      } else {
-        result = response.message
-      }
+      //Si no es correcto entonces lanzamos la excepción
+      response += " / Trx ID: ${payment.transactionId}"
+      throw new RuntimeException(response)
     }
-    result
+    thisPaymentIsPayed
   }
 
-  def verifyStatus(status) {
-    def error = [:]
-    def message
-    switch (status) {
-      case '1':
-        message = 'Good¡'
-        break
-      case '2':
-        message = 'malformed xml'
-        break
-      case '3':
-        message = "Invalid account number, please verify the configuration for '${accountNumber}'"
-        break
-      case '4':
-        message = "invalid password, please verify the configuration for '${accountNumber}'"
-        break
-      case '5':
-        message = 'invalid query'
-        break
-      case '6':
-        message = 'invalid operation id'
-        break
-      case '7':
-        message = "invalid account number or invalid password, please verify the configuration for '${accountNumber}'"
-        break
-      case '8':
-        message = 'no operations found'
-        break
-      default:
-        message = 'unknow response'
-    }
-    error.status = status
-    error.message = message
-    error
-  }
-
-  def convertStatus(status) {
-    def result
-    switch (status) {
-      case '1':
-        result = PENDING
-        break
-      case '2':
-        result = PAID
-        break
-      case '3':
-        result = CANCELLED
-        break
-      default:
-        result = FLAGGED
-    }
-    result
-  }
 
 }

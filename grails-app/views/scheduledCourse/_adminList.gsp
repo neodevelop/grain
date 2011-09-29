@@ -82,7 +82,7 @@
                     </td>
                     <td>
                       <g:if test="${ payment.paymentStatus == PaymentStatus.PENDING  && payment.kindOfPayment == KindOfPayment.DINERO_MAIL }">
-                        <g:remoteLink update="approvePayment${payment.id}" controller="receipt" action="approveDineroMail" id="${payment.id}">
+                        <g:remoteLink update="approvePayment${payment.id}" controller="receipt" action="approveDineroMail" id="${payment.id}" params="[registrationId:it.id]">
                           <span id="approvePayment${payment.id}">
                             <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-blue.png')}" width="24" height="24" />
                           </span>
