@@ -11,7 +11,7 @@
     </tr>
     <tr class="content">
       <td class="contentLeft">
-        <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
+        <img src="${resource(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
         <g:message code="registration.date"/>:<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <g:formatDate date="${registration.dateCreated}" format="EEEE dd/MMMM/yyyy"/>
@@ -19,23 +19,23 @@
       <td class="contentRight">
         <g:if test="${registration.registrationStatus == RegistrationStatus.REGISTERED}">
           <g:message code="registration.registered"/>
-          <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-blue.png')}" alt="valid"/>
+          <img src="${resource(dir:'themes/wb/icon',file:'valid-blue.png')}" alt="valid"/>
         </g:if>
         <g:if test="${registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH}">
           <g:message code="registration.pending"/>
-          <img src="${createLinkTo(dir:'themes/wb/icon',file:'attention.png')}" alt="valid"/>
+          <img src="${resource(dir:'themes/wb/icon',file:'attention.png')}" alt="valid"/>
         </g:if>
         <g:if test="${registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED}">
           <g:message code="registration.payed"/>
-          <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-green.png')}" alt="valid"/>
+          <img src="${resource(dir:'themes/wb/icon',file:'valid-green.png')}" alt="valid"/>
         </g:if>
         <g:if test="${registration.registrationStatus == RegistrationStatus.CANCELLED}">
           <g:message code="registration.cancelled"/>
-          <img src="${createLinkTo(dir:'themes/wb/icon',file:'graphite.png')}" alt="valid"/>
+          <img src="${resource(dir:'themes/wb/icon',file:'graphite.png')}" alt="valid"/>
         </g:if>
         <g:if test="${registration.registrationStatus == RegistrationStatus.FINISHED}">
 
-          <img src="${createLinkTo(dir:'themes/wb/icon',file:'medal.png')}" alt="valid"/>
+          <img src="${resource(dir:'themes/wb/icon',file:'medal.png')}" alt="valid"/>
         </g:if>
       </td>
     </tr>
@@ -44,7 +44,7 @@
     <g:if test="${registration.registrationStatus == RegistrationStatus.REGISTERED || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH || registration.registrationStatus == RegistrationStatus.CANCELLED}">
     <tr class="content">
       <td class="contentLeft">
-        <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
+        <img src="${resource(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
         <g:message code="registration.beginDate"/>: <g:formatDate date="${registration.scheduledCourse.beginDate}" format="EEEE dd/MMMM/yyyy"/>
       </td>
       <td class="contentRight">
@@ -55,7 +55,7 @@
     <g:else>
     <tr class="content">
       <td class="contentLeft">
-        <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
+        <img src="${resource(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
         <g:message code="registration.sessions"/>
         <ul>
         <g:each in="${registration.scheduledCourse.courseSessions.sort()}" var="courseSession">
@@ -89,12 +89,12 @@
     <g:if test="${registration.registrationStatus == RegistrationStatus.REGISTERED}">
     <tr class="content">
       <td class="contentLeft">
-        <img src="${createLinkTo(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
+        <img src="${resource(dir:'themes/wb/images',file:'icon_calendar.png')}" alt="calendar" width="24px" height="24px"/>
         <g:message code="registration.limitDate"/>: <g:formatDate date="${registration.scheduledCourse.limitRegistrationDate}" format="EEEE dd/MMMM/yyyy"/>
       </td>
       <td class="contentRight money">
         <g:message code="registration.cost"/>: $ ${registration.scheduledCourse.costByCourse}
-        <img src="${createLinkTo(dir:'themes/wb/icon',file:'money.png')}" alt="money" width="32px" height="32px"/>
+        <img src="${resource(dir:'themes/wb/icon',file:'money.png')}" alt="money" width="32px" height="32px"/>
       </td>
     </tr>
 

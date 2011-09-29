@@ -29,15 +29,15 @@
             <td>
               <g:if test="${it.registrationStatus == RegistrationStatus.REGISTERED || it.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH}">
                 <g:remoteLink controller="registration" action="delete" id="${it.id}" onSuccess="removeRegistration(${it.id})">
-                  <img src="${createLinkTo(dir:'themes/wb/icon',file:'cancel.png')}" width="24" height="24" />
+                  <img src="${resource(dir:'themes/wb/icon',file:'cancel.png')}" width="24" height="24" />
                 </g:remoteLink>
                 <g:set var="registrationId" value="${it.id}"/>
                 <g:remoteLink controller="registration" action="cancel" id="${it.id}" update="cancelRegistration${it.id}">
                   <span id="cancelRegistration${registrationId}">
-                  <img src="${createLinkTo(dir:'themes/wb/icon',file:'graphite.png')}" width="24" height="24" />
+                  <img src="${resource(dir:'themes/wb/icon',file:'graphite.png')}" width="24" height="24" />
                   </span>
                 </g:remoteLink>
-                  <img src="${createLinkTo(dir:'themes/wb/icon',file:'edit-icon.png')}" width="24" height="24" />
+                  <img src="${resource(dir:'themes/wb/icon',file:'edit-icon.png')}" width="24" height="24" />
               </g:if>
               <g:else>
                 &nbsp;
@@ -73,7 +73,7 @@
                     <td>
                       <g:if test="${payment.paymentStatus == PaymentStatus.PENDING || payment.paymentStatus == PaymentStatus.WAITING || payment.paymentStatus == PaymentStatus.PAYED}">
                         <g:link controller="payment" action="edit" id="${payment.id}">
-                        <img src="${createLinkTo(dir:'themes/wb/icon',file:'edit-icon.png')}" width="24" height="24" />
+                        <img src="${resource(dir:'themes/wb/icon',file:'edit-icon.png')}" width="24" height="24" />
                         </g:link>
                       </g:if>
                       <g:else>
@@ -84,7 +84,7 @@
                       <g:if test="${ payment.paymentStatus == PaymentStatus.PENDING  && payment.kindOfPayment == KindOfPayment.DINERO_MAIL }">
                         <g:remoteLink update="approvePayment${payment.id}" controller="receipt" action="approveDineroMail" id="${payment.id}" params="[registrationId:it.id]">
                           <span id="approvePayment${payment.id}">
-                            <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-blue.png')}" width="24" height="24" />
+                            <img src="${resource(dir:'themes/wb/icon',file:'valid-blue.png')}" width="24" height="24" />
                           </span>
                         </g:remoteLink>
                       </g:if>
@@ -96,20 +96,20 @@
                               <td>${receipt.receiptStatus}</td>
                               <td>
                                 <g:link controller="receipt" action="showImage" id="${receipt.id}" class="seeReceipt">
-                                  <img src="${createLinkTo(dir:'themes/wb/icon',file:'search.png')}" width="24" height="24" />
+                                  <img src="${resource(dir:'themes/wb/icon',file:'search.png')}" width="24" height="24" />
                                 </g:link>
                               </td>
                               <g:if test="${receipt.receiptStatus == ReceiptStatus.RECEIVED}">
                                 <td>
                                   <g:remoteLink update="approveResult${receipt.id}" controller="receipt" action="approve" id="${receipt.id}">
                                     <span id="approveResult${receipt.id}">
-                                      <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-blue.png')}" width="24" height="24" />
+                                      <img src="${resource(dir:'themes/wb/icon',file:'valid-blue.png')}" width="24" height="24" />
                                     </span>
                                   </g:remoteLink>
                                 </td>
                                 <td>
                                   <g:remoteLink controller="receipt" action="delete" id="${receipt.id}" onSuccess="removeReceipt(${receipt.id})">
-                                    <img src="${createLinkTo(dir:'themes/wb/icon',file:'remove-red.png')}" width="24" height="24" />
+                                    <img src="${resource(dir:'themes/wb/icon',file:'remove-red.png')}" width="24" height="24" />
                                   </g:remoteLink>
                                 </td>
                               </g:if>
@@ -122,7 +122,7 @@
                       <g:else>
                         <g:if test="${payment?.kindOfPayment == KindOfPayment.SPEI}">
                           <g:link controller="payment" action="uploadReceipt" name="uploadReceipt${payment.id}">
-                            <img src="${createLinkTo(dir:'themes/wb/icon',file:'upload.png')}" width="24" height="24" />
+                            <img src="${resource(dir:'themes/wb/icon',file:'upload.png')}" width="24" height="24" />
                           </g:link>
                         </g:if>
                       </g:else>
@@ -134,7 +134,7 @@
             </g:if>
             <td>
               <g:if test="${it.invoice}">
-                <img src="${createLinkTo(dir:'themes/wb/icon',file:'invoice.png')}" width="24" height="24" />
+                <img src="${resource(dir:'themes/wb/icon',file:'invoice.png')}" width="24" height="24" />
               </g:if>
               <g:else>
                 &nbsp;

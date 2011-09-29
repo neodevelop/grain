@@ -84,7 +84,7 @@ class RegistrationController {
     def registration = Registration.get(params.id)
     registration.registrationStatus = RegistrationStatus.CANCELLED
     render """
-      <img src="${createLinkTo(dir:'themes/wb/icon',file:'purple.png')}" width="24" height="24" />
+      <img src="${resource(dir:'themes/wb/icon',file:'purple.png')}" width="24" height="24" />
     """
   }
 

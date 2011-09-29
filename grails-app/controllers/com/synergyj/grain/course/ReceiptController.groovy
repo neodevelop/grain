@@ -34,7 +34,7 @@ class ReceiptController {
     receipt.payment.paymentDate = new Date()
     registrationService.checkIsPayed(receipt.payment.registration.id)
     render """
-      <img src="${createLinkTo(dir: 'themes/wb/icon', file: 'valid-green.png')}" width="24" height="24" />
+      <img src="${resource(dir: 'themes/wb/icon', file: 'valid-green.png')}" width="24" height="24" />
     """
   }
 
@@ -43,17 +43,17 @@ class ReceiptController {
       if (dineroMailService.verifyPayment(params.long('id'))) {
         registrationService.checkIsPayed(params.long('registrationId'))
         render """
-              <img src="${createLinkTo(dir: 'themes/wb/icon', file: 'remove.png')}" width="24" height="24" />
+              <img src="${resource(dir: 'themes/wb/icon', file: 'remove.png')}" width="24" height="24" />
             """
       } else {
         render """
-              <img src="${createLinkTo(dir: 'themes/wb/icon', file: 'remove-red.png')}" width="24" height="24" />
+              <img src="${resource(dir: 'themes/wb/icon', file: 'remove-red.png')}" width="24" height="24" />
             """
       }
     } catch (RuntimeException e) {
       log.error(e.message)
       render """
-            <img src="${createLinkTo(dir: 'themes/wb/icon', file: 'help.png')}" width="24" height="24" />
+            <img src="${resource(dir: 'themes/wb/icon', file: 'help.png')}" width="24" height="24" />
           """
     }
 

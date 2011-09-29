@@ -3,8 +3,8 @@
   <title><g:message code='me.title' default="Me"/></title>
   <meta name='layout' content='wb'/>
   <parameter name="pageHeader" value="${g.message(code: 'me.title', default: 'This is me')}"/>
-  <script language="JavaScript" src="${createLinkTo(dir:'themes/wb/js/registration',file:'list.js')}"></script>
-  <script language="JavaScript" src="${createLinkTo(dir:'themes/wb/js/user',file:'me.js')}"></script>
+  <script language="JavaScript" src="${resource(dir:'themes/wb/js/registration',file:'list.js')}"></script>
+  <script language="JavaScript" src="${resource(dir:'themes/wb/js/user',file:'me.js')}"></script>
   <!-- Plugin de formulario -->
   <script src='https://github.com/malsup/form/raw/master/jquery.form.js' type='text/javascript'></script>
 </head>
@@ -115,7 +115,7 @@
       <input value="Subir archivo..." class="continue" tabindex="3" type="submit">
     </g:form>
     <div id="fileupload" style="display: none;">
-      <img src="${createLinkTo(dir:'themes/wb/images',file:'ajax-loader.gif')}" title="progress" alt="loader"/>
+      <img src="${resource(dir:'themes/wb/images',file:'ajax-loader.gif')}" title="progress" alt="loader"/>
     </div>
     <div id="okMessage" style="display:none;"></div>
     <div id="errorMessage" style="display:none;"></div>

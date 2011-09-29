@@ -3,7 +3,7 @@
   <title><g:message code='payment.info' default="Payment info"/></title>
   <meta name='layout' content='wb'/>
   <parameter name="pageHeader" value="${g.message(code: 'payment.info', default: 'Payment info')}"/>
-  <script type="text/javascript" src="${createLinkTo(dir:'themes/wb/js/payment',file:'index.js')}"></script>
+  <script type="text/javascript" src="${resource(dir:'themes/wb/js/payment',file:'index.js')}"></script>
   <link rel="stylesheet" type="text/css" href="http://craigsworks.com/projects/qtip2/packages/latest/jquery.qtip.css" />
   <script type="text/javascript" src="http://craigsworks.com/projects/qtip2/packages/latest/jquery.qtip.js"></script>
   <script type="text/javascript" src="http://flesler-plugins.googlecode.com/files/jquery.scrollTo-1.4.2-min.js"></script>
@@ -38,11 +38,11 @@
     <div class="paymentOption groupOption2">
       <g:radio id="dineromail" value="dineromail" name="paymentOption"/>
       Otros medios de pago<br/>
-      <img src="${createLinkTo(dir:'themes/wb/icon',file:'visa-icon.gif')}" title="visa" alt="visa"/>
-      <img src="${createLinkTo(dir:'themes/wb/icon',file:'mastercard-icon.gif')}" title="mastercard" alt="mastercard"/>
-      <img src="${createLinkTo(dir:'themes/wb/icon',file:'amex-icon.png')}" title="amex" alt="amex"/>
-      <img src="${createLinkTo(dir:'themes/wb/icon',file:'7-eleven-icon.png')}" title="7eleven" alt="7eleven"/>
-      <img src="${createLinkTo(dir:'themes/wb/icon',file:'oxxo-icon.gif')}" title="oxxo" alt="oxxo"/>
+      <img src="${resource(dir:'themes/wb/icon',file:'visa-icon.gif')}" title="visa" alt="visa"/>
+      <img src="${resource(dir:'themes/wb/icon',file:'mastercard-icon.gif')}" title="mastercard" alt="mastercard"/>
+      <img src="${resource(dir:'themes/wb/icon',file:'amex-icon.png')}" title="amex" alt="amex"/>
+      <img src="${resource(dir:'themes/wb/icon',file:'7-eleven-icon.png')}" title="7eleven" alt="7eleven"/>
+      <img src="${resource(dir:'themes/wb/icon',file:'oxxo-icon.gif')}" title="oxxo" alt="oxxo"/>
     </div>
 
   </div>

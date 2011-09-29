@@ -219,7 +219,7 @@ class PaymentController {
         params.invoice)
 
     render """
-      <img src="${createLinkTo(dir:'themes/wb/icon',file:'valid-green.png')}" width="24" height="24" />
+      <img src="${resource(dir:'themes/wb/icon',file:'valid-green.png')}" width="24" height="24" />
     """
   }
 

@@ -50,9 +50,9 @@
 <body>
 <g:if test="${scheduledCourse}">
   <div id="floatingMessage">
-    <img src="<g:createLinkTo dir='themes/wb/images' file='icon_student.png'/>" alt="course" title="course"/>
+    <img src="<g:resource dir='themes/wb/images' file='icon_student.png'/>" alt="course" title="course"/>
     <i>Curso:</i> <b>${scheduledCourse.course.name}</b><br/>
-    <img src="<g:createLinkTo dir='themes/wb/images' file='icon_calendar.png'/>" alt="course" title="course"/>
+    <img src="<g:resource dir='themes/wb/images' file='icon_calendar.png'/>" alt="course" title="course"/>
     <i>Inicia:</i> <b><g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd 'de' MMMM 'del' yyyy"/></b>
   </div>
 </g:if>

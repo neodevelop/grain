@@ -3,7 +3,7 @@
   <title><g:message code='payment.do' default="Making payment"/></title>
   <meta name='layout' content='wb'/>
   <parameter name="pageHeader" value="${g.message(code: 'payment.do', default: 'Making payment')}"/>
-  <script type="text/javascript" src="${createLinkTo(dir:'themes/wb/js/payment',file:'do.js')}"></script>
+  <script type="text/javascript" src="${resource(dir:'themes/wb/js/payment',file:'do.js')}"></script>
   <script language="javascript">
     <g:if test="${!user?.firstName || !user?.lastName }">
       $(function(){
@@ -42,7 +42,7 @@
 </head>
 <body>
 <div id="progress" align="center" style="height:250px;">
-  <img src="${createLinkTo(dir:'themes/wb/images',file:'ajax-loader.gif')}" title="progress" alt="loader"/>
+  <img src="${resource(dir:'themes/wb/images',file:'ajax-loader.gif')}" title="progress" alt="loader"/>
   <div id="waitMessage" align="center" style="display:none;">
     Espera un momento por favor...
   </div>

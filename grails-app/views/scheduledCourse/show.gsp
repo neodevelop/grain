@@ -6,7 +6,7 @@
   <parameter name="pageHeader" value="${g.message(code: 'scheduledCourse.show', default: 'Scheduled Course Info')}"/>
   <script type="text/javascript" src="https://raw.github.com/fgelinas/timepicker/master/jquery.ui.timepicker.js"></script>
   <link rel="stylesheet" href="https://raw.github.com/fgelinas/timepicker/master/jquery-ui-timepicker.css"/>
-  <script language="javascript" src="${createLinkTo(dir:'themes/wb/js/scheduledCourse',file:'show.js')}">
+  <script language="javascript" src="${resource(dir:'themes/wb/js/scheduledCourse',file:'show.js')}">
   </script>
 
 </head>

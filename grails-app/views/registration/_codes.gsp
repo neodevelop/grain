@@ -14,13 +14,13 @@
       </tr>
       <tr class="content">
         <td class="contentLeft">
-          <img src="${createLinkTo(dir: 'themes/wb/images', file: 'icon_calendar.png')}" alt="calendar" width="24px"
+          <img src="${resource(dir: 'themes/wb/images', file: 'icon_calendar.png')}" alt="calendar" width="24px"
                height="24px"/>
           <g:message code="registration.beginDate"/><br/>
           <b><g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd/MMMM/yyyy"/></b>
         </td>
         <td class="contentRight">
-          <img src="${createLinkTo(dir: 'themes/wb/icon', file: 'attention.png')}" alt="valid"/>
+          <img src="${resource(dir: 'themes/wb/icon', file: 'attention.png')}" alt="valid"/>
         </td>
       </tr>
       <tr>

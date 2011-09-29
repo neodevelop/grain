@@ -5,11 +5,11 @@
 A través de este medio podrás pagar con cualquiera de las siguientes opciones:
 
 <div id="medios">
-  <img src="${createLinkTo(dir:'themes/wb/icon',file:'visa-icon.gif')}" title="visa" alt="visa"/>
-  <img src="${createLinkTo(dir:'themes/wb/icon',file:'mastercard-icon.gif')}" title="mastercard" alt="mastercard"/>
-  <img src="${createLinkTo(dir:'themes/wb/icon',file:'amex-icon.png')}" title="amex" alt="amex"/>
-  <img src="${createLinkTo(dir:'themes/wb/icon',file:'7-eleven-icon.png')}" title="7eleven" alt="7eleven"/>
-  <img src="${createLinkTo(dir:'themes/wb/icon',file:'oxxo-icon.gif')}" title="oxxo" alt="oxxo"/>
+  <img src="${resource(dir:'themes/wb/icon',file:'visa-icon.gif')}" title="visa" alt="visa"/>
+  <img src="${resource(dir:'themes/wb/icon',file:'mastercard-icon.gif')}" title="mastercard" alt="mastercard"/>
+  <img src="${resource(dir:'themes/wb/icon',file:'amex-icon.png')}" title="amex" alt="amex"/>
+  <img src="${resource(dir:'themes/wb/icon',file:'7-eleven-icon.png')}" title="7eleven" alt="7eleven"/>
+  <img src="${resource(dir:'themes/wb/icon',file:'oxxo-icon.gif')}" title="oxxo" alt="oxxo"/>
 </div>
 
 <div id="confirmAmountDM" class="confirmAmount">

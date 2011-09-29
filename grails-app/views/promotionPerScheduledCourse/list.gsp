@@ -6,7 +6,7 @@
   <meta name="layout" content="wb" />
   <title><g:message code="promotionPerScheduledCourse.list" default="PromotionPerScheduledCourse List" /></title>
   <parameter name="pageHeader" value="${g.message(code: 'promotionPerScheduledCourse.create', default: 'Promo to ScheduledCourse List')}"/>
-  <script type="text/javascript" language="javascript" src="${createLinkTo(dir:'js',file:'tables.js')}"></script>
+  <script type="text/javascript" language="javascript" src="${resource(dir:'js',file:'tables.js')}"></script>
   <script language="javascript">
     $(function(){
       $("div.list table").styleTable();
@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="nav">
-  <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
+  <span class="menuButton"><a class="home" href="${resource(dir: '')}"><g:message code="home" default="Home" /></a></span>
   <span class="menuButton"><g:link class="create" action="create"><g:message code="promotionPerScheduledCourse.new" default="New PromotionPerScheduledCourse" /></g:link></span>
 </div>
 <br/>

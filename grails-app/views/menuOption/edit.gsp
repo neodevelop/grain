@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="nav">
-  <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home"/></a></span>
+  <span class="menuButton"><a class="home" href="${resource(dir: '')}"><g:message code="home" default="Home"/></a></span>
   <span class="menuButton"><g:link class="list" action="list"><g:message code="menuOption.list" default="MenuOption List"/></g:link></span>
   <span class="menuButton"><g:link class="create" action="create"><g:message code="menuOption.new" default="New MenuOption"/></g:link></span>
 </div>

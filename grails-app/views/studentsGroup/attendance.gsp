@@ -4,8 +4,8 @@
   <meta name="layout" content="wb" />
   <title><g:message code="studentsGroup.attendance" default="Attendance" /></title>
   <parameter name="pageHeader" value="${g.message(code: 'studentsGroup.attendance', default: 'Attendance')}"/>
-  <script language="JavaScript" src="${createLinkTo(dir:'themes/wb/js/studentsGroup',file:'attendance.js')}"></script>
-  <script type="text/javascript" language="javascript" src="${createLinkTo(dir:'js',file:'tables.js')}"></script>
+  <script language="JavaScript" src="${resource(dir:'themes/wb/js/studentsGroup',file:'attendance.js')}"></script>
+  <script type="text/javascript" language="javascript" src="${resource(dir:'js',file:'tables.js')}"></script>
 </head>
 <body>
 <div class="content">
@@ -38,12 +38,12 @@
             <g:remoteLink controller="studentsGroup" action="checkAttendance" id="${courseSession.id}" onSuccess="changeAttendanceStatus(data,${courseSession.id});">
             <g:if test="${courseSession.attended}">
               <span id="sessionPerRegistration${courseSession.id}">
-              <img src="${createLinkTo(dir:'themes/wb/icon',file:'green.png')}" width="24" height="24" title="attended${courseSession.id}" alt="attended${courseSession.id}"/>
+              <img src="${resource(dir:'themes/wb/icon',file:'green.png')}" width="24" height="24" title="attended${courseSession.id}" alt="attended${courseSession.id}"/>
               </span>
             </g:if>
             <g:else>
               <span id="sessionPerRegistration${courseSession.id}">
-              <img src="${createLinkTo(dir:'themes/wb/icon',file:'red.png')}" width="24" height="24" title="attended${courseSession.id}" alt="attended${courseSession.id}"/>
+              <img src="${resource(dir:'themes/wb/icon',file:'red.png')}" width="24" height="24" title="attended${courseSession.id}" alt="attended${courseSession.id}"/>
               </span>
             </g:else>
             ${courseSession.courseSession}
@@ -54,10 +54,10 @@
             <g:remoteLink controller="registration" action="toggleFinished" id="${registration.id}" onSuccess="changeRegistrationStatus(data,${registration.id});">
             <span id="registration${registration.id}">
             <g:if test="${!(registration.registrationStatus == RegistrationStatus.FINISHED)}">
-              <img src="${createLinkTo(dir:'themes/wb/icon',file:'shuffle-off.png')}" width="24" height="24"/>
+              <img src="${resource(dir:'themes/wb/icon',file:'shuffle-off.png')}" width="24" height="24"/>
             </g:if>
             <g:else>
-              <img src="${createLinkTo(dir:'themes/wb/icon',file:'shuffle-on.png')}" width="24" height="24"/>
+              <img src="${resource(dir:'themes/wb/icon',file:'shuffle-on.png')}" width="24" height="24"/>
             </g:else>
             </span>
             <g:message code="registration.generateCertificate" default="Generate"/>

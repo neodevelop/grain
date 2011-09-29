@@ -6,16 +6,16 @@
 
 <!-- CSS Sheet  -->
 
-<link rel="stylesheet" href="${createLinkTo(dir: 'themes/wb/css', file: 'style.css')}"/>
+<link rel="stylesheet" href="${resource(dir: 'themes/wb/css', file: 'style.css')}"/>
 
 <!-- Lava Lamp Navigation  -->
-<link rel="stylesheet" href="${createLinkTo(dir: 'themes/wb/css', file: 'lavalamp.css')}"/>
+<link rel="stylesheet" href="${resource(dir: 'themes/wb/css', file: 'lavalamp.css')}"/>
 
 <!-- Hoja de estilo para el WYSIWYG  -->
 <link rel="stylesheet" type="text/css" href="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.css"/>
 
-<script type="text/javascript" src="${createLinkTo(dir: 'themes/wb/js', file: 'jquery.easing.compatibility.js')}"></script>
-<script type="text/javascript" src="${createLinkTo(dir: 'themes/wb/js', file: 'jquery.lavalamp.min.js')}"></script>
+<script type="text/javascript" src="${resource(dir: 'themes/wb/js', file: 'jquery.easing.compatibility.js')}"></script>
+<script type="text/javascript" src="${resource(dir: 'themes/wb/js', file: 'jquery.lavalamp.min.js')}"></script>
 <script type="text/javascript">
   $(function() {
     $("#1, #2, #3").lavaLamp({
@@ -29,7 +29,7 @@
 </script>
 
 <!-- Sliding Gallery Navigation  -->
-<script type="text/javascript" src="${createLinkTo(dir: 'themes/wb/js', file: 'easySlider1.5.js')}"></script>
+<script type="text/javascript" src="${resource(dir: 'themes/wb/js', file: 'easySlider1.5.js')}"></script>
 <script type="text/javascript">
   $(document).ready(function() {
     $("#slider").easySlider({

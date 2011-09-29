@@ -6,7 +6,7 @@
   <meta name="layout" content="wb" />
   <title><g:message code="scheduledCourse.list" default="Scheduled Course List" /></title>
   <parameter name="pageHeader" value="${g.message(code: 'scheduledCourse.list', default: 'Scheduled Course List')}"/>
-  <script type="text/javascript" language="javascript" src="${createLinkTo(dir:'js',file:'tables.js')}"></script>
+  <script type="text/javascript" language="javascript" src="${resource(dir:'js',file:'tables.js')}"></script>
   <script language="javascript">
     $(function(){
       $("div.list table").styleTable();
