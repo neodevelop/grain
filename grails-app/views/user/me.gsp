@@ -6,7 +6,7 @@
   <script language="JavaScript" src="${resource(dir:'themes/wb/js/registration',file:'list.js')}"></script>
   <script language="JavaScript" src="${resource(dir:'themes/wb/js/user',file:'me.js')}"></script>
   <!-- Plugin de formulario -->
-  <script src='https://github.com/malsup/form/raw/master/jquery.form.js' type='text/javascript'></script>
+  <script src='http://synergyj.com/resources/jquery.form.js' type='text/javascript'></script>
 </head>
 <body>
 <div id="left">
