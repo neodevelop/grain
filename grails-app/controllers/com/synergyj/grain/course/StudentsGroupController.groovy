@@ -41,11 +41,11 @@ class StudentsGroupController {
     }
     // Obtenemos los usuarios que SI están en el grupo
     def registrationsInGroup = registrations.findAll { registration ->
-      registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED_IN_GROUP || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH_IN_GROUP
+      registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED_IN_GROUP || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH_IN_GROUP || registration.registrationStatus == RegistrationStatus.FINISHED
     }
     // Obtenemos los registros que NO están en un grupo
     def registrationsNoGroup = registrations.findAll { registration ->
-      registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH  || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED
+      registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH  || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED || registration.registrationStatus == RegistrationStatus.CANCELLED
     }
 
     [scheduledCourse: scheduledCourse, registrationsInGroup: registrationsInGroup, registrationsNoGroup: registrationsNoGroup]

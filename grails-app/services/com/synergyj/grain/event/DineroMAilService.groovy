@@ -28,8 +28,8 @@ class DineroMailService {
   static transactional = true
 
   static urlIPN = 'https://mexico.dineromail.com/Vender/Consulta_IPN.asp'
-  static ipnPassword = '1234abcd.'
-  static accountNumber = '580433'
+  static ipnPassword = ''
+  static accountNumber = ''
   static timeoutDM = 1000 * 60 * 5
   static messageCodes = [
       '0': 'Código invalido',
