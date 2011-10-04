@@ -53,7 +53,7 @@ class ScheduledCourseController {
         def criteria = Registration.createCriteria()
         def pendingPaymentRegistrations = criteria.count {
           eq 'scheduledCourse', scheduledCourse
-          eq 'registrationStatus', RegistrationStatus.INSCRIBED_AND_WITH_DEBTH
+          eq 'registrationStatus', RegistrationStatus.INSCRIBED_AND_WITH_DEBTH_IN_GROUP
         }
         if(pendingPaymentRegistrations)
           hasPendingPayments."sc${scheduledCourse.id}" = pendingPaymentRegistrations
