@@ -104,10 +104,11 @@ log4j = {
   }
 
   debug 'grails.app.controllers.com.synergyj',
-        'grails.app.taglib.com.synergyj',
-        'grails.app.services.com.synergyj',
-        'grails.app.domain.com.synergyj',
-        'grails.app.conf'
+      'grails.app.taglib.com.synergyj',
+      'grails.app.services.com.synergyj',
+      'grails.app.domain.com.synergyj',
+      'grails.app.conf',
+      'grails.app.jobs.com.synergyj.grain'
 
   warn 'org.codehaus.groovy.grails.web.servlet',  //  controllers
       'org.codehaus.groovy.grails.web.pages', //  GSP
@@ -130,7 +131,7 @@ log4j = {
       'net.sf.ehcache.hibernate',
       'org.grails.tomcat'
 
-  error 'net.sf.ehcache','net.sf.ehcache.hibernate', 'org.hibernate'
+  error 'net.sf.ehcache', 'net.sf.ehcache.hibernate', 'org.hibernate'
 
   environments {
     production {

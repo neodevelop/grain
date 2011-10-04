@@ -23,6 +23,7 @@ import com.synergyj.grain.course.Payment
 import com.synergyj.grain.course.PaymentStatus
 import java.text.SimpleDateFormat
 import grails.util.Environment
+import com.synergyj.grain.course.RegistrationStatus
 
 class ScheduledCourseJob {
 
@@ -37,11 +38,16 @@ class ScheduledCourseJob {
   def execute(){
     def scheduledCourses = ScheduledCourse.findAllByScheduledCourseStatus(ScheduledCourseStatus.SCHEDULED)
     def message = ""
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm")
     scheduledCourses.each{ scheduledCourse ->
       // Obtenemos los registros de las personas que han ingresado su correo en la Landing desde que se abrió el curso
       def registrationsCodesForScheduledCourse = RegistrationCodeForScheduledCourse.findAllByScheduledCourseId(scheduledCourse.id)
       // Obtenemos los que han confirmado su registro al curso
       def registrations = Registration.findAllByScheduledCourse(scheduledCourse)
+      // Obtenemos los registros que ya están en la lista  de asistencia
+      def inGroupRegistrations = registrations.findAll { registration ->
+        registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED_IN_GROUP || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH_IN_GROUP || registration.registrationStatus == RegistrationStatus.FINISHED
+      }
       // Obtenemos los inscritos desde hace un día
       def registrationsFromToday = registrations.findAll{ registration ->
         registration.dateCreated >= new Date() - 1
@@ -56,15 +62,11 @@ class ScheduledCourseJob {
       def  payedPayments = payments.findAll{ payment ->
         payment.paymentStatus == PaymentStatus.PAYED
       }
-
-
-      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm")
-
       message += """
       Del curso ${scheduledCourse.course.name} que comienza el ${dateFormat.format(scheduledCourse.beginDate)}
-      Se han registrado en la Landing ${registrationsCodesForScheduledCourse.size()} personas en total
+      Se han registrado en la Landing Page ${registrationsCodesForScheduledCourse.size()} personas en total
       Han confirmado su registro ${registrations.size()} personas
-      Asitirán ${scheduledCourse?.studentsGroup?.registrations?.size() ?: 0} personas
+      Asitirán ${inGroupRegistrations.size() ?: 0} personas
       El numero de personas registradas hace 24 horas es: ${registrationsFromToday.size()}
       Existen generados ${payments.size()} pagos de los cuales,
       hay ${waitingAndPendingPayments.size()} pagos en espera o pendientes,
