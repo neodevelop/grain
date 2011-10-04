@@ -3,7 +3,7 @@
     <meta name="layout" content="wb" />
     <title><g:message code="registration.confirm" default="Confirm registration" /></title>
     <parameter name="pageHeader" value="${g.message(code: 'course.info', default: 'Confirm Info')}"/>
-    <script type="text/javascript" src="https://raw.github.com/malsup/form/master/jquery.form.js"></script>
+    <script type="text/javascript" src="http://synergyj.com/resources/jquery.form.js"></script>
     <script language="javascript">
       $(function(){
         $("form#auth").ajaxForm({
