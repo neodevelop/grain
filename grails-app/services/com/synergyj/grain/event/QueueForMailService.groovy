@@ -83,18 +83,22 @@ class QueueForMailService {
 
           log.debug("${Environment.current} - ${out}")
         } catch (Exception e) {
-          log.debug e.message
+          log.error e.message
         }
         break
       case Environment.TEST:
         log.debug("${Environment.current} - ${message}")
         break
       case Environment.PRODUCTION:
-        mailService.sendMail {
-          to message.to
-          from message.from
-          subject message.subject
-          body(view: message.view, model: message.model)
+        try {
+          mailService.sendMail {
+            to message.to
+            from message.from
+            subject message.subject
+            body(view: message.view, model: message.model)
+          }
+        } catch (Exception e) {
+          log.error e.message
         }
         break
     }
