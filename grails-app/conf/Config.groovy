@@ -108,7 +108,8 @@ log4j = {
       'grails.app.services.com.synergyj',
       'grails.app.domain.com.synergyj',
       'grails.app.conf',
-      'grails.app.jobs.com.synergyj.grain'
+      'grails.app.jobs.com.synergyj.grain',
+      'groovyx'
 
   warn 'org.codehaus.groovy.grails.web.servlet',  //  controllers
       'org.codehaus.groovy.grails.web.pages', //  GSP
@@ -139,7 +140,8 @@ log4j = {
       error "grails",
           "org",
           "net",
-          "com"
+          "com",
+          "groovyx"
     }
   }
 

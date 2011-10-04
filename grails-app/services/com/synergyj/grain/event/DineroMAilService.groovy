@@ -49,18 +49,26 @@ class DineroMailService {
       '3': 'CANCELLED'
   ]
   static paymentMethods = [
-      '1':'Fondos DineroMail',
-      '2':'Efectivo en Banco',
-      '3':'Tarjeta de crédito',
-      '4':'Transaferencia bancaria',
-      '5':'Efectivo en Oxxo y 7Eleven',
-      '0':'No categorizado'
+      '1': 'Fondos DineroMail',
+      '2': 'Efectivo en Banco',
+      '3': 'Tarjeta de crédito',
+      '4': 'Transaferencia bancaria',
+      '5': 'Efectivo en Oxxo y 7Eleven',
+      '0': 'No categorizado'
   ]
 
-  def verifyPayment(Long paymentId) {
+  def verifyPayment(Long paymentId = 0L, String txId = '0') {
     def isPayed = false
-    // Obtenemos el pago que vamos a consultar
-    def payment = Payment.get(paymentId)
+    // Si traemos un ID en el payment ID
+    def payment
+    if (paymentId) {
+      // Obtenemos el pago que vamos a consultar por su id de BD
+      payment = Payment.get(paymentId)
+    } else {
+      // Obtenemos el pago que vamos a consultar por su id de TX
+      payment = Payment.findByTransactionId(txId)
+    }
+
     // Generamos el cuerpo de la petición con el id de TX
     def requestData = prepareXml(payment.transactionId)
     // Creamos un objeto HTTPBuilder con la url de DM - IPN
@@ -133,11 +141,11 @@ class DineroMailService {
         operationsForTransaction << tx
       }
       // Buscamos si entre las operaciones existe el pago
-      def operationPayed = operationsForTransaction.find{ operation ->
+      def operationPayed = operationsForTransaction.find { operation ->
         operation.statusOperation == statusOperation['2']
       }
       // Si la operación esta pagada
-      if(operationPayed){
+      if (operationPayed) {
         // Asignamos los valores del pago proveidos por DM a nuestro pago
         payment.paymentDate = operationPayed.operationDate
         payment.commission = operationPayed.amount - operationPayed.totalAmount

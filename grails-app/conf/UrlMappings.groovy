@@ -82,6 +82,9 @@ class UrlMappings {
     name addMeFromLandingNoPost: "/addMeFromLandingNoPost"(controller:"landing"){
       action = [GET:"addMeNoPost"]
     }
+    name ipn:"/ipn"(controller:"IPN"){
+
+    }
     "403"(controller: 'error',action: 'forbidden')
     "404"(controller: 'error',action: 'notfound')
     "500"(controller: 'error',action: 'internalError')
