@@ -35,6 +35,7 @@ grails.project.dependency.resolution = {
     runtime 'org.grails.plugins:rabbitmq:0.3.2'
     runtime 'org.grails.plugins:quartz:0.4.2'
     runtime ':grails-melody:1.7'
+    runtime ':amazon-s3:0.8.2'
     //runtime 'org.grails.plugins:jquery-validation:1.7'
     //runtime 'org.grails.plugins:jquery-validation-ui:1.1'
     //runtime 'org.grails.plugins:constraints:0.5.1'

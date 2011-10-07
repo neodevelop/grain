@@ -25,16 +25,22 @@ import com.synergyj.grain.auth.PersonAuthority
 import com.synergyj.grain.course.Course
 import com.synergyj.grain.course.CourseType
 import com.synergyj.grain.course.Status
+import com.synergyj.grain.course.ReceiptStatus
+import com.synergyj.grain.course.ReceiptAWS
+import com.synergyj.grain.course.Receipt
 import grails.util.GrailsUtil
 import com.synergyj.grain.course.ScheduledCourse
 import com.synergyj.grain.course.ScheduledCourseStatus
 import grails.converters.JSON
 import com.synergyj.grain.course.CourseSession
+import org.grails.s3.S3Asset
+import org.grails.s3.S3AssetService
 
 class BootStrap {
   
   def springSecurityService
   def courseSessionService
+  def s3AssetService
   
   def save(domain) {
     assert domain
@@ -58,6 +64,25 @@ class BootStrap {
 
     JSON.registerObjectMarshaller(Date) {
       return it?.format("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    }
+    
+    if(!ReceiptAWS.count()){
+      def receipts = Receipt.list(fetch:[payment:'eager'])
+
+      receipts.each{ receipt ->
+          def tmp = s3AssetService.getNewTmpLocalFile("image/jpeg")
+          def file = new File("file.jpg")
+          file.bytes = receipt.image
+          tmp.bytes = file.bytes
+          def receiptAWS = new ReceiptAWS()
+          receiptAWS.newFile(tmp)
+          receiptAWS.title = "Receipt for ${receipt.payment.transactionId}"
+          receiptAWS.description = "Receipt for ${receipt.payment.amount}"
+          receiptAWS.mimeType = "image/jpeg"
+          receiptAWS.payment = receipt.payment
+          receiptAWS.receiptStatus = ReceiptStatus.RECEIVED
+          s3AssetService.put(receiptAWS)
+      }
     }
 
     if(!Role.count()){
