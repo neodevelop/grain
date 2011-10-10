@@ -65,23 +65,29 @@ class BootStrap {
     JSON.registerObjectMarshaller(Date) {
       return it?.format("yyyy-MM-dd'T'HH:mm:ss'Z'")
     }
-    
-    if(!ReceiptAWS.count()){
-      def receipts = Receipt.list(fetch:[payment:'eager'])
 
-      receipts.each{ receipt ->
-          def tmp = s3AssetService.getNewTmpLocalFile("image/jpeg")
-          def file = new File("file.jpg")
-          file.bytes = receipt.image
-          tmp.bytes = file.bytes
-          def receiptAWS = new ReceiptAWS()
-          receiptAWS.newFile(tmp)
-          receiptAWS.title = "Receipt for ${receipt.payment.transactionId}"
-          receiptAWS.description = "Receipt for ${receipt.payment.amount}"
-          receiptAWS.mimeType = "image/jpeg"
-          receiptAWS.payment = receipt.payment
-          receiptAWS.receiptStatus = ReceiptStatus.RECEIVED
-          s3AssetService.put(receiptAWS)
+    // Para migración esto ocurre una vez, la primera vez
+    if (!ReceiptAWS.count()) {
+      // Obtenemos la lista de receipts de Payment
+      def receipts = Receipt.list(fetch: [payment: 'eager'])
+      // Iteramos los receipts
+      receipts.each { receipt ->
+        //  Usamos el servicio de S3Asset para crear el archivo
+        def tmp = s3AssetService.getNewTmpLocalFile("image/jpeg")
+        // Le asignamos los bytes de la BD
+        tmp.bytes = receipt.image
+        // Creamos la entidad persistente de AWS
+        def receiptAWS = new ReceiptAWS()
+        // Usamos el método del objeto con el archivo
+        receiptAWS.newFile(tmp)
+        // Establecemos sus propiedades
+        receiptAWS.title = "Receipt for ${receipt.payment.transactionId}"
+        receiptAWS.description = "Receipt for ${receipt.payment.amount}"
+        receiptAWS.mimeType = "image/jpeg"
+        receiptAWS.receiptStatus = receipt.receiptStatus
+        // Creamos la relación
+        receiptAWS.payment = receipt.payment
+        s3AssetService.put(receiptAWS)
       }
     }
 
