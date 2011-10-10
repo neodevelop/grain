@@ -22,7 +22,7 @@ class ReceiptController {
   def s3AssetService
 
   def approve = {
-    def receipt = Receipt.get(params.id)
+    def receipt = ReceiptAWS.get(params.id)
     receipt.receiptStatus = ReceiptStatus.APROVED
     receipt.payment.paymentStatus = PaymentStatus.PAYED
     receipt.payment.paymentDate = new Date()
