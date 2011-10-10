@@ -107,7 +107,7 @@
     </tr>
     </g:if>
 
-    <g:if test="${registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH}">
+    <g:if test="${registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH_IN_GROUP}">
     <tr>
       <td colspan="2" class="paymentSection">
         <g:message code="course.payments"/>
