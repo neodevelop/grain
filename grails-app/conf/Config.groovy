@@ -217,4 +217,7 @@ aws {
   secretKey=""
   bucketName="media.grain.com"
   prefixBucketWithKey=false
+  lazyInit=true
+  startDelay=60000
+  timeout=60000
 }

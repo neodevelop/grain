@@ -25,16 +25,13 @@ import com.synergyj.grain.auth.PersonAuthority
 import com.synergyj.grain.course.Course
 import com.synergyj.grain.course.CourseType
 import com.synergyj.grain.course.Status
-import com.synergyj.grain.course.ReceiptStatus
 import com.synergyj.grain.course.ReceiptAWS
 import com.synergyj.grain.course.Receipt
 import grails.util.GrailsUtil
 import com.synergyj.grain.course.ScheduledCourse
 import com.synergyj.grain.course.ScheduledCourseStatus
 import grails.converters.JSON
-import com.synergyj.grain.course.CourseSession
-import org.grails.s3.S3Asset
-import org.grails.s3.S3AssetService
+
 
 class BootStrap {
   

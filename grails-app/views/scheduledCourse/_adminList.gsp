@@ -95,9 +95,9 @@
                             <tr id="receipt${receipt.id}">
                               <td>${receipt.receiptStatus}</td>
                               <td>
-                                <g:link controller="receipt" action="showImage" id="${receipt.id}" class="seeReceipt">
+                                <a href="${receipt.url()}" class="seeReceipt">
                                   <img src="${resource(dir:'themes/wb/icon',file:'search.png')}" width="24" height="24" />
-                                </g:link>
+                                </a>
                               </td>
                               <g:if test="${receipt.receiptStatus == ReceiptStatus.RECEIVED}">
                                 <td>

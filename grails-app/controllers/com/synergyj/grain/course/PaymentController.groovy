@@ -21,103 +21,123 @@ class PaymentController {
   def paymentService
   def notificationService
   def registrationService
+  def s3AssetService
 
   def index = {
     // Obtenemos el usuario actual
     def user = springSecurityService.currentUser
     // Obtenemos sus cursos pendientes por pagar
     // Buscamos el registro del usuario a un curso calendarizado y Metemos el objeto registration en sesión
-    def registration  = Registration.findByStudentAndRegistrationStatus(user,RegistrationStatus.REGISTERED)
+    def registration = Registration.findByStudentAndRegistrationStatus(user, RegistrationStatus.REGISTERED)
 
     //Obtenemos las promociones de este curso calendarizado
     def promotionsPerCourse = PromotionPerScheduledCourse.findAllByScheduledCourse(registration.scheduledCourse)
     // Obtenemos las promociones que aún estén vigentes
     def promotionsForThisUser = []
     promotionsPerCourse.each { promotion ->
-      if(promotion.hasNotExpired())
+      if (promotion.hasNotExpired())
         promotionsForThisUser << promotion
     }
     session.promotionsPerCourse = promotionsForThisUser
     // Regresamos sus cursos para presentar el detalle y las promociones a escoger
-    [registration:registration,promotionsPerCourse:promotionsForThisUser]
+    [registration: registration, promotionsPerCourse: promotionsForThisUser]
   }
 
   def fileupload = {
+    // Obtenemos el pago al que le asignaremos el recibo
     def payment = Payment.get(params.long('paymentNumber'))
-    def receipt = new Receipt(receiptStatus:ReceiptStatus.RECEIVED,amount:payment.amount)
-    receipt.image = params.file.getBytes()
-    payment.addToReceipts(receipt)
+    // Creamos el recibo
+    def receipt = new ReceiptAWS(receiptStatus: ReceiptStatus.RECEIVED,payment: payment)
+    // Establecemos propiedades
+    receipt.title = "Receipt for ${payment.transactionId}"
+    receipt.description = "Receipt for ${payment.amount}"
+    // Obtenemos el archivo de los parámetros
+    def file = params.file
+    // Creamos el espacio temporal del archivo
+    def tmp = s3AssetService.getNewTmpLocalFile(file.contentType)
+    // Transferimos el archivo
+    file.transferTo(tmp)
+    // Usamos el método del asset para crear un archivo nuevo
+    receipt.newFile(tmp);
+    // El tipo del archivo es...
+    receipt.mimeType = file.contentType;
+    // Subimos el archivo
+    s3AssetService.put(receipt)
+    // Cambiamos el status del pago
     payment.paymentStatus = PaymentStatus.PENDING
-    render "${g.message(code:'receipt.received')}"
+    // Creamos la relación
+    payment.addToReceipts(receipt)
+
+    render "${g.message(code: 'receipt.received')}"
   }
 
   def start = {
     def payment = Payment.get(params.id)
-    [payment:payment]
+    [payment: payment]
   }
 
   def pay = {
     // Conservamos la opción de pago que selecciono
     def paymentOption = KindOfPayment.SPEI
-    if(params.paymentOption == 'dineromail'){
+    if (params.paymentOption == 'dineromail') {
       // Pagará con DM
       paymentOption = KindOfPayment.DINERO_MAIL
     }
     def payment = Payment.findByTransactionId(params.transactionId)
     payment.kindOfPayment = paymentOption
     // Validar si es SPEI o DineroMail y direccionarlo
-    if(paymentOption==KindOfPayment.SPEI){
+    if (paymentOption == KindOfPayment.SPEI) {
       notificationService.sendPaymentInstructions(payment.id)
-      flash.message = "${g.message(code:'notification.send')}"
-      redirect action:'receive',params:[status:'pending',trx:payment.transactionId]
+      flash.message = "${g.message(code: 'notification.send')}"
+      redirect action: 'receive', params: [status: 'pending', trx: payment.transactionId]
       return
-    }else{
-      render view:"do",model:[registration:payment.registration,payment:payment,user:springSecurityService.currentUser]
+    } else {
+      render view: "do", model: [registration: payment.registration, payment: payment, user: springSecurityService.currentUser]
     }
   }
 
   def receive = {
     // Si obtenemos algún error de pago
-    if(params.status == 'error'){
+    if (params.status == 'error') {
       // Ponemos un mensaje
-      flash.message = "${g.message(code:'payment.error')}"
+      flash.message = "${g.message(code: 'payment.error')}"
       // Redireccionamos
-      redirect uri:'/me'
+      redirect uri: '/me'
       return
     }
     // Si traemos algún parámetro de pago
-    if(params.status && params.trx){
+    if (params.status && params.trx) {
       // Actualizamos el pago y el registro
-      def payment = paymentService.checkPaymentAndRegistration(params.status,params.trx)
+      def payment = paymentService.checkPaymentAndRegistration(params.status, params.trx)
       // Evaluamos el pago para mandar el mensaje apropiado
-      switch(payment.kindOfPayment){
+      switch (payment.kindOfPayment) {
         case KindOfPayment.SPEI:
-          flash.message = "${g.message(code:'payment.waitSpei')}"
+          flash.message = "${g.message(code: 'payment.waitSpei')}"
           break
         case KindOfPayment.DINERO_MAIL:
-          switch(payment.paymentStatus){
+          switch (payment.paymentStatus) {
             case PaymentStatus.PENDING:
-              flash.message = "${g.message(code:'payment.waitPending')}"
+              flash.message = "${g.message(code: 'payment.waitPending')}"
               break
             case PaymentStatus.PAYED:
               // Actualizamos la fecha de pago
               payment.paymentDate = new Date()
               // Comprobamos si el registro al curso ya esta pagado
               registrationService.checkIsPayed(payment.registration.id)
-              flash.message = "${g.message(code:'payment.ispayed')}"
+              flash.message = "${g.message(code: 'payment.ispayed')}"
               break;
           }
           break
       }
     }
-    redirect uri:'/me'
+    redirect uri: '/me'
   }
 
   def create = {
 
     // Conservamos la opción de pago que selecciono
     def paymentOption = "spei"
-    if(params.paymentOption == 'dineromail'){
+    if (params.paymentOption == 'dineromail') {
       // Pagará con DM
       paymentOption = "dineroMail"
     }
@@ -134,16 +154,16 @@ class PaymentController {
     def promotionsIds = params?.checkedPromotions?.tokenize(',')
 
     // Iteramos la seleccion de promociones
-    promotionsIds.each{ promotionId ->
+    promotionsIds.each { promotionId ->
       // buscamos en la lista de promociones en la sesion el descuento
       def promotionPerCourse = (session.promotionsPerCourse).find { it.id >= promotionId.toLong() }
       // Generamos el objeto de promoción por registro
       def promotionPerRegistration = new PromotionPerRegistration(
-        promotion:promotionPerCourse.promotion,
-        registration:registration
+          promotion: promotionPerCourse.promotion,
+          registration: registration
       )
       // Si escogió la recomendación
-      if(promotionPerRegistration.promotion.kindPromotion == KindPromotion.RECOMMENDATION){
+      if (promotionPerRegistration.promotion.kindPromotion == KindPromotion.RECOMMENDATION) {
         // Creamos el objeto para tomar el valor, en este caso el correo
         def promotionPerRegistrationProperty = new PromotionPerRegistrationProperty()
         promotionPerRegistrationProperty.propertyKey = "email"
@@ -156,57 +176,57 @@ class PaymentController {
     }
 
     // Eliminamos los valores de la sesión
-    if(session.removeAttribute)
+    if (session.removeAttribute)
       session.removeAttribute(promotionsPerCourse)
 
     // Consultamos los pagos para el registro para mandarlos por el modelo
-    def payment = Payment.findByRegistrationAndPaymentStatus(registration,PaymentStatus.WAITING,[sort:'id'])
+    def payment = Payment.findByRegistrationAndPaymentStatus(registration, PaymentStatus.WAITING, [sort: 'id'])
 
     // Validar si es SPEI o DineroMail y direccionarlo
-    if(paymentOption=='spei'){
+    if (paymentOption == 'spei') {
       notificationService.sendPaymentInstructions(payment.id)
-      flash.message = "${g.message(code:'notification.send')}"
-      redirect action:'receive',params:[status:'pending',trx:payment.transactionId]
+      flash.message = "${g.message(code: 'notification.send')}"
+      redirect action: 'receive', params: [status: 'pending', trx: payment.transactionId]
       return
-    }else{
-      render view:"do",model:[registration:registration,payment:payment,user:springSecurityService.currentUser]
+    } else {
+      render view: "do", model: [registration: registration, payment: payment, user: springSecurityService.currentUser]
     }
 
   }
 
   def edit = {
     def payment = Payment.get(params.id)
-    [payment:payment]
+    [payment: payment]
   }
 
   def update = {
     def payment = Payment.get(params.id)
     payment.properties = params
-    if(payment.save()){
-      flash.message = "${message(code:'default.updated.message',args:[payment.class.name,payment.id])}"
-    }else{
-      flash.message = "${message(code:'default.optimistic.locking.failure',args:[payment.class.name,payment.id])}"
+    if (payment.save()) {
+      flash.message = "${message(code: 'default.updated.message', args: [payment.class.name, payment.id])}"
+    } else {
+      flash.message = "${message(code: 'default.optimistic.locking.failure', args: [payment.class.name, payment.id])}"
     }
-    redirect uri:'/me'
+    redirect uri: '/me'
   }
 
   def delete = {
     def payment = Payment.get(params.id)
     payment.delete()
-    flash.message = "${message(code:'default.deleted.message',args:[payment.class.name,payment.id])}"
-    redirect uri:'/me'
+    flash.message = "${message(code: 'default.deleted.message', args: [payment.class.name, payment.id])}"
+    redirect uri: '/me'
   }
 
   def createForRegistration = {
     //def registration = Registration.get(params.id)
     def paymentOption = "spei"
-    if(params.paymentOption == "DINERO_MAIL"){
+    if (params.paymentOption == "DINERO_MAIL") {
       // Pagará con DM
       paymentOption = "dineromail"
     }
-    def totalToPay =  new BigDecimal(params.costByCourse)
-    if(params.invoice)
-      totalToPay =  totalToPay * 1.16
+    def totalToPay = new BigDecimal(params.costByCourse)
+    if (params.invoice)
+      totalToPay = totalToPay * 1.16
 
     def thisPayment = totalToPay / (new BigDecimal(params.percentOption))
 
@@ -219,7 +239,7 @@ class PaymentController {
         params.invoice)
 
     render """
-      <img src="${resource(dir:'themes/wb/icon',file:'valid-green.png')}" width="24" height="24" />
+      <img src="${resource(dir: 'themes/wb/icon', file: 'valid-green.png')}" width="24" height="24" />
     """
   }
 

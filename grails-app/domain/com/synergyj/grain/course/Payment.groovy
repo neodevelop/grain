@@ -31,7 +31,7 @@ class Payment implements Comparable,Serializable{
 	Date lastUpdated
 
   static belongsTo = [registration:Registration]
-  static hasMany = [receipts:Receipt]
+  static hasMany = [receipts:ReceiptAWS]
 
   static constraints = {
     amount nullable:false

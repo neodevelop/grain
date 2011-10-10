@@ -19,14 +19,8 @@ class ReceiptController {
 
   def registrationService
   def dineroMailService
+  def s3AssetService
 
-  def showImage = {
-    def receipt = Receipt.get(params.id)
-    response.contentType = 'image/jpeg'
-    response.outputStream << receipt.image
-    response.outputStream.flush()
-    return;
-  }
   def approve = {
     def receipt = Receipt.get(params.id)
     receipt.receiptStatus = ReceiptStatus.APROVED
@@ -60,8 +54,8 @@ class ReceiptController {
   }
 
   def delete = {
-    def receipt = Receipt.get(params.id)
-    receipt.delete()
+    def receipt = ReceiptAWS.get(params.id)
+    s3AssetService.delete(receipt)
     render ""
   }
 }
