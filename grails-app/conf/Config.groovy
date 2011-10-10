@@ -141,7 +141,8 @@ log4j = {
           "org",
           "net",
           "com",
-          "groovyx"
+          "groovyx",
+          "net.bull.javamelody"
     }
   }
 
@@ -208,4 +209,12 @@ rabbitmq {
   queues = {
     grain_mail_notification()
   }
+}
+
+aws {
+  domain="s3.amazonaws.com"
+  accessKey=""
+  secretKey=""
+  bucketName="media.grain.com"
+  prefixBucketWithKey=false
 }
