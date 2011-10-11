@@ -177,7 +177,8 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/images/**': ['permitAll'],
     '/plugins/**': ['permitAll'],
     '/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
-    '/monitoring/**': ["hasRole('ROLE_ADMIN')"]
+    '/monitoring/**': ["hasRole('ROLE_ADMIN')"],
+    '/s3Asset/**': ["hasRole('ROLE_ADMIN')"]
 ]
 
 // Temporalmente agregado para usar el flujo de registro
@@ -203,7 +204,7 @@ google.analytics.webPropertyID = "UA-xxxxxx-x"
 
 tomcat.deploy.username = "tomcat"
 tomcat.deploy.password = "secret"
-tomcat.deploy.url = "http://localhost:8080/manager/text"
+tomcat.deploy.url = "http://localhost:8080/manager/text"towe
 
 rabbitmq {
   connectionfactory {
