@@ -204,7 +204,7 @@ google.analytics.webPropertyID = "UA-xxxxxx-x"
 
 tomcat.deploy.username = "tomcat"
 tomcat.deploy.password = "secret"
-tomcat.deploy.url = "http://localhost:8080/manager/text"towe
+tomcat.deploy.url = "http://localhost:8080/manager/text"
 
 rabbitmq {
   connectionfactory {
