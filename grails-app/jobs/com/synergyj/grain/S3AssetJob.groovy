@@ -19,7 +19,7 @@ import com.synergyj.grain.course.ReceiptAWS
 
 class S3AssetJob {
   static triggers = {
-    cron name: 's3AssetTrigger', cronExpression: "0 0/1 * * * ?"
+    cron name: 's3AssetTrigger', cronExpression: "0 0/15 * * * ?"
   }
 
   def group = "S3AssetGroup"

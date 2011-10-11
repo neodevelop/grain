@@ -73,20 +73,24 @@ jqueryUi.cdn = 'googlecode'
 
 // set per-environment serverURL stem for creating absolute links
 def logDirectory = "target/" // Directorio de Log4J
+def theBucketName = ""
 environments {
   development {
     grails.serverURL = "http://localhost:8080/grain"
+    theBucketName = "dev"
   }
   test {
     grails.serverURL = "http://localhost:8080/${appName}"
     grails.plugins.springsecurity.portMapper.httpPort = 80 // Spring Security Config
     grails.plugins.springsecurity.portMapper.httpsPort = 80 // Spring Security Config
+    theBucketName = "test"
   }
   production {
     grails.serverURL = "http://entrenamiento.synergyj.com"
     logDirectory = "logs/" // Directorio de Log4J
     grails.plugins.springsecurity.portMapper.httpPort = 80 // Spring Security Config
     grails.plugins.springsecurity.portMapper.httpsPort = 443 // Spring Security Config
+    theBucketName = "prod"
   }
 }
 
@@ -142,7 +146,8 @@ log4j = {
           "net",
           "com",
           "groovyx",
-          "net.bull.javamelody"
+          "net.bull.javamelody",
+          "httpclient"
     }
   }
 
@@ -215,9 +220,10 @@ aws {
   domain="s3.amazonaws.com"
   accessKey=""
   secretKey=""
-  bucketName="media.grain.com"
+  bucketName="media.grain.com.${theBucketName}"
   prefixBucketWithKey=false
   lazyInit=true
-  startDelay=60000
-  timeout=60000
+  // Le damos u plazo de 10 minutos entre intervalos para que sincronice
+  startDelay=1000*60*10
+  timeout=1000*60*10
 }
