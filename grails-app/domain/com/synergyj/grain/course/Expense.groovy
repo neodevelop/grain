@@ -9,9 +9,11 @@ class Expense {
   Date dateCreated
   Date lastUpdated
 
-  static belongsTo = { scheduledCourse: ScheduledCourse}
+  static belongsTo = [ scheduledCourse: ScheduledCourse ]
 
   static constraints = {
+    amount(blank:false)
+    description(blank:false)
     dateCreated(display: false)
     lastUpdated(display: false)
   }

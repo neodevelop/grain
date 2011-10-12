@@ -2,8 +2,15 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="layout" content="main"/>
+  <meta name="layout" content="wb"/>
   <title><g:message code="expense.list" default="Expense List"/></title>
+  <parameter name="pageHeader" value="${g.message(code: 'expense.list', default: 'Expense List')}"/>
+  <script type="text/javascript" language="javascript" src="${resource(dir: 'js', file: 'tables.js')}"></script>
+  <script language="javascript">
+    $(function() {
+      $("div.list table").styleTable();
+    });
+  </script>
 </head>
 
 <body>
@@ -15,21 +22,14 @@
 </div>
 
 <div class="body">
-  <h1><g:message code="expense.list" default="Expense List"/></h1>
-  <g:if test="${flash.message}">
-    <div class="message"><g:message code="${flash.message}" args="${flash.args}"
-                                    default="${flash.defaultMessage}"/></div>
-  </g:if>
   <div class="list">
-    <table>
+    <table cellpadding="5" cellspacing="0" border="0" width="100%">
       <thead>
       <tr>
 
         <g:sortableColumn property="id" title="Id" titleKey="expense.id"/>
 
-        <g:sortableColumn property="dateCreated" title="Date Created" titleKey="expense.dateCreated"/>
-
-        <g:sortableColumn property="lastUpdated" title="Last Updated" titleKey="expense.lastUpdated"/>
+        <g:sortableColumn property="expenseTime" title="Expense Time" titleKey="expense.expenseTime"/>
 
         <g:sortableColumn property="amount" title="Amount" titleKey="expense.amount"/>
 
@@ -46,11 +46,9 @@
           <td><g:link action="show"
                       id="${expenseInstance.id}">${fieldValue(bean: expenseInstance, field: "id")}</g:link></td>
 
-          <td><g:formatDate date="${expenseInstance.dateCreated}"/></td>
+          <td><g:formatDate date="${expenseInstance.expenseTime}"/></td>
 
-          <td><g:formatDate date="${expenseInstance.lastUpdated}"/></td>
-
-          <td><g:formatNumber number="${expenseInstance.amount}"/></td>
+          <td>$ <g:formatNumber number="${expenseInstance.amount}" locale="MX" format="#,###.00"/></td>
 
           <td>${fieldValue(bean: expenseInstance, field: "description")}</td>
 

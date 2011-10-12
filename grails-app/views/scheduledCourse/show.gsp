@@ -93,8 +93,9 @@
         </tr>
 
         <tr class="prop">
-          <td valign="top" class="name"><g:message code="scheduledCourse.courseSessions" default="Course Sessions" />:</td>
-
+          <td valign="top" class="name">
+            <g:message code="scheduledCourse.courseSessions" default="Course Sessions" />:
+          </td>
           <td  valign="top" style="text-align: left;" class="value">
             <div id="sessionList">
             <ul>
@@ -116,7 +117,51 @@
             </ul>
             </div>
           </td>
-
+        </tr>
+        
+        <tr class="prop">
+          <td valign="top" class="name">
+            <g:message code="scheduledCourse.expenses" default="Course Expenses" />:
+          </td>
+          <td  valign="top" style="text-align: left;" class="value">
+            <table id="expenseList">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Amount</th>
+                  <th>Category</th>
+                  <th>Time</th>
+                  <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="expense" style="display:none;">
+                  <td><span class="description"></span></td>
+                  <td><span class="amount"></span></td>
+                  <td><span class="expenseCategory"></span></td>
+                  <td><span class="expenseTime"></span></td>
+                  <td>
+                    &nbsp;
+                  </td>
+                </tr>
+                <g:each in="${scheduledCourseInstance?.expenses?.sort()}" var="expenseInstance">
+                <tr id="expense${expenseInstance.id}">
+                  <td>${expenseInstance.description}</td>
+                  <td>${expenseInstance.amount}</td>
+                  <td>${expenseInstance.expenseCategory}</td>
+                  <td><g:formatDate date="${expenseInstance.expenseTime}" format="dd/MM/yyyy HH:mm"/></td>
+                  <td>
+                    <!--
+                    <a class="updateExpense" href="${createLink(controller:'expense',action:'updateAsync',id:expenseInstance.id)}">
+                      Update
+                    </a>
+                    -->
+                  </td>
+                </tr>
+                </g:each>
+              </tbody>
+            </table>
+          </td>
         </tr>
 
         </tbody>
@@ -132,6 +177,7 @@
   </g:form>
 </div>
 <br/>
+
 <button id="showAddCourseSession">
   <g:message code="scheduledCourse.addSessions" default="Add Session" />
 </button>
@@ -152,6 +198,24 @@
 </div>
 
 <!-- TODO: Agregar promociones -->
+
+<button id="showAddExpense">
+  <g:message code="expense.add" default="Add Expense" />
+</button>
+
+<div id="newExpense" title="Add a new expense" style="display:none;">
+  <g:formRemote
+      name="addExpenseToScheduledCourse"
+      url="[controller:'expense',action:'addToScheduledCourse']"
+      onSuccess="addExpenseToTable(data)"
+      onComplete="restoreForm()" style="height:100%;" >
+    <g:hiddenField name="scheduledCourseId" value="${scheduledCourseInstance.id}"/>
+    <g:hiddenField name="expenseId" value="0"/>
+    <g:render template="/expense/form" model="[expenseInstance:expenseInstance]"/>
+    <input type="submit" value="Add Expense to Course" id="addExpense" name="addExpense"/>
+  </g:formRemote>
+</div>
+
 
 </body>
 </html>

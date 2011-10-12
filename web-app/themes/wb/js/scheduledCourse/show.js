@@ -6,6 +6,11 @@ $(function(){
     $('#newSessionCourse').show();
     $('#showAddCourseSession').hide();
   });
+  
+  $('#showAddExpense').click(function(){
+    $('#newExpense').show();
+    $('#showAddExpense').hide();
+  });
 
   $("a.deleteSession").live("click",function(){
     var splitLink = this.href.split('/');
@@ -41,6 +46,14 @@ function restoreLink(){
   $('#showAddCourseSession').show();
   return false;
 }
+
+function restoreForm(){
+  $('#newExpense').hide();
+  $('#showAddExpense').show();
+  $('#addExpenseToScheduledCourse')[0].reset();
+  return false;
+}
+
 function reacting(e){
   var date = new Date(e.sessionStartTime)
   var stringdate = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+ date.getUTCHours()+":"+date.getMinutes();
@@ -51,4 +64,15 @@ function reacting(e){
     $("<li id='sessionCourse"+e.id+"'>"+stringdate+" "+link+"</li>").appendTo("div#sessionList > ul");
   }
   $("#courseSessionId").val(0);
+}
+
+function addExpenseToTable(expense){
+  var date = new Date(expense.expenseTime)
+  var stringdate = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+ date.getUTCHours()+":"+date.getMinutes();
+  var newRow = $("table#expenseList tbody > tr.expense").clone().removeClass("expense");
+  newRow.find('.description').text(expense.description);
+  newRow.find('.amount').text(expense.amount);
+  newRow.find('.expenseCategory').text(expense.expenseCategory.name);
+  newRow.find('.expenseTime').text(stringdate);
+  newRow.appendTo("table#expenseList tbody").fadeIn();
 }
