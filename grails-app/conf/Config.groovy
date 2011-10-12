@@ -224,7 +224,6 @@ aws {
   bucketName="media.grain.com.${theBucketName}"
   prefixBucketWithKey=false
   lazyInit=true
-  // Le damos u plazo de 10 minutos entre intervalos para que sincronice
   startDelay=1000*60*10
   timeout=1000*60*10
 }
