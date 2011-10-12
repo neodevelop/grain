@@ -28,3 +28,4 @@ out
 
 /logs/
 /s3-plugin-temp/
+/erl_crash.dump

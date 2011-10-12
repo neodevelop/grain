@@ -73,7 +73,7 @@ jqueryUi.cdn = 'googlecode'
 
 // set per-environment serverURL stem for creating absolute links
 def logDirectory = "target/" // Directorio de Log4J
-def theBucketName = ""
+def theBucketName = "dev"
 environments {
   development {
     grails.serverURL = "http://localhost:8080/grain"

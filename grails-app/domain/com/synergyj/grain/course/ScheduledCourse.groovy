@@ -51,7 +51,7 @@ class ScheduledCourse implements Serializable {
     durationInHours nullable: false
   }
 
-  static hasMany = [courseSessions: CourseSession, promotions: PromotionPerScheduledCourse, registrations:Registration]
+  static hasMany = [courseSessions: CourseSession, promotions: PromotionPerScheduledCourse, registrations:Registration,expenses:Expense]
 
   String toString() {
     "(${id} : ${beginDate} : ${scheduledCourseStatus})"
