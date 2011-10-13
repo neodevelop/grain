@@ -48,7 +48,7 @@ class StudentsGroupController {
       registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH  || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED || registration.registrationStatus == RegistrationStatus.CANCELLED
     }
 
-    [scheduledCourse: scheduledCourse, registrationsInGroup: registrationsInGroup, registrationsNoGroup: registrationsNoGroup]
+    [scheduledCourse: scheduledCourse,registrations:registrations, registrationsInGroup: registrationsInGroup, registrationsNoGroup: registrationsNoGroup]
   }
 
   def addStudent = {

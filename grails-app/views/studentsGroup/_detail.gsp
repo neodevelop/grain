@@ -4,20 +4,16 @@
       <tr>
         <th><g:message code="login.username"/></th>
         <th><g:message code="me.name"/></th>
-        <th>&nbsp;</th>
+        <th><g:message code="studentsGroup.move"/></th>
         <th><g:message code="registration.status" default="Status"/></th>
-        <th><g:message code="registration.invoice" default="Invoice"/></th>
-        <th><g:message code="promotion.name"/></th>
-        <th><g:message code="payment.payment"/></th>
       </tr>
     </thead>
     <tbody>
-      <g:set var="totalPerGroup" value="${new BigDecimal(0)}"/>
       <g:each in="${registrationGroup}" var="registration">
       <tr id="student${registration?.id}" class="registration_${registration?.registrationStatus}">
         <td>${registration?.student?.email}</td>
         <td>${registration?.student?.firstName} ${registration?.student?.lastName}</td>
-        <td>
+        <td align="center">
           <g:remoteLink controller="studentsGroup" action="${action}" id="${registration?.id}" onSuccess="${action}(${registration?.id})">
             <g:message code="studentsGroup.move" />
           </g:remoteLink>
@@ -25,45 +21,7 @@
         <td>
           ${registration.registrationStatus}
         </td>
-        <td>
-          <g:formatBoolean boolean="${registration?.invoice}" true="Yes" false="No"/>
-        </td>
-        <td>
-          <table id="promotionsForRegistration${registration?.id}" border="1">
-            <g:each in="${registration?.promotions}" var="promotionPerRegistration">
-            <tr>
-              <td>${promotionPerRegistration?.promotion}</td>
-            </tr>
-            </g:each>
-          </table>
-        </td>
-        <td>
-          <table id="paymentsForRegistration${registration?.id}" border="0" cellpadding="2px">
-            <g:set var="totalAmount" value="${new BigDecimal(0)}"/>
-            <g:set var="totalCommission" value="${new BigDecimal(0)}"/>
-            <g:each in="${registration?.payments}" var="payment">
-            <tr>
-              <td>${payment?.paymentStatus}</td>
-              <td>${payment?.kindOfPayment}</td>
-              <td>$ ${payment?.amount}</td>
-              <td>-$ ${payment?.commission}</td>
-            </tr>
-            <g:set var="totalAmount" value="${totalAmount + payment.amount}"/>
-            <g:set var="totalCommission" value="${totalCommission?.plus(payment?.commission ?: 0)}"/>
-            </g:each>
-          </table>
-        </td>
-        <td>
-          <g:set var="totalPerRegistration" value="${totalAmount - totalCommission}"/>
-          $ ${ totalPerRegistration }
-          <g:set var="totalPerGroup" value="${totalPerGroup + totalPerRegistration}"/>
-        </td>
       </tr>
       </g:each>
-      <tr class="totalPerGroup">
-        <td colspan="8">
-          Total del grupo: $ ${totalPerGroup}
-        </td>
-      </tr>
     </tbody>
   </table>
