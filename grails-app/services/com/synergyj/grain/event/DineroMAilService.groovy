@@ -134,7 +134,7 @@ class DineroMailService {
         def fecha = operation.FECHA?.text() - '.'
         tx.operationDate = sdf.parse(fecha.toUpperCase())
         // Obtenemos el monto"
-        tx.amount = new BigDecimal(operation.MONTO?.text()?.replace(',','.')))
+        tx.amount = new BigDecimal(operation.MONTO?.text()?.replace(',','.'))
         // Obtenemos el monto total $operation.MONTONETO"
         tx.totalAmount = new BigDecimal(operation.MONTONETO?.text()?.replace(',','.'))
         // Obtenemos el método de pago"

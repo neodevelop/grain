@@ -137,7 +137,7 @@ class PaymentController {
 
     // Conservamos la opción de pago que selecciono
     def paymentOption = "spei"
-    if (params.paymentOption == 'dineromail') {
+    if (params.paymentOption == "dineromail") {
       // Pagará con DM
       paymentOption = "dineroMail"
     }

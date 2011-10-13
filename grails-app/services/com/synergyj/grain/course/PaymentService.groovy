@@ -75,7 +75,7 @@ class PaymentService {
   private def preparePayment(amount,kindOfPayment){
     def description = "Pago de inscripción"
     def thisKindOfPayment = KindOfPayment.SPEI
-    if(kindOfPayment == 'dineromail')
+    if(kindOfPayment.toLowerCase() == 'dineroMail'.toLowerCase())
       thisKindOfPayment = KindOfPayment.DINERO_MAIL
     return new Payment(
       amount:amount,
