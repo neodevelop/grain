@@ -12,7 +12,7 @@ class Expense {
   static belongsTo = [ scheduledCourse: ScheduledCourse ]
 
   static constraints = {
-    amount(blank:false)
+    amount(nullable:false)
     description(blank:false)
     dateCreated(display: false)
     lastUpdated(display: false)
