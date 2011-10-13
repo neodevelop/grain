@@ -2,6 +2,9 @@ package com.synergyj.grain.course
 
 import grails.converters.JSON
 
+import grails.plugins.springsecurity.Secured
+
+@Secured(["hasRole('ROLE_ADMIN')"])
 class ExpenseController {
 
   def index = { redirect(action: "list", params: params) }
