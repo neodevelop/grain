@@ -82,7 +82,6 @@ class DineroMailService {
 
       // Manejamos la respuesta satisfactoria
       response.success = {resp, data ->
-        log.debug("Manejando la respuesta de la petición")
         isPayed = handleResponse(resp, data, payment)
       }
 
@@ -126,23 +125,19 @@ class DineroMailService {
       // Iteramos las operaciones obtenidas de esta transacción
       data.DETALLE.OPERACIONES.OPERACION.each {operation ->
         def tx = new Expando()
-        log.debug "Obtenemos el ID de la TX"
+        // Obtenemos el ID de la TX"
         tx.id = operation.ID?.text()
-        log.debug "Obtenemos el status"
+        // Obtenemos el status"
         tx.statusOperation = statusOperation["${operation.ESTADO?.text() ?: '0'}"]
-        try{
-          log.debug "Obtenemos la fecha y parseamos ${operation.FECHA}"
-          def sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa")
-          def fecha = operation.FECHA?.text() - '.'
-          log.debug fecha
-          tx.operationDate = sdf.parse(fecha.toUpperCase())
-        }catch(Exception e){ log.error e.message }
-        log.debug "Fecha en objeto parseada: ${tx.operationDate}"
-        log.debug "Obtenemos el monto"
+        // Obtenemos la fecha y parseamos ${operation.FECHA}"
+        def sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa")
+        def fecha = operation.FECHA?.text() - '.'
+        tx.operationDate = sdf.parse(fecha.toUpperCase())
+        // Obtenemos el monto"
         tx.amount = new BigDecimal(operation.MONTO?.text())
-        log.debug "Obtenemos el monto total $operation.MONTONETO"
+        // Obtenemos el monto total $operation.MONTONETO"
         tx.totalAmount = new BigDecimal(operation.MONTONETO?.text().replace(',','.'))
-        log.debug "Obtenemos el método de pago"
+        // Obtenemos el método de pago"
         tx.paymentMethod = paymentMethods["${operation.METODOPAGO?.text() ?: '0'}"]
         operationsForTransaction << tx
       }
