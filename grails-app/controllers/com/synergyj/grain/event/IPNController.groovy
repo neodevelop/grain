@@ -37,6 +37,7 @@ class IPNController {
       }
     } else {
       log.error("No hay notificaciones en DM")
+      log.error(params)
     }
     render "ok"
   }
