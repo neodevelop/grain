@@ -62,7 +62,6 @@
     <div id="tabs-4">
       <div align="center">
         <i>Aquí está el detalle de los pagos de las personas que están inscritas al curso.<br/>
-          El total es de <b>${registrationsNoGroup.size()}</b> participantes</i>
       </div>
       <g:render template="paymentsDetail" model="[registrationGroup:registrationsInGroup]"/>
     </div>
