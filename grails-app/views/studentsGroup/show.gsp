@@ -5,6 +5,7 @@
   <title><g:message code="studentsGroup.show" default="Students Group" /></title>
   <parameter name="pageHeader" value="${g.message(code: 'studentsGroup.show', default: 'Students Group')}"/>
   <script language="JavaScript" src="${resource(dir:'themes/wb/js/studentsGroup',file:'show.js')}"></script>
+  <script type="text/javascript" language="javascript" src="${resource(dir:'js',file:'tables.js')}"></script>
 </head>
 <body>
 <div class="content">
@@ -23,12 +24,12 @@
         <i>Aquí se presenta a todos los participantes que han dado clic al botón de confirmación de registro.<br/>
         El total es de <b>${registrations.size()}</b> participantes</i><br/>
       </div>
-      <table width="100%">
+      <table width="100%" class="registrationsList" cellpadding="5" cellspacing="0">
         <thead>
           <tr>
-            <td>Correo electrónico</td>
-            <td>Nombre</td>
-            <td>Fecha de registro</td>
+            <th>Correo electrónico</th>
+            <th>Nombre</th>
+            <th>Fecha de registro</th>
           </tr>
         </thead>
         <tbody>

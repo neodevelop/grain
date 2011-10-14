@@ -50,7 +50,11 @@ class RegistrationService {
     // Si no tiene deuda
     if(!debt){
       // Entonces actualizamos el registro y lo marcamos que ya pago
-      registration.registrationStatus = RegistrationStatus.INSCRIBED_AND_PAYED
+      if(registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH_IN_GROUP ){
+        registration.registrationStatus = RegistrationStatus.INSCRIBED_AND_PAYED_IN_GROUP
+      }else{
+        registration.registrationStatus = RegistrationStatus.INSCRIBED_AND_PAYED
+      }
     }
 
   }
