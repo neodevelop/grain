@@ -31,6 +31,8 @@ class StudentsGroupController {
   def show = {
     // Obtenemos el grupo de estudiantes
     def scheduledCourse = ScheduledCourse.get(params.id)
+    // Obtenemos los gastos de este curso
+    def expenses = Expense.findAllByScheduledCourse(scheduledCourse)
     // Buscamos los registros al curso calendarizado
     def criteria = Registration.createCriteria()
     def registrations = criteria.listDistinct {
@@ -48,7 +50,13 @@ class StudentsGroupController {
       registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH  || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED || registration.registrationStatus == RegistrationStatus.CANCELLED
     }
 
-    [scheduledCourse: scheduledCourse,registrations:registrations, registrationsInGroup: registrationsInGroup, registrationsNoGroup: registrationsNoGroup]
+    [
+        scheduledCourse: scheduledCourse,
+        registrations: registrations,
+        registrationsInGroup: registrationsInGroup,
+        registrationsNoGroup: registrationsNoGroup,
+        expenses:expenses
+    ]
   }
 
   def addStudent = {

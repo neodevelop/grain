@@ -18,6 +18,7 @@
       <li><a href="#tabs-2">Usuarios inscritos</a></li>
       <li><a href="#tabs-3">Usuarios no inscritos</a></li>
       <li><a href="#tabs-4">Pagos de inscritos</a></li>
+      <li><a href="#tabs-5">Lista de gastos</a></li>
     </ul>
     <div id="tabs-1">
       <div align="center">
@@ -65,6 +66,13 @@
         <i>Aquí está el detalle de los pagos de las personas que están inscritas al curso.<br/>
       </div>
       <g:render template="paymentsDetail" model="[registrationGroup:registrationsInGroup]"/>
+    </div>
+
+    <div id="tabs-5">
+      <div align="center">
+        <i>Aquí está el detalle de los gastos generados en este curso.<br/>
+      </div>
+      <g:render template="/expense/list" model="[expensesList:expenses]"/>
     </div>
   </div>
 </div>
