@@ -24,8 +24,8 @@
   <tfoot>
     <tr>
       <td colspan="5" align="center">
-        Total de costos:
-        $ <g:formatNumber number="${totalExpenseCost}" format="#,###.00" locale="MX"/>
+        <b>Total de costos:</b>
+        <b>$ <g:formatNumber number="${totalExpenseCost}" format="#,###.00" locale="MX"/></b>
       </td>
     </tr>
   </tfoot>

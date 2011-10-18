@@ -19,6 +19,7 @@
       <li><a href="#tabs-3">Usuarios no inscritos</a></li>
       <li><a href="#tabs-4">Pagos de inscritos</a></li>
       <li><a href="#tabs-5">Lista de gastos</a></li>
+      <li><a href="#tabs-6">Ingresos</a></li>
     </ul>
     <div id="tabs-1">
       <div align="center">
@@ -74,6 +75,15 @@
       </div>
       <g:render template="/expense/list" model="[expensesList:expenses]"/>
     </div>
+
+    <div id="tabs-6">
+      <div align="center">
+        <i>Se presenta el detalle de ingresos menos gastos que se generaron en el curso.<br/>
+          Asistieron <b>${registrationsInGroup.size()}</b> participantes</i><br/>
+      </div>
+      <g:render template="summary" model="[registrationGroup:registrationsInGroup,expensesList:expenses]"/>
+    </div>
+
   </div>
 </div>
 </body>

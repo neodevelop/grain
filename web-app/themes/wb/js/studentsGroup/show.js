@@ -9,6 +9,7 @@ $(function() {
   $("table.paymentsDetails").styleTable();
   $("table.registrationsList").styleTable();
   $("table.expensesList").styleTable();
+  $("table.summary").styleTable();
 });
 function addStudent(studentRowId) {
   $("table#studentsNoGroup > tbody > tr#student" + studentRowId).clone().prependTo("table#studentsInGroup");
