@@ -16,23 +16,27 @@
 package com.synergyj.grain.event
 
 import grails.converters.XML
-import com.synergyj.grain.course.Payment
 
 class IPNController {
 
   def dineroMailService
 
   def index = {
+    def toLowerParams = [:]
+    // Convertimos las llaves de los parámetros a minúsculas
+    params.each { key, value ->
+      toLowerParams."${key.toLowerCase()}" = value
+    }
     // Si viene el parámetro de notificación entonces lo tratamos
-    if (params.NOTIFICACION) {
+    if (toLowerParams.notificacion) {
       // Parseamos el XML contenido en dicho parámetro
-      def rootNode = XML.parse(params.NOTIFICACION)
+      def rootNode = XML.parse(toLowerParams.notificacion)
       // Si el tipo de notificaciones es el que pide DM
-      if (rootNode.TIPONOTIFICACION.text() == '1') {
+      if (rootNode.tiponotificacion.text() == '1') {
         // Recorremos las operaciones notificadas
-        rootNode.OPERACIONES.OPERACION.each { op ->
+        rootNode.operaciones.operacion.each { op ->
           // Llamammos la verificación del pago con el ID de cada operacion
-          dineroMailService.verifyPayment(0L,op.ID.text())
+          dineroMailService.verifyPayment(0L, op.id.text())
         }
       }
     } else {
