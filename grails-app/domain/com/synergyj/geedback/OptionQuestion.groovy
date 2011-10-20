@@ -17,13 +17,13 @@ package com.synergyj.geedback
 
 class OptionQuestion {
 
-  String option
+  String optionDescription
   Integer orderTo
 
   static belong = [question: Question]
 
   static constraints = {
-    option(nullable: false, blank: false, size: 1..1000)
+    optionDescription(nullable: false, blank: false, size: 1..1000)
     orderTo(nullable: false)
   }
 
