@@ -22,11 +22,11 @@ class Question {
   KindOfQuestion kindOfQuestion
 
   static hasMany = [options: OptionQuestion]
-  static belongsTo = [questionnaire: Questionnaire]
+  static belongsTo = Questionnaire
 
   static constraints = {
     question(nullable: false, blank: false, size: 1..1000)
-    order(nullable: false)
+    orderTo(nullable: false)
     kindOfQuestion(nullable: false)
   }
 

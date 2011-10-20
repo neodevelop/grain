@@ -36,6 +36,10 @@ import com.synergyj.grain.course.KindPromotion
 import com.synergyj.grain.course.PromotionPerScheduledCourse
 import com.synergyj.grain.course.Registration
 import com.synergyj.grain.course.RegistrationStatus
+import com.synergyj.geedback.Questionnaire
+import com.synergyj.geedback.Question
+import com.synergyj.geedback.KindOfQuestion
+import com.synergyj.geedback.OptionQuestion
 
 
 class BootStrap {
@@ -47,16 +51,16 @@ class BootStrap {
   def save(domain) {
     assert domain
     if (domain.hasErrors()) {
-      println "errors"
+      log.error "errors"
       domain.errors.each {error ->
-        println error.dump()
+        log.error error.dump()
       }
     } else {
-      println "trying to save"
+      log.debug "trying to save"
       def saved = domain.save(flush: true, failOnError: true)
       if (!saved) {
         domain.errors.each {error ->
-          println error.dump()
+          log.error error.dump()
         }
       }
     }
@@ -77,8 +81,98 @@ class BootStrap {
       createRegistrations()
       createMenuItems()
       createContents()
+      createQuestionnarie()
+      createQuestionsAndOptions()
     }
 
+  }
+
+  def createQuestionnarie() {
+    if (!Questionnaire.count()) {
+      log.debug("Creando un cuestionario de prueba")
+      def questionnaire = new Questionnaire(name: "Evaluación de curso", description: "Cuestionario para evaluación de desempeño y aprovechamiento de curso")
+      questionnaire.save()
+      log.debug("Cuestionario creado")
+    }
+  }
+
+  def createQuestionsAndOptions() {
+    if (!Question.count()) {
+      log.debug("Creando las preguntas para el cuestionario")
+      def q1 = new Question(
+          question: "Los temas expuestos, ¿ fueron de manera clara y de fácil comprensión?",
+          orderTo: 1, kindOfQuestion: KindOfQuestion.TRUE_FALSE
+      )
+      def q2 = new Question(
+          question: "El contenido de los temas expuestos consideras que fue:",
+          orderTo: 2, kindOfQuestion: KindOfQuestion.CHOOSE_OPTION
+      )
+      def q3 = new Question(
+          question: "Los temas tratados, fueron:",
+          orderTo: 3, kindOfQuestion: KindOfQuestion.CHOOSE_OPTION
+      )
+      def q4 = new Question(
+          question: "Con este curso, consideras que se ampliaron tus conocimientos y comprensión acerca de tu trabajo.",
+          orderTo: 4, kindOfQuestion: KindOfQuestion.TRUE_FALSE
+      )
+      def q5 = new Question(
+          question: "La presentación, ¿incluyó suficientes ejemplos prácticos, que facilitaron la comprensión del curso?",
+          orderTo: 5, kindOfQuestion: KindOfQuestion.TRUE_FALSE
+      )
+      def q6 = new Question(
+          question: "¿Cómo consideras la calidad de las presentaciones?",
+          orderTo: 6, kindOfQuestion: KindOfQuestion.CHOOSE_OPTION
+      )
+      def q7 = new Question(
+          question: "¿El curso cubrió tus expectativas?",
+          orderTo: 7, kindOfQuestion: KindOfQuestion.TRUE_FALSE
+      )
+      def q8 = new Question(
+          question: "Los conceptos de cómo aplicar los conocimientos adquiridos en tu trabajo, ¿te han quedado claros...?",
+          orderTo: 8, kindOfQuestion: KindOfQuestion.CHOOSE_OPTION
+      )
+      def q9 = new Question(
+          question: "Por favor escribe los temas tratados que consideres de mayor importancia:",
+          orderTo: 9, kindOfQuestion: KindOfQuestion.SHORT_ANSWER
+      )
+      def q10 = new Question(
+          question: "¿Qué temas consideras tratar mas brevemente o eliminarse?",
+          orderTo: 10, kindOfQuestion: KindOfQuestion.SHORT_ANSWER
+      )
+      def q11 = new Question(
+          question: "¿Qué temas deberían de agregarse?",
+          orderTo: 11, kindOfQuestion: KindOfQuestion.SHORT_ANSWER
+      )
+      def q12 = new Question(
+          question: "La limpieza, iluminación y ventilación del lugar, consideras que fue:",
+          orderTo: 12, kindOfQuestion: KindOfQuestion.CHOOSE_OPTION
+      )
+      def q13 = new Question(
+          question: "Las sillas, mesas y las condiciones del aula, consideras que son:",
+          orderTo: 13, kindOfQuestion: KindOfQuestion.CHOOSE_OPTION
+      )
+      def q14 = new Question(
+          question: "El equipo didáctico y audiovisual, consideras que fue:",
+          orderTo: 14, kindOfQuestion: KindOfQuestion.CHOOSE_OPTION
+      )
+      def q15 = new Question(
+          question: "Por favor si consideras que olvidamos algo o nos quieres dejar una opinión comentario o dudas, háznolos saber:",
+          orderTo: 15, kindOfQuestion: KindOfQuestion.DESCRIPTION
+      )
+      def questions = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15]
+      log.debug("Obteniendo el cuestionario")
+      def quiz = Questionnaire.get(1L)
+      log.debug("Asignando preguntas al cuestionario")
+      questions.each { q ->
+        quiz.addToQuestions(q)
+      }
+      quiz.save()
+      log.debug("Preguntas y cuestionario guardados")
+      log.debug("Agregando respuestas al cuestionario")
+
+      //q1.addToOptions(new OptionQuestion(optionDescription: "", orderTo: 1))
+
+    }
   }
 
   def createContents() {
