@@ -161,8 +161,13 @@ function recalculateAmounts(animate){
 
   $("#half").val(finalCostCourse/2);
   $("#full").val(finalCostCourse);
-
   $("#totalToPay").val(finalCostCourse);
+
+  if ($.browser.opera) {
+    $("#half").val(finalCostCourse / 2).css({display:block});
+    $("#full").val(finalCostCourse).css({display:block});
+    $("#totalToPay").val(finalCostCourse).css({display:block});
+  }
 
   if(animate){
     $("td.finalAmount").qtip({
