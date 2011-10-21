@@ -20,7 +20,7 @@ class OptionQuestion {
   String optionDescription
   Integer orderTo
 
-  static belong = [question: Question]
+  static belong = Question
 
   static constraints = {
     optionDescription(nullable: false, blank: false, size: 1..1000)

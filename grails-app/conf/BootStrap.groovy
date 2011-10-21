@@ -169,9 +169,39 @@ class BootStrap {
       quiz.save()
       log.debug("Preguntas y cuestionario guardados")
       log.debug("Agregando respuestas al cuestionario")
+      def yes = new OptionQuestion(optionDescription: "Si", orderTo: 1)
+      def no = new OptionQuestion(optionDescription: "No", orderTo: 2)
+      def veryGood = new OptionQuestion(optionDescription: "Muy bueno", orderTo: 1)
+      def good = new OptionQuestion(optionDescription: "Bueno", orderTo: 2)
+      def acceptable = new OptionQuestion(optionDescription: "Aceptable", orderTo: 3)
+      def regular = new OptionQuestion(optionDescription: "Regular", orderTo: 4)
+      def bad = new OptionQuestion(optionDescription: "Malo", orderTo: 5)
+      def brief = new OptionQuestion(optionDescription: "Abreviados", orderTo: 1)
+      def extense = new OptionQuestion(optionDescription: "Extensos", orderTo: 2)
+      def justs = new OptionQuestion(optionDescription: "Justos", orderTo: 3)
+      def option1 = new OptionQuestion(optionDescription: "Si, completamente...", orderTo: 1)
+      def option2 = new OptionQuestion(optionDescription: "Si, aunque presiento que necesitaré ayuda o guías adicionales...", orderTo: 2)
+      def option3 = new OptionQuestion(optionDescription: "No, pero leyendo el material y practicando los ejercicios me puedo ayudar...", orderTo: 3)
+      def option4 = new OptionQuestion(optionDescription: "Definitivamente no...", orderTo: 4)
+      def excelent = new OptionQuestion(optionDescription: "Excelente", orderTo: 1)
+      def canBetter = new OptionQuestion(optionDescription: "Se puede mejorar", orderTo: 3)
+      log.debug("Respuestas creadas")
+      log.debug("Agregando respuestas a preguntas")
+      q1.addToOptions(yes).addToOptions(no)
+      q2.addToOptions(veryGood).addToOptions(good).addToOptions(acceptable).addToOptions(regular).addToOptions(bad)
+      q3.addToOptions(brief).addToOptions(extense).addToOptions(justs)
+      q4.addToOptions(yes).addToOptions(no)
+      q5.addToOptions(yes).addToOptions(no)
+      q6.addToOptions(veryGood).addToOptions(good).addToOptions(acceptable).addToOptions(regular).addToOptions(bad)
+      q7.addToOptions(yes).addToOptions(no)
+      q8.addToOptions(option1).addToOptions(option2).addToOptions(option3).addToOptions(option4)
+      q12.addToOptions(excelent).addToOptions(acceptable).addToOptions(canBetter)
+      q13.addToOptions(excelent).addToOptions(acceptable).addToOptions(canBetter)
+      q14.addToOptions(excelent).addToOptions(acceptable).addToOptions(canBetter)
 
-      //q1.addToOptions(new OptionQuestion(optionDescription: "", orderTo: 1))
-
+      questions.each { q ->
+        q.save()
+      }
     }
   }
 
@@ -361,7 +391,7 @@ class BootStrap {
         User.list().each { user ->
           def registration = new Registration(student: user, registrationStatus: RegistrationStatus.REGISTERED)
           sc.addToRegistrations(registration)
-          sc.save()
+          sc.save(flush: true)
         }
       }
     }
@@ -384,7 +414,7 @@ class BootStrap {
       ScheduledCourse.list().each { sc ->
         sc.addToPromotions(new PromotionPerScheduledCourse(promotion: p1, validUntil: (new Date() + 30)))
         sc.addToPromotions(new PromotionPerScheduledCourse(promotion: p2, validUntil: (new Date() + 30)))
-        sc.save()
+        sc.save(flush: true)
       }
     }
   }
