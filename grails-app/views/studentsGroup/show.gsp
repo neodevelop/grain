@@ -14,6 +14,7 @@
   <br/>
   <div id="tabs" style="width:100%;">
     <ul>
+      <li><a href="#tabs-0">Usuarios interesados</a></li>
       <li><a href="#tabs-1">Usuarios registrados</a></li>
       <li><a href="#tabs-2">Usuarios inscritos</a></li>
       <li><a href="#tabs-3">Usuarios no inscritos</a></li>
@@ -21,6 +22,31 @@
       <li><a href="#tabs-5">Lista de gastos</a></li>
       <li><a href="#tabs-6">Ingresos</a></li>
     </ul>
+
+    <div id="tabs-0">
+      <div align="center">
+        <i>Aquí se presenta los correos de las personas que han entrado a la Landing Page y han dejado sus datos.<br/>
+          El total es de <b>${emailsFromLP.size()}</b> participantes</i><br/>
+      </div>
+      <table width="100%" class="registrationsList" cellpadding="5" cellspacing="0">
+        <thead>
+        <tr>
+          <th>Correo electrónico</th>
+          <th>Fecha de registro</th>
+          <th>Token</th>
+        </tr>
+        </thead>
+        <tbody>
+        <g:each in="${emailsFromLP}" var="r">
+          <tr>
+            <td>${r.username}</td>
+            <td><g:formatDate date="${r.dateCreated}" format="dd / MMMM / yyyy hh:mm a"/></td>
+            <td>${r.token}</td>
+          </tr>
+        </g:each>
+        </tbody>
+      </table>
+    </div>
     <div id="tabs-1">
       <div align="center">
         <i>Aquí se presenta a todos los participantes que han dado clic al botón de confirmación de registro.<br/>

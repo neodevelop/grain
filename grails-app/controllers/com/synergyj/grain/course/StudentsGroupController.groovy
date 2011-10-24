@@ -22,6 +22,7 @@ import org.codehaus.groovy.grails.plugins.jasper.JasperExportFormat
 import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
 import java.text.SimpleDateFormat
 import org.hibernate.FetchMode as FM
+import com.synergyj.grain.auth.RegistrationCodeForScheduledCourse
 
 @Secured(["hasRole('ROLE_ADMIN')"])
 class StudentsGroupController {
@@ -50,12 +51,16 @@ class StudentsGroupController {
       registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH  || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED || registration.registrationStatus == RegistrationStatus.CANCELLED
     }
 
+    // Obtenemos los correos de las personas que se han registrado en la LP
+    def emailsFromLP = RegistrationCodeForScheduledCourse.findAllByScheduledCourseId(scheduledCourse.id)
+
     [
         scheduledCourse: scheduledCourse,
         registrations: registrations,
         registrationsInGroup: registrationsInGroup,
         registrationsNoGroup: registrationsNoGroup,
-        expenses:expenses
+        expenses:expenses,
+        emailsFromLP:emailsFromLP
     ]
   }
 
