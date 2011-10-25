@@ -197,7 +197,7 @@
     </script>
     </g:if>
 
-    <g:if test="${registration.registrationStatus == RegistrationStatus.FINISHED}">
+  <g:if test="${registration.registrationStatus == RegistrationStatus.FINISHED}">
     <tr>
       <td colspan="2" class="cellCenter">
         <g:link controller="studentsGroup" action="certificate" id="${registration.id}" class="action">
@@ -205,7 +205,18 @@
         </g:link>
       </td>
     </tr>
-    </g:if>
+
+    <g:hasEvaluationForCourse scheduledCourseId="${registration.scheduledCourse.id}">
+      <tr>
+        <td colspan="2" class="cellCenter">
+          <g:link class="poll" controller="evaluation" id="${registration.id}">
+            <g:message code="evaluation.do" default="Begin evaluation for this course"/>
+          </g:link>
+        </td>
+      </tr>
+    </g:hasEvaluationForCourse>
+
+  </g:if>
 
     <g:if test="${!(registration.registrationStatus == RegistrationStatus.CANCELLED || registration.registrationStatus == RegistrationStatus.FINISHED)}">
     <tr>

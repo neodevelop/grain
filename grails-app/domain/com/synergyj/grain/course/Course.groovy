@@ -15,8 +15,6 @@
  */
 package com.synergyj.grain.course
 
-import com.synergyj.geedback.Evaluation
-
 class Course extends CourseContent implements Serializable{
 
   transient private static final long serialVersionUID = -1L
@@ -39,7 +37,7 @@ class Course extends CourseContent implements Serializable{
   String borderColor
   String textColor
 
-  static hasMany = [modules:CourseModule,evaluations:Evaluation]
+  static hasMany = [modules:CourseModule]
 
   static constraints = {
     overview nullable:false,blank:false,size:1..1000

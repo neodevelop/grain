@@ -16,13 +16,14 @@
 package com.synergyj.geedback
 
 import com.synergyj.grain.auth.User
+import com.synergyj.grain.course.ScheduledCourse
 
 class Evaluation {
 
   User user
   EvaluationStatus evaluationStatus
 
-  static belongsTo = [questionnaire: Questionnaire]
+  static belongsTo = [scheduledCourse:ScheduledCourse,questionnaire: Questionnaire]
   static hasMany = [answers: AnswerForQuestion]
 
   Date dateCreated
