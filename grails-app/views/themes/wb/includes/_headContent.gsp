@@ -44,7 +44,7 @@
 <!-- Aplicamos el wysiwyg a los textarea y button al menu -->
 <script language="javascript">
   $(function(){
-    $('textarea').wysiwyg({
+    $('textarea.wysiwyg').wysiwyg({
       controls:{
         html  : { visible: true }
       }
