@@ -81,9 +81,9 @@ class BootStrap {
       createRegistrations()
       createMenuItems()
       createContents()
-      createQuestionnarie()
-      createQuestionsAndOptions()
     }
+    createQuestionnarie()
+    createQuestionsAndOptions()
 
   }
 

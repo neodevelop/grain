@@ -24,7 +24,7 @@
       $(this).parent().parent().next().fadeIn();
       $("form#formQuestion"+questionId).submit();
       $("span#quizCursor").text(questionId);
-      $(this).text("Actualizar");
+      $(this).children("span").text("Actualizar");
     });
         
   });
@@ -76,7 +76,7 @@
           <g:textArea id="answerFor${question.id}" name="answerFor${question.id}" rows="3" cols="80" value=""/>
           <br/>
           <button type="button" id="actionForQuestion${question.id}" name="actionForQuestion${question.id}">
-            Continuar
+            <span>Continuar</span>
           </button>
         </g:if>
       </g:formRemote>

@@ -209,8 +209,8 @@
     <g:hasEvaluationForCourse scheduledCourseId="${registration.scheduledCourse.id}">
       <tr>
         <td colspan="2" class="cellCenter">
-          <g:link class="poll" controller="evaluation" id="${registration.id}">
-            <g:message code="evaluation.do" default="Begin evaluation for this course"/>
+          <g:link class="poll" controller="evaluation" action="index" id="${registration.scheduledCourse.id}">
+            <g:message code="evaluation.do" default="Begin evaluation for this course"/> ^_^
           </g:link>
         </td>
       </tr>

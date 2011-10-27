@@ -22,6 +22,7 @@ class EvaluationController {
       evaluation = new Evaluation(user: user, evaluationStatus: EvaluationStatus.OPEN)
       evaluation.questionnaire = quiz
       scheduledCourse.addToEvaluations(evaluation)
+      scheduledCourse.save()
     }
     
     [quiz:quiz,evaluation:evaluation]
