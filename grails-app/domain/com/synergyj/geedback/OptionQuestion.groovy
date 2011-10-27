@@ -15,7 +15,7 @@
  */
 package com.synergyj.geedback
 
-class OptionQuestion {
+class OptionQuestion implements Comparable {
 
   String optionDescription
   Integer orderTo
@@ -27,5 +27,9 @@ class OptionQuestion {
     orderTo(nullable: false)
   }
 
-  String toString() { option }
+  String toString() { optionDescription }
+  
+  int compareTo(obj) {
+    orderTo.compareTo(obj.orderTo)
+  }
 }
