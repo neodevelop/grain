@@ -17,11 +17,13 @@ package com.synergyj.geedback
 
 class ExtraInformationForAnswer {
 
-  String propertyName
-  String propertyValue
+  String description
+  KindOfExtraInformation kindOfExtraInformation
+  
+  static belongsTo = [answerForQuestion:AnswerForQuestion]
 
   static constraints = {
-    propertyName nullable: false
-    propertyValue nullable: false
+    description nullable: false, blank:true
+    kindOfExtraInformation nullable: false
   }
 }
