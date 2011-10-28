@@ -72,7 +72,7 @@ function startOver(){
     $(this).children(":checkbox").trigger("change");
   });
 
-  $(":radio").hide();
+  $("input:radio").hide();
 
   $("div.percentOption").click(function(){
     $("div#leftbox :radio").attr("checked",false);
@@ -159,15 +159,11 @@ function recalculateAmounts(animate){
   $("span#totalCostByCourse").text((finalCostCourse*1).toFixed(2));
   $("span#halfCostByCourse").text(((finalCostCourse/2)*1).toFixed(2));
 
-  $("#half").val(finalCostCourse/2);
-  $("#full").val(finalCostCourse);
-  $("#totalToPay").val(finalCostCourse);
 
-  if ($.browser.opera) {
-    $("#half").val(finalCostCourse / 2).css({display:block});
-    $("#full").val(finalCostCourse).css({display:block});
-    $("#totalToPay").val(finalCostCourse).css({display:block});
-  }
+  $("#half").val(finalCostCourse / 2).val();
+  $("#full").val(finalCostCourse).val();
+  $("#totalToPay").val(finalCostCourse).val();
+
 
   if(animate){
     $("td.finalAmount").qtip({
