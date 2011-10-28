@@ -23,7 +23,7 @@ class ExtraInformationForAnswer {
   static belongsTo = [answerForQuestion:AnswerForQuestion]
 
   static constraints = {
-    description nullable: false, blank:true
+    description nullable: false, blank:true,size:1..1000
     kindOfExtraInformation nullable: false
   }
 }

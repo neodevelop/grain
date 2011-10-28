@@ -60,7 +60,7 @@ class EvaluationService {
           answer = ExtraInformationForAnswer.findByAnswerForQuestion(answerForQuestion)
         }
         if(!answer){
-          answer = new ExtraInformationForAnswer(answerForQuestion:answerForQuestion,kindOfExtraInformation:KindOfExtraInformation.PUBLIC_THIS)
+          answer = new ExtraInformationForAnswer(answerForQuestion:answerForQuestion,kindOfExtraInformation:KindOfExtraInformation.PRIVATE)
           answerForQuestion.addToExtras(answer)
         }
         answer.description = answerId
