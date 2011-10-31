@@ -16,21 +16,21 @@
 package com.synergyj.grain.event
 
 import groovy.xml.MarkupBuilder
-import groovyx.net.http.HTTPBuilder
 import static groovyx.net.http.ContentType.XML
-import static groovyx.net.http.Method.GET
 import static groovyx.net.http.Method.POST
 import com.synergyj.grain.course.Payment
 import java.text.SimpleDateFormat
 import com.synergyj.grain.course.PaymentStatus
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
+import groovyx.net.http.HTTPBuilder
 
 class DineroMailService {
 
   static transactional = true
 
-  static urlIPN = "https://mexico.dineromail.com/Vender/Consulta_IPN.asp"
-  static ipnPassword = ''
-  static accountNumber = ''
+  static urlIPN = ConfigurationHolder.config.dineroMail.urlIPN
+  static ipnPassword = ConfigurationHolder.config.dineroMail.ipnPassword
+  static accountNumber = ConfigurationHolder.config.dineroMail.accountNumber
   static timeoutDM = 1000 * 60 * 5
   static messageCodes = [
       '0': 'Código invalido',
@@ -130,7 +130,7 @@ class DineroMailService {
         // Obtenemos el status"
         tx.statusOperation = statusOperation["${operation.ESTADO?.text() ?: '0'}"]
         // Obtenemos la fecha y parseamos ${operation.FECHA}"
-        def sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa")
+        def sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa")
         def fecha = operation.FECHA?.text() - '.'
         tx.operationDate = sdf.parse(fecha.toUpperCase())
         // Obtenemos el monto"
