@@ -1,5 +1,3 @@
-import org.apache.log4j.DailyRollingFileAppender
-
 /*
 * Copyright 2002-2008 the original author or authors.
 *
@@ -16,17 +14,19 @@ import org.apache.log4j.DailyRollingFileAppender
 * limitations under the License.
 */
 
+import org.apache.log4j.DailyRollingFileAppender
+
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
-// grails.config.locations = [ "classpath:${appName}-config.properties",
-//                             "classpath:${appName}-config.groovy",
-//                             "file:${userHome}/.grails/${appName}-config.properties",
-//                             "file:${userHome}/.grails/${appName}-config.groovy"]
+grails.config.locations = [ "classpath:${appName}-config.properties",
+                             "classpath:${appName}-config.groovy",
+                             "file:${userHome}/.grails/${appName}-config.properties",
+                             "file:${userHome}/.grails/${appName}-config.groovy"]
 
-// if(System.properties["${appName}.config.location"]) {
-//    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
-// }
+//if(System.properties["${appName}.config.location"]) {
+//   grails.config.locations << "file:" + System.properties["${appName}.config.location"]
+//}
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
@@ -181,30 +181,10 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/s3Asset/**': ["hasRole('ROLE_ADMIN')"]
 ]
 
-// Temporalmente agregado para usar el flujo de registro
-grails {
-  mail {
-    host = "smtp.gmail.com"
-    port = 465
-    username = "cursos@synergyj.com"
-    password = ""
-    props = ["mail.smtp.auth": "true",
-        "mail.smtp.socketFactory.port": "465",
-        "mail.smtp.socketFactory.class": "javax.net.ssl.SSLSocketFactory",
-        "mail.smtp.socketFactory.fallback": "false"]
-  }
-}
-
 avatarPlugin {
   defaultGravatarUrl = """http://synergyj.com/user_anonymous.png"""
   gravatarRating = "G"
 }
-
-google.analytics.webPropertyID = "UA-xxxxxx-x"
-
-tomcat.deploy.username = "tomcat"
-tomcat.deploy.password = "secret"
-tomcat.deploy.url = "http://localhost:8080/manager/text"
 
 rabbitmq {
   connectionfactory {
@@ -217,13 +197,4 @@ rabbitmq {
   }
 }
 
-aws {
-  domain="s3.amazonaws.com"
-  accessKey=""
-  secretKey=""
-  bucketName="media.grain.com.${theBucketName}"
-  prefixBucketWithKey=false
-  lazyInit=true
-  startDelay=1000*60*10
-  timeout=1000*60*10
-}
+// Configuración externalizada
