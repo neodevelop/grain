@@ -19,9 +19,7 @@ import org.apache.log4j.DailyRollingFileAppender
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
-grails.config.locations = [ "classpath:${appName}-config.properties",
-                             "classpath:${appName}-config.groovy",
-                             "file:${userHome}/.grails/${appName}-config.properties",
+grails.config.locations = [  "file:${userHome}/.grails/${appName}-config.properties",
                              "file:${userHome}/.grails/${appName}-config.groovy"]
 
 //if(System.properties["${appName}.config.location"]) {
@@ -73,24 +71,20 @@ jqueryUi.cdn = 'googlecode'
 
 // set per-environment serverURL stem for creating absolute links
 def logDirectory = "target/" // Directorio de Log4J
-def theBucketName = "dev"
 environments {
   development {
     grails.serverURL = "http://localhost:8080/grain"
-    theBucketName = "dev"
   }
   test {
     grails.serverURL = "http://localhost:8080/${appName}"
     grails.plugins.springsecurity.portMapper.httpPort = 80 // Spring Security Config
     grails.plugins.springsecurity.portMapper.httpsPort = 80 // Spring Security Config
-    theBucketName = "test"
   }
   production {
     grails.serverURL = "http://entrenamiento.synergyj.com"
     logDirectory = "logs/" // Directorio de Log4J
     grails.plugins.springsecurity.portMapper.httpPort = 80 // Spring Security Config
     grails.plugins.springsecurity.portMapper.httpsPort = 443 // Spring Security Config
-    theBucketName = "prod"
   }
 }
 
