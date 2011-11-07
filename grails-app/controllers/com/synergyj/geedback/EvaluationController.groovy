@@ -3,12 +3,14 @@ package com.synergyj.geedback
 import com.synergyj.grain.course.ScheduledCourse
 import org.hibernate.FetchMode as FM
 import grails.converters.JSON
+import grails.plugins.springsecurity.Secured
 
 class EvaluationController {
 
   def springSecurityService
   def evaluationService
 
+  @Secured(['isAuthenticated()'])
   def index = {
     def scheduledCourse = ScheduledCourse.get(params.id)
     def user = springSecurityService.currentUser
@@ -46,6 +48,7 @@ class EvaluationController {
     redirect(uri: '/me')
   }
 
+  @Secured(['ROLE_ADMIN'])
   def feedback = {
     def scheduledCourse = ScheduledCourse.withCriteria(uniqueResult: true) {
       eq 'id', params.long('id')
