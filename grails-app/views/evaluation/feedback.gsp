@@ -9,6 +9,7 @@
     $(function() {
       $("div#tabs").tabs();
       $("table.answers").styleTable();
+      $("a.reset").button();
     });
   </script>
 </head>
@@ -57,6 +58,15 @@
             </g:each>
           </tbody>
         </table>
+        <br/>
+        <div align="center">
+          <g:remoteLink controller="evaluation" action="reset" id="${evaluation.id}" class="reset" update="evaluationStatus${evaluation.id}">
+            Restablecer evaluación
+          </g:remoteLink>
+          <div id="evaluationStatus${evaluation.id}">
+            Status: ${evaluation.evaluationStatus}
+          </div>
+        </div>
       </div>
     </g:each>
 

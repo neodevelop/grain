@@ -48,6 +48,12 @@ class EvaluationController {
     redirect(uri: '/me')
   }
 
+  def reset = {
+    def evaluation = Evaluation.get(params.id)
+    evaluation.evaluationStatus = EvaluationStatus.OPEN
+    render "Status: ${evaluation.evaluationStatus }"
+  }
+
   @Secured(['ROLE_ADMIN'])
   def feedback = {
     def scheduledCourse = ScheduledCourse.withCriteria(uniqueResult: true) {
