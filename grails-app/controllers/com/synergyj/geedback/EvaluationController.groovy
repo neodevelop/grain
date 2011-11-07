@@ -13,21 +13,21 @@ class EvaluationController {
     def scheduledCourse = ScheduledCourse.get(params.id)
     def user = springSecurityService.currentUser
     // TODO: Asignar un cuestionario por curso calendarizado
-    def quiz  = Questionnaire.withCriteria(uniqueResult:true) {
-      eq 'id',1L
+    def quiz = Questionnaire.withCriteria(uniqueResult: true) {
+      eq 'id', 1L
       fetchMode "questions", FM.EAGER
     }
-    def evaluation = Evaluation.findByScheduledCourseAndUser(scheduledCourse,user)
-    if(!evaluation){
+    def evaluation = Evaluation.findByScheduledCourseAndUser(scheduledCourse, user)
+    if (!evaluation) {
       evaluation = new Evaluation(user: user, evaluationStatus: EvaluationStatus.OPEN)
       evaluation.questionnaire = quiz
       scheduledCourse.addToEvaluations(evaluation)
       scheduledCourse.save()
     }
-    
-    [quiz:quiz,evaluation:evaluation]
+
+    [quiz: quiz, evaluation: evaluation]
   }
-  
+
   def pickAnswer = {
     log.debug params
     def answerForQuestion = evaluationService.saveOptionForThisQuestion(
@@ -38,11 +38,26 @@ class EvaluationController {
     )
     render answerForQuestion as JSON
   }
-  
+
   def confirm = {
     def evaluation = Evaluation.get(params.id)
     evaluation.evaluationStatus = EvaluationStatus.CLOSED
     flash.message = "Gracias por contestar nuestra evaluación del curso..."
-    redirect(uri:'/me')
+    redirect(uri: '/me')
+  }
+
+  def feedback = {
+    def scheduledCourse = ScheduledCourse.withCriteria(uniqueResult: true) {
+      eq 'id', params.long('id')
+      join "course"
+    }
+    def evaluations = Evaluation.withCriteria {
+      eq 'scheduledCourse', scheduledCourse
+    }
+    def questionnarie = Questionnaire.withCriteria(uniqueResult: true) {
+      eq 'id', 1L
+      fetchMode 'questions', FM.EAGER
+    }
+    [scheduledCourse: scheduledCourse, evaluations: evaluations,questionnarie:questionnarie,questionnarie:questionnarie]
   }
 }

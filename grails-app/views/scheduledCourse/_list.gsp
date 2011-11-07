@@ -17,6 +17,8 @@
 
       <th>&nbsp;</th>
 
+      <th>&nbsp;</th>
+
     </tr>
     </thead>
     <tbody>
@@ -61,6 +63,12 @@
         <td>
           <g:link controller="studentsGroup" action="attendance" id="${scheduledCourse?.id}">
             <g:message code="studentsGroup.attendance" default="Attendance"/>
+          </g:link>
+        </td>
+
+        <td>
+          <g:link controller="evaluation" action="feedback" id="${scheduledCourse?.id}">
+            <g:message code="studentsGroup.feedback" default="Feedback"/>
           </g:link>
         </td>
 

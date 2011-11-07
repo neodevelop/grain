@@ -6,6 +6,7 @@ test/reports
 web-app/plugins
 web-app/js/prototype
 *.iws
+*.ipr
 *.war
 *DB*
 cobertura.ser
@@ -25,7 +26,6 @@ web-app/images/leftnav_top.png
 web-app/images/springsource.png
 out
 /log/
-
 /logs/
 /s3-plugin-temp/
 /erl_crash.dump
