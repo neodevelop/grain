@@ -56,17 +56,50 @@ class EvaluationController {
 
   @Secured(['ROLE_ADMIN'])
   def feedback = {
+    // Obtenemos el curso calendarizado con su curso
     def scheduledCourse = ScheduledCourse.withCriteria(uniqueResult: true) {
       eq 'id', params.long('id')
       join "course"
     }
+    // Obtenemos las evaluaciones por curso
     def evaluations = Evaluation.withCriteria {
       eq 'scheduledCourse', scheduledCourse
     }
+    // Obtenemos el cuestionario realizado con sus preguntas
     def questionnarie = Questionnaire.withCriteria(uniqueResult: true) {
       eq 'id', 1L
       fetchMode 'questions', FM.EAGER
     }
-    [scheduledCourse: scheduledCourse, evaluations: evaluations,questionnarie:questionnarie,questionnarie:questionnarie]
+    
+    // Preparando la cuenta
+    def dataGraph = [:]
+    // Iteramos las evaluaciones
+    evaluations.each{ evaluation ->
+      // Iteramos las respuestas de cada evaluación
+      evaluation.answers.sort().each{ answer ->
+        // Solo se toman en cuenta evaluaciones de opcion multiple
+        if((answer.question.kindOfQuestion == KindOfQuestion.CHOOSE_OPTION) || (answer.question.kindOfQuestion == KindOfQuestion.TRUE_FALSE)){
+          // Si no tenemos el elemento en el mapa lo creamos
+          if(!(dataGraph[answer.question])){
+            dataGraph[answer.question] = [:]
+            def currentQuestion = questionnarie.questions.find { it == answer.question }
+            currentQuestion.options.sort().each{ option ->
+              dataGraph[answer.question][option] = 0
+            }
+            
+          }
+          // Si dentro del mapa de respuestaa no esta la opcion, entonces la agregamos
+          if(!(dataGraph[answer.question][answer.optionQuestion])){
+            dataGraph[answer.question][answer.optionQuestion] = 0
+          }
+          // Sumamos uno a la respuesta escogida de la respuesta
+          dataGraph[answer.question][answer.optionQuestion] += 1
+        }
+      }
+    }
+    
+    log.debug dataGraph
+    
+    [scheduledCourse: scheduledCourse, evaluations: evaluations,questionnarie:questionnarie,dataGraph:dataGraph]
   }
 }
