@@ -12,6 +12,11 @@ $(function(){
     $('#showAddExpense').hide();
   });
 
+  $('#showAddInstructor').click(function(){
+      $('#newInstructor').show();
+      $('#showAddInstructor').hide();
+    });
+
   $("a.deleteSession").live("click",function(){
     var splitLink = this.href.split('/');
     var index = splitLink[splitLink.length - 1];
@@ -52,6 +57,19 @@ function restoreForm(){
   $('#showAddExpense').show();
   $('#addExpenseToScheduledCourse')[0].reset();
   return false;
+}
+
+function restoreInstructorButton(){
+  $('#newInstructor').hide();
+  $('#showAddInstructor').show();
+}
+
+function addToInstructors(elementId){
+  $("li#instructor"+elementId).appendTo("ul#instructors");
+}
+
+function removeFromInstructors(elementId){
+  $("li#instructor"+elementId).appendTo("ul#selectInstructors");
 }
 
 function reacting(e){

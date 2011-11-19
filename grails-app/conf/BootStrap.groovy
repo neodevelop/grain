@@ -532,16 +532,28 @@ class BootStrap {
     def emails = ["user@mail.com", "user1@mail.com", "user2@mail.com", "user3@mail.com",
         "user4@mail.com", "user5@mail.com", "user6@mail.com", "user7@mail.com",
         "user8@mail.com", "user9@mail.com", "user10@mail.com"]
+    def instructors = [
+      "jmanuel.reyes@synergyj.com",
+      "jorge.rodriguez@synergyj.com",
+      "domingo.suarez@@synergyj.com",
+      "jjuan.reyes@synergyj.com",
+      "andres.valdez@synergyj.com"
+    ]
 
     if (!Role.count()) {
       def adminRole = new Role(authority: 'ROLE_ADMIN', description: 'Administrador').save(flush: true)
       def userRole = new Role(authority: 'ROLE_USER', description: 'Usuario').save(flush: true)
+      def instructorRole = new Role(authority: 'ROLE_INSTRUCTOR', description: 'Instructor').save(flush: true)
       log.debug "Roles creados ${adminRole},${userRole}"
       String password = 'password'
       log.debug("Creando usuarios de prueba y asignando roles")
       emails.each { mail ->
         def user = new User(email: mail, password: password).save(flush: true)
         PersonAuthority.create user, userRole, true
+      }
+      instructors.each { email ->
+        def user = new User(email: email, password: password).save(flush: true)
+        PersonAuthority.create user, instructorRole, true
       }
       log.debug "Usuarios creados!!!"
       log.debug "Creando usuario administrador"

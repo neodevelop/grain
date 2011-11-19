@@ -118,6 +118,24 @@
             </div>
           </td>
         </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name">
+            <g:message code="scheduledCourse.instructors" default="Instructors"/>:
+          </td>
+          <td valign="top" style="text-align: left;" class="value">
+            <ul id="instructors">
+            <g:each in="${scheduledCourseInstance.instructors}" var="instructor">
+              <li id="instructor${instructor.id}">
+                <g:remoteLink controller="scheduledCourse" action="removeInstructor" id="${scheduledCourseInstance.id}"
+                              params="[instructorId:instructor.id]" onComplete="removeFromInstructors(${instructor.id})">
+                  ${instructor}
+                </g:remoteLink>
+              </li>
+            </g:each>
+            </ul>
+          </td>
+        </tr>
         
         <tr class="prop">
           <td valign="top" class="name">
@@ -233,6 +251,24 @@
   </g:formRemote>
 </div>
 
+
+<button id="showAddInstructor">
+  <g:message code="instructor.add" default="Add Instructor" />
+</button>
+
+<div id="newInstructor" title="Add instructor to this course" style="display:none;">
+  <ul id="selectInstructors">
+    <g:each in="${instructors}" var="instructor">
+      <li id="instructor${instructor.id}">
+        <g:remoteLink controller="scheduledCourse" action="addInstructor" id="${scheduledCourseInstance.id}"
+                      params="[instructorId:instructor.id]" onSuccess="addToInstructors(${instructor.id})"
+                      onComplete="restoreInstructorButton()">
+          ${instructor}
+      </g:remoteLink>
+      </li>
+    </g:each>
+  </ul>
+</div>
 
 </body>
 </html>
