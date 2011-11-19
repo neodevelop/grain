@@ -16,6 +16,7 @@
 package com.synergyj.grain.course
 
 import com.synergyj.geedback.Evaluation
+import com.synergyj.grain.auth.User
 
 class ScheduledCourse implements Serializable {
 
@@ -51,7 +52,14 @@ class ScheduledCourse implements Serializable {
     durationInHours nullable: false
   }
 
-  static hasMany = [courseSessions: CourseSession, promotions: PromotionPerScheduledCourse, registrations:Registration,expenses:Expense, evaluations:Evaluation]
+  static hasMany = [
+    courseSessions: CourseSession,
+    promotions: PromotionPerScheduledCourse,
+    registrations:Registration,
+    expenses:Expense,
+    evaluations:Evaluation,
+    instructors:User
+  ]
 
   String toString() {
     "(${id} : ${beginDate} : ${scheduledCourseStatus})"

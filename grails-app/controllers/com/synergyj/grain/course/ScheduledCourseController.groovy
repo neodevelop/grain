@@ -19,6 +19,10 @@ import java.text.SimpleDateFormat
 import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 import com.synergyj.grain.ScheduledCourseException
+import com.synergyj.grain.auth.User
+import com.synergyj.grain.auth.PersonAuthority
+import com.synergyj.grain.auth.Role
+import org.hibernate.FetchMode
 
 @Secured(["hasRole('ROLE_ADMIN')"])
 class ScheduledCourseController {
@@ -38,6 +42,20 @@ class ScheduledCourseController {
         params.long('courseSessionId')
     )
     render courseSession as JSON
+  }
+
+  def addInstructor = {
+    def scheduledCourse = ScheduledCourse.get(params.id)
+    def instructor = User.get(params.long('instructorId'))
+    scheduledCourse.addToInstructors(instructor)
+    render '0'
+  }
+
+  def removeInstructor = {
+    def scheduledCourse = ScheduledCourse.get(params.id)
+    def instructor = User.get(params.long('instructorId'))
+    scheduledCourse.removeFromInstructors(instructor)
+    render '0'
   }
 
   // the delete, save and update actions only accept POST requests
@@ -97,7 +115,22 @@ class ScheduledCourseController {
       redirect(action: "list")
     }
     else {
-      return [scheduledCourseInstance: scheduledCourseInstance]
+      def criteria = PersonAuthority.createCriteria()
+      def usersRole = criteria.list {
+        eq "role",Role.findByAuthority("ROLE_INSTRUCTOR")
+        join 'user'
+      }
+      def instructors = usersRole*.user
+      def instructorsInThisCourse = scheduledCourseInstance.instructors
+      def instructorsToSelect = []
+
+      instructors.each{ instructor ->
+        def instructorInCourse = instructorsInThisCourse.find { it.id == instructor.id }
+        if(!instructorInCourse)
+          instructorsToSelect << instructor
+      }
+
+      return [scheduledCourseInstance: scheduledCourseInstance,instructors:instructorsToSelect]
     }
   }
 
