@@ -116,8 +116,6 @@ class ScheduledCourseController {
 
   def update = {
     def scheduledCourseInstance = ScheduledCourse.get(params.id)
-    println "Valor de base de datos:" + scheduledCourseInstance.costByModule
-    println "Valor del formulario:" + params.costByModule
     if (scheduledCourseInstance) {
       if (params.version) {
         def version = params.version.toLong()

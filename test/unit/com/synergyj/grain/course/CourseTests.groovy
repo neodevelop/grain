@@ -153,7 +153,6 @@ class CourseTests extends GrailsUnitTestCase {
 	void testConstraints() {
 		existingCourse.courseKey = "COURSE1"
 		def validate = existingCourse.validate()
-		println existingCourse.errors
 		assertTrue validate
 		groovy.util.GroovyTestCase.assertEquals existingCourse.toString(), buildString(50)
 	}
