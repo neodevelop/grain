@@ -37,7 +37,7 @@ class StudentsGroupController {
     // Buscamos los registros al curso calendarizado
     def criteria = Registration.createCriteria()
     def registrations = criteria.listDistinct {
-      eq 'scheduledCourse',scheduledCourse
+      eq 'scheduledCourse', scheduledCourse
       join "student"
       fetchMode "promotions", FM.EAGER
       fetchMode "payments", FM.EAGER
@@ -48,27 +48,27 @@ class StudentsGroupController {
     }
     // Obtenemos los registros que NO están en un grupo
     def registrationsNoGroup = registrations.findAll { registration ->
-      registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH  || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED || registration.registrationStatus == RegistrationStatus.CANCELLED
+      registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH || registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED || registration.registrationStatus == RegistrationStatus.CANCELLED
     }
 
     // Obtenemos los correos de las personas que se han registrado en la LP
     def emailsFromLP = RegistrationCodeForScheduledCourse.findAllByScheduledCourseId(scheduledCourse.id)
 
     [
-        scheduledCourse: scheduledCourse,
-        registrations: registrations,
-        registrationsInGroup: registrationsInGroup,
-        registrationsNoGroup: registrationsNoGroup,
-        expenses:expenses,
-        emailsFromLP:emailsFromLP
+      scheduledCourse: scheduledCourse,
+      registrations: registrations,
+      registrationsInGroup: registrationsInGroup,
+      registrationsNoGroup: registrationsNoGroup,
+      expenses: expenses,
+      emailsFromLP: emailsFromLP
     ]
   }
 
   def addStudent = {
     def registration = Registration.get(params.id)
-    if(registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH)
+    if (registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH)
       registration.registrationStatus = RegistrationStatus.INSCRIBED_AND_WITH_DEBTH_IN_GROUP
-    if(registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED)
+    if (registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_PAYED)
       registration.registrationStatus = RegistrationStatus.INSCRIBED_AND_PAYED_IN_GROUP
   }
 
@@ -93,17 +93,17 @@ class StudentsGroupController {
           scheduledCourseSessions.each { scheduledCourseSession ->
             // Las replicamos a cada alumno
             def courseSessionPerRegistration = new CourseSessionPerRegistration(
-                registration: registration,
-                courseSession: scheduledCourseSession
+              registration: registration,
+              courseSession: scheduledCourseSession
             )
             // Agregamos la sesión de curso calendarizado al estudiante
             registration.addToCourseSessions(courseSessionPerRegistration)
           }
         }
-      }else{
-        if(registration?.courseSessions?.size()){
+      } else {
+        if (registration?.courseSessions?.size()) {
           // Borramos las sesiones de este registro para este curso
-          CourseSessionPerRegistration.executeUpdate("delete CourseSessionPerRegistration cpr where cpr.registration = :registration",[registration:registration])
+          CourseSessionPerRegistration.executeUpdate("delete CourseSessionPerRegistration cpr where cpr.registration = :registration", [registration: registration])
         }
       }
     }
@@ -159,24 +159,36 @@ class StudentsGroupController {
       // Concatenamos la fecha con el uso del formateador
       certificate.dateRange += "${dateFormat.format(lastSession)}"
       // Agregamos los instructores
-      // TODO: Asignar instructores por curso
-      certificate.mainInstructor = "Domingo Suárez Torres"
-      certificate.secondaryInstructor = "José Juan Reyes Zuñiga"
+      def names = getInstrutorsNamesForScheduledCourse(scheduledCourse)
+
+      certificate.mainInstructor = names[0]
+      certificate.secondaryInstructor = names[1]
+
       // Agregamos el objeto a la lista
       reportData << certificate
     }
 
     // Generamos la definición del reporte
     def reportDef = new JasperReportDef(
-        name: 'certificates.jasper',
-        fileFormat: JasperExportFormat.PDF_FORMAT,
-        reportData: reportData,
-        parameters: [:]
+      name: 'certificates.jasper',
+      fileFormat: JasperExportFormat.PDF_FORMAT,
+      reportData: reportData,
+      parameters: [:]
     )
     // Mandamos un nombre de archivo a la salida
     response.setHeader("Content-disposition", "attachment; filename=certificates.pdf")
     // Mandamos el reporte al response
     response.outputStream << jasperService.generateReport(reportDef).toByteArray()
+  }
+
+  private def getInstrutorsNamesForScheduledCourse(ScheduledCourse scheduledCourse) {
+    scheduledCourse.instructors.collect { instructor ->
+      if (instructor?.firstName && instructor?.lastName) {
+        "$instructor.firstName $instructor.lastName"
+      } else {
+        instructor?.email
+      }
+    }
   }
 
   @Secured(["hasRole('ROLE_USER')"])
@@ -199,18 +211,21 @@ class StudentsGroupController {
     def lastSession = (registration.scheduledCourse.courseSessions.max()).sessionStartTime
     // Concatenamos la fecha con el uso del formateador
     certificate.dateRange += "${dateFormat.format(lastSession)}"
-    certificate.mainInstructor = "Domingo Suárez Torres"
-    certificate.secondaryInstructor = "José Juan Reyes Zuñiga"
+
+    def names = getInstrutorsNamesForScheduledCourse(registration.scheduledCourse)
+
+    certificate.mainInstructor = names[0]
+    certificate.secondaryInstructor = names[1]
 
     def reportData = []
     reportData << certificate
 
     // Generamos la definición del reporte
     def reportDef = new JasperReportDef(
-        name: 'certificate_image.jasper', // La imagen tiene una rut absoluta
-        fileFormat: JasperExportFormat.PDF_FORMAT,
-        reportData: reportData,
-        parameters: [:]
+      name: 'certificate_image.jasper', // La imagen tiene una rut absoluta
+      fileFormat: JasperExportFormat.PDF_FORMAT,
+      reportData: reportData,
+      parameters: [:]
     )
 
     // Mandamos un nombre de archivo a la salida
