@@ -205,7 +205,7 @@ class ScheduledCourseController {
   }
 
   def addStudents = {
-    scheduledCourseService.addStudentsFromCsvString(params.studentsData,params.long('scheduledCourseId'))
-    render "hola mundo"
+    def result = scheduledCourseService.addStudentsFromCsvString(params.studentsData,params.long('scheduledCourseId'))
+    render "Se han creado ${result.newUsersCount} usuarios nuevos y  ${result.newRegistrationsCount} registros nuevos"
   }
 }

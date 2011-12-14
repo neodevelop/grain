@@ -94,3 +94,11 @@ function addExpenseToTable(expense){
   newRow.find('.expenseTime').text(stringdate);
   newRow.appendTo("table#expenseList tbody").fadeIn();
 }
+
+function beforeAddStudentsToCourse(){
+  $("div#statusAfterAddStudents").hide();
+}
+
+function afterAddStudentsToCourse(){
+  $("div#statusAfterAddStudents").fadeIn();
+}

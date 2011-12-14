@@ -41,16 +41,15 @@ class ScheduledCourseService {
   }
 
   def addStudentsFromCsvString(String csvString, Long id) {
-    log.debug(id)
+    def newUsersCount = 0
+    def newRegistrationsCount = 0
     //Obtenemos el curso actual
     def scheduledCourse = ScheduledCourse.get(id)
-    log.debug(csvString)
     // Iteramos las líneas que vienen en el String
     csvString.eachLine { line ->
       // El formato de la línea debe ser "email,nombre,apellidos"
       def record = line.tokenize(',')
       // Buscamos el usuario
-      log.debug "Buscando al usuario ${record[0] as String}"
       def user = userService.findUser("${record[0] as String}")
       // Si no existe lo creamos con un password default
       if (!user) {
@@ -64,9 +63,21 @@ class ScheduledCourseService {
         user.accountLocked = false
         user.emailShow = true
         user.passwordExpired = false
+        // Guardamos el usuario
+        user.save()
+        newUsersCount++
       }
-      def registration = new Registration()
-      log.debug(user)
+      // Buscamos el registro para determinar si existe
+      def registration = Registration.findByStudentAndScheduledCourse(user, scheduledCourse)
+      // Si no hay registro
+      if (!registration) {
+        // Creamos el registro
+        registration = new Registration(student: user, registrationStatus: RegistrationStatus.REGISTERED)
+        newRegistrationsCount++
+      }
+      // Agregamos el registro al curso calendarizado
+      scheduledCourse.addToRegistrations(registration)
+      [newUsersCount:newUsersCount,newRegistrationsCount:newRegistrationsCount]
     }
   }
 }
