@@ -15,15 +15,21 @@
  */
 package com.synergyj.grain.course
 
+import com.synergyj.grain.auth.User
+import com.synergyj.grain.auth.RegisterUserCommand
+
 class ScheduledCourseService {
+
   static transactional = true
 
-  def isAvailableToRegister(Long scheduledCourseId){
+  def userService
+
+  def isAvailableToRegister(Long scheduledCourseId) {
     def scheduledCourse = ScheduledCourse.get(scheduledCourseId)
     def available = false
-    if(scheduledCourse){
-      switch(scheduledCourse.scheduledCourseStatus){
-        case[ScheduledCourseStatus.PLANNING,ScheduledCourseStatus.SCHEDULED]:
+    if (scheduledCourse) {
+      switch (scheduledCourse.scheduledCourseStatus) {
+        case [ScheduledCourseStatus.PLANNING, ScheduledCourseStatus.SCHEDULED]:
           available = true
           break
         default:
@@ -32,5 +38,35 @@ class ScheduledCourseService {
       }
     }
     available
+  }
+
+  def addStudentsFromCsvString(String csvString, Long id) {
+    log.debug(id)
+    //Obtenemos el curso actual
+    def scheduledCourse = ScheduledCourse.get(id)
+    log.debug(csvString)
+    // Iteramos las líneas que vienen en el String
+    csvString.eachLine { line ->
+      // El formato de la línea debe ser "email,nombre,apellidos"
+      def record = line.tokenize(',')
+      // Buscamos el usuario
+      log.debug "Buscando al usuario ${record[0] as String}"
+      def user = userService.findUser("${record[0] as String}")
+      // Si no existe lo creamos con un password default
+      if (!user) {
+        user = new User()
+        user.email = record[0] as String
+        user.firstName = record[1] as String
+        user.lastName = record[2] as String
+        user.password = "${new Date().toString()}"
+        user.enabled = true
+        user.accountExpired = false
+        user.accountLocked = false
+        user.emailShow = true
+        user.passwordExpired = false
+      }
+      def registration = new Registration()
+      log.debug(user)
+    }
   }
 }

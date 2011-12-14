@@ -28,6 +28,7 @@ import org.hibernate.FetchMode
 class ScheduledCourseController {
 
   def courseSessionService
+  def scheduledCourseService
 
   def index = { redirect(action: "list", params: params) }
 
@@ -201,5 +202,10 @@ class ScheduledCourseController {
       flash.defaultMessage = "ScheduledCourse not found with id ${params.id}"
       redirect(action: "list")
     }
+  }
+
+  def addStudents = {
+    scheduledCourseService.addStudentsFromCsvString(params.studentsData,params.long('scheduledCourseId'))
+    render "hola mundo"
   }
 }
