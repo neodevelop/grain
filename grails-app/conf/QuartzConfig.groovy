@@ -15,7 +15,7 @@
  */
 quartz {
     autoStartup = true
-    jdbcStore = false
+    jdbcStore = true
     waitForJobsToCompleteOnShutdown = true
 }
 
