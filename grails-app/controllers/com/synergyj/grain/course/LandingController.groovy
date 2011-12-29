@@ -22,17 +22,19 @@ import com.synergyj.grain.auth.RegistrationCodeForScheduledCourse
 
 class LandingController {
 
-  def userService
-  def notificationService
   def scheduledCourseService
+  def landingService
+  def notificationService
+  def userService
 
   @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
   def addMeNoPost = {
-    // Recibimos el email y el id de curso calendarizado
-    // Llamamos el método privado que genera la URL
-    def actionAndRegistrationCode = obtainRegistrationCode(params.email,params.long("scheduledCourseId"))
-
-    redirect(uri: "/${actionAndRegistrationCode.myAction}?code=${actionAndRegistrationCode.registrationCode.token}")
+    // Generamos el código de registro o lo obtenemos si ya existe
+    def registrationCode = landingService.obtainRegistrationCode(params.email,params.long("scheduledCourseId"))
+    // Determinamos la acción a seguir si el usuario es nuevo o no
+    def action = actionForANewOrExistingUser(params.email,params.long("scheduledCourseId"),registrationCode)
+    // Redireccionamos
+    redirect(uri: "/${action}?code=${registrationCode.token}")
   }
 
   @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
@@ -40,14 +42,15 @@ class LandingController {
     // Determinamos si en este curso se puede inscribir
     response.addHeader("Access-Control-Allow-Origin","*")
     response.addHeader("Content-Type","	application/json;charset=UTF-8")
-    // Recibimos el email y el id de curso calendarizado
-    // Llamamos el método privado que genera la URL
-    def actionAndRegistrationCode = obtainRegistrationCode(params.email,params.long("scheduledCourseId"))
     // Checamos si el curso está disponible
     if(scheduledCourseService.isAvailableToRegister(params.long("scheduledCourseId"))){
+      // Generamos el código de registro o lo obtenemos si ya existe
+      def registrationCode = landingService.obtainRegistrationCode(params.email, params.long("scheduledCourseId"))
+      // Determinamos la acción a seguir si el usuario es nuevo o no
+      def action = actionForANewOrExistingUser(params.email,params.long("scheduledCourseId"),registrationCode)
       // Formamos la URL con el resultado
       def url = request.scheme+'://'+request.serverName+(request.serverPort == 80 ? '' : ':'+request.serverPort )+request.contextPath+'/'
-      url += actionAndRegistrationCode.myAction+"?code="+actionAndRegistrationCode.registrationCode.token
+      url += action+"?code="+registrationCode.token
       // Regresamos una respuesta para el formulario de registro
       render([url:url] as JSON)
     }else{
@@ -61,29 +64,21 @@ class LandingController {
   def create = {
   }
 
-  private def obtainRegistrationCode(String email, Long scheduledCourseId){
-    // Buscamos si el usuario ya se registró previamente
-    def registrationCode = RegistrationCodeForScheduledCourse.findByUsernameAndScheduledCourseId(email,scheduledCourseId)
-
-    // Si no existe un código de registro lo generamos
-    if(!registrationCode){
-      registrationCode = RegistrationCodeForScheduledCourse.create(email,scheduledCourseId)
-    }
-
+  private def actionForANewOrExistingUser(email,scheduledCourseId,registrationCode) {
     // Buscamos el usuario por su correo
     def user = userService.findUser(email)
     def myAction = ""
-    if(user){
+    if (user) {
       // Si ya existe el usuario entonces lo notificamos
-      notificationService.sendConfirmRegistration(user.email,scheduledCourseId,registrationCode)
+      notificationService.sendConfirmRegistration(user.email, scheduledCourseId, registrationCode)
       // Definimos la acción
       myAction = "confirmRegistration"
-    }else{
+    } else {
       // Si no existe entonces lo invitamos
-      registrationCode = notificationService.sendInvitation(email,scheduledCourseId,registrationCode)
+      notificationService.sendInvitation(email, scheduledCourseId, registrationCode)
       // Definimos la acción
       myAction = "signup"
     }
-    [myAction:myAction,registrationCode:registrationCode]
+    myAction
   }
 }

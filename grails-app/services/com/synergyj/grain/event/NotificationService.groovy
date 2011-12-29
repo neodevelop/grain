@@ -108,7 +108,6 @@ class NotificationService {
         model: [email: email, scheduledCourse: scheduledCourse, registrationCode: registrationCode, courseName: scheduledCourse.course.name]
     ]
     rabbitSend MAIL_QUEUE_NOTIFICATION, mailParams
-    registrationCode
   }
 
   def sendPaymentInstructions(Long paymentId) {
