@@ -19,7 +19,11 @@ class ExpenseService {
 
   static transactional = true
 
-  def serviceMethod() {
-    
+  def createExpenseForScheduledCourse(Long scheduledCourseId, Map properties) {
+    def expense = new Expense(properties)
+    def scheduledCourse = ScheduledCourse.get(scheduledCourseId)
+    scheduledCourse.addToExpenses(expense)
+    scheduledCourse.save()
+    expense
   }
 }
