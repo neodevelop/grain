@@ -27,6 +27,5 @@ class CourseSessionController {
     def courseSession = CourseSession.get(params.id as Long);
     courseSession.delete()
     render courseSession as JSON
-
   }
 }

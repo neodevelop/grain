@@ -17,29 +17,29 @@ package com.synergyj.grain.course
 
 class CourseSessionService {
 
-    static transactional = true
+  static transactional = true
 
-    def createSession4ScheduledCourse(Long scheduledCourseId,Date sessionStartTime, int duration=9,Long courseSessionId=0) {
-      def scheduledCourse = ScheduledCourse.get(scheduledCourseId)
-      if(!scheduledCourse)
-        throw ScheduledCourseException(message:"No se encontró el curso agendado...")
-      def courseSession
-      if(!courseSessionId)
-        courseSession = new CourseSession()
-      else
-        courseSession = CourseSession.get(courseSessionId)
-      courseSession.scheduledCourse = scheduledCourse
-      Calendar calendar = new GregorianCalendar()
-      calendar.setTime(sessionStartTime)
-      courseSession.sessionStartTime = calendar.time
-      calendar.add(Calendar.HOUR,duration)
-      courseSession.sessionEndTime = calendar.time
-      if(courseSession.hasErrors()){
-        throw ScheduledCourseException(message:"No se puede crear la sesión del curso...")
-      }else{
-        scheduledCourse.addToCourseSessions(courseSession).save()
-      }
-      courseSession
+  def createSession4ScheduledCourse(Long scheduledCourseId, Date sessionStartTime, int duration = 9, Long courseSessionId = 0) {
+    def scheduledCourse = ScheduledCourse.get(scheduledCourseId)
+    if (!scheduledCourse)
+      throw ScheduledCourseException(message: "No se encontró el curso agendado...")
+    def courseSession
+    if (!courseSessionId)
+      courseSession = new CourseSession()
+    else
+      courseSession = CourseSession.get(courseSessionId)
+    courseSession.scheduledCourse = scheduledCourse
+    Calendar calendar = new GregorianCalendar()
+    calendar.setTime(sessionStartTime)
+    courseSession.sessionStartTime = calendar.time
+    calendar.add(Calendar.HOUR, duration)
+    courseSession.sessionEndTime = calendar.time
+    if (courseSession.hasErrors()) {
+      throw ScheduledCourseException(message: "No se puede crear la sesión del curso...")
+    } else {
+      scheduledCourse.addToCourseSessions(courseSession).save()
     }
+    courseSession
+  }
 }
 
