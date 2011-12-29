@@ -26,27 +26,7 @@ class CalendarController {
   }
 
   def scheduledCourseInfo = {
-    def scheduledCourses = ScheduledCourse.findAllByScheduledCourseStatusInList(ScheduledCourseStatus.publicCourses())
-    def events = []
-    scheduledCourses.each{ sc ->
-      def sessions = calendarService.obtainSessionsFromFromScheduledCourse(sc.id)
-      // Generamos los objetos eventInfo iterando las sesiones
-      def contador = 1
-      sessions.each { courseSession ->
-        def properties = [
-          id:courseSession.id,
-          title:"${sc.course.name} - Sesión ${contador++}",
-          start:courseSession.sessionStartTime,
-          end:courseSession.sessionEndTime,
-          url:sc?.course?.urlLandingPage ?: "http://synergyj.com",
-          backgroundColor:sc.course.backgroundColor,
-          borderColor:sc.course.borderColor,
-          textColor:sc.course.textColor
-        ]
-        def eventInfo = new EventInfo(properties)
-        events << eventInfo
-      }
-    }
+    def events = calendarService.obtainEventsByStatusList(ScheduledCourseStatus.publicCourses())
     render events as JSON
   }
 }

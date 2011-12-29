@@ -18,14 +18,44 @@ package com.synergyj.grain.course
 class CalendarService {
   static transactional = true
 
-  def obtainSessionsFromFromScheduledCourse(Long scheduledCourseId){
+  def obtainSessionsFromFromScheduledCourse(Long scheduledCourseId) {
     def criteria = CourseSession.createCriteria()
     // Obtenemos las sesiones de un curso calendarizado ordenadas por fecha de inicio
     def sessions = criteria.list {
-      scheduledCourse{
-        eq("id",scheduledCourseId)
+      scheduledCourse {
+        eq("id", scheduledCourseId)
       }
       order("sessionStartTime", "asc")
     }
+    sessions
+  }
+
+  def obtainEventsByStatusList(statusList) {
+    // Buscamos cursos calendarizados por un grupo de estados
+    def scheduledCourses = ScheduledCourse.findAllByScheduledCourseStatusInList(statusList)
+    // Iniciamos nuestro valor de retorno
+    def events = []
+    // Iteramos los cursos encontrados
+    scheduledCourses.each { sc ->
+      // Buscamos sesiones para este curso caledarizado
+      def sessions = this.obtainSessionsFromFromScheduledCourse(sc.id)
+      // Generamos los objetos eventInfo iterando las sesiones
+      def counter = 1
+      sessions.each { courseSession ->
+        def properties = [
+          id: courseSession.id,
+          title: "${sc.course.name} - Sesión ${counter++}",
+          start: courseSession.sessionStartTime,
+          end: courseSession.sessionEndTime,
+          url: sc?.course?.urlLandingPage ?: "http://synergyj.com",
+          backgroundColor: sc.course.backgroundColor,
+          borderColor: sc.course.borderColor,
+          textColor: sc.course.textColor
+        ]
+        def eventInfo = new EventInfo(properties)
+        events << eventInfo
+      }
+    }
+    events
   }
 }
