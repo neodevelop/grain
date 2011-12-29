@@ -51,6 +51,13 @@ class PaymentService {
     // Obtenemos el registro que vamos a modificar
     def registration = Registration.get(registrationId)
 
+    // Eliminamos los pagos asociados a este registro para evitar duplicados
+    if (registration?.payments?.size()) {
+      registration.payments.each { p ->
+        registration.removeFromPayments(p)
+      }
+    }
+
     // Preparar el pago
     def payment = preparePayment(thisPayment,kindOfPayment)
     // Agregamos el pago al registro

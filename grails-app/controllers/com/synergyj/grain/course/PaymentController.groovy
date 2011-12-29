@@ -29,7 +29,12 @@ class PaymentController {
     // Obtenemos sus cursos pendientes por pagar
     // Buscamos el registro del usuario a un curso calendarizado y Metemos el objeto registration en sesión
     def registration = Registration.findByStudentAndRegistrationStatus(user, RegistrationStatus.REGISTERED)
-
+    // Eliminamos las promociones asociadas a este registro si es que tiene
+    if (registration?.promotions?.size()) {
+      registration.promotions.each { r ->
+        registration.removeFromPromotions(r)
+      }
+    }
     //Obtenemos las promociones de este curso calendarizado
     def promotionsPerCourse = PromotionPerScheduledCourse.findAllByScheduledCourse(registration.scheduledCourse)
     // Obtenemos las promociones que aún estén vigentes
@@ -143,12 +148,18 @@ class PaymentController {
     }
 
     // Creamos los pagos para el registro
-    def registration = paymentService.preparePaymentsForRegistration(
+    def registration = new Registration()
+    try {
+      registration = paymentService.preparePaymentsForRegistration(
         params.long("registrationId"),
         new BigDecimal(params.totalToPay),
         new BigDecimal(params.percentOption),
         paymentOption,
         params.invoice)
+    } catch (Exception e) {
+      flash.message = message(code: "payment.already.generated")
+      redirect(controller: 'user',action: 'me')
+    }
 
     // Obtenemos las promociones que selecciono/aplico, vienen en un string separado por comas
     def promotionsIds = params?.checkedPromotions?.tokenize(',')
@@ -176,8 +187,8 @@ class PaymentController {
     }
 
     // Eliminamos los valores de la sesión
-    if (session.removeAttribute)
-      session.removeAttribute(promotionsPerCourse)
+    if (session?.promotionsPerCourse)
+      session.removeAttribute("promotionsPerCourse")
 
     // Consultamos los pagos para el registro para mandarlos por el modelo
     def payment = Payment.findByRegistrationAndPaymentStatus(registration, PaymentStatus.WAITING, [sort: 'id'])
