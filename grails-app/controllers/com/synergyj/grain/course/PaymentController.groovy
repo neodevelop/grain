@@ -21,7 +21,7 @@ class PaymentController {
   def paymentService
   def notificationService
   def registrationService
-  def s3AssetService
+  def receiptService
 
   def index = {
     // Obtenemos el usuario actual
@@ -49,30 +49,7 @@ class PaymentController {
   }
 
   def fileupload = {
-    // Obtenemos el pago al que le asignaremos el recibo
-    def payment = Payment.get(params.long('paymentNumber'))
-    // Creamos el recibo
-    def receipt = new ReceiptAWS(receiptStatus: ReceiptStatus.RECEIVED,payment: payment)
-    // Establecemos propiedades
-    receipt.title = "Receipt for ${payment.transactionId}"
-    receipt.description = "Receipt for ${payment.amount}"
-    // Obtenemos el archivo de los parámetros
-    def file = params.file
-    // Creamos el espacio temporal del archivo
-    def tmp = s3AssetService.getNewTmpLocalFile(file.contentType)
-    // Transferimos el archivo
-    file.transferTo(tmp)
-    // Usamos el método del asset para crear un archivo nuevo
-    receipt.newFile(tmp);
-    // El tipo del archivo es...
-    receipt.mimeType = file.contentType;
-    // Subimos el archivo
-    s3AssetService.put(receipt)
-    // Cambiamos el status del pago
-    payment.paymentStatus = PaymentStatus.PENDING
-    // Creamos la relación
-    payment.addToReceipts(receipt)
-
+    receiptService.attachReceiptToPayment(params.long('paymentNumber'),params.file)
     render "${g.message(code: 'receipt.received')}"
   }
 
