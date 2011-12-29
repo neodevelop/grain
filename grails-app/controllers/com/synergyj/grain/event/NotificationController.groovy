@@ -1,4 +1,4 @@
-package com.synergyj.grain.course
+package com.synergyj.grain.event
 
 class NotificationController {
 
