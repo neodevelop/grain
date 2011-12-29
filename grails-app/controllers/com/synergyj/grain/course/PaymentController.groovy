@@ -102,8 +102,6 @@ class PaymentController {
               flash.message = "${g.message(code: 'payment.waitPending')}"
               break
             case PaymentStatus.PAYED:
-              // Actualizamos la fecha de pago
-              payment.paymentDate = new Date()
               // Comprobamos si el registro al curso ya esta pagado
               registrationService.checkIsPayed(payment.registration.id)
               flash.message = "${g.message(code: 'payment.ispayed')}"
