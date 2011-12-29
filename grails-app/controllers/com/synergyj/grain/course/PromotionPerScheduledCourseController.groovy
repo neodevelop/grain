@@ -15,6 +15,22 @@
  */
 package com.synergyj.grain.course
 
+import grails.converters.JSON
+
 class PromotionPerScheduledCourseController {
+
   def scaffold = PromotionPerScheduledCourse
+
+  def checkCouponToRedeem = {
+    def promotionPerScheduledCourse = PromotionPerScheduledCourse.withCriteria(uniqueResult: true) {
+      eq('id', params.long('id'))
+      join('promotion')
+    }
+    def model = [isValid: false,message:message(code: 'promotion.coupon.fail',args: ['Código incorrecto'])]
+    if (promotionPerScheduledCourse.promotion.promotionKey == params?.coupon){
+      model.isValid = true
+      model.message = message(code: 'promotion.coupon.ok')
+    }
+    render model as JSON
+  }
 }

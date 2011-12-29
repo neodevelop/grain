@@ -72,6 +72,44 @@ function startOver(){
     $(this).children(":checkbox").trigger("change");
   });
 
+  $("ul#promotions > li.coupon > a[id^=checkCoupon]").click(function(){
+    var element = this;
+    var couponId = $(element).attr('id').substring('checkCoupon'.length);
+    var coupon = $("input[name=coupon"+couponId+"]").val();
+    var url = element + "?coupon="+coupon;
+    var checkboxForThisPromotion = $(element).siblings(":checkbox").attr('checked', false);
+    $.ajax({
+      url: url,
+      beforeSend: function( xhr ) {
+        $("img[name=loader]").fadeIn();
+        $("#messageForCoupon"+couponId).hide();
+      },
+      success: function( data ) {
+        if(data.isValid){
+          $(checkboxForThisPromotion).parent().toggleClass('uncheck');
+          $(checkboxForThisPromotion).parent().toggleClass('check');
+          $(checkboxForThisPromotion).siblings("span").removeClass("optionUncheck").addClass("optionCheck");
+          $(checkboxForThisPromotion).attr('checked', true);
+          $(checkboxForThisPromotion).trigger("change");
+          $(checkboxForThisPromotion).siblings("input").attr("disabled","disabled");
+          $(checkboxForThisPromotion).siblings("input").css("border","");
+          $(element).fadeOut();
+        }else{
+          $(checkboxForThisPromotion).siblings("input").css("border","1px solid red");
+        }
+        $("#messageForCoupon"+couponId).text(data.message);
+      },
+      error: function(jqXHR, textStatus, errorThrown){
+        alert(errorThrown);
+      },
+      complete: function(){
+        $("img[name=loader]").fadeOut();
+        $("#messageForCoupon"+couponId).fadeIn();
+      }
+    });
+    return false;
+  });
+
   $("input:radio").hide();
 
   $("div.percentOption").click(function(){

@@ -10,12 +10,23 @@
           <g:else>
             <g:set var="isChecked" value=""/>
           </g:else>
-          <li class='<g:if test="${isChecked}">check</g:if><g:else>uncheck</g:else><g:if test="${promotionPerCourse.promotion.kindPromotion == KindPromotion.DISCOUNT}"> select</g:if>' >
+          <li class='<g:if test="${isChecked}">check</g:if><g:else>uncheck</g:else>
+          <g:if test="${promotionPerCourse.promotion.kindPromotion == KindPromotion.DISCOUNT}">select</g:if>
+          <g:if test="${promotionPerCourse.promotion.kindPromotion == KindPromotion.COUPON}">coupon</g:if>'>
             <span class="option<g:if test="${isChecked}">Check</g:if><g:else>Uncheck</g:else>"></span>
             <input type="checkbox" id="discount${promotionPerCourse.id}" name="discount" value="${promotionPerCourse.promotion.discount}" ${isChecked ?: ''} style="display:none;" />
 					  ${promotionPerCourse?.promotion?.description}
             <g:if test="${promotionPerCourse.promotion.kindPromotion == KindPromotion.RECOMMENDATION}">
               <br/>Correo: <input type="text" name="emailFrom${promotionPerCourse.id}" size="30"/>
+            </g:if>
+            <g:if test="${promotionPerCourse.promotion.kindPromotion == KindPromotion.COUPON}">
+              <br/><br/>Código: <input type="text" name="coupon${promotionPerCourse.id}" size="12"/>
+              <a href="${createLink(controller: 'promotionPerScheduledCourse', action: 'checkCouponToRedeem', id: promotionPerCourse.id)}" id="checkCoupon${promotionPerCourse.id}">
+                <g:message code="promotion.coupon.apply"/>
+              </a>
+              <img src="${resource(dir:'themes/wb/images',file: 'spinner.gif')}" name="loader" style="display: none;" />
+              <div id="messageForCoupon${promotionPerCourse.id}" style="display: none;"></div>
+              <br/><br/>
             </g:if>
           </li>
         </g:each>
