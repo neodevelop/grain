@@ -90,9 +90,15 @@ class RegistrationController {
 
   def toggleFinished = {
     def registration = Registration.get(params.id)
-    registration.registrationStatus = RegistrationStatus.FINISHED
+    def isFinished = true
+    if (registration.registrationStatus == RegistrationStatus.FINISHED){
+      registration.registrationStatus = RegistrationStatus.INSCRIBED_AND_PAYED_IN_GROUP
+      isFinished = false
+    }else{
+      registration.registrationStatus = RegistrationStatus.FINISHED
+    }
     response.addHeader("Access-Control-Allow-Origin","*")
     response.addHeader("Content-Type","	application/json;charset=UTF-8")
-    render([finished:true] as JSON)
+    render([finished:isFinished] as JSON)
   }
 }
