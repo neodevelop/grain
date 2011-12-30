@@ -3,6 +3,7 @@ package com.synergyj.grain.course
 class ReceiptService {
 
   def s3AssetService
+  def registrationService
 
   static transactional = true
 
@@ -28,5 +29,18 @@ class ReceiptService {
     payment.paymentStatus = PaymentStatus.PENDING
     // Creamos la relación
     payment.addToReceipts(receipt)
+  }
+
+  def approveReceiptAndCheckRegistration(Long receiptId) {
+    def receipt = ReceiptAWS.get(receiptId)
+    receipt.receiptStatus = ReceiptStatus.APROVED
+    receipt.payment.paymentStatus = PaymentStatus.PAYED
+    receipt.payment.paymentDate = new Date()
+    registrationService.checkIsPayed(receipt.payment.registration.id)
+  }
+
+  def deleteThisReceipt(Long receiptId) {
+    def receipt = ReceiptAWS.get(receiptId)
+    s3AssetService.delete(receipt)
   }
 }

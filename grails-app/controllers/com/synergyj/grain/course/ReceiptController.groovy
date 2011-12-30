@@ -20,13 +20,10 @@ class ReceiptController {
   def registrationService
   def dineroMailService
   def s3AssetService
+  def receiptService
 
   def approve = {
-    def receipt = ReceiptAWS.get(params.id)
-    receipt.receiptStatus = ReceiptStatus.APROVED
-    receipt.payment.paymentStatus = PaymentStatus.PAYED
-    receipt.payment.paymentDate = new Date()
-    registrationService.checkIsPayed(receipt.payment.registration.id)
+    receiptService.approveReceiptAndCheckRegistration(params.long('id'))
     render """
       <img src="${resource(dir: 'themes/wb/icon', file: 'valid-green.png')}" width="24" height="24" />
     """
@@ -54,8 +51,7 @@ class ReceiptController {
   }
 
   def delete = {
-    def receipt = ReceiptAWS.get(params.id)
-    s3AssetService.delete(receipt)
+    receiptService.deleteThisReceipt(params.long('id'))
     render ""
   }
 }
