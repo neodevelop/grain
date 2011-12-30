@@ -15,6 +15,9 @@
  */
 package com.synergyj.geedback
 
+import com.synergyj.grain.course.ScheduledCourse
+import com.synergyj.grain.auth.User
+
 class EvaluationService {
 
   static transactional = false
@@ -28,39 +31,51 @@ class EvaluationService {
       scheduledCourse {
         eq "id", scheduledCourseId
       }
-      eq "evaluationStatus",EvaluationStatus.CLOSED
+      eq "evaluationStatus", EvaluationStatus.CLOSED
     }
     evaluationCount
   }
-  
-  def saveOptionForThisQuestion(Long evaluationId,Long questionId, def answerId, kindOfQuestion = KindOfQuestion.CHOOSE_OPTION){
+
+  def createOrObtainForThisUserInThisScheduledCourse(User user, Long scheduledCourseId, Questionnaire quiz) {
+    def scheduledCourse = ScheduledCourse.get(scheduledCourseId)
+    def evaluation = Evaluation.findByScheduledCourseAndUser(scheduledCourse, user)
+    if (!evaluation) {
+      evaluation = new Evaluation(user: user, evaluationStatus: EvaluationStatus.OPEN)
+      evaluation.questionnaire = quiz
+      scheduledCourse.addToEvaluations(evaluation)
+      scheduledCourse.save()
+    }
+    evaluation
+  }
+
+  def saveOptionForThisQuestion(Long evaluationId, Long questionId, def answerId, kindOfQuestion = KindOfQuestion.CHOOSE_OPTION) {
     log.debug "Obteniendo evaluación"
     def evaluation = Evaluation.get(evaluationId)
     log.debug "Obteniendo pregunta de evaluación"
     def question = Question.get(questionId)
     log.debug "Buscamos si ya tiene una respuesta a esa pregunta"
-    def answerForQuestion = AnswerForQuestion.findByEvaluationAndQuestion(evaluation,question)
+    def answerForQuestion = AnswerForQuestion.findByEvaluationAndQuestion(evaluation, question)
     log.debug "Si no la tiene entonces creamos una"
-    if(!answerForQuestion)
-      answerForQuestion = new AnswerForQuestion(evaluation:evaluation,question:question)
+    if (!answerForQuestion)
+      answerForQuestion = new AnswerForQuestion(evaluation: evaluation, question: question)
     log.debug "Validando el tipo de pregunta"
-    switch(kindOfQuestion){
-      case [KindOfQuestion.CHOOSE_OPTION,KindOfQuestion.TRUE_FALSE]:
+    switch (kindOfQuestion) {
+      case [KindOfQuestion.CHOOSE_OPTION, KindOfQuestion.TRUE_FALSE]:
         log.debug "La pregunta es de opción a escoger"
         log.debug "Obtenemos la opción que escogió"
         def answer = OptionQuestion.get(answerId)
         log.debug "Asignamos la respuesta"
-        answerForQuestion.optionQuestion = answer        
+        answerForQuestion.optionQuestion = answer
         break
-      case [KindOfQuestion.SHORT_ANSWER,KindOfQuestion.DESCRIPTION]:
+      case [KindOfQuestion.SHORT_ANSWER, KindOfQuestion.DESCRIPTION]:
         log.debug "La pregunta es abierta"
         log.debug "Buscamos si ya tiene una respuesta a esta pregunta"
         def answer = null
-        if(answerForQuestion.id){
+        if (answerForQuestion.id) {
           answer = ExtraInformationForAnswer.findByAnswerForQuestion(answerForQuestion)
         }
-        if(!answer){
-          answer = new ExtraInformationForAnswer(answerForQuestion:answerForQuestion,kindOfExtraInformation:KindOfExtraInformation.PRIVATE)
+        if (!answer) {
+          answer = new ExtraInformationForAnswer(answerForQuestion: answerForQuestion, kindOfExtraInformation: KindOfExtraInformation.PRIVATE)
           answerForQuestion.addToExtras(answer)
         }
         answer.description = answerId
