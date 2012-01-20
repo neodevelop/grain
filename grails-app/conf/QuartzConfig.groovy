@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 quartz {
-    autoStartup = true
-    jdbcStore = true
-    waitForJobsToCompleteOnShutdown = true
+  autoStartup = true
+  jdbcStore = true
+  waitForJobsToCompleteOnShutdown = true
 }
 
 environments {
-    test {
-        quartz {
-            autoStartup = false
-        }
+  test {
+    quartz {
+      autoStartup = false
+      jdbcStore = false
     }
+  }
 }
