@@ -15,8 +15,6 @@
  */
 package com.synergyj.grain.course
 
-import com.synergyj.grain.course.CourseModule
-
 class ModuleTopic extends CourseContent implements Comparable<ModuleTopic> {
 	CourseModule module
 	ModuleTopic parent

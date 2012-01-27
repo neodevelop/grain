@@ -19,7 +19,7 @@ import com.synergyj.grain.content.ContentType
 
 class CourseModuleTests extends grails.test.GrailsUnitTestCase {
 	//def existingCourse = new Course(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), type:CourseType.COURSE)
-	def existingModule = new CourseModule(name:CourseTests.buildString(50), content:CourseTests.buildString(10000), course:new Course(), order:1, contentType:ContentType.HTML)
+	def existingModule = new CourseModule(name:CourseTests.buildString(50), content:CourseTests.buildString(1000), course:new Course(), order:1, contentType:ContentType.HTML)
 	
 	protected void setUp() {
 		super.setUp()
@@ -61,6 +61,5 @@ class CourseModuleTests extends grails.test.GrailsUnitTestCase {
 	
 	void testConstraints() {
 		assertTrue existingModule.validate()
-		groovy.util.GroovyTestCase.assertEquals existingModule.toString(), CourseTests.buildString(50)
 	}
 }
