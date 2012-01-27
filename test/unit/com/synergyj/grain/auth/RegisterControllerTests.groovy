@@ -15,12 +15,15 @@
  */
 package com.synergyj.grain.auth
 
-import grails.test.*
 import com.synergyj.grain.data.UserService
+import grails.plugins.springsecurity.SpringSecurityService
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import grails.test.ControllerUnitTestCase
 
 class RegisterControllerTests extends ControllerUnitTestCase {
   protected void setUp() {
     super.setUp()
+    SpringSecurityUtils.metaClass.'static'.getSecurityConfig = { [successHandler: [defaultTargetUrl: "http://localhost:8080/grain"]] }
   }
 
   protected void tearDown() {
@@ -31,11 +34,13 @@ class RegisterControllerTests extends ControllerUnitTestCase {
     mockForConstraintsTests(RegisterUserCommand)
     def mockUserService = mockFor(UserService)
     mockUserService.demand.createUser(1..1) {RegisterUserCommand usercommand -> new User() }
+    def mockSpringSecurityService = mockFor(SpringSecurityService)
+    mockSpringSecurityService.demand.reauthenticate(1..1) {  }
     controller.userService = mockUserService.createMock()
+    controller.springSecurityService = mockSpringSecurityService.createMock()
     controller.metaClass.message = { LinkedHashMap arg1 -> 'test message output'}
     def userdata = new RegisterUserCommand(email: 'user@server.com', password: 'supersecret')
     controller.user(userdata)
     mockUserService.verify()
-
   }
 }
