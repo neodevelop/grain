@@ -544,6 +544,7 @@ class BootStrap {
       def adminRole = new Role(authority: 'ROLE_ADMIN', description: 'Administrador').save(flush: true)
       def userRole = new Role(authority: 'ROLE_USER', description: 'Usuario').save(flush: true)
       def instructorRole = new Role(authority: 'ROLE_INSTRUCTOR', description: 'Instructor').save(flush: true)
+
       log.debug "Roles creados ${adminRole},${userRole}"
       String password = 'password'
       log.debug("Creando usuarios de prueba y asignando roles")
@@ -551,6 +552,10 @@ class BootStrap {
         def user = new User(email: mail, password: password).save(flush: true)
         PersonAuthority.create user, userRole, true
       }
+
+      log.debug "Asignamos el currentUser al servicio de seguridad"
+      springSecurityService.currentUser = User.get(1)
+
       instructors.each { email ->
         def user = new User(email: email, password: password).save(flush: true)
         PersonAuthority.create user, instructorRole, true

@@ -79,6 +79,7 @@ environments {
     grails.serverURL = "http://localhost:8080/${appName}"
     grails.plugins.springsecurity.portMapper.httpPort = 80 // Spring Security Config
     grails.plugins.springsecurity.portMapper.httpsPort = 80 // Spring Security Config
+    grails.plugins.springsecurity.active = false  // Deshabilitamos SS para testing
   }
   production {
     grails.serverURL = "http://entrenamiento.synergyj.com"
