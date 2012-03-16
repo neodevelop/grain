@@ -44,7 +44,7 @@ grails.project.dependency.resolution = {
     runtime 'org.grails.plugins:google-analytics:1.0'
     runtime 'org.grails.plugins:jasper:1.2.1'
     runtime 'org.grails.plugins:rabbitmq:0.3.2'
-    runtime 'org.grails.plugins:quartz:0.4.2'
+    compile ":quartz:1.0-RC1"
     runtime ':grails-melody:1.7'
     runtime ':amazon-s3:0.8.2'
     test ":geb:0.6.2"

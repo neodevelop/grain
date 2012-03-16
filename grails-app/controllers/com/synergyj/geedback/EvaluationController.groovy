@@ -14,15 +14,19 @@ class EvaluationController {
   @Secured(['isAuthenticated()'])
   def index = {
 
+    User user = springSecurityService.currentUser as User
+    Long scheduledCourseId = params.long('id')
     // TODO: Asignar un cuestionario por curso calendarizado
-    def quiz = Questionnaire.withCriteria(uniqueResult: true) {
+    Questionnaire quiz = Questionnaire.withCriteria(uniqueResult: true) {
       eq 'id', 1L
       fetchMode "questions", FM.EAGER
     }
 
-    def evaluation = evaluationService.createOrObtainForThisUserInThisScheduledCourse(
-      springSecurityService.currentUser as User, params.long('id'), quiz
-    )
+    log.debug("User: ${user.class.name}")
+    log.debug("ScheduledCourseId: ${scheduledCourseId.class.name}")
+    log.debug("Quiz: ${quiz.class.name}")
+
+    def evaluation = evaluationService.createOrObtainForThisUserInThisScheduledCourse(user, scheduledCourseId, quiz)
 
     [quiz: quiz, evaluation: evaluation]
   }
