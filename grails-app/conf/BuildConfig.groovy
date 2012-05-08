@@ -18,12 +18,6 @@ grails.project.dependency.resolution = {
   }
 
   dependencies {
-    test("org.seleniumhq.selenium:selenium-htmlunit-driver:2.16.1") {
-      excludes 'xml-apis', 'xercesImpl', 'xmlParserAPIs' // Exclusiones cruciales
-    }
-    test("org.seleniumhq.selenium:selenium-chrome-driver:2.16.1")
-    test("org.seleniumhq.selenium:selenium-firefox-driver:2.16.1")
-    test "org.codehaus.geb:geb-spock:0.6.2"
     runtime 'mysql:mysql-connector-java:5.1.13'
   }
 
@@ -34,7 +28,7 @@ grails.project.dependency.resolution = {
 
     build ":tomcat:$grailsVersion"
 
-    runtime 'org.grails.plugins:spring-security-core:1.2'
+    compile ":spring-security-core:1.2.7.3"
     runtime 'org.grails.plugins:spring-security-ui:0.1.2'
     runtime 'org.grails.plugins:famfamfam:1.0.1'
     runtime 'org.grails.plugins:mail:1.0-SNAPSHOT'
@@ -47,8 +41,6 @@ grails.project.dependency.resolution = {
     compile ":quartz:0.4.2"
     runtime ':grails-melody:1.7'
     runtime ':amazon-s3:0.8.2'
-    test ":geb:0.6.2"
-    test ":spock:0.5-groovy-1.7"
     //runtime 'org.grails.plugins:jquery-validation:1.7'
     //runtime 'org.grails.plugins:jquery-validation-ui:1.1'
     //runtime 'org.grails.plugins:constraints:0.5.1'
