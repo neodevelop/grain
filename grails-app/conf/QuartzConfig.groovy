@@ -15,14 +15,14 @@
  */
 quartz {
   autoStartup = true
-  jdbcStore = true
+  jdbcStore = false
   waitForJobsToCompleteOnShutdown = true
 }
 
 environments {
   dev {
     quartz {
-      autoStartup = false
+      autoStartup = true
       jdbcStore = false
     }
   }
@@ -31,5 +31,10 @@ environments {
       autoStartup = false
       jdbcStore = false
     }
+  }
+  prod{
+    autoStartup = true
+    jdbcStore = true
+    waitForJobsToCompleteOnShutdown = true
   }
 }
