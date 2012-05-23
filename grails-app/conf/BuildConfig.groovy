@@ -10,11 +10,19 @@ grails.project.dependency.resolution = {
   }
   log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
   repositories {
-    mavenRepo name: "OpenNMS", root: "http://repo.opennms.org/content/groups/opennms.org-release"
     grailsPlugins()
     grailsHome()
     grailsCentral()
+
+    // from public Maven repositories
+    mavenLocal()
     mavenCentral()
+
+    mavenRepo "http://maven.springframework.org/release"
+    mavenRepo "http://maven.springframework.org/snapshot"
+    mavenRepo "http://maven.springframework.org/milestone"
+
+    grailsRepo "http://grails.org/plugins"
   }
 
   dependencies {
