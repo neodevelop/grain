@@ -60,3 +60,8 @@ grails.project.dependency.resolution = {
   }
 
 }
+grails.project.repos.clickonero.url = "http://repo.clickonero.com/nexus/content/repositories/snapshots/"
+
+grails.release.scm.enabled = false
+//grails.project.repos.default = "grailsCentral"
+grails.project.repos.default = "clickonero"
