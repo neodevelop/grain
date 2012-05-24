@@ -49,6 +49,7 @@ grails.project.dependency.resolution = {
     compile ":quartz:0.4.2"
     runtime ':grails-melody:1.7'
     runtime ':amazon-s3:0.8.2'
+    provided ":webxml:1.4.1"
     //runtime 'org.grails.plugins:jquery-validation:1.7'
     //runtime 'org.grails.plugins:jquery-validation-ui:1.1'
     //runtime 'org.grails.plugins:constraints:0.5.1'
