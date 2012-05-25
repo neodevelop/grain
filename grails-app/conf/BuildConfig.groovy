@@ -36,8 +36,8 @@ grails.project.dependency.resolution = {
 
     build ":tomcat:$grailsVersion"
 
-    compile ":spring-security-core:1.2.7.3"
-    compile ":spring-security-ui:0.2"
+    runtime 'org.grails.plugins:spring-security-core:1.2'
+    runtime 'org.grails.plugins:spring-security-ui:0.1.2'
     runtime 'org.grails.plugins:famfamfam:1.0.1'
     compile ":mail:1.0"
     runtime 'org.grails.plugins:settings:1.4'

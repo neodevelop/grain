@@ -34,7 +34,7 @@ environments {
   }
   prod{
     autoStartup = true
-    jdbcStore = true
+    jdbcStore = false
     waitForJobsToCompleteOnShutdown = true
   }
 }
