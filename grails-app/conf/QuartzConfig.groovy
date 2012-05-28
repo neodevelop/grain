@@ -13,28 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import grails.util.Environment
+ 
 quartz {
-  autoStartup = true
-  jdbcStore = false
-  waitForJobsToCompleteOnShutdown = true
-}
-
-environments {
-  dev {
-    quartz {
+  switch(Environment.current) {
+    case Environment.DEVELOPMENT:
       autoStartup = true
       jdbcStore = false
-    }
-  }
-  test {
-    quartz {
+    break
+    case Environment.TEST:
       autoStartup = false
       jdbcStore = false
-    }
-  }
-  prod{
-    autoStartup = true
-    jdbcStore = false
-    waitForJobsToCompleteOnShutdown = true
+    break
+    case Environment.PRODUCTION:
+      autoStartup = true
+      jdbcStore = true
+      waitForJobsToCompleteOnShutdown = true
+    break
   }
 }
