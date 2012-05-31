@@ -144,7 +144,7 @@ class StudentsGroupController {
       certificate.courseName = "${scheduledCourse.course.name}"
       // Indicamos la duración del curso
       // TODO: Este debe venir del curso
-      certificate.duration = "40"
+      certificate.duration = "${scheduledCourse.durationInHours}"
       // Obtenemos la fecha de inicio
       def startDate = scheduledCourse.beginDate
       // Usamos un formateador para la primera parte de la fecha

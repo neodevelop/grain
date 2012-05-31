@@ -10,11 +10,19 @@ grails.project.dependency.resolution = {
   }
   log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
   repositories {
-    mavenRepo name: "OpenNMS", root: "http://repo.opennms.org/content/groups/opennms.org-release"
     grailsPlugins()
     grailsHome()
     grailsCentral()
+
+    // from public Maven repositories
+    mavenLocal()
     mavenCentral()
+
+    mavenRepo "http://maven.springframework.org/release"
+    mavenRepo "http://maven.springframework.org/snapshot"
+    mavenRepo "http://maven.springframework.org/milestone"
+
+    grailsRepo "http://grails.org/plugins"
   }
 
   dependencies {
@@ -28,10 +36,10 @@ grails.project.dependency.resolution = {
     compile ":twitter-bootstrap:2.0.2.25"
     build ":tomcat:$grailsVersion"
 
-    compile ":spring-security-core:1.2.7.3"
+    runtime 'org.grails.plugins:spring-security-core:1.2'
     runtime 'org.grails.plugins:spring-security-ui:0.1.2'
     runtime 'org.grails.plugins:famfamfam:1.0.1'
-    runtime 'org.grails.plugins:mail:1.0-SNAPSHOT'
+    compile ":mail:1.0"
     runtime 'org.grails.plugins:settings:1.4'
     runtime 'org.grails.plugins:jquery-ui:1.8.11'
     runtime 'org.grails.plugins:avatar:0.5'
