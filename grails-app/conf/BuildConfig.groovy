@@ -32,16 +32,16 @@ grails.project.dependency.resolution = {
   plugins {
     compile ":hibernate:$grailsVersion"
     runtime ":jquery:1.7.1"
+    compile ":jquery-ui:1.8.15"
     runtime ":resources:1.1.6"
     compile ":twitter-bootstrap:2.0.2.25"
     build ":tomcat:$grailsVersion"
 
-    runtime 'org.grails.plugins:spring-security-core:1.2'
-    runtime 'org.grails.plugins:spring-security-ui:0.1.2'
+    compile ":spring-security-core:1.2.7.3"
+    compile ":spring-security-ui:0.2"
     runtime 'org.grails.plugins:famfamfam:1.0.1'
     compile ":mail:1.0"
     runtime 'org.grails.plugins:settings:1.4'
-    runtime 'org.grails.plugins:jquery-ui:1.8.11'
     runtime 'org.grails.plugins:avatar:0.5'
     runtime 'org.grails.plugins:google-analytics:1.0'
     runtime 'org.grails.plugins:jasper:1.2.1'
