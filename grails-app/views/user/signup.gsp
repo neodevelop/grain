@@ -1,8 +1,7 @@
 <head>
   <meta name="layout" content="main"/>
   <r:require module="home"/>
-  <parameter name="pageHeader" value="${g.message(code: 'user.signup', default: 'Signup')}"/>
-
+  <title><g:message code="user.signup" default="User signup" /></title>
   <r:script>
     $(function(){
       <g:if test="${registrationCode}">
@@ -79,7 +78,7 @@
 <div class="row">
   
   <div class="span6">
-    <h3>Información básica</h3>
+    <h2>Información básica</h2>
     <p>Una notificación será enviada a tu correo</p>
 
     <g:render template="/common/errors" model="[instance:userdata]"/>
@@ -129,6 +128,34 @@
         <h2>${scheduledCourse.course.name}<h2/>
         <p>Inicia: <g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd 'de' MMMM 'del' yyyy"/></p>
       </div>
+      <dl class="dl-horizontal">
+        <dt>Duración:</dt>
+        <dd>${scheduledCourse.durationInHours} horas</dd>
+        <dt>Dirección:</dt>
+        <dd>${scheduledCourse.fullAddress}</dd>
+        <dt>Inversión:</dd>
+        <dd>${scheduledCourse.costByCourse}</dt>
+      </dl>
+      <hr>
+      <div class="row">
+        <div class="span3">
+          <h3>Sesiones</h3>
+          <ul>
+            <g:each in="${scheduledCourse.courseSessions}" var="courseSession">
+              <li>${courseSession}</li>
+            </g:each>
+          </ul>
+        </div>
+        <div class="span3">
+          <h3>Impartido por</h3>
+          <ul>
+            <g:each in="${scheduledCourse.instructors}" var="instructor">
+              <li>${instructor}</li>
+            </g:each>
+          </ul>
+        </div>
+      </div>
+      
     </g:if>      
   </div>
 </div>
