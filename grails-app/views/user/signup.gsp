@@ -108,7 +108,7 @@
 
       <div class="control-group">
         <g:checkBox name="tos" id="tos" checked="${fieldValue(bean: userdata, field: 'tos')}" />
-        <label class="control-label" for="tos" class="checkbox">
+        <label id="tosLabel" class="control-label" for="tos">
           <g:message code='login.tos' default="Terms of Service"/>
         </label>
       </div>
@@ -124,37 +124,7 @@
   </div>
   <div class="span6">
     <g:if test="${scheduledCourse}">
-      <div id="courseInfo">
-        <h2>${scheduledCourse.course.name}<h2/>
-        <p>Inicia: <g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd 'de' MMMM 'del' yyyy"/></p>
-      </div>
-      <dl class="dl-horizontal">
-        <dt>Duración:</dt>
-        <dd>${scheduledCourse.durationInHours} horas</dd>
-        <dt>Dirección:</dt>
-        <dd>${scheduledCourse.fullAddress}</dd>
-        <dt>Inversión:</dd>
-        <dd>${scheduledCourse.costByCourse}</dt>
-      </dl>
-      <hr>
-      <div class="row">
-        <div class="span3">
-          <h3>Sesiones</h3>
-          <ul>
-            <g:each in="${scheduledCourse.courseSessions}" var="courseSession">
-              <li>${courseSession}</li>
-            </g:each>
-          </ul>
-        </div>
-        <div class="span3">
-          <h3>Impartido por</h3>
-          <ul>
-            <g:each in="${scheduledCourse.instructors}" var="instructor">
-              <li>${instructor}</li>
-            </g:each>
-          </ul>
-        </div>
-      </div>
+      <g:render template="/scheduledCourse/show" model="[scheduledCourse:scheduledCourse]"/>
       
     </g:if>      
   </div>
