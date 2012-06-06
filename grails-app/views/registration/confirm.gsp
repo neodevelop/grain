@@ -1,23 +1,21 @@
 <html>
   <head>
-    <meta name="layout" content="wb" />
+    <meta name="layout" content="main" />
+    <r:require module="home"/>
     <title><g:message code="registration.confirm" default="Confirm registration" /></title>
-    <parameter name="pageHeader" value="${g.message(code: 'course.info', default: 'Confirm Info')}"/>
-    <script type="text/javascript" src="http://synergyj.com/resources/jquery.form.js"></script>
-    <script language="javascript">
+    <r:script> 
       $(function(){
         $("form#auth").ajaxForm({
           dataType:'json',
           success:function(json){
             if (json.success) {
+              $("#extraInfo,#formActions,#profile").show();
               if (json.url) {
                 document.location = json.url;
               }
               else {
-                $("#leftbox > #loadProfile").load("${createLink(controller:'user',action:'simpleProfile')}");
-                $("#confirm").show();
-                $("#profile").hide()
-                $("#loginForm").hide()
+                $("#loadProfile").load("${createLink(controller:'user',action:'simpleProfile')}");
+                $("#loginForm").hide();
               }
             }
             else if (json.error) {
@@ -32,9 +30,8 @@
         });
 
         $("a#notme").live('click',function(){
-          $("#profile").hide();
           $("#loginForm").show();
-          $("#confirm").hide();
+          $("#extraInfo,#formActions,#profile").hide();
           $("form#auth").each(function(){
             this.reset();
           });
@@ -43,43 +40,52 @@
         });
 
       });
-    </script>
+    </r:script>
   </head>
   <body>
-  <div id="left">
-    <div id="leftbox">
+
+  <div class="page-header">
+    <h1>${g.message(code: 'course.info', default: 'Confirm Info')}
+      <small>${message(code:'register.confirm',default:"Please confirm the info below.")}</small>
+    </h1>
+  </div>
+
+  <div class="row">
+    <div class="span6">
+      <h2>Tus datos</h2>
+      <p>Una notificación será enviada a tu correo</p>
       <div id="loadProfile"></div>
       <g:render template="/login/form" model="[email:email,postUrl:postUrl,rememberMeParameter:rememberMeParameter,scheduledCourseId:scheduledCourse.id]"/>
       <g:render template="/login/logged"/>
-    </div>
-
-    <div id="confirm" style="display:<sec:ifLoggedIn>block</sec:ifLoggedIn><sec:ifNotLoggedIn>none</sec:ifNotLoggedIn>;">
-
+      <br/>
+      <g:set var="visible" value="none"/>
+      <sec:ifLoggedIn>
+        <g:set var="visible" value="block"/>
+      </sec:ifLoggedIn>
+      <div id="extraInfo" class="well" style="display:${visible};">
+        Recuerda completar los datos de tu perfil, principalmente tu <span class="label label-info">nombre</span>, pues con esa información generamos los reconocimientos de la manera correcta.
+      </div>
+      <div id="formActions" class="form-actions" style="display:${visible};">
         <g:if test="${flash.message}">
-          <g:link mapping="me" class="button">
-          <g:message code='login.goMe' default="Go to my profile"/>
+          <g:link mapping="me" class="btn btn-info">
+            <g:message code='login.goMe' default="Go to my profile"/>
           </g:link>
         </g:if>
         <g:else>
-          <g:link controller="registration" action="addMeToCourse" params="[scheduledCourseId:scheduledCourse.id]" class="button">
+          <g:link controller="registration" action="addMeToCourse" params="[scheduledCourseId:scheduledCourse.id]" class="btn btn-success">
             <g:message code='registration.confirm' default="Confirm registration"/>
           </g:link>
         </g:else>
-    </div>
-
-  </div>
-  <div id="right">
-    <div id="rightbox">
-
-      <h2>${scheduledCourse.course.name}</h2>
-      <div class="info">
-        <g:message code='course.startDate'/> : <b><g:formatDate date="${scheduledCourse.beginDate}" format="dd - MMMM - yyyy"/></b> <br/>
-        <g:message code='course.limitDate'/> : <b><g:formatDate date="${scheduledCourse.limitRegistrationDate}" format="dd - MMMM - yyyy"/></b>
-      </div>
-      <div id="price">
-        <g:message code='course.cost'/> : $ <g:formatNumber number="${scheduledCourse.costByCourse}" format="#,###.00"/>
+        <a href="#" id="notme" class="btn btn-inverse"><g:message code='login.notyou' default="aren't you? this is not me!"/></a>
       </div>
     </div>
+
+    <div class="span6">
+      <g:render template="/scheduledCourse/show" model="[scheduledCourse:scheduledCourse]"/>
+    </div>
   </div>
+
+
+  <script type="text/javascript" src="http://synergyj.com/resources/jquery.form.js"></script>
   </body>
 </html>

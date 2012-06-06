@@ -9,7 +9,15 @@ body {
   background-repeat: no-repeat;
 }
 
-form.well label{
+form.well label,div#loginForm form#auth div.field label{
   display: block;
   padding-bottom:5px;
+}
+
+div#profile div#uservatar {
+  float: right;
+}
+
+table#login tbody tr.links td label.remember_me_label {
+  display: inline;
 }
