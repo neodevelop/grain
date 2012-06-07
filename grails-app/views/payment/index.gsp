@@ -1,28 +1,48 @@
 <%@ page import="com.synergyj.grain.course.KindPromotion; com.synergyj.grain.course.RegistrationStatus" %>
 <head>
   <title><g:message code='payment.info' default="Payment info"/></title>
-  <meta name='layout' content='wb'/>
+  <meta name='layout' content='main'/>
+  <r:require module="home"/>
   <parameter name="pageHeader" value="${g.message(code: 'payment.info', default: 'Payment info')}"/>
-  <script type="text/javascript" src="${resource(dir:'themes/wb/js/payment',file:'index.js')}"></script>
+  
   <link rel="stylesheet" type="text/css" href="http://craigsworks.com/projects/qtip2/packages/latest/jquery.qtip.css" />
-  <script type="text/javascript" src="http://craigsworks.com/projects/qtip2/packages/latest/jquery.qtip.js"></script>
-  <script type="text/javascript" src="http://flesler-plugins.googlecode.com/files/jquery.scrollTo-1.4.2-min.js"></script>
+  
 </head>
 <body>
+
+<div class="page-header">
+  <h1>Comienza tu pago
+    <small>${message(code:'payment.start',default:"Starting your payment you make sure you have a place reserved in this course.")}</small>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span6">
+    <div class="well">
+
+      <g:render template="/registration/simpleShow" model="[registration:registration]"/>
+      <div class="percentOption groupOption1">
+        <g:radio id="half" value="" name="percentOption"/>
+        Aparta tu lugar con el 50%<br/>( $ <span id="halfCostByCourse"></span> )
+      </div>
+      <div class="percentOption groupOption1">
+        <g:radio id="full" value="" name="percentOption"/>
+        Paga el total de tu curso<br/>( $ <span id="totalCostByCourse"></span>  )
+      </div>
+      
+    </div>
+  </div>
+  <div class="span6">
+  </div>
+</div>
+
 <g:form action="create" name="makePayment">
 <div id="left">
 
   <div id="leftbox">
-    <g:render template="/registration/simpleShow" model="[registration:registration]"/>
+    
 
-    <div class="percentOption groupOption1">
-      <g:radio id="half" value="" name="percentOption"/>
-      Aparta tu lugar con el 50%<br/>( $ <span id="halfCostByCourse"></span> )
-    </div>
-    <div class="percentOption groupOption1">
-      <g:radio id="full" value="" name="percentOption"/>
-      Paga el total de tu curso<br/>( $ <span id="totalCostByCourse"></span>  )
-    </div>
+    
 
   </div>
 
@@ -60,4 +80,7 @@
 <g:hiddenField name="totalToPay" value=""/>
 <g:hiddenField name="checkedPromotions" value=""/>
 </g:form>
+<script type="text/javascript" src="${resource(dir:'themes/wb/js/payment',file:'index.js')}"></script>
+<script type="text/javascript" src="http://craigsworks.com/projects/qtip2/packages/latest/jquery.qtip.js"></script>
+  <script type="text/javascript" src="http://flesler-plugins.googlecode.com/files/jquery.scrollTo-1.4.2-min.js"></script>
 </body>

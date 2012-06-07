@@ -1,40 +1,42 @@
-<div id="title">
-<g:message code="course.name"/>:
-<div id="courseName">${registration.scheduledCourse.course.name}</div>
-</div>
+<h3><div id="courseName">${registration.scheduledCourse.course.name}</div></h3>
 
-<table id="breakDownDetail">
-  <tr>
-    <td width="50%"><g:message code="course.originalPrice"/>:</td>
-    <td>
-      $ <span id="originalPrice"><g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/></span>
-      <g:hiddenField name="costByCourse" value="${registration.scheduledCourse.costByCourse}"/>
-    </td>
-  </tr>
-
-  <tr class="discount" style="display:none;">
-    <td><g:message code="course.discount"/>:</td>
-    <td>
-      - $ <span id="discountAmount"><g:formatNumber number="${discount}" format="#,###.##"/></span>
-    </td>
-  </tr>
-
-  <tr class="priceWithDiscount" style="display:none;">
-    <td><g:message code="course.priceDiscount"/>:</td>
-    <td>
-      $ <span id="priceWithDiscount"><g:formatNumber number="${finalAmount}" format="#,###.##"/></span>
-    </td>
-  </tr>
-
-  <tr class="taxIva" style="display:none;">
-    <td><g:message code="course.tax"/>:</td>
-    <td>$ <span id="taxIvaAmount"><g:formatNumber number="${iva}" format="#,###.##"/></span></td>
-  </tr>
-
-  <tr class="finalPrice">
-    <td><g:message code="course.finalPrice"/>:</td>
-    <td class="finalAmount">
-      $ <span id="finalAmount"><g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/></span>
-    </td>
-  </tr>
-</table>
+<dl class="dl-horizontal">
+  <dt><g:message code="course.originalPrice"/>:</dt>
+  <dd>
+    $ <span id="originalPrice"><g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/>
+    </span>
+    <g:hiddenField name="costByCourse" value="${registration.scheduledCourse.costByCourse}"/>
+  </dd>
+  <dt class="discount" style="display:none;">
+    <g:message code="course.discount"/>:
+  </dt>
+  <dd class="discount" style="display:none;">
+    - $ <span id="discountAmount">
+    <g:formatNumber number="${discount}" format="#,###.##"/>
+    </span>
+  </dd>
+  <dt class="priceWithDiscount" style="display:none;">
+    <g:message code="course.priceDiscount"/>:
+  </dt>
+  <dd class="priceWithDiscount" style="display:none;">
+    $ <span id="priceWithDiscount">
+      <g:formatNumber number="${finalAmount}" format="#,###.##"/>
+    </span>
+  </dd>
+  <dt class="taxIva" style="display:none;">
+    <g:message code="course.tax"/>:
+  </dt>
+  <dd class="taxIva" style="display:none;">
+    $ <span id="taxIvaAmount">
+      <g:formatNumber number="${iva}" format="#,###.##"/>
+    </span>
+  </dd>
+  <dt class="finalPrice">
+    <g:message code="course.finalPrice"/>:
+  </dt>
+  <dd class="finalPrice finalAmount">
+    $ <span id="finalAmount">
+      <g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/>
+    </span>
+  </dd>
+</dl>

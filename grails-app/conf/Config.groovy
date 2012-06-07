@@ -129,7 +129,9 @@ log4j = {
       'net.bull',
       'grails.spring',
       'net.sf.ehcache.hibernate',
-      'org.grails.tomcat'
+      'org.grails.tomcat',
+      'org.grails.plugin.resource',
+      'grails.app.tagLib.org.grails.plugin'
 
   error 'net.sf.ehcache', 'net.sf.ehcache.hibernate', 'org.hibernate'
 
