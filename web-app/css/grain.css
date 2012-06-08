@@ -21,3 +21,7 @@ div#profile div#uservatar {
 table#login tbody tr.links td label.remember_me_label {
   display: inline;
 }
+
+input, textarea, select {
+  margin-bottom:0px;
+}
