@@ -3,7 +3,7 @@
 <dl class="dl-horizontal">
   <dt><g:message code="course.originalPrice"/>:</dt>
   <dd>
-    $ <span id="originalPrice"><g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/>
+    &nbsp; $ <span id="originalPrice"><g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/>
     </span>
     <g:hiddenField name="costByCourse" value="${registration.scheduledCourse.costByCourse}"/>
   </dd>
@@ -19,7 +19,7 @@
     <g:message code="course.priceDiscount"/>:
   </dt>
   <dd class="priceWithDiscount" style="display:none;">
-    $ <span id="priceWithDiscount">
+    &nbsp; $ <span id="priceWithDiscount">
       <g:formatNumber number="${finalAmount}" format="#,###.##"/>
     </span>
   </dd>
@@ -27,7 +27,7 @@
     <g:message code="course.tax"/>:
   </dt>
   <dd class="taxIva" style="display:none;">
-    $ <span id="taxIvaAmount">
+    &nbsp; $ <span id="taxIvaAmount">
       <g:formatNumber number="${iva}" format="#,###.##"/>
     </span>
   </dd>
@@ -35,7 +35,7 @@
     <g:message code="course.finalPrice"/>:
   </dt>
   <dd class="finalPrice finalAmount">
-    $ <span id="finalAmount">
+    &nbsp; $ <span id="finalAmount">
       <g:formatNumber number="${registration.scheduledCourse.costByCourse}" format="#,###.##"/>
     </span>
   </dd>
