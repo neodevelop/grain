@@ -15,7 +15,7 @@
   <div class="span3">
     <h3>Sesiones</h3>
     <ul>
-      <g:each in="${scheduledCourse.courseSessions}" var="courseSession">
+      <g:each in="${scheduledCourse.courseSessions.sort()}" var="courseSession">
         <li>${courseSession}</li>
       </g:each>
     </ul>
