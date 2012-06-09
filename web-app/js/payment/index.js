@@ -79,32 +79,17 @@ function startOver(){
     $("div#leftbox :radio").attr("checked",false);
     $(":first",this).attr("checked",true);
     highlight(this,"percentOption",".groupOption1");
-    bothSelected();
   });
 
   $("div.paymentOption").click(function(){
     $("div#rightbox :radio").attr("checked",false);
     $(":first",this).attr("checked",true);
     highlight(this,"paymentOption",".groupOption2");
-    bothSelected();
   });
 
   $(":checkbox").change(function(){
     recalculateAmounts(true);
   });
-}
-
-function bothSelected(){
-  $("div.payment").hide();
-  if($("input[name='percentOption']").is(":checked") && $("input[name='paymentOption']").is(":checked")){
-    if($("input[name='paymentOption']:checked").val() == 'transferencia'){
-      $("div#paymentSpei").slideDown('slow');
-      $("span#paymentAmountSpei").text($("input[name='percentOption']:checked").val());
-    }else{
-      $("div#paymentDineroMail").slideDown('slow');
-      $("span#paymentAmountDM").text($("input[name='percentOption']:checked").val());
-    }
-  }
 }
 
 function isValidEmailAddress(emailAddress) {
@@ -177,8 +162,5 @@ function recalculateAmounts(animate){
   if(animate){
 
   }
-
-  if($("div.payment").is(":visible")){
-    bothSelected();
-  }
+  
 }

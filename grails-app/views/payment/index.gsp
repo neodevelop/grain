@@ -24,7 +24,7 @@
         Aparta tu lugar con el 50% ( $ <span id="halfCostByCourse"></span> )
       </div>
       <div class="percentOption groupOption1">
-        <g:radio id="full" value="" name="percentOption"/>
+        <g:radio id="full" value="" name="percentOption" checked="checked"/>
         Paga el total de tu curso ( $ <span id="totalCostByCourse"></span>  )
       </div>
 
@@ -32,30 +32,22 @@
   </div>
   <div class="span6">
     <g:render template="/promotion/showForPayment" model="[promotionsPerCourse:promotionsPerCourse]" />
-    <div class="paymentOption groupOption2">
-      <g:radio id="transferencia" value="transferencia" name="paymentOption"/>
-      Transferencia electrónica
-    </div>
-    <div class="paymentOption groupOption2">
-      <g:radio id="dineromail" value="dineromail" name="paymentOption"/>
-      Otros medios de pago<br/>
-      <img src="${resource(dir:'themes/wb/icon',file:'visa-icon.gif')}" title="visa" alt="visa"/>
-      <img src="${resource(dir:'themes/wb/icon',file:'mastercard-icon.gif')}" title="mastercard" alt="mastercard"/>
-      <img src="${resource(dir:'themes/wb/icon',file:'amex-icon.png')}" title="amex" alt="amex"/>
-      <img src="${resource(dir:'themes/wb/icon',file:'7-eleven-icon.png')}" title="7eleven" alt="7eleven"/>
-      <img src="${resource(dir:'themes/wb/icon',file:'oxxo-icon.gif')}" title="oxxo" alt="oxxo"/>
-    </div>
   </div>
 </div>
 
-<div class="clearer"></div>
-<div id="paymentSpei" class="payment">
-  <g:render template="spei"/>
-</div>
-
-<div class="clearer"></div>
-<div id="paymentDineroMail" class="payment">
-  <g:render template="dineroMail"/>
+<div class="row">
+  <div class="span4">
+    <h2>Pago en efectivo</h2>
+    <g:render template="efectivo"/>
+  </div>
+  <div class="span4">
+    <h2>Transferencia electrónica</h2>
+    <g:render template="spei"/>
+  </div>
+  <div class="span4">
+    <h2>Tarjetas de crédito</h2>
+    <g:render template="tc"/>
+  </div>
 </div>
 
 <g:hiddenField name="registrationId" value="${registration.id}"/>

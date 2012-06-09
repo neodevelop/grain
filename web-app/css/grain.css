@@ -4,7 +4,6 @@ body {
 }
 
 .home .hero-unit{
-  background-image: "../images/training.jpg";
   background-position:100% 100%;
   background-repeat: no-repeat;
 }
@@ -24,4 +23,8 @@ table#login tbody tr.links td label.remember_me_label {
 
 input, textarea, select {
   margin-bottom:0px;
+}
+
+.medios,.instrucciones,.action {
+  padding-top: 10px;
 }

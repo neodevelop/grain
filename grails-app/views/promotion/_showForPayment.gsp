@@ -52,5 +52,5 @@
     </g:if>
     <div id="needInvoice">
       <input type="checkbox" id="invoice" name="invoice"/>
-      <g:message code="payment.needInvoice"/>
+      <g:message code="payment.needInvoice"/>&nbsp;<span class="label">Te solicitaremos tus datos después</span>
     </div>
