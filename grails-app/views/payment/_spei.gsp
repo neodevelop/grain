@@ -9,7 +9,7 @@
     <r:img uri="/images/banorte-icon.png" title="7eleven" alt="7eleven"/>
   </div>
   <div id="finish">
-    <g:link class="btn btn-success" action="${pay ?: 'create'}" params="[paymentOption:'transferencia']" >
+    <g:link class="btn btn-success submit" action="${pay ?: 'create'}" params="[paymentOption:'transferencia']" >
       <i class="icon-ok icon-white"></i>
       Haré mi pago en el portal de mi banco...
     </g:link>

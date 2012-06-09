@@ -7,7 +7,7 @@
     <r:img uri="/images/oxxo-icon.gif" title="oxxo" alt="oxxo"/>
   </div>
   <div class="action">
-    <g:link class="btn btn-success" action="${pay ?: 'create'}" params="[paymentOption:'dineromail']" >
+    <g:link class="btn btn-success submit" action="${pay ?: 'create'}" params="[paymentOption:'dineromail']" >
       <i class="icon-print icon-white"></i>
       Imprimir recibo de pago
     </g:link>
