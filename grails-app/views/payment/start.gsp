@@ -61,7 +61,7 @@
 
 <div class="clearer"></div>
 <div id="paymentDineroMail" class="payment">
-  <g:render template="dineroMail"  model="[pay:'pay']"/>
+  <g:render template="efectivo"  model="[pay:'pay']"/>
 </div>
 <g:hiddenField name="totalToPay" value="${payment.amount}"/>
 <g:hiddenField name="transactionId" value="${payment.transactionId}"/>
