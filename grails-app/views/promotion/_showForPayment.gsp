@@ -50,6 +50,9 @@
         </g:each>
       </ul>
     </g:if>
+    <g:else>
+      <h3><g:message code="promotion.not.available" default="There's not promotions available for this course"/></h3>
+    </g:else>
     <div id="needInvoice">
       <input type="checkbox" id="invoice" name="invoice"/>
       <g:message code="payment.needInvoice"/>&nbsp;<span class="label">Te solicitaremos tus datos después</span>
