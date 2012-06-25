@@ -81,7 +81,11 @@
     <h2>Información básica</h2>
     <p>Una notificación será enviada a tu correo</p>
 
-    <g:render template="/common/errors" model="[instance:userdata]"/>
+    <g:if test="${flash.error}">
+      <div class="alert alert-error">
+        ${flash.error}
+      </div>
+    </g:if>
 
     <g:form name="registerForm" action="user" method="post" controller="register" class="well">
 
