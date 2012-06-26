@@ -48,7 +48,7 @@
       <g:layoutBody/>  
 
       <footer>
-        <p>&copy; SynergyJ.com 2012</p>
+        <p>&copy; SynergyJ Servicios Profesionales  - 2012</p>
       </footer>
     </div> <!-- /container -->
 
