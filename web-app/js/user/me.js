@@ -28,8 +28,8 @@ $(function(){
     return false;
   });
 
-  $("div#tabs").tabs();
-  $("#accordion").accordion({ header:'div.note' });
+  $('.nav-tabs li a:first').tab('show');
+
   $("a[name^='uploadReceipt']").click(function(){
     var number = $(this).attr('name').substring("uploadReceipt".length);
     $("#paymentNumber").val(number);
