@@ -29,13 +29,18 @@
       <a class="brand" href="#">SynergyJ.com</a>
       <div class="btn-group pull-right">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-          <i class="icon-user"></i> Username
+          <i class="icon-user"></i>
+          <sec:loggedInUserInfo field="username"/>
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
           <li><a href="#">Profile</a></li>
           <li class="divider"></li>
-          <li><a href="#">Sign Out</a></li>
+          <li>
+            <g:link controller="logout">
+              Logout
+            </g:link>
+          </li>
         </ul>
       </div>
       <div class="nav-collapse">
@@ -63,7 +68,7 @@
         <ul class="nav nav-list">
           <sec:ifAnyGranted roles="ROLE_ADMIN" >
           <li class="nav-header">Administrador</li>
-          <li>
+          <li class="active">
             <a href="#">Grupos</a>
           </li>
           <li>
