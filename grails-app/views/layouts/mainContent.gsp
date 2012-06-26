@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>. : SynergyJ - <g:layoutTitle default="Entrenamiento"/> : .</title>
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <r:require module="bootstrap-js"/>
+  <r:require module="bootstrap-css"/>
+  <g:layoutHead/>
+  <r:layoutResources />
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">SynergyJ.com</a>
+      <div class="btn-group pull-right">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="icon-user"></i> Username
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Profile</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Sign Out</a></li>
+        </ul>
+      </div>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <g:set var="options" value="${menu.options(name:'top')}"/>
+          <g:if test="${options}">
+            <g:each in="${options}" var="option">
+              <li>
+                <a href="${menu.link(option:option)}">
+                  ${g.message(code:option.item.labelCode, default:option.item.labelCode)}
+                </a>
+              </li>
+            </g:each>
+          </g:if>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3">
+      <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+          <sec:ifAnyGranted roles="ROLE_ADMIN" >
+          <li class="nav-header">Administrador</li>
+          <li>
+            <a href="#">Grupos</a>
+          </li>
+          <li>
+            <a href="#">Cotizador de cursos</a>
+          </li>
+          <li>
+            <a href="#">Rondas de cursos</a>
+          </li>
+          <li>
+            <g:link controller="course">
+              <g:message code="course.label" default="Courses"/>
+            </g:link>
+          </li>
+          <li>
+            <g:link controller="scheduledCourse">
+              <g:message code="scheduledcourse.label" default="Scheduled Courses"/>
+            </g:link>
+          </li>
+          <li>
+            <g:link controller="promotion">
+              <g:message code="promotion.label" default="Promotions"/>
+            </g:link>
+          </li>
+          <li>
+            <g:link controller="promotionPerScheduledCourse">
+              <g:message code="promotionPerScheduledCourse.label" default="Promotion Per Course"/>
+            </g:link>
+          </li>
+          <li>
+            <g:link controller="content" class="action">
+              <g:message code="content.label" default="Contents"/>
+            </g:link>
+          </li>
+          <li>
+            <g:link controller="newsItem" class="action">
+              <g:message code="newsItem.label" default="News Item"/>
+            </g:link>
+          </li>
+          <li>
+            <g:link controller="notification" class="action">
+              <g:message code="notification.label" default="Notifications"/>
+            </g:link>
+          </li>
+          </sec:ifAnyGranted>
+          <li class="nav-header">Personal</li>
+          <li><a href="#">Mis sesiones</a></li>
+          <li><a href="#">Chat</a></li>
+          <li>
+            <g:link mapping="updateme" class="action">
+              <g:message code="me.update"/>
+            </g:link>
+          </li>
+          <li><a href="#">Configuración</a></li>
+          <li><a href="#">Mis pagos</a></li>
+          <li><a href="#">Mi historial</a></li>
+          <li>
+            <g:link mapping="changePassword" class="action">
+              <g:message code="me.changePassword"/>
+            </g:link>
+          </li>
+          <li class="nav-header">Social</li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Github</a></li>
+        </ul>
+      </div><!--/.well -->
+    </div><!--/span-->
+    <div class="span9">
+      <g:layoutBody/>
+    </div><!--/span-->
+  </div><!--/row-->
+
+  <hr>
+
+  <footer>
+    <p>&copy; SynergyJ Servicios Profesionales  - 2012</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
