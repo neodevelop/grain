@@ -1,19 +1,24 @@
 <%@ page import="com.synergyj.grain.course.KindOfPayment; com.synergyj.grain.course.RegistrationStatus; com.synergyj.grain.course.PaymentStatus; com.synergyj.grain.course.ReceiptStatus" %>
-    <ul>
-      <g:each in="${scheduledCourseList}" var="scheduledCourse" status="i">
-        <li><a href="#sc-${i}">${scheduledCourse.course.courseKey}</a></li>
-      </g:each>
-    </ul>
-
+  <ul class="nav nav-tabs">
     <g:each in="${scheduledCourseList}" var="scheduledCourse" status="i">
-    <div id="sc-${i}">
-      <h1>Lista de inscritos</h1>
-      <h3>Comienza: <g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd-MM-yy"/> </h3>
+      <li>
+        <a href="#sc-${i}" data-toggle="tab">
+          ${scheduledCourse.course.courseKey}
+        </a>
+      </li>
+    </g:each>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <g:each in="${scheduledCourseList}" var="scheduledCourse" status="i">
+    <div id="sc-${i}" class="tab-pane fade">
+      <h2>Comienza: <g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd-MM-yy"/> </h2>
       <g:each in="${RegistrationStatus.values()}" var="registrationStatus">
       <table id="registrations_${registrationStatus}" width="100%" class="registrationsDetail">
         <thead>
           <tr>
-            <th>${registrationStatus}</th>
+            <th>
+              ${g.message(code:registrationStatus.code)}
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -156,3 +161,4 @@
       </g:each>
     </div>
     </g:each>
+  </div>
