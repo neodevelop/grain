@@ -2,12 +2,10 @@
 <head>
   <title><g:message code='me.title' default="Me"/></title>
   <meta name='layout' content='mainContent'/>
-  <script language="JavaScript" src="${resource(dir:'themes/wb/js/registration',file:'list.js')}"></script>
-  <script language="JavaScript" src="${resource(dir:'themes/wb/js/user',file:'me.js')}"></script>
   <!-- Plugin de formulario -->
   <script src='http://synergyj.com/resources/jquery.form.js' type='text/javascript'></script>
   <r:require module="home"/>
-  
+  <r:require module="me"/>
 </head>
 <body>
 <div id="right">
