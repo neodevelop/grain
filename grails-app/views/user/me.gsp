@@ -8,18 +8,12 @@
   <r:require module="me"/>
 </head>
 <body>
-<div id="right">
-
   <sec:ifAllGranted roles="ROLE_ADMIN">
-
-  <div id="tabs" style="width:650px;">
+    <h1>Grupos de inscritos</h1>
     <g:render template="/scheduledCourse/adminList" model="[scheduledCourseList:scheduledCourseList]"/>
-  </div>
-
   </sec:ifAllGranted>
 
   <sec:ifNotGranted roles="ROLE_ADMIN">
-
   <g:if test="${!myRegistrations && !registrationsCodeForScheduledCourses}">
     <h1>Aún no te has registrado a ningún curso</h1>
     <h3>Explora nuestro calendario e inscríbete!!!</h3>
@@ -39,7 +33,7 @@
     </div>
   </g:else>
   </sec:ifNotGranted>
-</div>
+
 
   <div id="lightbox" style="display:none;"></div>
   <div id="imageReceipt" style="display:none;">
