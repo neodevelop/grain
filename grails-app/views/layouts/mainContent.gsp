@@ -109,18 +109,28 @@
           </li>
           </sec:ifAnyGranted>
           <li class="nav-header">Personal</li>
-          <li><a href="#">Mis sesiones</a></li>
-          <li><a href="#">Chat</a></li>
+          <li>
+            <a href="#">
+              <i class="icon-calendar"></i>Mis sesiones
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="icon-comment"></i>Chat
+            </a>
+          </li>
           <li>
             <g:link mapping="updateme" class="action">
+              <i class="icon-user"></i>
               <g:message code="me.update"/>
             </g:link>
           </li>
-          <li><a href="#">Configuración</a></li>
-          <li><a href="#">Mis pagos</a></li>
-          <li><a href="#">Mi historial</a></li>
+          <li><a href="#"><i class="icon-leaf"></i>Configuración</a></li>
+          <li><a href="#"><i class="icon-file"></i>Mis pagos</a></li>
+          <li><a href="#"><i class="icon-time"></i>Mi historial</a></li>
           <li>
             <g:link mapping="changePassword" class="action">
+              <i class="icon-exclamation-sign"></i>
               <g:message code="me.changePassword"/>
             </g:link>
           </li>
@@ -143,6 +153,6 @@
   </footer>
 
 </div>
-
+<r:layoutResources />
 </body>
 </html>
