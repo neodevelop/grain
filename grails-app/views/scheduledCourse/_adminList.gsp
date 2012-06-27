@@ -41,21 +41,33 @@
             </td>
             <td>
               <div class="btn-group">
-                <button data-toggle="dropdown" class="btn dropdown-toggle">Action <span class="caret"></span></button>
+                <button data-toggle="dropdown" class="btn dropdown-toggle">Registro <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">Modificar registro</a></li>
+                  <li><a href="#">Cancelar registro</a></li>
+                </ul>
+                <g:if test="${it?.registrationStatus == RegistrationStatus.REGISTERED}">
+                <button href="#" class="btn btn-danger">Eliminar registro</button> 
+                </g:if>
+              </div>
+            </td>
+            <td>
+              <div class="btn-group">
+                <button data-toggle="dropdown" class="btn dropdown-toggle">Pagos <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Ver pagos</a></li>
+                  <li><a href="#">Agregar pago</a></li>
                 </ul>
               </div>
             </td>
             <td>
-              Botones
-            </td>
-            <td>
-              Botones
+              <div class="btn-group">
+                <button data-toggle="dropdown" class="btn dropdown-toggle">Promociones <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Ver promociones</a></li>
+                  <li><a href="#">Agregar promoción</a></li>
+                </ul>
+              </div>
             </td>
           </tr>
         </g:findAll>
