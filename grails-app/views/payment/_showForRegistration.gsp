@@ -4,6 +4,12 @@
   <h3>Pagos de ${registration.student.email}</h3>
 </div>
 <div class="modal-body">
+
+  <div class="alert alert-success" id="editMessage" style="display: none;">
+    <button class="close" data-dismiss="alert">×</button>
+    <strong>Correcto!</strong> <span id="messageForEditAction"></span>
+  </div>
+
   <table class="table table-condensed" id="payments">
     <thead>
         <tr>
@@ -33,7 +39,7 @@
           <td>${payment.kindOfPayment}</td>
           <td>
             <div class="btn-group">
-              <g:remoteLink class="btn btn-mini" controller="payment" action="showForEditAsync" update="editPayment" id="${payment.id}">
+              <g:remoteLink class="btn btn-mini" controller="payment" action="showForEditAsync" update="editPayment" id="${payment.id}" onSuccess="showActionsForEdit()">
                 Editar
               </g:remoteLink>
               <g:if test="${payment.paymentStatus == PaymentStatus.PENDING}">
@@ -53,21 +59,19 @@
       </g:each>
       </tbody>
   </table>
-  <g:form controller="payment" action="updateAsync" class="well form-horizontal">
+  <g:formRemote url="[controller:'payment',action:'updateAsync']" class="well form-horizontal" name="editPaymentForm" style="display:none;" onSuccess="paymentEditOk(data)">
     <fieldset>
-      <div id="editPayment">
-        
+      <div id="editPayment"></div>
+      <div class="control-group">
+        <label class="control-label"></label>
+        <input class="btn btn-success" type="submit" value="Actualizar"/>
       </div>
-    <div class="form-actions">
-      <button class="btn btn-primary" type="submit">Save changes</button>
-      <button class="btn">Cancel</button>
-    </div>
     </fieldset>
-  </g:form>
+  </g:formRemote>
   </div>
 </div>
 <div class="modal-footer">
-  <a href="#" class="btn" data-dismiss="modal">Cerrar</a>
+  <a href="#" class="btn" onclick="hidePaymentForRegistration()">Cerrar</a>
   <g:remoteLink controller="payment" action="createAsync" class="btn btn-primary" id="${registration.id}" onSuccess="addPaymentToRegistration(data)">
     Agregar pago
   </g:remoteLink>

@@ -72,6 +72,14 @@ function showPaymentForRegistration(){
   $('#modalPayment').modal('show');
 }
 
+function hidePaymentForRegistration(){
+  var paymentForm = $("#editPaymentForm");
+  if(paymentForm.is(":visible")){
+    paymentForm.hide();
+  }
+  $('#modalPayment').modal('hide');
+}
+
 function addPaymentToRegistration(data){
   var row = $("table#payments tbody tr:first").clone().removeClass("cloneable");
   var numberPayment = $("table#payments tbody tr:last td:first").text();
@@ -80,4 +88,15 @@ function addPaymentToRegistration(data){
   row.find("span[title=paymentStatus]").text(data.paymentStatus.name);
   row.find("span[title=paymentKind]").text(data.kindOfPayment.name);
   row.appendTo("table#payments tbody").removeClass("hide").fadeIn();
+}
+
+function showActionsForEdit(){
+  $("#editPaymentForm").show();
+}
+
+function paymentEditOk(data){
+  var paymentForm = $("#editPaymentForm");
+  paymentForm.hide();
+  $("#editMessage span#messageForEditAction").text(data);
+  $("#editMessage").show();
 }

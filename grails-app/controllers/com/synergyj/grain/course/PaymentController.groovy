@@ -187,7 +187,7 @@ class PaymentController {
     [payment: payment]
   }
 
-  def update = {
+  def updateAsync = {
     def payment = Payment.get(params.id)
     payment.properties = params
     if (payment.save()) {
@@ -195,7 +195,7 @@ class PaymentController {
     } else {
       flash.message = "${message(code: 'default.optimistic.locking.failure', args: [payment.class.name, payment.id])}"
     }
-    redirect uri: '/me'
+    render flash.message
   }
 
   def delete = {
