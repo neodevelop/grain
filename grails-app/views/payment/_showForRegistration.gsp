@@ -28,10 +28,10 @@
           <td><span title="paymentDate"></span></td>
           <td><span title="paymentStatus"></span></td>
           <td><span title="paymentKind"></span></td>
-          <td><button class="btn btn-mini">Editar</button></td>
+          <td>&nbsp;</td>
         </tr>
       <g:each in="${registration.payments}" var="payment" status="i">
-        <tr>
+        <tr id="payment${payment.id}">
           <td>${i+1}</td>
           <td>$ ${payment.amount}</td>
           <td><g:formatDate format="E dd-MM-yy" date="${payment?.paymentDate}"/></td>

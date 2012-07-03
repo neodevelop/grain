@@ -191,11 +191,10 @@ class PaymentController {
     def payment = Payment.get(params.id)
     payment.properties = params
     if (payment.save()) {
-      flash.message = "${message(code: 'default.updated.message', args: [payment.class.name, payment.id])}"
+      render payment as JSON
     } else {
-      flash.message = "${message(code: 'default.optimistic.locking.failure', args: [payment.class.name, payment.id])}"
+      render "${message(code: 'default.optimistic.locking.failure', args: [payment.class.name, payment.id])}"
     }
-    render flash.message
   }
 
   def delete = {

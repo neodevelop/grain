@@ -97,6 +97,7 @@ function showActionsForEdit(){
 function paymentEditOk(data){
   var paymentForm = $("#editPaymentForm");
   paymentForm.hide();
-  $("#editMessage span#messageForEditAction").text(data);
+  $("#editMessage span#messageForEditAction").text("El pago se ha modificado");
   $("#editMessage").show();
+  $("tr#payment" + data.id).find("td:last").html("<span class='label label-success'>Modificado</span>");
 }
