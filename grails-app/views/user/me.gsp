@@ -8,6 +8,7 @@
   <r:require module="me"/>
 </head>
 <body>
+  <!-- TODO: Si la sesion es de instructor y es el día de la clase entonces mostramos lista de asistencia -->
   <sec:ifAllGranted roles="ROLE_ADMIN">
     <h1>Grupos de inscritos</h1>
     <g:render template="/scheduledCourse/adminList" model="[scheduledCourseList:scheduledCourseList]"/>

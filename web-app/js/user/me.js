@@ -67,3 +67,17 @@ function removeReceipt(receiptId){
 function removeRegistration(registrationId){
   $("#registration"+registrationId).fadeOut('slow');
 }
+
+function showPaymentForRegistration(){
+  $('#modalPayment').modal('show');
+}
+
+function addPaymentToRegistration(data){
+  var row = $("table#payments tbody tr:first").clone().removeClass("cloneable");
+  var numberPayment = $("table#payments tbody tr:last td:first").text();
+  row.find("span[title=paymentNumber]").text((numberPayment*1) + 1);
+  row.find("span[title=paymentAmount]").text("$ "+data.amount);
+  row.find("span[title=paymentStatus]").text(data.paymentStatus.name);
+  row.find("span[title=paymentKind]").text(data.kindOfPayment.name);
+  row.appendTo("table#payments tbody").removeClass("hide").fadeIn();
+}

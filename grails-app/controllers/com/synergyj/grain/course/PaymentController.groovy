@@ -231,11 +231,16 @@ class PaymentController {
     """
   }
 
-  def showAsync = {
+  def showForRegistrationAsync = {
     // Obtenemos el registration
     def registration = Registration.get(params.id)
     // Desplegamos el template con los datos de los pagos del registro
-    render template: "/payment/show",model:[registration:registration]
+    render template: "/payment/showForRegistration",model:[registration:registration]
+  }
+
+  def showForEditAsync = {
+    def payment = Payment.get(params.id)
+    render template: "/payment/form",model:[payment:payment]
   }
 
   def createAsync = {
