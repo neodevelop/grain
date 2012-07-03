@@ -41,32 +41,24 @@
             </td>
             <td>
               <div class="btn-group">
-                <button data-toggle="dropdown" class="btn dropdown-toggle">Registro <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Modificar registro</a></li>
-                  <li><a href="#">Cancelar registro</a></li>
-                </ul>
-                <g:if test="${it?.registrationStatus == RegistrationStatus.REGISTERED}">
-                <button href="#" class="btn btn-danger">Eliminar registro</button> 
+                <button class="btn btn-mini">Modificar</button>
+                <g:if test="${it.registrationStatus == RegistrationStatus.REGISTERED || it.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH}">
+                  <g:remoteLink class="btn btn-danger btn-mini" controller="registration" action="delete" id="${it.id}" onSuccess="removeRegistration(${it.id})">
+                    Eliminar registro
+                  </g:remoteLink>
                 </g:if>
               </div>
             </td>
             <td>
               <div class="btn-group">
-                <button data-toggle="dropdown" class="btn dropdown-toggle">Pagos <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Ver pagos</a></li>
-                  <li><a href="#">Agregar pago</a></li>
-                </ul>
+                <g:remoteLink class="btn btn-mini" update="modalPayment" controller="payment" action="showForRegistrationAsync" id="${it.id}" onSuccess="showPaymentForRegistration();">
+                  Ver pagos
+                </g:remoteLink>
               </div>
             </td>
             <td>
               <div class="btn-group">
-                <button data-toggle="dropdown" class="btn dropdown-toggle">Promociones <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Ver promociones</a></li>
-                  <li><a href="#">Agregar promoción</a></li>
-                </ul>
+                <a href="#" class="btn btn-mini">Aplicables</a>
               </div>
             </td>
           </tr>
@@ -76,4 +68,8 @@
       </g:each>
     </div>
     </g:each>
+  </div>
+
+  <div class="modal hide" id="modalPayment">
+
   </div>
