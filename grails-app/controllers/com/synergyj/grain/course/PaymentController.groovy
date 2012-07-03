@@ -15,6 +15,8 @@
  */
 package com.synergyj.grain.course
 
+import grails.converters.JSON
+
 class PaymentController {
 
   def springSecurityService
@@ -227,6 +229,18 @@ class PaymentController {
     render """
       <img src="${resource(dir: 'themes/wb/icon', file: 'valid-green.png')}" width="24" height="24" />
     """
+  }
+
+  def showAsync = {
+    // Obtenemos el registration
+    def registration = Registration.get(params.id)
+    // Desplegamos el template con los datos de los pagos del registro
+    render template: "/payment/show",model:[registration:registration]
+  }
+
+  def createAsync = {
+    def payment = paymentService.addPaymentToRegistration(params.long('id'))
+    render payment as JSON
   }
 
 }

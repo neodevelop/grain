@@ -79,6 +79,14 @@ class PaymentService {
     registration
   }
 
+  Payment addPaymentToRegistration(Long registrationId){
+    def registration = Registration.get(registrationId)
+    def payment =  preparePayment(0,"")
+    registration.addToPayments(payment)
+    registration.save()
+    payment
+  }
+
   private def preparePayment(amount,kindOfPayment){
     def description = "Pago de inscripción"
     def thisKindOfPayment = KindOfPayment.SPEI
