@@ -42,12 +42,6 @@ $(function(){
     return false;
   });
 
-  $('#lightbox').click(function(){
-    $("img#currentReceipt").remove();
-    $('#userDataForm').fadeOut(300);
-    $('#lightbox').effect('clip',{},500,function(){});
-  });
-
   $("a.seeReceipt").click(function(){
     var link = this;
     $('#lightbox').css({width:'100%',height:'100%'}).fadeIn(500,function(){
@@ -100,7 +94,13 @@ function showActionsForEdit(){
 function paymentEditOk(data){
   var paymentForm = $("#editPaymentForm");
   paymentForm.hide();
-  $("#editMessage span#messageForOkStatus").text("El pago se ha modificado");
+  $("#okMessage span#messageForOkStatus").text("El pago se ha modificado");
   $("#okMessage").show();
   $("tr#payment" + data.id).find("td:last").html("<span class='label label-success'>Modificado</span>");
+}
+
+function paymentDeleted(data){
+  $("tr#payment"+data.id).fadeOut();
+  $("#okMessage span#messageForOkStatus").text("El pago se ha eliminado");
+  $("#okMessage").show();
 }

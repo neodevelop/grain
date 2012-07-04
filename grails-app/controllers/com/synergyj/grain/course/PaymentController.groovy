@@ -197,11 +197,10 @@ class PaymentController {
     }
   }
 
-  def delete = {
+  def deleteAsync = {
     def payment = Payment.get(params.id)
     payment.delete()
-    flash.message = "${message(code: 'default.deleted.message', args: [payment.class.name, payment.id])}"
-    redirect uri: '/me'
+    render payment as JSON
   }
 
   def createForRegistration = {

@@ -47,6 +47,11 @@
               <g:remoteLink class="btn btn-mini" controller="payment" action="showForEditAsync" update="editPayment" id="${payment.id}" onSuccess="showActionsForEdit()">
                 Editar
               </g:remoteLink>
+              <g:if test="${payment.paymentStatus == PaymentStatus.WAITING}">
+                <g:remoteLink class="btn btn-mini btn-danger" id="${payment.id}" controller="payment" action="deleteAsync" onSuccess="paymentDeleted(data)">
+                  Eliminar
+                </g:remoteLink>
+              </g:if>
               <g:if test="${payment.paymentStatus == PaymentStatus.PENDING}">
                 <g:if test="${payment.kindOfPayment == KindOfPayment.SPEI}">
                   <a href="#" class="btn btn-mini btn-info" name="uploadReceipt${payment.id}">Subir recibo</a>
@@ -92,8 +97,8 @@
     </fieldset>
   </g:form>
 
-  </div>
 </div>
+
 <div class="modal-footer">
   <a href="#" class="btn" onclick="hidePaymentForRegistration()">Cerrar</a>
   <g:remoteLink controller="payment" action="createAsync" class="btn btn-primary" id="${registration.id}" onSuccess="addPaymentToRegistration(data)">
