@@ -1,41 +1,43 @@
 $(function(){
 
-  $("#fileuploadForm").submit(function(){
+  $("form#fileuploadForm").live("submit",function(){
     $("#okMessage").hide();
     $("#errorMessage").hide();
     $(this).ajaxSubmit({
-          beforeSubmit:function(formData, jqForm, options){
-            $("input.continue").hide();
-            $("#fileupload").fadeIn('slow');
-          },
-          success:function(data){
-            var linkId = $("#paymentNumber").val();
-            $("<span>Procesando</span>").insertBefore("a[name=uploadReceipt"+linkId+"]");
-            $("a[name=uploadReceipt"+linkId+"]").hide();
-            $("#okMessage").text(data);
-            $("#okMessage").fadeIn();
-            $('#userDataForm').delay(4000).fadeOut(300);
-            $('#lightbox').delay(4000).effect('clip',{},500,function(){});
-          },
-          error:function(jqXHR, textStatus, errorThrown){
-            $("#errorMessage").text(errorThrown);
-            $("#errorMessage").fadeIn();
-          },
-          complete:function(){
-            $("#fileupload").fadeOut('slow').delay(1000);
-          }
-        });
+      clearForm: true,
+      resetForm: true,
+      beforeSubmit:function(formData, jqForm, options){
+        $("input#sendReceipt").hide();
+        $("input#filet").disabled();
+        $("#loaderProgressBar").fadeIn('slow');
+      },
+      success:function(data){
+        var linkId = $("#paymentNumber").val();
+        $("a[name=uploadReceipt"+linkId+"]").hide();
+        $("#okMessage").text(data);
+        $("#okMessage").fadeIn();
+
+      },
+      error:function(jqXHR, textStatus, errorThrown){
+        $("#errorMessage").text(errorThrown);
+        $("#errorMessage").fadeIn();
+      },
+      complete:function(jqXHR, textStatus){
+        $("#loaderProgressBar").fadeOut('slow');
+        $("form#fileuploadForm").fadeOut();
+        $("input#sendReceipt").show();
+      }
+    });
     return false;
   });
 
   $('.nav-tabs li a:first').tab('show');
 
-  $("a[name^='uploadReceipt']").click(function(){
+  $("a[name^='uploadReceipt']").live("click",function(){
+    var form = $("form#fileuploadForm");
+    form.show();
     var number = $(this).attr('name').substring("uploadReceipt".length);
-    $("#paymentNumber").val(number);
-    $('#lightbox').css({width:'100%',height:'100%'}).fadeIn(500,function(){
-      $("#userDataForm").fadeIn(300);
-    });
+    form.find("#paymentNumber").val(number);
     return false;
   });
 
@@ -97,7 +99,7 @@ function showActionsForEdit(){
 function paymentEditOk(data){
   var paymentForm = $("#editPaymentForm");
   paymentForm.hide();
-  $("#editMessage span#messageForEditAction").text("El pago se ha modificado");
-  $("#editMessage").show();
+  $("#editMessage span#messageForOkStatus").text("El pago se ha modificado");
+  $("#okMessage").show();
   $("tr#payment" + data.id).find("td:last").html("<span class='label label-success'>Modificado</span>");
 }

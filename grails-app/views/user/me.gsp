@@ -2,8 +2,6 @@
 <head>
   <title><g:message code='me.title' default="Me"/></title>
   <meta name='layout' content='mainContent'/>
-  <!-- Plugin de formulario -->
-  <script src='http://synergyj.com/resources/jquery.form.js' type='text/javascript'></script>
   <r:require module="home"/>
   <r:require module="me"/>
 </head>
@@ -34,28 +32,6 @@
     </div>
   </g:else>
   </sec:ifNotGranted>
-
-
-  <div id="lightbox" style="display:none;"></div>
-  <div id="imageReceipt" style="display:none;">
-
-  </div>
-  <div id="userDataForm" style="display:none;">
-    <div class="title"> Gracias por tu pago! </div>
-    <div class="sub-title">
-      Por favor, selecciona el archivo(jpeg) que comprueba tu pago
-    </div>
-    <g:form name="fileuploadForm" controller="payment" action="fileupload" method="POST" enctype="multipart/form-data">
-      <g:hiddenField name="paymentNumber" value=""/>
-      <label>Archivo:</label><br/>
-      <input id="file" type="file" name="file" class="file" size="30" />
-      <div align="center">
-      <input value="Subir archivo..." class="continue" tabindex="3" type="submit">
-    </g:form>
-    <div id="fileupload" style="display: none;">
-      <img src="${resource(dir:'themes/wb/images',file:'ajax-loader.gif')}" title="progress" alt="loader"/>
-    </div>
-    <div id="okMessage" style="display:none;"></div>
-    <div id="errorMessage" style="display:none;"></div>
-  </div>
+  <!-- Plugin de formulario -->
+  <script src='http://synergyj.com/resources/jquery.form.js' type='text/javascript'></script>
 </body>

@@ -5,9 +5,14 @@
 </div>
 <div class="modal-body">
 
-  <div class="alert alert-success" id="editMessage" style="display: none;">
+  <div class="alert alert-success" id="okMessage" style="display: none;">
     <button class="close" data-dismiss="alert">×</button>
-    <strong>Correcto!</strong> <span id="messageForEditAction"></span>
+    <strong>Correcto!</strong> <span id="messageForOkStatus"></span>
+  </div>
+
+  <div class="alert alert-error" id="errorMessage" style="display: none;">
+    <button class="close" data-dismiss="alert">×</button>
+    <strong>Error!</strong> <span id="messageForErrorStatus"></span>
   </div>
 
   <table class="table table-condensed" id="payments">
@@ -44,7 +49,7 @@
               </g:remoteLink>
               <g:if test="${payment.paymentStatus == PaymentStatus.PENDING}">
                 <g:if test="${payment.kindOfPayment == KindOfPayment.SPEI}">
-                  <button class="btn btn-mini btn-info">Subir recibo</button>
+                  <a href="#" class="btn btn-mini btn-info" name="uploadReceipt${payment.id}">Subir recibo</a>
                 </g:if>
                 <g:else>
                   <button class="btn btn-mini btn-info">Comprobar en DM</button>
@@ -59,6 +64,7 @@
       </g:each>
       </tbody>
   </table>
+
   <g:formRemote url="[controller:'payment',action:'updateAsync']" class="well form-horizontal" name="editPaymentForm" style="display:none;" onSuccess="paymentEditOk(data)">
     <fieldset>
       <div id="editPayment"></div>
@@ -68,6 +74,24 @@
       </div>
     </fieldset>
   </g:formRemote>
+
+  <g:form name="fileuploadForm" controller="payment" action="fileupload" method="POST" enctype="multipart/form-data" style="display:none;" class="well form-horizontal">
+    <fieldset>
+      <g:hiddenField name="paymentNumber" value=""/>
+      <div class="control-group">
+        <label class="control-label">Archivo:</label>
+        <input id="file" type="file" name="file" class="file"/>
+      </div>
+      <div class="control-group">
+        <label class="control-label"></label>
+        <input value=". : Subir archivo : ." class="btn btn-success" type="submit" id="sendReceipt">
+      </div>
+      <div class="progress progress-striped active" id="loaderProgressBar" style="display: none;">
+        <div style="width: 100%" class="bar"></div>
+      </div>
+    </fieldset>
+  </g:form>
+
   </div>
 </div>
 <div class="modal-footer">
