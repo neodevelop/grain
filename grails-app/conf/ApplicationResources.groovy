@@ -6,7 +6,6 @@ modules = {
     resource url:'/js/payment/index.js'
   }
   me {
-    resource url:'/js/registration/list.js'
     resource url:'/js/user/me.js'
   }
   overrides { // Arreglando bootstra-fixtaglib.css

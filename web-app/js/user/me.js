@@ -8,7 +8,7 @@ $(function(){
       resetForm: true,
       beforeSubmit:function(formData, jqForm, options){
         $("input#sendReceipt").hide();
-        $("input#filet").disabled();
+        $("input#file").addClass("disabled");
         $("#loaderProgressBar").fadeIn('slow');
       },
       success:function(data){
@@ -25,6 +25,7 @@ $(function(){
       complete:function(jqXHR, textStatus){
         $("#loaderProgressBar").fadeOut('slow');
         $("form#fileuploadForm").fadeOut();
+        $("input#file").removeClass("disabled");
         $("input#sendReceipt").show();
       }
     });
