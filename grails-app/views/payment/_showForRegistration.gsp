@@ -35,7 +35,7 @@
           <td><span title="paymentKind"></span></td>
           <td>&nbsp;</td>
         </tr>
-      <g:each in="${registration.payments}" var="payment" status="i">
+      <g:each in="${registration.payments.sort()}" var="payment" status="i">
         <tr id="payment${payment.id}">
           <td>${i+1}</td>
           <td>$ ${payment.amount}</td>
@@ -54,14 +54,33 @@
               </g:if>
               <g:if test="${payment.paymentStatus == PaymentStatus.PENDING}">
                 <g:if test="${payment.kindOfPayment == KindOfPayment.SPEI}">
-                  <a href="#" class="btn btn-mini btn-info" name="uploadReceipt${payment.id}">Subir recibo</a>
+                  <g:if test="${payment.receipts.size()}">
+                    <g:each in="${payment.receipts}" var="receipt">
+                      <a href="${receipt.url()}" target="_blank" class="btn btn-mini btn-info"><i class="icon-file"></i></a>
+                      <g:remoteLink class="btn btn-mini btn-success" controller="receipt" action="approve" id="${receipt.id}" onSuccess="showResponse(data)" onComplete="hideButtons(${payment.id})">
+                        <i class="icon-ok"></i>
+                      </g:remoteLink>
+                      <g:remoteLink class="btn btn-mini btn-danger" controller="receipt" action="delete" id="${receipt.id}" onSuccess="showResponse(data)" onComplete="hideButtons(${payment.id})">
+                        <i class="icon-remove"></i>
+                      </g:remoteLink>
+                    </g:each>
+                  </g:if>
+                  <g:else>
+                    <a href="#" class="btn btn-mini btn-info" name="uploadReceipt${payment.id}">Subir recibo</a>
+                  </g:else>
                 </g:if>
                 <g:else>
-                  <button class="btn btn-mini btn-info">Comprobar en DM</button>
+                  <g:remoteLink class="btn btn-mini btn-info" controller="receipt" action="approveDineroMail" id="${payment.id}" onSuccess="showResponse(data)" onComplete="hideButtons(${payment.id})">
+                    Comprobar en DM
+                  </g:remoteLink>
                 </g:else>
               </g:if>
               <g:if test="${payment.paymentStatus == PaymentStatus.PAYED}">
-                <button class="btn btn-mini btn-info">Ver recibo</button>
+                  <g:if test="${payment.receipts.size()}">
+                    <g:each in="${payment.receipts}" var="receipt">
+                      <a href="${receipt.url()}" target="_blank" class="btn btn-mini btn-info"><i class="icon-file"></i></a>
+                    </g:each>
+                  </g:if>
               </g:if>
             </div>
           </td>

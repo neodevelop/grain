@@ -104,3 +104,19 @@ function paymentDeleted(data){
   $("#okMessage span#messageForOkStatus").text("El pago se ha eliminado");
   $("#okMessage").show();
 }
+
+function showResponse(data){
+  var message = data.message;
+  if(data.status == 200){
+    $("#okMessage #messageForOkStatus").text(message);
+    $("#okMessage").show();
+  }
+  if(data.status == 400){
+    $("#errorMessage #messageForErrorStatus").text(message);
+    $("#errorMessage").show();
+  }
+}
+
+function hideButtons(paymentId){
+  $("tr#payment" + paymentId + " td:last div.btn-group").fadeOut();
+}

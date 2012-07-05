@@ -24,34 +24,41 @@ class ReceiptController {
 
   def approve = {
     receiptService.approveReceiptAndCheckRegistration(params.long('id'))
-    render """
-      <img src="${resource(dir: 'themes/wb/icon', file: 'valid-green.png')}" width="24" height="24" />
-    """
+    render(contentType:"text/json") {
+      message = "Recibo aprobado"
+      status = 200
+	  }
   }
 
   def approveDineroMail = {
     try {
       if (dineroMailService.verifyPayment(params.long('id'))) {
         registrationService.checkIsPayed(params.long('registrationId'))
-        render """
-              <img src="${resource(dir: 'themes/wb/icon', file: 'remove.png')}" width="24" height="24" />
-            """
+        render(contentType:"text/json") {
+          message = "Pago realizado"
+          status = 200
+	      }
       } else {
-        render """
-              <img src="${resource(dir: 'themes/wb/icon', file: 'remove-red.png')}" width="24" height="24" />
-            """
+        render(contentType:"text/json") {
+          message = "Pago NO realizado"
+          status = 400
+	      }
       }
     } catch (RuntimeException e) {
       log.error(e.message)
-      render """
-            <img src="${resource(dir: 'themes/wb/icon', file: 'help.png')}" width="24" height="24" />
-          """
+      render(contentType:"text/json") {
+        message = "Error al obtener la información del pago"
+        status = 400
+	    }
     }
 
   }
 
   def delete = {
     receiptService.deleteThisReceipt(params.long('id'))
-    render ""
+    render(contentType:"text/json") {
+      message = "Recibo eliminado"
+      status = 200
+	  }
   }
 }
