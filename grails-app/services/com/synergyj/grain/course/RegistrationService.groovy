@@ -55,6 +55,8 @@ class RegistrationService {
       }else{
         registration.registrationStatus = RegistrationStatus.INSCRIBED_AND_PAYED
       }
+    }else{
+      registration.registrationStatus = RegistrationStatus.INSCRIBED_AND_WITH_DEBTH
     }
 
   }
