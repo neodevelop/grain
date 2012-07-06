@@ -70,7 +70,7 @@
                   </g:else>
                 </g:if>
                 <g:else>
-                  <g:remoteLink class="btn btn-mini btn-info" controller="receipt" action="approveDineroMail" id="${payment.id}" onSuccess="showResponse(data)" onComplete="hideButtons(${payment.id})">
+                  <g:remoteLink class="btn btn-mini btn-info" controller="receipt" action="approveDineroMail" id="${payment.id}" params="[registrationId:registration.id]" onSuccess="showResponse(data)" onComplete="hideButtons(${payment.id})">
                     Comprobar en DM
                   </g:remoteLink>
                 </g:else>

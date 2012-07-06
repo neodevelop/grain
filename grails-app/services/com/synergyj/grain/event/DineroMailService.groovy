@@ -153,6 +153,7 @@ class DineroMailService {
         payment.paymentStatus = PaymentStatus.PAYED
         payment.description += " / ${operationPayed.paymentMethod}"
         thisPaymentIsPayed = true
+        // TODO: tomar la respuesta y convertirla en un AWSReceipt
       }
     } else {
       //Si no es correcto entonces lanzamos la excepción
