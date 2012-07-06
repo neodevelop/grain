@@ -51,14 +51,16 @@
             </td>
             <td>
               <div class="btn-group">
-                <g:remoteLink class="btn btn-mini" update="modalPayment" controller="payment" action="showForRegistrationAsync" id="${it.id}" onSuccess="showPaymentForRegistration();">
+                <g:remoteLink class="btn btn-mini" update="modalPayment" controller="payment" action="showForRegistrationAsync" id="${it.id}" onSuccess="showModalFor('modalPayment');">
                   Ver pagos
                 </g:remoteLink>
               </div>
             </td>
             <td>
               <div class="btn-group">
-                <a href="#" class="btn btn-mini">Aplicables</a>
+                <g:remoteLink class="btn btn-mini" update="modalPromotions" controller="promotionPerScheduledCourse" action="showForRegistration" id="${it.id}" params="[scheduledCourseId:scheduledCourse.id]" onSuccess="showModalFor('modalPromotions');">
+                  Aplicables
+                </g:remoteLink>
               </div>
             </td>
           </tr>
@@ -71,5 +73,9 @@
   </div>
 
   <div class="modal hide" id="modalPayment">
+
+  </div>
+
+  <div class="modal hide" id="modalPromotions">
 
   </div>

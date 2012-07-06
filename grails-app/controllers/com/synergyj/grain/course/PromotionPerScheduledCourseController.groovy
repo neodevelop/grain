@@ -33,4 +33,14 @@ class PromotionPerScheduledCourseController {
     }
     render model as JSON
   }
+
+  def showForRegistration = {
+    def criteria = PromotionPerScheduledCourse.createCriteria()
+    def promotionsForScheduledCourse = criteria.list {
+      scheduledCourse{
+        eq "id",params.long('scheduledCourseId')
+      }
+    }
+    render template: "/promotionPerScheduledCourse/showForRegistration",model: [promotionsForScheduledCourse:promotionsForScheduledCourse]
+  }
 }
