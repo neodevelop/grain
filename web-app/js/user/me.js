@@ -65,8 +65,9 @@ function removeRegistration(registrationId){
   $("#registration"+registrationId).fadeOut('slow');
 }
 
-function showPaymentForRegistration(){
-  $('#modalPayment').modal('show');
+
+function showModalFor(selector){
+  $("#"+selector).modal('show');
 }
 
 function hidePaymentForRegistration(){
