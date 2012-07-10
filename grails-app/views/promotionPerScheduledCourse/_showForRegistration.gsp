@@ -18,7 +18,7 @@
     <g:each in="${promotionsForScheduledCourse}" var="promotionPerCourse">
       <tr id="promotionPerCourse${promotionPerCourse.id}">
         <g:set var="isPromotionActive" value="${false}"/>
-        <g:findAll in="${promotionsInRegistration}" expr="it.id == promotionPerCourse?.promotion?.id">
+        <g:findAll in="${registration.promotions*.promotion}" expr="it.id == promotionPerCourse?.promotion?.id">
           <g:set var="isPromotionActive" value="${true}"/>
         </g:findAll>
         <td><g:checkBox name="promotion${promotionPerCourse?.promotion?.id}" checked="${isPromotionActive}" /> </td>
