@@ -41,6 +41,15 @@ class PromotionPerScheduledCourseController {
         eq "id",params.long('scheduledCourseId')
       }
     }
-    render template: "/promotionPerScheduledCourse/showForRegistration",model: [promotionsForScheduledCourse:promotionsForScheduledCourse]
+    def registration = Registration.findById(params.id,[fetch:[promotions:"eager"]])
+    def promotionsInScheduledCourse = promotionsForScheduledCourse*.promotion
+    def promotionsInRegistration = registration.promotions*.promotion
+    log.debug promotionsInRegistration
+    render template: "/promotionPerScheduledCourse/showForRegistration",
+           model: [
+             promotionsForScheduledCourse:promotionsForScheduledCourse,
+             registration:registration,
+             promotionsInRegistration:promotionsInRegistration
+           ]
   }
 }
