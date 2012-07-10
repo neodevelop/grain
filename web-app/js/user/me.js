@@ -41,20 +41,7 @@ $(function(){
     form.find("#paymentNumber").val(number);
     return false;
   });
-
-  $("a.seeReceipt").click(function(){
-    var link = this;
-    $('#lightbox').css({width:'100%',height:'100%'}).fadeIn(500,function(){
-      $("<img src='"+ $(link).attr('href') +"' alt='receipt' title='receipt' id='currentReceipt'/>").appendTo("#imageReceipt");
-      $("#imageReceipt").fadeIn();
-    });
-    return false;
-  });
-
-  $("img#currentReceipt").live('click',function(){
-    $(this).remove();
-    $('#lightbox').effect('clip',{},500,function(){});
-  });
+  
 });
 
 function removeReceipt(receiptId){
