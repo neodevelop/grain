@@ -19,6 +19,8 @@ import grails.converters.JSON
 
 class PromotionPerScheduledCourseController {
 
+  def promotionPerRegistrationService
+
   def scaffold = PromotionPerScheduledCourse
 
   def checkCouponToRedeem = {
@@ -47,5 +49,18 @@ class PromotionPerScheduledCourseController {
              promotionsForScheduledCourse:promotionsForScheduledCourse,
              registration:registration
            ]
+  }
+
+  def updateForRegistration = {
+    // Buscamnos en los parametros las promociones seleccionadas
+    def promotionsToApplyForThisRegistration = params.findAll{ key,value -> key.startsWith("promotion") }
+    // Obtenemos los id's seleccionados quitando la parte de 'promotion'
+    def promotionsIds = promotionsToApplyForThisRegistration.collect { key,value -> Long.parseLong( key - "promotion" ) }
+    // Llamando al método de asignación de promociones
+    def registration = promotionPerRegistrationService.applyPromotionsToRegistration(params.long('registrationId'),promotionsIds)
+    render(contentType:"text/json") {
+      message = "El registro ${registration.id} ha actuzalidado sus promociones"
+      status = 200
+	  }
   }
 }
