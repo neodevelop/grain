@@ -108,3 +108,8 @@ function showResponse(data){
 function hideButtons(paymentId){
   $("tr#payment" + paymentId + " td:last div.btn-group").fadeOut();
 }
+
+function populateDataForRegistrationAndPromotions(registrationId){
+  var row = $("tr#registration"+registrationId);
+  $("span#promotionsForUser").text(row.find("td:first").text());
+}+
