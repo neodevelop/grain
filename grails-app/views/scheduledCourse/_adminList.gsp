@@ -58,8 +58,15 @@
             </td>
             <td>
               <div class="btn-group">
-                <g:remoteLink class="btn btn-mini" update="modalPromotions" controller="promotionPerScheduledCourse" action="showForRegistration" id="${it.id}" params="[scheduledCourseId:scheduledCourse.id]" onSuccess="showModalFor('modalPromotions');">
-                  Aplicables
+                <g:remoteLink
+                  class="btn btn-mini"
+                  update="modalPromotions"
+                  controller="promotionPerScheduledCourse"
+                  action="showForRegistration"
+                  id="${it.id}"
+                  params="[scheduledCourseId:scheduledCourse.id]"
+                  onSuccess="showModalFor('modalPromotions');populateDataForRegistrationAndPromotions(${it?.id});">
+                    Aplicables
                 </g:remoteLink>
               </div>
             </td>
