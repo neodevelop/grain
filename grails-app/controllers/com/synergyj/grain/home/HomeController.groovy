@@ -16,8 +16,19 @@
 package com.synergyj.grain.home
 
 import grails.plugins.springsecurity.Secured
+import com.synergyj.grain.course.ScheduledCourse
+import com.synergyj.grain.course.ScheduledCourseStatus
+import com.synergyj.geedback.ExtraInformationForAnswer
+import com.synergyj.geedback.KindOfExtraInformation
 
 @Secured(['permitAll()'])
 class HomeController {
-  def index = { render view:'home' }
+  def index = {
+    def scheduledCourses = ScheduledCourse.findAllByScheduledCourseStatus(ScheduledCourseStatus.SCHEDULED,[max:3])
+    def criteria = ExtraInformationForAnswer.createCriteria()
+    def comments = criteria.list {
+      eq "kindOfExtraInformation", KindOfExtraInformation.PUBLIC_THIS
+    }
+    render view:'home', model: [scheduledCourses:scheduledCourses,comments:comments]
+  }
 }

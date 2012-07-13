@@ -2,65 +2,65 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		
+
     <r:require module="home"/>
 	</head>
 	<body>
-      <div class="hero-unit">
+      <div class="home hero-unit">
         <h1>Bienvenido a tu entrenamiento</h1>
         <p>Es momento de potenciar tu desempeño y atender tu plan de carrera de desarrollador de la mejor manera, para ello, hemos puesto a tu disposición esta aplicación, donde podras administrar los cursos que deseas tomar y planear la adquisicion de los skills necesarios en esta rama tan competida.</p>
-        <p><a class="btn btn-primary btn-large">Comienza aquí... &raquo;</a></p>
+        <!--p><a class="btn btn-primary btn-large">Comienza aquí... &raquo;</a></p-->
       </div>
       <div class="page-header">
         <h1>Próximos cursos</h1>
       </div>
       <div class="row">
+        <g:each in="${scheduledCourses}" var="scheduledCourse">
         <div class="span4">
-          <h2>Desarrollo profesional con Springframework 3</h2>
+          <h2>${scheduledCourse.course.name}</h2>
           <p>
-            Lorem ipsum dolom
+            <dl>
+              <dt>Inicia</dt>
+              <dd>
+                <span class="label label-info">
+                  <g:formatDate date="${scheduledCourse.beginDate}" format="EEEE "/>
+                </span>&nbsp;
+                <g:formatDate date="${scheduledCourse.beginDate}" format="dd / MMMM / yyyy"/>
+              </dd>
+              <dt>Overview</dt>
+              <dd>${scheduledCourse.course.overview}</dd>
+              <dt>Duración</dt>
+              <dd><span class="badge badge-info">${scheduledCourse.durationInHours}</span> horas</dd>
+            </dl>
+            <a href="${scheduledCourse.course.urlLandingPage}" class="btn">Más información...</a>
           </p>
         </div>
-        <div class="span4">
-          <h2>Desarrollo ágil con Groovy y Grails</h2>
-          <p>
-            Lorem ipsum dolom
-          </p>
-        </div>
-        <div class="span4">
-          <h2>Desarrollo profesional en web</h2>
-          <p>
-            Lorem ipsum dolom
-          </p>
-        </div>
+        </g:each>
       </div>
       
       <div class="page-header">
         <h1>Los profesionales dicen...</h1>
       </div>
       <div class="row">
-        <div class="span3">
-          <div class="well">
-          <h3>Typographic scale</h3>
-          <p>The entire typographic grid is based on two Less variables in our variables.less file: <code>@baseFontSize</code> and <code>@baseLineHeight</code>. The first is the base font-size used throughout and the second is the base line-height.</p>
-          <p>We use those variables, and some math, to create the margins, paddings, and line-heights of all our type and more.</p>
+        <div id="myCarousel" class="carousel slide">
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+          <div class="active item">elemento 1</div>
+          <div class="item">elemento 2</div>
+          <div class="item">elemento 3</div>
+        </div>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        </div>
+        <g:each in="${comments}" var="comment">
+          <div class="span3">
+            <blockquote>
+            <p>${comment.description}</p>
+            <small>Someone famous</small>
+            </blockquote>
           </div>
-        </div>
-        <div class="span3">
-          <h3>Typographic scale</h3>
-          <p>The entire typographic grid is based on two Less variables in our variables.less file: <code>@baseFontSize</code> and <code>@baseLineHeight</code>. The first is the base font-size used throughout and the second is the base line-height.</p>
-          <p>We use those variables, and some math, to create the margins, paddings, and line-heights of all our type and more.</p>
-        </div>
-        <div class="span3">
-          <h3>Typographic scale</h3>
-          <p>The entire typographic grid is based on two Less variables in our variables.less file: <code>@baseFontSize</code> and <code>@baseLineHeight</code>. The first is the base font-size used throughout and the second is the base line-height.</p>
-          <p>We use those variables, and some math, to create the margins, paddings, and line-heights of all our type and more.</p>
-        </div>
-        <div class="span3">
-          <h3>Typographic scale</h3>
-          <p>The entire typographic grid is based on two Less variables in our variables.less file: <code>@baseFontSize</code> and <code>@baseLineHeight</code>. The first is the base font-size used throughout and the second is the base line-height.</p>
-          <p>We use those variables, and some math, to create the margins, paddings, and line-heights of all our type and more.</p>
-        </div>
+        </g:each>
       </div>
 
       <div class="row">
