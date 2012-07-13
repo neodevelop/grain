@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-
+    <r:require module="common"/>
     <r:require module="home"/>
 	</head>
 	<body>
@@ -41,26 +41,30 @@
       <div class="page-header">
         <h1>Los profesionales dicen...</h1>
       </div>
-      <div class="row">
-        <div id="myCarousel" class="carousel slide">
-        <!-- Carousel items -->
-        <div class="carousel-inner">
-          <div class="active item">elemento 1</div>
-          <div class="item">elemento 2</div>
-          <div class="item">elemento 3</div>
-        </div>
-        <!-- Carousel nav -->
-        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-        </div>
-        <g:each in="${comments}" var="comment">
-          <div class="span3">
-            <blockquote>
-            <p>${comment.description}</p>
-            <small>Someone famous</small>
-            </blockquote>
+
+      <div id="comments">
+      <g:set var="counter" value="${1}"/>
+      <g:each in="${comments}" var="comment" status="i">
+        <g:if test="${(counter - 1) % 3 == 0}">
+          <div class="row">
+        </g:if>
+            <div class="span4">
+              <blockquote>
+              <p>${comment.description}</p>
+              <small>Someone famous</small>
+              </blockquote>
+            </div>
+        <g:if test="${counter % 3 == 0}">
           </div>
-        </g:each>
+          <g:set var="counter" value="${1}"/>
+        </g:if>
+        <g:else>
+          <g:set var="counter" value="${counter + 1}"/>
+        </g:else>
+      </g:each>
+      <g:if test="${counter % 3 != 0}">
+        </div>
+      </g:if>
       </div>
 
       <div class="row">
