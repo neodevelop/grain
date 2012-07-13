@@ -3,9 +3,8 @@ body {
   padding-bottom: 40px;
 }
 
-.home .hero-unit{
-  background-position:100% 100%;
-  background-repeat: no-repeat;
+.home,.hero-unit{
+  background: no-repeat 100% 100% url("../images/banner1.jpg");
 }
 
 form.well label,div#loginForm form#auth div.field label{

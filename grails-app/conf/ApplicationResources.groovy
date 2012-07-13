@@ -21,5 +21,6 @@ modules = {
     resource url:'/images/mastercard-icon.gif'
     resource url:'/images/oxxo-icon.gif'
     resource url:'/images/visa-icon.gif'
+    resource url:'/images/banner1.jpg'
   }
 }

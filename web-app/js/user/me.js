@@ -112,4 +112,4 @@ function hideButtons(paymentId){
 function populateDataForRegistrationAndPromotions(registrationId){
   var row = $("tr#registration"+registrationId);
   $("span#promotionsForUser").text(row.find("td:first").text());
-}+
+}
