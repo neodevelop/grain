@@ -2,7 +2,7 @@
 <head>
   <title><g:message code='me.title' default="Me"/></title>
   <meta name='layout' content='mainContent'/>
-  <r:require module="home"/>
+  <r:require module="common"/>
   <r:require module="me"/>
 </head>
 <body>

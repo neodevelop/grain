@@ -1,6 +1,10 @@
 modules = {
-  home {
+  common {
     resource url:'/css/grain.css'
+  }
+  home{
+    resource url:'/js/home/jquery.timer.js'
+    resource url:'/js/home/home.js'
   }
   payment {
     resource url:'/js/payment/index.js'
