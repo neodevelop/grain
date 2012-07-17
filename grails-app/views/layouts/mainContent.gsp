@@ -26,7 +26,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">SynergyJ.com</a>
+      <a class="brand" href="#"><r:img uri="/images/ico.png" width="16"/>&nbsp;SynergyJ.com</a>
       <div class="btn-group pull-right">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
           <i class="icon-user"></i>

@@ -25,6 +25,8 @@ modules = {
     resource url:'/images/oxxo-icon.gif'
     resource url:'/images/visa-icon.gif'
     resource url:'/images/banner1.jpg'
+    resource url:'/images/ico.gif'
+    resource url:'/images/ico.png'
   }
   overrides {
     'jquery-theme'{
