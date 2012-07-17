@@ -26,4 +26,9 @@ modules = {
     resource url:'/images/visa-icon.gif'
     resource url:'/images/banner1.jpg'
   }
+  overrides {
+    'jquery-theme'{
+      resource id:'theme', url:'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/cupertino/jquery-ui.css'
+    }
+  }
 }

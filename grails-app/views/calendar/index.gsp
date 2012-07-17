@@ -25,6 +25,11 @@
   </r:script>
 </head>
 <body>
+  <div class="page-header">
+    <h1>Calendario
+      <small>Cursos y reuniones</small>
+    </h1>
+  </div>
 <div id='calendar'></div>
 <script type='text/javascript' src='http://arshaw.com/js/fullcalendar-1.5.3/fullcalendar/fullcalendar.min.js'></script>
 </body>
