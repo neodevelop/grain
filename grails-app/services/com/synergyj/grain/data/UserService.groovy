@@ -19,6 +19,8 @@ import com.synergyj.grain.BusinessException
 import com.synergyj.grain.UserRegistrationException
 
 import com.synergyj.grain.auth.User
+import com.synergyj.grain.auth.Role
+import com.synergyj.grain.auth.PersonAuthority
 
 class UserService {
 
@@ -41,7 +43,11 @@ class UserService {
     user.emailShow = true
     user.passwordExpired = false
 
-    if (user.validate() && user.save(flush: true)) {
+    if (user.validate() && user.save()) {
+      // Buscamos el rol del usuario
+      def userRole = Role.findByAuthority("ROLE_USER")
+      // Le asignamos el rol al usuario
+      PersonAuthority.create user, userRole, true
       // Notificación de la creación de la cuenta del usuario
       notificationService.sendUserRegistration(user.email)
       log.info 'User created'
