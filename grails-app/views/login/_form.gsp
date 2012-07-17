@@ -1,10 +1,12 @@
 <div id="loginForm" style="display:<sec:ifLoggedIn>none</sec:ifLoggedIn><sec:ifNotLoggedIn>block</sec:ifNotLoggedIn>;">
   <form action='${postUrl}' method='POST' id="auth" name="auth" autocomplete='off' class="form-horizontal">
       <div id="loginMessage" class="alert alert-error" style="padding: 0px; display: none; text-align: center;">
-        <p>
-          <span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
-          <span id="jsonMessage"></span>
-        </p>
+        <strong>Ups!</strong>
+        <span id="jsonMessage">
+          <g:if test="${flash.message}">
+            ${flash.message}
+          </g:if>
+        </span>
       </div>
 
       <div class="control-group">
@@ -42,9 +44,16 @@
         </tr>
         <tr>
           <td colspan='2' align="center">
-            <g:submitButton name="loginSubmit" value="${g.message(code:'login.login')}" class="btn btn-primary"/>
+            <g:submitButton name="loginSubmit" value="${g.message(code:'login.login')}" class="btn btn-large btn-primary"/>
           </td>
         </tr>
       </table>
   </form>
 </div>
+<r:script>
+<g:if test="${flash.message}">
+  $(function(){
+    $("#loginMessage").fadeIn();
+  });
+</g:if>
+</r:script>

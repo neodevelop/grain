@@ -9,7 +9,8 @@
           dataType:'json',
           success:function(json){
             if (json.success) {
-              $("#extraInfo,#formActions,#profile").show();
+              $("#profile").remove();
+              $("#extraInfo,#formActions").show();
               if (json.url) {
                 document.location = json.url;
               }
@@ -36,6 +37,7 @@
             this.reset();
           });
           $("#username").focus();
+          $("#loginMessage").hide();
           return false;
         });
 
@@ -61,7 +63,9 @@
       <p>Una notificación será enviada a tu correo</p>
       <div id="loadProfile"></div>
       <g:render template="/login/form" model="[email:email,postUrl:postUrl,rememberMeParameter:rememberMeParameter,scheduledCourseId:scheduledCourse.id]"/>
-      <g:render template="/login/logged"/>
+      <sec:ifLoggedIn>
+        <g:render template="/login/logged"/>
+      </sec:ifLoggedIn>
       <br/>
       <g:set var="visible" value="none"/>
       <sec:ifLoggedIn>
