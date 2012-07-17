@@ -75,6 +75,7 @@ class BootStrap {
     if (GrailsUtil.environment == "development" || GrailsUtil.environment == "test") {
       createReceipts()
       createUsers()
+      checkRolesForExistingUsers()
       createCourses()
       createScheduledCourses()
       createPromotions()
@@ -565,6 +566,16 @@ class BootStrap {
       def admin = new User(email: 'admin@admin.com', password: password).save(flush: true)
       PersonAuthority.create admin, adminRole, true
       log.debug "Usuario administrador creado y con roles asignados"
+    }
+  }
+
+  def checkRolesForExistingUsers(){
+    def allUsers = User.list()
+    def userRole = Role.findByAuthority("ROLE_USER")
+    allUsers.each { user ->
+      if(!user.authorities){
+        PersonAuthority.create(user,userRole,true)
+      }
     }
   }
 
