@@ -51,7 +51,7 @@
             <div class="span4">
               <blockquote>
               <p>${comment.description}</p>
-              <small>Someone famous</small>
+              <small>Anónimo</small>
               </blockquote>
             </div>
         <g:if test="${counter % 3 == 0}">
@@ -65,7 +65,6 @@
       <g:if test="${counter % 3 != 0}">
         </div>
       </g:if>
-      </div>
 
       <div class="row">
         <div class="span4">

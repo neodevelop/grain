@@ -25,10 +25,12 @@ import com.synergyj.geedback.KindOfExtraInformation
 class HomeController {
   def index = {
     def scheduledCourses = ScheduledCourse.findAllByScheduledCourseStatus(ScheduledCourseStatus.SCHEDULED,[max:3])
+    // TODO: Corregir la consulta y la forma en que se muestran los testimonios
     def criteria = ExtraInformationForAnswer.createCriteria()
     def comments = criteria.list {
       eq "kindOfExtraInformation", KindOfExtraInformation.PUBLIC_THIS
     }
-    render view:'home', model: [scheduledCourses:scheduledCourses,comments:comments]
+    def randomSize = new Random().nextInt(comments.size())
+    render view:'home', model: [scheduledCourses:scheduledCourses,comments:(comments*2)[randomSize..(randomSize+2)]]
   }
 }
