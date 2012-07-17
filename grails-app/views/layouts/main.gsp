@@ -10,6 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>. : SynergyJ - <g:layoutTitle default="Entrenamiento"/> : .</title>
+    <ga:trackPageviewAsynch />
     <r:require module="bootstrap-js"/>
     <r:require module="bootstrap-css"/>
     <g:layoutHead/>
