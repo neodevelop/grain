@@ -1,13 +1,13 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="layout" content="wb" />
+  <meta name="layout" content="main" />
   <title><g:message code="calendar.show" default="Show Calendar" /></title>
   <link rel='stylesheet' type='text/css' href='http://arshaw.com/js/fullcalendar-1.5.3/fullcalendar/fullcalendar.css' />
   <link rel='stylesheet' type='text/css' href='http://arshaw.com/js/fullcalendar-1.5.3/fullcalendar/fullcalendar.print.css' media='print' />
-  <script type='text/javascript' src='http://arshaw.com/js/fullcalendar-1.5.3/fullcalendar/fullcalendar.min.js'></script>
-  <parameter name="pageHeader" value="${g.message(code: 'calendar.show', default: 'Calendar')}"/>
-  <script language="javascript">
+  <r:require module="common"/>
+  <r:require module="jquery-ui"/>
+  <r:script>
     $(function(){
 
       $('#calendar').fullCalendar({
@@ -22,9 +22,10 @@
         events: '${createLink(action:"scheduledCourseInfo")}'
       });
     });
-  </script>
+  </r:script>
 </head>
 <body>
 <div id='calendar'></div>
+<script type='text/javascript' src='http://arshaw.com/js/fullcalendar-1.5.3/fullcalendar/fullcalendar.min.js'></script>
 </body>
 </html>
