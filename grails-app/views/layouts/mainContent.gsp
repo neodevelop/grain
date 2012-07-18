@@ -120,11 +120,6 @@
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="icon-comment"></i>Chat
-            </a>
-          </li>
-          <li>
             <g:link mapping="updateme" class="action">
               <i class="icon-user"></i>
               <g:message code="me.update"/>
@@ -139,10 +134,15 @@
               <g:message code="me.changePassword"/>
             </g:link>
           </li>
-          <li class="nav-header">Social</li>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Twitter</a></li>
-          <li><a href="#">Github</a></li>
+          <li>
+            <a href="#">
+              <i class="icon-comment"></i>Chat <span class="label">Próximamente</span>
+            </a>
+          </li>
+          <li class="nav-header">Social <span class="label">Próximamente</span></li>
+          <li><a href="#">Facebook </a></li>
+          <li><a href="#">Twitter </a></li>
+          <li><a href="#">Github </a></li>
         </ul>
       </div><!--/.well -->
     </div><!--/span-->
