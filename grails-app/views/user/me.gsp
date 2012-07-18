@@ -13,24 +13,34 @@
   </sec:ifAllGranted>
 
   <sec:ifNotGranted roles="ROLE_ADMIN">
-  <g:if test="${!myRegistrations && !registrationsCodeForScheduledCourses}">
-    <h1>Aún no te has registrado a ningún curso</h1>
-    <h3>Explora nuestro calendario e inscríbete!!!</h3>
-    <p>
-      <g:link controller="calendar" class="button">Ver el calendario</g:link>
-    </p>
-  </g:if>
-  <g:else>
-    <div id="tabs" style="width:550px;">
-      <ul>
-        <li><a href="#tabs-1">Estado de tus inscripciones</a></li>
-      </ul>
-      <div id="tabs-1">
-        <g:render template="/registration/codes" model="[registrationsCodeForScheduledCourses:registrationsCodeForScheduledCourses]"/>
-        <g:render template="/registration/list" model="[registrationList:myRegistrations]" />
-      </div>
+    <div class="page-header">
+      <h1>Próximos cursos <small>Aparta tu lugar</small></h1>
     </div>
-  </g:else>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Curso</th>
+          <th>Fecha de inicio</th>
+          <th>Precio</th>
+          <th>Duración</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <g:each in="${scheduledCourses}" var="sc" status="i">
+        <tr>
+          <td>${i+1}</td>
+          <td>${sc.course.name}</td>
+          <td><g:formatDate date="${sc.beginDate}" format="EEEE dd-MMMM-yy" locale="es"/></td>
+          <td>$ <g:formatNumber number="${sc.costByCourse}" format="#,##0.00;(#,##0.00)" locale="es" /></td>
+          <td>${sc.durationInHours} hrs.</td>
+          <td><a href="#" class="btn">Más información</a></td>
+        </tr>
+        </g:each>
+      </tbody>
+    </table>
+    
   </sec:ifNotGranted>
   <!-- Plugin de formulario -->
   <script src='http://synergyj.com/resources/jquery.form.js' type='text/javascript'></script>
