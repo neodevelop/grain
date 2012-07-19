@@ -2,13 +2,18 @@
 
 <head>
   <title><g:message code='me.changePassword' default="Change my password"/></title>
-  <meta name='layout' content='wb'/>
-  <parameter name="pageHeader" value="${g.message(code: 'me.changePassword', default: 'Change my password')}"/>
-  <script type="text/javascript" src="http://jquery.bassistance.de/validate/jquery.validate.js"></script>
-  <script type="text/javascript">
+  <meta name='layout' content='mainContent'/>
+  <r:require module="common"/>
+  <r:script>
     $(function(){
       $("#oldPassword").focus();
       $("#updatePassword").validate({
+        errorPlacement: function(error, element) {
+          $(element).parent().parent().removeClass('success');
+          $(element).parent().parent().addClass('error');
+          element.next().remove()
+          error.insertAfter(element);
+        },
         rules:{
           password: {
             required: true,
@@ -30,44 +35,58 @@
             minlength: "Tu contraseña debe tener al menos 5 caracteres",
             equalTo: "Tu contraseña no coincide"
           }
-        }
+        },
+        success: function(element) {
+          $(element).parent().parent().addClass('success');
+          element.addClass("valid").text("Ok!")
+        },
+        validClass: "success",
+        errorElement: "span class='help-inline'"
       });
     });
-  </script>
+  </r:script>
 </head>
 <body>
-<div id="bigForm">
-  <div id="signup">
-    <g:form name="updatePassword" action="updatePassword" method="post" controller="user">
-
-      <div id="registrationInfo">
-        <g:message code="login.updatePassword"/>
-      </div>
-
-      <!--div class="field">
-        <label for="oldPassword"><g:message code='login.oldPassword'/></label>
-         <input type="password" maxlength="25" id="oldPassword" name="oldPassword" value=""/>
-      </div-->
-
-      <g:if test="${email}">
-        <g:hiddenField name="email" value="${email}"/>
-      </g:if>
-
-      <div class="field">
-        <label for="password"><g:message code='login.newPassword'/></label><br/>
-        <input type="password" maxlength="25" id="password" name="password" value=""/>
-      </div>
-
-      <div class="field">
-        <label for="confirmPassword"><g:message code='login.confirmpassword'/></label><br/>
-        <input type="password" maxlength="25" id="confirmPassword" name="confirmPassword" value=""/>
-      </div>
-
-      <div class="submit">
-        <input class="sendButton" name="sendButton" type="submit" value="${g.message(code: 'login.updatePassword')}"/>
-      </div>
-
-    </g:form>
-  </div>
+<div class="page-header">
+  <h1><g:message code="login.updatePassword"/>
+    <small>Escribe tu nueva contraseña y confirmala</small>
+  </h1>
 </div>
+<g:if test="${flash.messageOk}">
+  <div class="alert alert-success">
+    <button data-dismiss="alert" class="close" type="button">×</button>
+    <strong>Bien!</strong> ${flash.messageOk}
+  </div>
+</g:if>
+<g:form name="updatePassword" action="updatePassword" method="post" controller="user" class="form-horizontal well">
+  <g:if test="${email}">
+    <g:hiddenField name="email" value="${email}"/>
+  </g:if>
+  <fieldset>
+    <!--div class="field">
+    <label for="oldPassword"><g:message code='login.oldPassword'/></label>
+    <input type="password" maxlength="25" id="oldPassword" name="oldPassword" value=""/>
+    </div-->
+    <div class="control-group">
+      <label for="password" class="control-label"><g:message code='login.newPassword'/></label>
+      <div class="controls">
+        <input type="password" maxlength="25" id="password" name="password" value="" class="input-xlarge focused"/>
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="confirmPassword" class="control-label"><g:message code='login.confirmpassword'/></label>
+      <div class="controls">
+        <input type="password" maxlength="25" id="confirmPassword" name="confirmPassword" value="" class="input-xlarge focused"/>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">&nbsp;</label>
+      <div class="controls">
+        <input class="btn btn-success" name="sendButton" type="submit" value="${g.message(code: 'login.updatePassword')}"/>
+      </div>
+    </div>
+  </fieldset>
+</g:form>
+
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
 </body>

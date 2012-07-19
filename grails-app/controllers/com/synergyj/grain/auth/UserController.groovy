@@ -133,21 +133,21 @@ class UserController extends grails.plugins.springsecurity.ui.UserController {
 
   @Secured(['permitAll()'])
   def updatePassword = {
-    User user = springSecurityService.currentUser as User
-    if(!user && params?.email){
-      user = User.findByEmail(params.email)
-    }
-    else{
+    if(springSecurityService.isLoggedIn()){ // Si el usuario esta en sesión
+      User user = springSecurityService.currentUser as User // Obtenemos el usuario
+      user.password = params.password // Cambiamos el password
+      user.save() // Actualizamos el usuario con el nuevo password
+      flash.messageOk = "${message(code:'login.passwordUpdated')}" // Ponemos un mensaje de que ha cambiado correctamente
+      render view: "changePassword"
+    }else{ // Si no hay usuario en sesión entonces es restablecer contraseña
       if(params?.email){
-        user = User.findByEmail(params.email)
-      }else {
-        redirect action: 'forgotPassword'
-        return
+        User user = User.findByEmail(params.email) // Buscamos el usuario por su correo
+        user.password = params.password // Cambiamos la contraseña
+        user.save() // Actualizamos el usuario con el nuevo password
+        redirect controller: 'login', action: 'auth' // Redireccionamos
+      }else { // Si no es ninguna de la anteriores
+        redirect action: 'forgotPassword' // Redireccionamos a olvido de contraseña
       }
     }
-    user.password = params.password
-    user.save()
-    flash.message = "${message(code:'login.passwordUpdated')}"
-    redirect controller: 'login', action: 'auth'
   }
 }
