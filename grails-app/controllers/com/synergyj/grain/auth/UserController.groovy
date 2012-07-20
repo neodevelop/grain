@@ -144,6 +144,7 @@ class UserController extends grails.plugins.springsecurity.ui.UserController {
         User user = User.findByEmail(params.email) // Buscamos el usuario por su correo
         user.password = params.password // Cambiamos la contraseña
         user.save() // Actualizamos el usuario con el nuevo password
+        flash.messageOk = "${message(code:'login.passwordUpdated')}" // Ponemos un mensaje de que ha cambiado correctamente
         redirect controller: 'login', action: 'auth' // Redireccionamos
       }else { // Si no es ninguna de la anteriores
         redirect action: 'forgotPassword' // Redireccionamos a olvido de contraseña
