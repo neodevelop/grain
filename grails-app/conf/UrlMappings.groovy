@@ -85,6 +85,10 @@ class UrlMappings {
     name ipn:"/ipn"(controller:"IPN"){
 
     }
+    name mySessions:'/mySessions' {
+      controller = 'courseSessionPerRegistration'
+      action = 'currentUser'
+    }
     "403"(controller: 'error',action: 'forbidden')
     "404"(controller: 'error',action: 'notfound')
     "500"(controller: 'error',action: 'internalError')
