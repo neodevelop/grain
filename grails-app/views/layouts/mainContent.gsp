@@ -115,9 +115,9 @@
           </sec:ifAnyGranted>
           <li class="nav-header">Personal</li>
           <li>
-            <a href="#">
+            <g:link mapping="mySessions" class="action">
               <i class="icon-calendar"></i>Mis sesiones
-            </a>
+            </g:link>
           </li>
           <li>
             <g:link mapping="updateme" class="action">
