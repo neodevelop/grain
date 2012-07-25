@@ -89,6 +89,10 @@ class UrlMappings {
       controller = 'courseSessionPerRegistration'
       action = 'currentUser'
     }
+    name myPayments:'/myPayments' {
+      controller = 'payment'
+      action = 'forCurrentUser'
+    }
     "403"(controller: 'error',action: 'forbidden')
     "404"(controller: 'error',action: 'notfound')
     "500"(controller: 'error',action: 'internalError')
