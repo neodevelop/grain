@@ -45,12 +45,14 @@
                   <g:if test="${payment.receipts.size()}">
                     <g:each in="${payment.receipts}" var="receipt">
                       <a href="${receipt.url()}" target="_blank" class="btn btn-mini btn-info"><i class="icon-file"></i></a>
+                      <sec:ifAnyGranted roles="ROLE_ADMIN">
                       <g:remoteLink class="btn btn-mini btn-success" controller="receipt" action="approve" id="${receipt.id}" onSuccess="showResponse(data)" onComplete="hideButtons(${payment.id})">
                         <i class="icon-ok"></i>
                       </g:remoteLink>
                       <g:remoteLink class="btn btn-mini btn-danger" controller="receipt" action="delete" id="${receipt.id}" onSuccess="showResponse(data)" onComplete="hideButtons(${payment.id})">
                         <i class="icon-remove"></i>
                       </g:remoteLink>
+                      </sec:ifAnyGranted>
                     </g:each>
                   </g:if>
                   <g:else>
@@ -58,9 +60,14 @@
                   </g:else>
                 </g:if>
                 <g:else>
+                  <sec:ifAllGranted roles="ROLE_ADMIN">
                   <g:remoteLink class="btn btn-mini btn-info" controller="receipt" action="approveDineroMail" id="${payment.id}" params="[registrationId:registration.id]" onSuccess="showResponse(data)" onComplete="hideButtons(${payment.id})">
                     Comprobar en DM
                   </g:remoteLink>
+                  </sec:ifAllGranted>
+                  <sec:ifNotGranted roles="ROLE_ADMIN">
+                    <span class="label label-info">Procesando pago</span>
+                  </sec:ifNotGranted>
                 </g:else>
               </g:if>
               <g:if test="${payment.paymentStatus == PaymentStatus.PAYED}">
