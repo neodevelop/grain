@@ -16,6 +16,7 @@
 package com.synergyj.grain.course
 
 import grails.converters.JSON
+import com.synergyj.grain.auth.User
 
 class PaymentController {
 
@@ -244,6 +245,12 @@ class PaymentController {
   def createAsync = {
     def payment = paymentService.addPaymentToRegistration(params.long('id'))
     render payment as JSON
+  }
+
+  def forCurrentUser = {
+    User user = springSecurityService.currentUser
+    def registrations = Registration.findAllByStudent(user)
+    [registrations:registrations]
   }
 
 }
