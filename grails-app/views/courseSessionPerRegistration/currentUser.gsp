@@ -2,16 +2,13 @@
   <title><g:message code='registration.your.sessions' default="Your sessions"/></title>
   <meta name='layout' content='mainContent'/>
   <r:require module="common"/>
-  <r:script>
-
-  </r:script>
 </head>
 <body>
-<div class="page-header">
-  <h1><g:message code='registration.your.sessions' default="Your sessions"/>
-    <small>La asistencia a tu entrenamiento</small>
-  </h1>
-</div>
+  <div class="page-header">
+    <h1><g:message code='registration.your.sessions' default="Your sessions"/>
+      <small>La asistencia a tu entrenamiento</small>
+    </h1>
+  </div>
   <g:each in="${registrations}" var="registration">
     <h2>${registration.scheduledCourse.course.name}</h2>
     <h3>${registration.scheduledCourse.durationInHours} hrs.</h3>
