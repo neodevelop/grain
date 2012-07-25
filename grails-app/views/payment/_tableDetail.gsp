@@ -3,10 +3,10 @@
     <thead>
         <tr>
           <th>#</th>
-          <th>Amount</th>
-          <th>Payment Date</th>
-          <th>Status</th>
-          <th>Kind of Payment</th>
+          <th><g:message code="payment.amount" default="Amount"/></th>
+          <th><g:message code="payment.paymentDate" default="Payment Date"/></th>
+          <th><g:message code="payment.status" default="Status"/></th>
+          <th><g:message code="payment.kind" default="Kind of Payment"/></th>
           <th>&nbsp;</th>
         </tr>
       </thead>
@@ -24,7 +24,7 @@
           <td>${i+1}</td>
           <td>$ ${payment.amount}</td>
           <td><g:formatDate format="E dd-MM-yy" date="${payment?.paymentDate}"/></td>
-          <td>${payment.paymentStatus}</td>
+          <td>${g.message(code:payment?.paymentStatus?.code)}</td>
           <td>${payment.kindOfPayment}</td>
           <td>
             <div class="btn-group">

@@ -11,7 +11,7 @@
   </h1>
   </div>
   <g:each in="${registrations}" var="registration">
-    <h2>${registration.scheduledCourse.course.name} <small>${registration.registrationStatus}</small></h2>
+    <h2>${registration.scheduledCourse.course.name} <small>${g.message(code:registration.registrationStatus.code)}</small></h2>
     <g:render template="/payment/tableDetail" model="[registration:registration]" />
   </g:each>
 </body>

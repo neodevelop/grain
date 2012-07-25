@@ -16,5 +16,17 @@
 package com.synergyj.grain.course
 
 enum PaymentStatus {
-  WAITING,PENDING,PAYED,CANCELLED,REFUND
+  WAITING("payment.waiting"),
+  PENDING("payment.pending"),
+  PAYED("payment.payed"),
+  CANCELLED("payment.cancelled"),
+  REFUND("payment.refund")
+
+  private final String code
+
+  PaymentStatus(String code){
+    this.code = code
+  }
+
+  public String getCode(){ return this.code }
 }
