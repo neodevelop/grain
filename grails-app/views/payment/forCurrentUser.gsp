@@ -16,7 +16,20 @@
     <g:render template="/payment/tableDetail" model="[registration:registration]" />
   </g:each>
 
-  <div id="uploadReceiptForPayment">
-    <g:render template="fileUpload"/>
+  <div class="modal hide" id="uploadReceiptForPaymentModal">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Subir comprobante de pago</h3>
+    </div>
+    <div class="modal-body">
+      <g:render template="/common/alertForResponse"/>
+      <g:render template="fileUpload"/>
+    </div>
+
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss="modal">Cerrar</a>
+    </div>
   </div>
+
+  <script src='http://synergyj.com/resources/jquery.form.js' type='text/javascript'></script>
 </body>
