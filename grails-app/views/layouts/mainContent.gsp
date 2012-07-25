@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,7 +127,11 @@
             </g:link>
           </li>
           <li><a href="#"><i class="icon-leaf"></i>Configuración</a></li>
-          <li><a href="#"><i class="icon-file"></i>Mis pagos</a></li>
+          <li>
+            <g:link mapping="myPayments" class="action">
+              <i class="icon-file"></i>Mis pagos
+            </g:link>
+          </li>
           <li><a href="#"><i class="icon-time"></i>Mi historial</a></li>
           <li>
             <g:link mapping="changePassword" class="action">
