@@ -8,6 +8,9 @@ modules = {
   payment {
     resource url:'/js/payment/index.js'
   }
+  paymentForCurrentUser {
+    resource url:'/js/payment/forCurrentUser.js'
+  }
   me {
     resource url:'/js/user/me.js'
   }
