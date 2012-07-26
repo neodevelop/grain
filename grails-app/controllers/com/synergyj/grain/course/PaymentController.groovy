@@ -87,7 +87,7 @@ class PaymentController {
       // Ponemos un mensaje
       flash.message = "${g.message(code: 'payment.error')}"
       // Redireccionamos
-      redirect uri: '/me'
+      redirect uri: '/myPayments'
       return
     }
     // Si traemos algún parámetro de pago
@@ -113,7 +113,7 @@ class PaymentController {
           break
       }
     }
-    redirect uri: '/me'
+    redirect uri: '/myPayments'
   }
 
   def create = {
