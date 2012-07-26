@@ -24,10 +24,32 @@
           <td>${i+1}</td>
           <td>$ ${payment.amount}</td>
           <td><g:formatDate format="E dd-MM-yy" date="${payment?.paymentDate}"/></td>
-          <td>${g.message(code:payment?.paymentStatus?.code)}</td>
-          <td>${payment.kindOfPayment}</td>
+          <td>
+            <g:if test="${payment.paymentStatus == PaymentStatus.WAITING}">
+              <span class="label label-warning">Pago no iniciado</span>
+            </g:if>
+            <g:else>
+              ${g.message(code:payment?.paymentStatus?.code)}
+            </g:else>
+          </td>
+          <td>
+            <g:if test="${payment.paymentStatus == PaymentStatus.WAITING}">
+              &nbsp;
+            </g:if>
+            <g:else>
+              ${payment.kindOfPayment}
+            </g:else>
+          </td>
           <td>
             <div class="btn-group">
+
+              <sec:ifNotGranted roles="ROLE_ADMIN">
+                <g:if test="${payment.paymentStatus == PaymentStatus.WAITING}">
+                  <g:link controller="payment" action="start" id="${payment.id}" class="btn btn-mini btn-success">
+                    ${message(code:'payment.startPayment')}
+                  </g:link>
+                </g:if>
+              </sec:ifNotGranted>
               
               <sec:ifAnyGranted roles="ROLE_ADMIN">
               <g:remoteLink class="btn btn-mini" controller="payment" action="showForEditAsync" update="editPayment" id="${payment.id}" onSuccess="showActionsForEdit()">
