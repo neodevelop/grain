@@ -126,18 +126,26 @@
               <g:message code="me.update"/>
             </g:link>
           </li>
-          <li><a href="#"><i class="icon-leaf"></i>Configuración</a></li>
           <li>
             <g:link mapping="myPayments" class="action">
               <i class="icon-file"></i>Mis pagos
             </g:link>
           </li>
-          <li><a href="#"><i class="icon-time"></i>Mi historial</a></li>
           <li>
             <g:link mapping="changePassword" class="action">
               <i class="icon-exclamation-sign"></i>
               <g:message code="me.changePassword"/>
             </g:link>
+          </li>
+          <li>
+            <a href="#">
+              <i class="icon-time"></i>Mi historial  <span class="label">En progreso</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="icon-leaf"></i>Configuración <span class="label">En progreso</span>
+            </a>
           </li>
           <li>
             <a href="#">
