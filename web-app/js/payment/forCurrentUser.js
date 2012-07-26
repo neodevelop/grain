@@ -4,7 +4,7 @@ $(function(){
     $('input[name=paymentNumber]').val($(this).attr("name").substring('uploadReceipt'.length));
     $('#uploadReceiptForPaymentModal').modal('show')
   });
-  $("form#fileuploadForm").submit(function(){
+  $("form#fileuploadForm").submit(function(){ // TODO: Código duplicado
     $("#okMessage").hide();
     $("#errorMessage").hide();
     $(this).ajaxSubmit({
@@ -18,12 +18,12 @@ $(function(){
       success:function(data){
         var linkId = $("#paymentNumber").val();
         $("a[name=uploadReceipt"+linkId+"]").hide();
-        $("#okMessage").text(data);
+        $("#messageForOkStatus").text(data);
         $("#okMessage").fadeIn();
 
       },
       error:function(jqXHR, textStatus, errorThrown){
-        $("#errorMessage").text(errorThrown);
+        $("#messageForErrorStatus").text(errorThrown);
         $("#errorMessage").fadeIn();
       },
       complete:function(jqXHR, textStatus){

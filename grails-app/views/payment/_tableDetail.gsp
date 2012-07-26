@@ -1,4 +1,4 @@
-  <%@ page import="com.synergyj.grain.course.Payment; com.synergyj.grain.course.KindOfPayment; com.synergyj.grain.course.PaymentStatus" %>
+  <%@ page import="com.synergyj.grain.course.ReceiptAWS; com.synergyj.grain.course.Payment; com.synergyj.grain.course.KindOfPayment; com.synergyj.grain.course.PaymentStatus" %>
   <table class="table table-condensed" id="payments">
     <thead>
         <tr>
@@ -44,7 +44,12 @@
                 <g:if test="${payment.kindOfPayment == KindOfPayment.SPEI}">
                   <g:if test="${payment.receipts.size()}">
                     <g:each in="${payment.receipts}" var="receipt">
-                      <a href="${receipt.url()}" target="_blank" class="btn btn-mini btn-info"><i class="icon-file"></i></a>
+                      <g:if test="${receipt.status == ReceiptAWS.STATUS_HOSTED}">
+                        <a href="${receipt.url()}" target="_blank" class="btn btn-mini btn-info"><i class="icon-file"></i></a>
+                      </g:if>
+                      <g:else>
+                        <span class="label label-info">Procesando archivo</span>
+                      </g:else>
                       <sec:ifAnyGranted roles="ROLE_ADMIN">
                       <g:remoteLink class="btn btn-mini btn-success" controller="receipt" action="approve" id="${receipt.id}" onSuccess="showResponse(data)" onComplete="hideButtons(${payment.id})">
                         <i class="icon-ok"></i>

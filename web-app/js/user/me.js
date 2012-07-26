@@ -1,6 +1,6 @@
 $(function(){
 
-  $("form#fileuploadForm").live("submit",function(){
+  $("form#fileuploadForm").live("submit",function(){ // TODO: Código duplicado
     $("#okMessage").hide();
     $("#errorMessage").hide();
     $(this).ajaxSubmit({
@@ -14,12 +14,12 @@ $(function(){
       success:function(data){
         var linkId = $("#paymentNumber").val();
         $("a[name=uploadReceipt"+linkId+"]").hide();
-        $("#okMessage").text(data);
+        $("#messageForOkStatus").text(data);
         $("#okMessage").fadeIn();
 
       },
       error:function(jqXHR, textStatus, errorThrown){
-        $("#errorMessage").text(errorThrown);
+        $("#messageForErrorStatus").text(errorThrown);
         $("#errorMessage").fadeIn();
       },
       complete:function(jqXHR, textStatus){
