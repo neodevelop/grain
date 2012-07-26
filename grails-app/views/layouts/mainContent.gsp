@@ -152,6 +152,7 @@
       </div><!--/.well -->
     </div><!--/span-->
     <div class="span9">
+      <g:render template="/common/flashMessagesAlerts"/>
       <g:layoutBody/>
     </div><!--/span-->
   </div><!--/row-->
