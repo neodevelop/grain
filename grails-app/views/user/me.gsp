@@ -35,7 +35,7 @@
           <td><g:formatDate date="${sc.beginDate}" format="EEEE dd-MMMM-yy" locale="es"/></td>
           <td>$ <g:formatNumber number="${sc.costByCourse}" format="#,##0.00;(#,##0.00)" locale="es" /></td>
           <td>${sc.durationInHours} hrs.</td>
-          <td><a href="#" class="btn">Más información</a></td>
+          <td><a href="${sc.course.urlLandingPage}" class="btn">Más información</a></td>
         </tr>
         </g:each>
       </tbody>

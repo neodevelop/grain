@@ -6,6 +6,7 @@
   <r:script>
   $(function(){
     $("a.submit").click(function(){
+      $("#paymentOption").val($(this).attr("name"));
       $("form#makePayment").submit();
       return false;
     });
@@ -54,5 +55,6 @@
 
 <g:hiddenField name="totalToPay" value="${payment.amount}"/>
 <g:hiddenField name="transactionId" value="${payment.transactionId}"/>
+<g:hiddenField name="paymentOption" value=""/>
 </g:form>
 </body>

@@ -9,7 +9,7 @@
       <r:img uri="/images/amex-icon.png" title="amex" alt="amex"/>
     </div>
   <div class="action">
-    <g:link class="btn btn-success submit" action="${pay ?: 'create'}" params="[paymentOption:'dineromail']" >
+    <g:link class="btn btn-success submit" action="${pay ?: 'create'}" name="dineromail" >
       <i class="icon-shopping-cart icon-white"></i>
       Realizar mi pago en línea
     </g:link>
