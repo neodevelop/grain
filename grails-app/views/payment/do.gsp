@@ -1,75 +1,75 @@
 <html>
 <head>
   <title><g:message code='payment.do' default="Making payment"/></title>
-  <meta name='layout' content='wb'/>
-  <parameter name="pageHeader" value="${g.message(code: 'payment.do', default: 'Making payment')}"/>
-  <script type="text/javascript" src="${resource(dir:'themes/wb/js/payment',file:'do.js')}"></script>
-  <script language="javascript">
+  <meta name='layout' content='main'/>
+  <r:require module="common"/>
+  <r:script>
     <g:if test="${!user?.firstName || !user?.lastName }">
       $(function(){
-        $('#lightbox').css({width:'100%',height:'100%'}).fadeIn(500,function(){
-          $("#userDataForm").fadeIn(300);
-        });
-        var selector = $("form[name=updateUser] > input[type=text]");
+        $("#extraInfoForm").modal({show:true,backdrop:"static"});
+        var selector = $("form[name=updateUser] input[type=text]");
         selector.keypress(function(){
           if ($(this).val().length <= 2) {
-            $(this).addClass("error");
-            $(this).removeClass("text");
+            $(this).parent().addClass("error");
           }else{
-            $(this).addClass("text");
-            $(this).removeClass("error");
+            $(this).parent().removeClass("error");
           }
         });
+        $("#saveAndContinue").click(function(){ $("#updateUser").submit(); });
       });
 
       function ok(){
         $("input[name=buyer_name]").val($("#firstName").val());
         $("input[name=buyer_lastname]").val($("#lastName").val());
-        $("#userDataForm").fadeOut(500,function(){
-          $('#lightbox').css({width:'0',height:'0'}).fadeIn(500);
-        });
+        $("#extraInfoForm").modal("hide");
         $("form#dineroMail").submit();
-        $("#waitMessage").fadeIn('slow');
       }
     </g:if>
     <g:else>
       $(function(){
         $("form#dineroMail").submit();
-        $("#waitMessage").fadeIn('slow');
       });
     </g:else>
-  </script>
+  </r:script>
 </head>
 <body>
-<div id="progress" align="center" style="height:250px;">
-  <img src="${resource(dir:'themes/wb/images',file:'ajax-loader.gif')}" title="progress" alt="loader"/>
-  <div id="waitMessage" align="center" style="display:none;">
-    Espera un momento por favor...
+  <div class="page-header">
+    <h1>Iniciando el proceso de pago
+      <small>Redireccionando a DineroMail</small>
+    </h1>
   </div>
-</div>
-<div>
+
+  <div class="progress progress-striped active" id="loaderProgressBar">
+    <div style="width: 100%" class="bar"></div>
+  </div>
 
   <g:if test="${!user?.firstName || !user?.lastName }">
-  <div id="lightbox"></div>
-  <div id="userDataForm">
-    <div class="title"> Antes de continuar! </div>
-      <div class="sub-title">
-        Necesitamos saber un poco más de ti.
-        Estos datos también nos servirán para la correcta acreditación y expedición de tu diploma.
+    <div class="modal hide" id="extraInfoForm">
+      <div class="modal-header">
+        <h3>Necesitamos saber un poco más de ti</h3>
       </div>
-      <g:formRemote url="[controller:'user',action:'save']" name="updateUser" method="post" onSuccess="ok()" >
-        <g:hiddenField name="isAjax" value="true"/>
-        <label>Tu(s) nombre(s) aqui:</label><br/>
-        <input id="firstName" name="firstName" value="" class="text" tabindex="1" type="text">
-        <span id="validName"></span><br/>
-        <label>Tu(s) apelllido(s) aqui:</label><br/>
-        <input id="lastName" name="lastName" value="" class="text" tabindex="2" type="text">
-        <span id="validLastName"></span><br/>
-        <div align="center">
-        <input value="Continuar" class="continue" tabindex="3" type="submit">
-        </div>
-      </g:formRemote>
-  </div>
+      <div class="modal-body">
+        <p>Estos datos también nos servirán para la correcta acreditación y expedición de tu diploma.</p>
+        <g:formRemote url="[controller:'user',action:'save']" name="updateUser" method="post" onSuccess="ok()" class="form-horizontal">
+          <fieldset>
+            <g:hiddenField name="isAjax" value="true"/>
+            <div class="control-group">
+              <label class="control-label">Tu(s) nombre(s) aqui: &nbsp;</label>
+              <input id="firstName" name="firstName" value="" tabindex="1" type="text"/>
+              <span id="validName"></span>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Tu(s) apelllido(s) aqui: &nbsp;</label>
+              <input id="lastName" name="lastName" value="" tabindex="2" type="text"/>
+              <span id="validLastName"></span>
+            </div>
+          </fieldset>
+        </g:formRemote>
+      </div>
+      <div class="modal-footer">
+        <a href="#" id="saveAndContinue" class="btn btn-primary">Guardar y continuar</a>
+      </div>
+    </div>
   </g:if>
 
   <form id="dineroMail" action="https://checkout.dineromail.com/CheckOut" method="post" >
@@ -119,6 +119,5 @@
     <input type="hidden" name="button_color" value="7DBE0B" />
   </form>
 
-</div>
 </body>
 </html>
