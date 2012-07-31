@@ -45,26 +45,5 @@
     </tbody>
   </table>
 
-  <!--table class="table table-condensed">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Course</th>
-        <th>Fecha de registro</th>
-      </tr>
-    </thead>
-    <tbody>
-      <g:each in="${registrationsNoConfirmed}" var="registrationCode" status="i">
-      <tr>
-        <td>${i+1}</td>
-        <td>${registrationCode.getScheduledCourseForCurrent()}</td>
-        <td>
-          <g:formatDate date="${registrationCode.dateCreated}" format="dd-MMMM-yy" locale="es" />
-        </td>
-      </tr>
-      </g:each>
-    </tbody>
-  </table-->
-
 </body>
 </html>
