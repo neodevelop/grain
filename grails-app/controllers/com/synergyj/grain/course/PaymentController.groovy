@@ -26,12 +26,11 @@ class PaymentController {
   def registrationService
   def receiptService
 
-  def index = {
+  def startForCurrentUser = {
     // Obtenemos el usuario actual
-    def user = springSecurityService.currentUser
-    // Obtenemos sus cursos pendientes por pagar
-    // Buscamos el registro del usuario a un curso calendarizado y Metemos el objeto registration en sesión
-    def registration = Registration.findByStudentAndRegistrationStatus(user, RegistrationStatus.REGISTERED)
+    User user = springSecurityService.currentUser
+    // Buscamos el registro del usuario a un curso calendarizado 
+    def registration = Registration.findByStudentAndId(user, params.id)
     // Eliminamos las promociones asociadas a este registro si es que tiene
     if (registration?.promotions?.size()) {
       registration.promotions.each { r ->

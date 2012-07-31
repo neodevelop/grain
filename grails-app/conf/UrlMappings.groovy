@@ -60,9 +60,9 @@ class UrlMappings {
       controller = 'calendar'
       action = 'index'
     }
-    name payment:"/payment"{
+    name payment:"/startPayment/$id"{
       controller = 'payment'
-      action = 'index'
+      action = 'startForCurrentUser'
     }
     name receivePayment:"/receivePayment"{
       controller = "payment"
