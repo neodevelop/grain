@@ -138,9 +138,9 @@
             </g:link>
           </li>
           <li>
-            <a href="#">
-              <i class="icon-time"></i>Mi historial  <span class="label">En progreso</span>
-            </a>
+            <g:link mapping="myAcademicHistorial" class="action">
+              <i class="icon-time"></i>Mi historial
+            </g:link>
           </li>
           <li>
             <a href="#">
