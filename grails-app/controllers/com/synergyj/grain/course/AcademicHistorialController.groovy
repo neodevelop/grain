@@ -12,6 +12,6 @@ class AcademicHistorialController {
     User user = springSecurityService.currentUser
     // Obtenemos los registros de este usauario
     def registrationsForThisUser = Registration.findAllByStudent(user,[sort:"id", order:"desc"])
-    [registrationsNoConfirmed:registrationsNoConfirmed,registrationsForThisUser:registrationsForThisUser]
+    [registrationsForThisUser:registrationsForThisUser]
   }
 }
