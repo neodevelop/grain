@@ -36,8 +36,9 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="#">Profile</a></li>
-          <li class="divider"></li>
+          <!-- TODO: Crear un perfil de usuario donde se muestre los cursos que ha tomado -->
+          <!--li><a href="#">Profile</a></li-->
+          <!--li class="divider"></li-->
           <li>
             <g:link controller="logout">
               Logout
