@@ -1,3 +1,4 @@
+<%@ page import="com.synergyj.grain.course.RegistrationStatus" %>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -14,36 +15,7 @@
 
   <h2>Tus registros</h2>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Curso</th>
-        <th>Fecha de inicio</th>
-        <th>Duración</th>
-        <th>Status</th>
-        <th>&nbsp;</th>
-      </tr>
-    </thead>
-    <tbody>
-      <g:each in="${registrationsForThisUser}" var="registration" status="i">
-      <tr>
-        <td>${i+1}</td>
-        <td>${registration.scheduledCourse.course.name}</td>
-        <td>
-          <g:formatDate date="${registration.scheduledCourse.beginDate}" format="dd-MMMM-yy" locale="es" />
-        </td>
-        <td>${registration.scheduledCourse.durationInHours} hrs.</td>
-        <td>
-          ${g.message(code:registration.registrationStatus.code)}
-        </td>
-        <td>
-          
-        </td>
-      </tr>
-      </g:each>
-    </tbody>
-  </table>
+  <g:render template="/registration/list" model="[registrationList:registrationsForThisUser]"/>
 
 </body>
 </html>
