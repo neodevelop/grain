@@ -12,10 +12,9 @@
       <small>El registro de tus cursos</small>
     </h1>
   </div>
-
-  <h2>Tus registros</h2>
-
+  <h2>Tu entrenamiento</h2>
   <g:render template="/registration/list" model="[registrationList:registrationsForThisUser]"/>
-
+  <h3>Tus registros</h3>
+  <g:render template="/registration/codes" model="[registrationsCodes:registrationsCodes,registeredScheduledCourses:registrationsForThisUser*.scheduledCourse]"/>
 </body>
 </html>

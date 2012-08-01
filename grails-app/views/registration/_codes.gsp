@@ -1,43 +1,39 @@
 <%@ page import="com.synergyj.grain.course.ScheduledCourseStatus" %>
-<g:each in="${registrationsCodeForScheduledCourses}" var="registrationCode">
-  <g:set var="scheduledCourse" value="${registrationCode.scheduledCourseForCurrent}"/>
-  <g:if
-      test="${scheduledCourse.scheduledCourseStatus == ScheduledCourseStatus.SCHEDULED || scheduledCourse.scheduledCourseStatus == ScheduledCourseStatus.PLANNING}">
-    <table class="registration" cellpadding="0" cellspacing="0">
-      <tr class="title">
-        <td class="titleLeft">
-          ${scheduledCourse.course}
-        </td>
-        <td class="titleRight">
-          ${scheduledCourse.course.courseKey}
-        </td>
-      </tr>
-      <tr class="content">
-        <td class="contentLeft">
-          <img src="${resource(dir: 'themes/wb/images', file: 'icon_calendar.png')}" alt="calendar" width="24px"
-               height="24px"/>
-          <g:message code="registration.beginDate"/><br/>
-          <b><g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd/MMMM/yyyy"/></b>
-        </td>
-        <td class="contentRight">
-          <img src="${resource(dir: 'themes/wb/icon', file: 'attention.png')}" alt="valid"/>
-        </td>
-      </tr>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <th>#</th>
+        <th>Curso</th>
+        <th><g:message code="registration.beginDate"/></th>
+        <th>Duración</th>
+        <th>&nbsp;</th>
       </tr>
+    </thead>
+    <tbody>
+      <g:each in="${registrationsCodes}" var="registrationCode" status="i">
+      <g:set var="scheduledCourse" value="${registrationCode.scheduledCourseForCurrent}"/>
+      <g:set var="scheduledCourseStatus" value="${scheduledCourse.scheduledCourseStatus }" />
       <tr>
-        <td colspan="2" align="center">
-          <g:link controller="registration" action="confirm" params="[scheduledCourseId:scheduledCourse.id,code:registrationCode.token]" class="action">
-            <g:message code="registration.want"/>
-          </g:link>
+        <td>${i+1}</td>
+        <td>${scheduledCourse.course.name}</td>
+        <td><g:formatDate date="${scheduledCourse.beginDate}" format="EEEE dd / MMMM / yyyy"/></td>
+        <td>${scheduledCourse.durationInHours} hrs.</td>
+        <td>
+          <g:if test="${registeredScheduledCourses.any{sc->sc == scheduledCourse}}">
+            <span class="label label-success">Bien!</span> Ya has confirmado tu registro a este curso
+          </g:if>
+          <g:else>
+            <g:if test="${scheduledCourseStatus == ScheduledCourseStatus.SCHEDULED || scheduledCourseStatus == ScheduledCourseStatus.PLANNING}">
+              <g:link controller="registration" action="confirm" params="[scheduledCourseId:scheduledCourse.id,code:registrationCode.token]" class="btn btn-success">
+                <g:message code="registration.want"/>
+              </g:link>
+            </g:if>
+            <g:else>
+              <span class="label label-info">Finalizado!</span> Este curso ha cerrado su registro
+            </g:else>
+          </g:else>
         </td>
       </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
-    </table>
-  </g:if>
-</g:each>
+      </g:each>
+    </tbody>
+  </table>

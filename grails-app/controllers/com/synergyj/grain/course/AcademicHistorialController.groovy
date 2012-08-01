@@ -12,6 +12,8 @@ class AcademicHistorialController {
     User user = springSecurityService.currentUser
     // Obtenemos los registros de este usauario
     def registrationsForThisUser = Registration.findAllByStudent(user,[sort:"id", order:"desc"])
-    [registrationsForThisUser:registrationsForThisUser]
+    // Obtenemos los códigos obtenidos de la landing page
+    def registrationsCodes = RegistrationCodeForScheduledCourse.findAllByUsername(user.email,[sort:"dateCreated", order:"desc",max:5])
+    [registrationsForThisUser:registrationsForThisUser,registrationsCodes:registrationsCodes]
   }
 }
