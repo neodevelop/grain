@@ -6,14 +6,17 @@
     <r:require module="home"/>
 	</head>
 	<body>
+    <g:render template="/common/flashMessagesAlerts" />
       <div class="home hero-unit">
         <h1>Bienvenido a tu entrenamiento</h1>
         <p>Es momento de potenciar tu desempeño y atender tu plan de carrera de desarrollador de la mejor manera, para ello, hemos puesto a tu disposición esta aplicación, donde podras administrar los cursos que deseas tomar y planear la adquisicion de los skills necesarios en esta rama tan competida.</p>
         <!--p><a class="btn btn-primary btn-large">Comienza aquí... &raquo;</a></p-->
       </div>
+      <g:if test="${scheduledCourses}">
       <div class="page-header">
         <h1>Próximos cursos</h1>
       </div>
+      </g:if>
       <div class="row">
         <g:each in="${scheduledCourses}" var="scheduledCourse">
         <div class="span4">
@@ -70,17 +73,21 @@
         <div class="span4">
           <h2>Cursos</h2>
            <p>En cursos de desarrollo de software estamos convencidos que nuestra experiencia y la práctica del conocimiento será lo que te dará la mayor satisfacción. </p>
-          <p><a class="btn" href="#">Explora más.. &raquo;</a></p>
+          <p><a class="btn" href="http://synergyj.com/training/">Explora más.. &raquo;</a></p>
         </div>
         <div class="span4">
           <h2>Comunidad</h2>
            <p>No serás sólo un alumno, cuando asistes a nuestros cursos, te conviertes en parte de la comunidad de desarrolladores que realmente hacen diferencia en su profesión. </p>
-          <p><a class="btn" href="#">Conoce más... &raquo;</a></p>
+          <p><a class="btn" href="http://synergyj.com/comunidad/">Conoce más... &raquo;</a></p>
        </div>
         <div class="span4">
           <h2>Inscribete</h2>
           <p>Es gratis! Mantente actualizado, recibe promociones y alístate para ser parte de la comunidad de desarrolladores en constante evolucion.</p>
-          <p><a class="btn" href="#">Comienza aquí... &raquo;</a></p>
+          <p>
+            <g:link mapping="signup" class="btn">
+              Comienza aquí... &raquo;
+            </g:link>
+          </p>
         </div>
       </div>
       <hr>
