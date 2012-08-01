@@ -70,7 +70,7 @@ class RegistrationController {
       redirect action:'confirm',params: [scheduledCourseId:scheduledCourseId]
     }
     if(registration){
-      redirect uri:'/payment'
+      redirect controller: 'payment', action: 'startForCurrentUser', id: registration.id
     }
   }
 

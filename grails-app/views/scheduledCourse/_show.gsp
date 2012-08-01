@@ -8,7 +8,7 @@
   <dt>Dirección:</dt>
   <dd>${scheduledCourse.fullAddress}</dd>
   <dt>Inversión:</dd>
-  <dd>${scheduledCourse.costByCourse}</dt>
+  <dd>$ ${scheduledCourse.costByCourse}</dt>
 </dl>
 <hr>
 <div class="row">
