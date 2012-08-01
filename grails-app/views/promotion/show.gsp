@@ -59,7 +59,7 @@
         <tr class="prop">
           <td valign="top" class="name"><g:message code="promotion.discount" default="Discount" />:</td>
 
-          <td valign="top" class="value"><g:formatNumber number="${promotionInstance?.discount}" /></td>
+          <td valign="top" class="value"><g:formatNumber number="${promotionInstance?.discount}" locale="es_MX" format="\$ ###,##0.00" /></td>
 
         </tr>
 

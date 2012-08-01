@@ -7,8 +7,8 @@
   <dd>${scheduledCourse.durationInHours} horas</dd>
   <dt>Dirección:</dt>
   <dd>${scheduledCourse.fullAddress}</dd>
-  <dt>Inversión:</dd>
-  <dd>$ ${scheduledCourse.costByCourse}</dt>
+  <dt>Inversión:</dt>
+  <dd><g:formatNumber number="${scheduledCourse.costByCourse}" locale="es_MX" format="\$ ###,##0.00"/></dd>
 </dl>
 <hr>
 <div class="row">

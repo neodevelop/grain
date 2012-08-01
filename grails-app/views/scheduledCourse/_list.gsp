@@ -50,7 +50,7 @@
 
         <td><g:formatDate date="${scheduledCourse.limitRegistrationDate}" format="dd-MMMM-yy" locale="es" /></td>
 
-        <td>$ <g:formatNumber number="${scheduledCourse.costByCourse}" format="#,##0.00;(#,##0.00)" /></td>
+        <td><g:formatNumber number="${scheduledCourse.costByCourse}" locale="es_MX" format="\$ ###,##0.00" /></td>
 
         <td>${scheduledCourse.scheduledCourseStatus}</td>
 

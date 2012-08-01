@@ -28,7 +28,7 @@
       <dl class="dl-horizontal">
         <dt><g:message code="payment.amount"/>:</dt>
         <dd>
-          $ <span id="finalAmount"><g:formatNumber number="${payment.amount}" format="#,###.00" locale="MX"/></span>
+          <span id="finalAmount"><g:formatNumber number="${payment.amount}" locale="es_MX" format="\$ ###,##0.00"/></span>
         </dd>
       </dl>
     </div>

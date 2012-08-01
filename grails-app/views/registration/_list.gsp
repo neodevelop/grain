@@ -30,7 +30,7 @@
           </g:if>
           <g:if test="${registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH}">
             <span class="label label">Atento!</span>
-            Ya has iniciado tu proceso de pago, revisa tu historial de pagos.
+            Ya has iniciado tu proceso de pago, revisa tus pagos.
           </g:if>
           <g:if test="${registration.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH_IN_GROUP}">
             <span class="label label-warning"><i class="icon-ok icon-white"></i> Bien!</span>

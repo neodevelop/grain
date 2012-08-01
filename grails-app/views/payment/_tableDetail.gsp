@@ -22,7 +22,7 @@
       <g:each in="${registration.payments.sort()}" var="payment" status="i">
         <tr id="payment${payment.id}">
           <td>${i+1}</td>
-          <td>$ ${payment.amount}</td>
+          <td><g:formatNumber number="${payment.amount}" format="\$ ###,##0.00" locale="es_MX"/></td>
           <td><g:formatDate format="E dd-MM-yy" date="${payment?.paymentDate}"/></td>
           <td>
             <g:if test="${payment.paymentStatus == PaymentStatus.WAITING}">

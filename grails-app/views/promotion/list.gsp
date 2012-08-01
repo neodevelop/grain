@@ -45,7 +45,7 @@
 
           <td>${fieldValue(bean: promotionInstance, field: "description")}</td>
 
-          <td><g:formatNumber number="${promotionInstance.discount}" /></td>
+          <td><g:formatNumber number="${promotionInstance.discount}" locale="es_MX" format="\$ ###,##0.00"/></td>
 
         </tr>
       </g:each>

@@ -38,14 +38,14 @@
         <tr class="prop">
           <td valign="top" class="name"><g:message code="scheduledCourse.costByCourse" default="Cost By Course" />:</td>
 
-          <td valign="top" class="value">$ <g:formatNumber number="${scheduledCourseInstance?.costByCourse}" format="#,##0.00" locale="MX"/> </td>
+          <td valign="top" class="value">$ <g:formatNumber number="${scheduledCourseInstance?.costByCourse}" locale="es_MX" format="\$ ###,##0.00"/> </td>
 
         </tr>
 
         <tr class="prop">
           <td valign="top" class="name"><g:message code="scheduledCourse.costByModule" default="Cost By Module" />:</td>
 
-          <td valign="top" class="value">$ <g:formatNumber number="${scheduledCourseInstance?.costByModule}" format="#,##0.00" locale="MX"/> </td>
+          <td valign="top" class="value">$ <g:formatNumber number="${scheduledCourseInstance?.costByModule}" locale="es_MX" format="\$ ###,##0.00"/> </td>
 
         </tr>
 
