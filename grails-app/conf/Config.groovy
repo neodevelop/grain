@@ -179,7 +179,7 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
 ]
 
 avatarPlugin {
-  defaultGravatarUrl = """http://synergyj.com/user_anonymous.png"""
+  defaultGravatarUrl = """http://synergyj.com/anonymous_icon.jpg"""
   gravatarRating = "G"
 }
 
