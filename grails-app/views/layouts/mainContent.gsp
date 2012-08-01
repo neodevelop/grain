@@ -1,9 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  ${r.external(uri:'/images/ico.png')}
   <title>. : SynergyJ - <g:layoutTitle default="Entrenamiento"/> : .</title>
 
   <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
