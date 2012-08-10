@@ -1,33 +1,27 @@
-
 <%@ page import="com.synergyj.grain.course.ScheduledCourse" %>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="layout" content="wb" />
+  <meta name="layout" content="mainContent" />
   <title><g:message code="scheduledCourse.list" default="Scheduled Course List" /></title>
-  <parameter name="pageHeader" value="${g.message(code: 'scheduledCourse.list', default: 'Scheduled Course List')}"/>
-  <script type="text/javascript" language="javascript" src="${resource(dir:'js',file:'tables.js')}"></script>
-  <script language="javascript">
-    $(function(){
-      $("div.list table").styleTable();
-    });
-  </script>
+  <r:require module="common"/>
+  <r:require module="paginator"/>
 </head>
 <body>
-<div class="nav">
-  <span class="menuButton"><g:link class="create" action="create"><g:message code="scheduledCourse.new" default="New ScheduledCourse" /></g:link></span>
-</div>
-<br/>
-<div class="body">
-  <g:if test="${flash.message}">
-    <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
-  </g:if>
+  <div class="page-header">
+    <h1><g:message code="scheduledCourse.list" default="Scheduled Course List" />
+      <small>Lista de cursos calendarizdos</small>
+    </h1>
+  </div>
+  <g:link class="btn btn-primary" action="create">
+    <g:message code="scheduledCourse.new" default="New ScheduledCourse" />
+  </g:link>
 
   <g:render template="list" model="[scheduledCourseList:scheduledCourseInstanceList,hasPendingPayments:hasPendingPayments]"/>
 
-  <div class="paginateButtons">
+  <div class="pagination">
     <g:paginate total="${scheduledCourseInstanceTotal}" />
   </div>
-</div>
+
 </body>
 </html>
