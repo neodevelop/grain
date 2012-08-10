@@ -106,11 +106,6 @@
             </g:link>
           </li>
           <li>
-            <g:link controller="newsItem" class="action">
-              <g:message code="newsItem.label" default="News Item"/>
-            </g:link>
-          </li>
-          <li>
             <g:link controller="notification" class="action">
               <g:message code="notification.label" default="Notifications"/>
             </g:link>
