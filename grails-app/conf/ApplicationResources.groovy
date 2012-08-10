@@ -2,6 +2,9 @@ modules = {
   common {
     resource url:'/css/grain.css'
   }
+  paginator {
+    resource url:'/js/common/paginator.js'
+  }
   home{
     resource url:'/js/home/home.js'
   }
