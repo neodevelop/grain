@@ -71,41 +71,41 @@
         <ul class="nav nav-list">
           <sec:ifAnyGranted roles="ROLE_ADMIN" >
           <li class="nav-header">Administrador</li>
-          <li class="active">
+          <li id="grupos" class="active">
             <a href="#">Grupos</a>
           </li>
-          <li>
+          <li id="cotizador">
             <a href="#">Cotizador de cursos</a>
           </li>
-          <li>
+          <li id="rondas">
             <a href="#">Rondas de cursos</a>
           </li>
-          <li>
+          <li id="cursos">
             <g:link controller="course">
               <g:message code="course.label" default="Courses"/>
             </g:link>
           </li>
-          <li>
+          <li id="cursosCalendarizados">
             <g:link controller="scheduledCourse">
               <g:message code="scheduledcourse.label" default="Scheduled Courses"/>
             </g:link>
           </li>
-          <li>
+          <li id="promociones">
             <g:link controller="promotion">
               <g:message code="promotion.label" default="Promotions"/>
             </g:link>
           </li>
-          <li>
+          <li id="promocionPorCursoCalendarizado">
             <g:link controller="promotionPerScheduledCourse">
               <g:message code="promotionPerScheduledCourse.label" default="Promotion Per Course"/>
             </g:link>
           </li>
-          <li>
+          <li id="contenido">
             <g:link controller="content" class="action">
               <g:message code="content.label" default="Contents"/>
             </g:link>
           </li>
-          <li>
+          <li id="notificaiones">
             <g:link controller="notification" class="action">
               <g:message code="notification.label" default="Notifications"/>
             </g:link>
@@ -169,6 +169,15 @@
   </footer>
 
 </div>
+${menuOption}
+<g:if test="${menuOption}">
+  <r:script>
+  $(function(){
+    $("ul.nav-list li").removeClass("active");
+  });
+  </r:script>
+</g:if>
+  
 <r:layoutResources />
 </body>
 </html>
