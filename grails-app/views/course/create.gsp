@@ -1,23 +1,39 @@
-
 <%@ page import="com.synergyj.grain.course.Course" %>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="layout" content="wb" />
+  <meta name="layout" content="mainContent" />
   <title><g:message code="course.create" default="Create Course" /></title>
-  <parameter name="pageHeader" value="${g.message(code: 'course.create', default: 'Create Course')}"/>
+  <!-- Hoja de estilo para el WYSIWYG  -->
+  <link rel="stylesheet" type="text/css" href="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.css"/>
+  <r:require module="common"/>
 </head>
 <body>
-<div class="nav">
-  <span class="menuButton"><g:link class="list" action="list"><g:message code="course.list" default="Course List" /></g:link></span>
-</div>
-<br/>
-<g:render template="/common/errors" model="[instance:courseInstance]"/>
-<g:form action="save" method="post" name="courseForm" onsubmit="return validateForm(this);">
-  <g:render template="courseForm" />
-  <div class="buttons">
-    <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'create', 'default': 'Create')}" /></span>
+  <div class="page-header">
+    <h1>${g.message(code: 'course.create', default: 'Create Course')}
+      <small>Los datos del curso</small>
+    </h1>
   </div>
-</g:form>
+
+  <g:form action="save" method="post" name="courseForm" onsubmit="return validateForm(this);" class="form-horizontal">
+    <g:render template="courseForm" />
+    <div class="form-actions">
+      <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'create', 'default': 'Create')}" />
+    </div>
+  </g:form>
+
+  
+  <!-- Script para el WYSIWYG -->
+  <script type="text/javascript" src="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.js"></script>
+  <!-- Aplicamos el wysiwyg a los textarea y button al menu -->
+<script language="javascript">
+  $(function(){
+    $('textarea.wysiwyg').wysiwyg({
+      controls:{
+        html  : { visible: true }
+      }
+    });
+  });
+</script>
 </body>
 </html>
