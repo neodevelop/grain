@@ -3,7 +3,7 @@
 <head>
   <meta name="layout" content="mainContent" />
   <title><g:message code="course.show" default="Show Course" /></title>
-  <g:set name="menuOption" value="grupos"/>
+  
   <r:require module="common"/>
 </head>
 <body>

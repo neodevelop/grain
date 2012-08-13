@@ -27,3 +27,7 @@ input, textarea, select {
 .medios,.instrucciones,.action {
   padding-top: 10px;
 }
+
+textarea.full {
+  width:100%;
+}

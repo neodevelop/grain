@@ -60,28 +60,28 @@
 <div class="control-group">
   <label for="content" class="control-label"><g:message code="course.content" default="Content" />:</label>
   <div class="controls">
-    <g:textArea rows="5" cols="80" name="content" value="" class="wysiwyg">${courseInstance?.content}</g:textArea>
+    <g:textArea name="content" value="" class="wysiwyg full">${courseInstance?.content}</g:textArea>
   </div>
 </div>
 
 <div class="control-group">
   <label for="overview" class="control-label"><g:message code="course.overview" default="Overview" />:</label>
   <div class="controls">
-    <g:textArea rows="5" cols="80"  name="overview" class="wysiwyg">${courseInstance?.overview}</g:textArea>
+    <g:textArea name="overview" class="wysiwyg full">${courseInstance?.overview}</g:textArea>
   </div>
 </div>
 
 <div class="control-group">
   <label for="audience" class="control-label"><g:message code="course.audience" default="Audience" />:</label>
   <div class="controls">
-    <g:textArea rows="5" cols="70" name="audience" class="wysiwyg">${courseInstance?.audience}</g:textArea>
+    <g:textArea name="audience" class="wysiwyg full">${courseInstance?.audience}</g:textArea>
   </div>
 </div>
 
 <div class="control-group">
   <label for="prerequisites" class="control-label"><g:message code="course.prerequisites" default="Prerequisites" />:</label>
   <div class="controls">
-    <g:textArea rows="5" cols="70" name="prerequisites" class="wysiwyg">${courseInstance?.prerequisites}</g:textArea>
+    <g:textArea name="prerequisites" class="wysiwyg full">${courseInstance?.prerequisites}</g:textArea>
   </div>
 </div>
 
@@ -102,21 +102,21 @@
 <div class="control-group">
   <label for="goal" class="control-label"><g:message code="course.goal" default="Goal" />:</label>
   <div class="controls">
-    <g:textArea rows="5" cols="70" name="goal" class="wysiwyg">${courseInstance?.goal}</g:textArea>
+    <g:textArea name="goal" class="wysiwyg full">${courseInstance?.goal}</g:textArea>
   </div>
 </div>
 
 <div class="control-group">
   <label for="method" class="control-label"><g:message code="course.method" default="Method" />:</label>
   <div class="controls">
-    <g:textArea rows="5" cols="70" name="method" class="wysiwyg">${courseInstance?.method}</g:textArea>
+    <g:textArea name="method" class="wysiwyg full">${courseInstance?.method}</g:textArea>
   </div>
 </div>
 
 <div class="control-group">
   <label for="format" class="control-label"><g:message code="course.format" default="Format" />:</label>
   <div class="controls">
-    <g:textArea rows="5" cols="70" name="format" class="wysiwyg">${courseInstance?.format}</g:textArea>
+    <g:textArea name="format" class="wysiwyg full">${courseInstance?.format}</g:textArea>
   </div>
 </div>
 
