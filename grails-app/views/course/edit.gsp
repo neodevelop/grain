@@ -10,18 +10,20 @@
   <r:require module="common"/>
 </head>
 <body>
+  
+  <g:link class="btn" action="list">
+    <g:message code="course.list" default="Course List" />
+  </g:link>
+
+  <g:link class="btn" action="create">
+    <g:message code="course.new" default="New Course" />
+  </g:link>
+
   <div class="page-header">
     <h1>${g.message(code: 'course.edit', default: 'Edit Course')}
       <small>Modifcando los datos del curso</small>
     </h1>
   </div>
-
-  <g:link class="btn" action="list">
-    <g:message code="course.list" default="Course List" />
-  </g:link>
-  <g:link class="btn" action="create">
-    <g:message code="course.new" default="New Course" />
-  </g:link>
 
   <g:form method="post" name="courseForm" onsubmit="return validateForm(this);" class="form-horizontal">
     <g:hiddenField name="id" value="${courseInstance?.id}" />

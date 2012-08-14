@@ -8,14 +8,17 @@
   <r:require module="paginator"/>
 </head>
 <body>
+
+  <g:link class="btn btn-primary" action="create">
+    <g:message code="course.new" default="New Course" />
+  </g:link>
+
   <div class="page-header">
     <h1>${g.message(code: 'course.list', default: 'Course List')}
       <small>Cátalogo de cursos disponibles</small>
     </h1>
   </div>
-  <g:link class="btn btn-primary" action="create">
-    <g:message code="course.new" default="New Course" />
-  </g:link>
+  
   <table class="table table-striped" width="100%">
     <thead>
       <tr>
