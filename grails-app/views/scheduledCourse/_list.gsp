@@ -3,11 +3,8 @@
     <tr>
       <th width="30%"><g:message code="scheduledCourse.course" default="Course" /></th>
       <g:sortableColumn property="beginDate" title="Begin Date" titleKey="scheduledCourse.beginDate" />
-      <g:sortableColumn property="limitRegistrationDate" title="Limit Registration Date" titleKey="scheduledCourse.limitRegistrationDate" />
       <g:sortableColumn property="costByCourse" title="Cost By Course" titleKey="scheduledCourse.costByCourse" />
       <g:sortableColumn property="scheduledCourseStatus" title="Status" titleKey="scheduledCourse.scheduledCourseStatus" />
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
       <th>&nbsp;</th>
     </tr>
   </thead>
@@ -35,27 +32,21 @@
 
       </td>
       <td><g:formatDate date="${scheduledCourse.beginDate}" format="dd-MMMM-yy" locale="es"/></td>
-      <td><g:formatDate date="${scheduledCourse.limitRegistrationDate}" format="dd-MMMM-yy" locale="es" /></td>
       <td><g:formatNumber number="${scheduledCourse.costByCourse}" locale="es_MX" format="\$ ###,##0.00" /></td>
       <td>${scheduledCourse.scheduledCourseStatus}</td>
       <td>
-        <g:link controller="studentsGroup" action="show" id="${scheduledCourse?.id}">
-          <g:message code="studentsGroup.show" default="See group"/>
-        </g:link>
+        <div class="btn-group">
+          <g:link controller="studentsGroup" action="show" id="${scheduledCourse?.id}" class="btn">
+            <g:message code="studentsGroup.show" default="See group"/>
+          </g:link>
+          <g:link controller="studentsGroup" action="attendance" id="${scheduledCourse?.id}" class="btn">
+            <g:message code="studentsGroup.attendance" default="Attendance"/>
+          </g:link>
+          <g:link controller="evaluation" action="feedback" id="${scheduledCourse?.id}" class="btn">
+            <g:message code="studentsGroup.feedback" default="Feedback"/>
+          </g:link>
+        </div>
       </td>
-
-      <td>
-        <g:link controller="studentsGroup" action="attendance" id="${scheduledCourse?.id}">
-          <g:message code="studentsGroup.attendance" default="Attendance"/>
-        </g:link>
-      </td>
-
-      <td>
-        <g:link controller="evaluation" action="feedback" id="${scheduledCourse?.id}">
-          <g:message code="studentsGroup.feedback" default="Feedback"/>
-        </g:link>
-      </td>
-
     </tr>
   </g:each>
   </tbody>

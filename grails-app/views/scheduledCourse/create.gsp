@@ -13,11 +13,6 @@
 </div>
 <br/>
 <div class="body">
-  <g:hasErrors bean="${scheduledCourseInstance}">
-    <div class="errors">
-      <g:renderErrors bean="${scheduledCourseInstance}" as="list" />
-    </div>
-  </g:hasErrors>
   <g:form action="save" method="post" >
     <g:render template="form" model="[scheduledCourseInstance:scheduledCourseInstance]"/>
     <div class="buttons">
