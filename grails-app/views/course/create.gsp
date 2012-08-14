@@ -26,7 +26,7 @@
   <!-- Script para el WYSIWYG -->
   <script type="text/javascript" src="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.js"></script>
   <!-- Aplicamos el wysiwyg a los textarea y button al menu -->
-<script language="javascript">
+  <script language="javascript">
   $(function(){
     $('textarea.wysiwyg').wysiwyg({
       controls:{
@@ -34,6 +34,6 @@
       }
     });
   });
-</script>
+  </script>
 </body>
 </html>
