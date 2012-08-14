@@ -65,6 +65,8 @@ class ScheduledCourseController {
   def list = {
     params.max = Math.min(params.max ? params.max.toInteger() : 10, 100)
     params.fetch = [course:"eager"]
+    params.sort = "beginDate"
+    params.order = "desc"
     def scheduledCourseInstanceList = ScheduledCourse.list(params)
     def hasPendingPayments = [:]
     scheduledCourseInstanceList.each { scheduledCourse ->
