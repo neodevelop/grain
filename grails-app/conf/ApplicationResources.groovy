@@ -17,6 +17,9 @@ modules = {
   me {
     resource url:'/js/user/me.js'
   }
+  scheduledCourses {
+    resource url:'/js/scheduledCourse/show.js'
+  }
   overrides { // Arreglando bootstra-fixtaglib.css
     'bootstrap-fixtaglib' {
       defaultBundle 'fixtaglib'
