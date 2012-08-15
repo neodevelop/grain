@@ -5,16 +5,19 @@ $(function(){
   $('#showAddCourseSession').click(function(){
     $('#newSessionCourse').show();
     $('#showAddCourseSession').hide();
+    return false;
   });
   
   $('#showAddExpense').click(function(){
     $('#newExpense').show();
     $('#showAddExpense').hide();
+    return false;
   });
 
   $('#showAddInstructor').click(function(){
       $('#newInstructor').show();
       $('#showAddInstructor').hide();
+      return false;
     });
 
   $("a.deleteSession").live("click",function(){
