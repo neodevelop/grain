@@ -22,7 +22,7 @@
 <button id="showAddExpense" class="btn">
   <g:message code="expense.add" default="Add Expense" />
 </button>
-<button id="showAddInstructor" class="btn">
+<button id="showAddInstructor" data-toggle="modal" href="#newInstructor" class="btn">
   <g:message code="instructor.add" default="Add Instructor" />
 </button>
 
@@ -158,10 +158,10 @@
   </div>
 </g:form>
 
-<div id="newSessionCourse" title="Add a new session" class="modal hide">
+<div id="newSessionCourse" class="modal hide">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>Agregar una sesión al curso</h3>
+    <h3>Datos de sesión de curso</h3>
   </div>
   <div class="modal-body">
   <g:formRemote
@@ -208,7 +208,12 @@
   </g:formRemote>
 </div>
 
-<div id="newInstructor" title="Add instructor to this course" class="modal hide">
+<div id="newInstructor" class="modal hide">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Add instructor to this course</h3>
+  </div>
+  <div class="modal-body">
   <ul id="selectInstructors">
     <g:each in="${instructors}" var="instructor">
       <li id="instructor${instructor.id}">
@@ -220,6 +225,10 @@
       </li>
     </g:each>
   </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Cerrar</a>
+  </div>
 </div>
 
 
