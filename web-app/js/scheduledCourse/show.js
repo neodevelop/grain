@@ -2,23 +2,11 @@ $(function(){
   $('#sessionStartTime').datepicker({ dateFormat:"dd/mm/yy" });
   $('#sessionHourStartTime').timepicker();
 
-  $('#showAddCourseSession').click(function(){
-    $('#newSessionCourse').show();
-    $('#showAddCourseSession').hide();
+  $("a#addSession").click(function(){
+    $("form#addSessionToScheduledCourse").submit();
+    $("#newSessionCourse").modal("hide");
     return false;
   });
-  
-  $('#showAddExpense').click(function(){
-    $('#newExpense').show();
-    $('#showAddExpense').hide();
-    return false;
-  });
-
-  $('#showAddInstructor').click(function(){
-      $('#newInstructor').show();
-      $('#showAddInstructor').hide();
-      return false;
-    });
 
   $("a.deleteSession").live("click",function(){
     var splitLink = this.href.split('/');
@@ -37,7 +25,7 @@ $(function(){
   });
 
   $("a.updateSession").live("click",function(){
-    $('#newSessionCourse').show();
+    $("#newSessionCourse").modal("show");
     var splitLink = this.href.split('/');
     var index = splitLink[splitLink.length - 1];
     var fullDate = $("span#sessionCourseValue"+index).text();

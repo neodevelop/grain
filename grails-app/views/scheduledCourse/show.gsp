@@ -3,10 +3,10 @@
 <head>
   <meta name="layout" content="mainContent" />
   <title><g:message code="scheduledCourse.show" default="Show ScheduledCourse" /></title>
-  <script type="text/javascript" src="https://raw.github.com/fgelinas/timepicker/master/jquery.ui.timepicker.js"></script>
   <link rel="stylesheet" href="https://raw.github.com/fgelinas/timepicker/master/jquery-ui-timepicker.css"/>
   <r:require module="common"/>
   <r:require module="scheduledCourses"/>
+  <r:require module="jquery-ui"/>
 </head>
 <body>
 
@@ -16,7 +16,7 @@
 <g:link class="btn" action="create">
   <g:message code="scheduledCourse.new" default="New ScheduledCourse" />
 </g:link>
-<button id="showAddCourseSession" class="btn">
+<button id="showAddCourseSession" class="btn" data-toggle="modal" href="#newSessionCourse" >
   <g:message code="scheduledCourse.addSessions" default="Add Session" />
 </button>
 <button id="showAddExpense" class="btn">
@@ -158,31 +158,44 @@
   </div>
 </g:form>
 
-
-
-
-
-
-<div id="newSessionCourse" title="Add a new session" style="display:none;">
+<div id="newSessionCourse" title="Add a new session" class="modal hide">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Agregar una sesión al curso</h3>
+  </div>
+  <div class="modal-body">
   <g:formRemote
       name="addSessionToScheduledCourse"
       url="[controller:'scheduledCourse',action:'newSessionToCourse']"
       onSuccess="reacting(data)"
-      onComplete="restoreLink()" style="height:100%;" >
-    <g:hiddenField name="scheduledCourseId" value="${scheduledCourseInstance.id}"/>
-    <g:hiddenField name="courseSessionId" value="0"/>
-    Fecha de la Sesión: <g:textField name="sessionStartTime" />
-    Hora de inicio: <g:textField name="sessionHourStartTime" />
-    Duración(hrs.): <g:select from="${2..9}" name="duration" value="9" />
-    <input type="submit" value="Add Session to Course" id="addSession" name="addSession"/>
+      onComplete="restoreLink()" class="form-horizontal">
+    <fieldset>
+      <g:hiddenField name="scheduledCourseId" value="${scheduledCourseInstance.id}"/>
+      <g:hiddenField name="courseSessionId" value="0"/>
+      <div class="control-group">
+        <label class="control-label">Fecha de la Sesión:</label>
+        <div class="controls"><g:textField name="sessionStartTime" /></div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Hora de inicio:</label>
+        <div class="controls"><g:textField name="sessionHourStartTime" /></div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Duración(hrs.):</label>
+        <div class="controls"><g:select from="${2..9}" name="duration" value="9"  class="span1"/></div>
+      </div>
+    </fieldset>
   </g:formRemote>
+  </div>
+  <div class="modal-footer">
+    <a href="#" id="addSession" name="addSession" class="btn btn-primary">Send session info</a>
+    <a href="#" class="btn" data-dismiss="modal">Cerrar</a>
+  </div>
 </div>
 
 <!-- TODO: Agregar promociones -->
 
-
-
-<div id="newExpense" title="Add a new expense" style="display:none;">
+<div id="newExpense" title="Add a new expense" class="modal hide">
   <g:formRemote
       name="addExpenseToScheduledCourse"
       url="[controller:'expense',action:'addToScheduledCourse']"
@@ -195,10 +208,7 @@
   </g:formRemote>
 </div>
 
-
-
-
-<div id="newInstructor" title="Add instructor to this course" style="display:none;">
+<div id="newInstructor" title="Add instructor to this course" class="modal hide">
   <ul id="selectInstructors">
     <g:each in="${instructors}" var="instructor">
       <li id="instructor${instructor.id}">
@@ -211,8 +221,9 @@
     </g:each>
   </ul>
 </div>
-<br/><br/>
-<div id="addStudentsToCourse">
+
+
+<div id="addStudentsToCourse" class="modal hide">
   <g:formRemote name="addStudents" url="[controller: 'scheduledCourse',action: 'addStudents']"
                 update="statusAfterAddStudents" before="beforeAddStudentsToCourse();"
                 after="afterAddStudentsToCourse();">
@@ -225,6 +236,6 @@
   </g:formRemote>
   <div id="statusAfterAddStudents"></div>
 </div>
-
+<script type="text/javascript" src="https://raw.github.com/fgelinas/timepicker/master/jquery.ui.timepicker.js"></script>
 </body>
 </html>
