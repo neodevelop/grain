@@ -8,6 +8,12 @@ $(function(){
     return false;
   });
 
+  $("a#addExpense").click(function(){
+    $("form#addExpenseToScheduledCourse").submit();
+    $("#newExpense").modal("hide");
+    return false;
+  });
+
   $("a.deleteSession").live("click",function(){
     var splitLink = this.href.split('/');
     var index = splitLink[splitLink.length - 1];
@@ -51,7 +57,7 @@ function restoreForm(){
 }
 
 function restoreInstructorButton(){
-  $('#newInstructor').hide();
+  $('#newInstructor').modal("hide");
   $('#showAddInstructor').show();
 }
 

@@ -9,23 +9,26 @@
   <r:require module="jquery-ui"/>
 </head>
 <body>
-
-<g:link class="btn" action="list">
-  <g:message code="scheduledCourse.list" default="ScheduledCourse List" />
-</g:link>
-<g:link class="btn" action="create">
-  <g:message code="scheduledCourse.new" default="New ScheduledCourse" />
-</g:link>
-<button id="showAddCourseSession" class="btn" data-toggle="modal" href="#newSessionCourse" >
-  <g:message code="scheduledCourse.addSessions" default="Add Session" />
-</button>
-<button id="showAddExpense" class="btn">
-  <g:message code="expense.add" default="Add Expense" />
-</button>
-<button id="showAddInstructor" data-toggle="modal" href="#newInstructor" class="btn">
-  <g:message code="instructor.add" default="Add Instructor" />
-</button>
-
+<div class="btn-group">
+  <g:link class="btn" action="list">
+    <g:message code="scheduledCourse.list" default="ScheduledCourse List" />
+  </g:link>
+  <g:link class="btn" action="create">
+    <g:message code="scheduledCourse.new" default="New ScheduledCourse" />
+  </g:link>
+  <button id="showAddCourseSession" class="btn" data-toggle="modal" href="#newSessionCourse" >
+    <g:message code="scheduledCourse.addSessions" default="Add Session" />
+  </button>
+  <button id="showAddExpense" data-toggle="modal" href="#newExpense" class="btn">
+    <g:message code="expense.add" default="Add Expense" />
+  </button>
+  <button id="showAddInstructor" data-toggle="modal" href="#newInstructor" class="btn">
+    <g:message code="instructor.add" default="Add Instructor" />
+  </button>
+  <button id="showAddPromotions" data-toggle="modal" href="#newPromotion" class="btn">
+    Add promotions
+  </button>
+</div>
 
 <div class="row">
   <div class="span3">
@@ -116,7 +119,11 @@
         <g:set var="totalExpenses" value="${new BigDecimal(0)}" />
         <g:each in="${scheduledCourseInstance?.expenses?.sort()}" var="expenseInstance">
         <tr id="expense${expenseInstance.id}">
-          <td>${expenseInstance.description}</td>
+          <td>
+            <g:link controller="expense" action="show" id="${expenseInstance.id}">
+              ${expenseInstance.description}
+            </g:link>
+          </td>
           <td>${expenseInstance.expenseCategory}</td>
           <td><g:formatDate date="${expenseInstance.expenseTime}" format="dd/MM/yyyy HH:mm"/></td>
           <td>
@@ -188,7 +195,7 @@
   </g:formRemote>
   </div>
   <div class="modal-footer">
-    <a href="#" id="addSession" name="addSession" class="btn btn-primary">Send session info</a>
+    <a href="#" id="addSession" class="btn btn-primary">Send session info</a>
     <a href="#" class="btn" data-dismiss="modal">Cerrar</a>
   </div>
 </div>
@@ -196,16 +203,27 @@
 <!-- TODO: Agregar promociones -->
 
 <div id="newExpense" title="Add a new expense" class="modal hide">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Add expense to this course</h3>
+  </div>
+  <div class="modal-body">
   <g:formRemote
       name="addExpenseToScheduledCourse"
       url="[controller:'expense',action:'addToScheduledCourse']"
       onSuccess="addExpenseToTable(data)"
-      onComplete="restoreForm()" style="height:100%;" >
+      onComplete="restoreForm()" class="form-horizontal" >
+    <fieldset>
     <g:hiddenField name="scheduledCourseId" value="${scheduledCourseInstance.id}"/>
     <g:hiddenField name="expenseId" value="0"/>
     <g:render template="/expense/form" model="[expenseInstance:expenseInstance]"/>
-    <input type="submit" value="Add Expense to Course" id="addExpense" name="addExpense"/>
+    </fieldset>
   </g:formRemote>
+  </div>
+  <div class="modal-footer">
+    <a href="#" id="addExpense" class="btn btn-primary">Add Expense to Course</a>
+    <a href="#" class="btn" data-dismiss="modal">Cerrar</a>
+  </div>
 </div>
 
 <div id="newInstructor" class="modal hide">
