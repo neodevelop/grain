@@ -94,7 +94,35 @@
       </g:each>
     </ul>
   </div>
-  <div class="span7">
+  <div class="span6">
+    <h2><g:message code="scheduledCourse.promotions" default="Current promotions" />:</h2>
+    <table id="expenseList" class="table table-condensed">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Promocion</th>
+          <th>Vigencia</th>
+          <th>Tipo</th>
+          <th>Descuento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <g:each in="${scheduledCourseInstance.promotions}" var="promotionForThisScheduledCourse" status="i">
+        <tr>
+          <td>${i+1}</td>
+          <td>${promotionForThisScheduledCourse.promotion}</td>
+          <td><g:formatDate date="${promotionForThisScheduledCourse.validUntil}" format="dd-MMMM-yy" /></td>
+          <td>${promotionForThisScheduledCourse.promotion.discount} %</td>
+          <td>${promotionForThisScheduledCourse.promotion.kindPromotion}</td>
+        </tr>
+        </g:each>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span9">
     <h2><g:message code="scheduledCourse.expenses" default="Course Expenses" />:</h2>
     <table id="expenseList" class="table table-condensed">
       <thead>
@@ -249,6 +277,18 @@
   </div>
 </div>
 
+<div id="newPromotion" class="modal hide">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Add promotion to this course</h3>
+  </div>
+  <div class="modal-body">
+    hola mundo
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Cerrar</a>
+  </div>
+</div>
 
 <div id="addStudentsToCourse" class="modal hide">
   <g:formRemote name="addStudents" url="[controller: 'scheduledCourse',action: 'addStudents']"
