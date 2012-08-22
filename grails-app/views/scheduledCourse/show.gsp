@@ -63,28 +63,7 @@
   </div>
   <div class="span6">
     <h2><g:message code="scheduledCourse.promotions" default="Current promotions" />:</h2>
-    <table id="expenseList" class="table table-condensed">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Promocion</th>
-          <th>Vigencia</th>
-          <th>Tipo</th>
-          <th>Descuento</th>
-        </tr>
-      </thead>
-      <tbody>
-        <g:each in="${scheduledCourseInstance.promotions}" var="promotionForThisScheduledCourse" status="i">
-        <tr>
-          <td>${i+1}</td>
-          <td>${promotionForThisScheduledCourse.promotion}</td>
-          <td><g:formatDate date="${promotionForThisScheduledCourse.validUntil}" format="dd-MMMM-yy" /></td>
-          <td>${promotionForThisScheduledCourse.promotion.discount} %</td>
-          <td>${promotionForThisScheduledCourse.promotion.kindPromotion}</td>
-        </tr>
-        </g:each>
-      </tbody>
-    </table>
+    <g:render template="/promotionPerScheduledCourse/list" model="[promotions:scheduledCourseInstance.promotions]" />
   </div>
 </div>
 
