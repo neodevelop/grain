@@ -124,64 +124,7 @@
 <div class="row">
   <div class="span9">
     <h2><g:message code="scheduledCourse.expenses" default="Course Expenses" />:</h2>
-    <table id="expenseList" class="table table-condensed">
-      <thead>
-        <tr>
-          <th>Description</th>
-          <th>Category</th>
-          <th>Time</th>
-          <th>&nbsp;</th>
-          <th>Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="expense" style="display:none;">
-          <td><span class="description"></span></td>
-          <td><span class="expenseCategory"></span></td>
-          <td><span class="expenseTime"></span></td>
-          <td>
-            &nbsp;
-          </td>
-          <td><span class="amount"></span></td>
-        </tr>
-        <g:set var="totalExpenses" value="${new BigDecimal(0)}" />
-        <g:each in="${scheduledCourseInstance?.expenses?.sort()}" var="expenseInstance">
-        <tr id="expense${expenseInstance.id}">
-          <td>
-            <g:link controller="expense" action="show" id="${expenseInstance.id}">
-              ${expenseInstance.description}
-            </g:link>
-          </td>
-          <td>${expenseInstance.expenseCategory}</td>
-          <td><g:formatDate date="${expenseInstance.expenseTime}" format="dd/MM/yyyy HH:mm"/></td>
-          <td>
-            <!--
-            <a class="updateExpense" href="${createLink(controller:'expense',action:'updateAsync',id:expenseInstance.id)}">
-              Update
-            </a>
-            -->
-          </td>
-          <td align="right">
-            $ <g:formatNumber number="${expenseInstance.amount}" locale="MX" format="#,###.00"/>
-          </td>
-        </tr>
-        <g:set var="totalExpenses" value="${totalExpenses + expenseInstance.amount}" />
-        </g:each>
-        <tfoot>
-          <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td align="right">
-              <b>Total</b>
-            </td>
-            <td align="right">
-              <b>$ <g:formatNumber number="${totalExpenses}" locale="MX" format="#,###.00"/></b>
-            </td>
-          </tr>
-        </tfoot>
-      </tbody>
-    </table>
+    <g:render template="/expense/list" model="[expenses:scheduledCourseInstance?.expenses]" />
   </div>
 </div>
 

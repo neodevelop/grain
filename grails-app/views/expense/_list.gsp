@@ -1,32 +1,50 @@
-<table class="expensesList" cellpadding="5px" cellspacing="0" width="100%">
+<table id="expenseList" class="table table-condensed">
   <thead>
     <tr>
       <th>#</th>
-      <th>Expense Time</th>
-      <th>Category</th>
       <th>Description</th>
-      <th align="right">Amount</th>
+      <th>Category</th>
+      <th>Time</th>
+      <th>Amount</th>
     </tr>
   </thead>
   <tbody>
-    <g:set var="totalExpenseCost" value="${new BigDecimal(0)}"/>
-    <g:each in="${expensesList}" var="expense" status="i">
-    <tr>
-      <td>${i + 1}</td>
-      <td align="center"><g:formatDate date="${expense.expenseTime}" format="dd/MM/yyyy hh:mm"/></td>
-      <td>${expense.expenseCategory}</td>
-      <td>${expense.description}</td>
-      <td align="right">$ <g:formatNumber number="${expense.amount}" format="#,###.00" locale="MX"/> </td>
-      <g:set var="totalExpenseCost" value="${totalExpenseCost + expense.amount}"/>
+    <tr class="expense" style="display:none;">
+      <td><span class="expenseId"></span></td>
+      <td><span class="description"></span></td>
+      <td><span class="expenseCategory"></span></td>
+      <td><span class="expenseTime"></span></td>
+      <td><span class="amount"></span></td>
     </tr>
-    </g:each>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="5" align="center">
-        <b>Total de costos:</b>
-        <b>$ <g:formatNumber number="${totalExpenseCost}" format="#,###.00" locale="MX"/></b>
+    <g:set var="totalExpenses" value="${new BigDecimal(0)}" />
+    <g:each in="${expenses?.sort()}" var="expenseInstance" status="i">
+    <tr id="expense${expenseInstance.id}">
+      <td>${i+1}</td>
+      <td>
+        <g:link controller="expense" action="show" id="${expenseInstance.id}">
+          ${expenseInstance.description}
+        </g:link>
+      </td>
+      <td>${expenseInstance.expenseCategory}</td>
+      <td><g:formatDate date="${expenseInstance.expenseTime}" format="dd/MM/yyyy HH:mm"/></td>
+      <td align="right">
+        $ <g:formatNumber number="${expenseInstance.amount}" locale="MX" format="#,###.00"/>
       </td>
     </tr>
-  </tfoot>
+    <g:set var="totalExpenses" value="${totalExpenses + expenseInstance.amount}" />
+    </g:each>
+    <tfoot>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td align="right">
+          <b>Total</b>
+        </td>
+        <td align="right">
+          <b>$ <g:formatNumber number="${totalExpenses}" locale="MX" format="#,###.00"/></b>
+        </td>
+      </tr>
+    </tfoot>
+  </tbody>
 </table>
