@@ -37,7 +37,7 @@
   </div>
   <div class="span3">
     <h2>Sesiones de curso</h2>
-    <g:render template="/courseSession/list" model="[courseSession:scheduledCourseInstance?.courseSessions]" />
+    <g:render template="/courseSession/list" model="[courseSessions:scheduledCourseInstance?.courseSessions]" />
   </div>
   <div class="span3">
     <h2><g:message code="scheduledCourse.fullAddress" default="Full Address" />:</h2>
@@ -116,8 +116,6 @@
     <a href="#" class="btn" data-dismiss="modal">Cerrar</a>
   </div>
 </div>
-
-<!-- TODO: Agregar promociones -->
 
 <div id="newExpense" title="Add a new expense" class="modal hide">
   <div class="modal-header">
