@@ -37,25 +37,7 @@
   </div>
   <div class="span3">
     <h2>Sesiones de curso</h2>
-    <div id="sessionList">
-      <ul>
-        <g:each in="${scheduledCourseInstance?.courseSessions?.sort()}" var="courseSessionInstance">
-          <li id="sessionCourse${courseSessionInstance.id}">
-            <span id="sessionCourseValue${courseSessionInstance.id}">${courseSessionInstance?.encodeAsHTML()}</span>
-            &nbsp;-&nbsp;
-            <span id="sessionCourseEndTime${courseSessionInstance.id}">
-              <g:formatDate date="${courseSessionInstance?.sessionEndTime}" format="HH:mm"/>
-            </span>
-            <a class="updateSession" href="${createLink(controller:'courseSession',action:'updateAsync',id:courseSessionInstance.id)}">
-              Update
-            </a>
-            <a class="deleteSession" href="${createLink(controller:'courseSession',action:'deleteAsync',id:courseSessionInstance.id)}">
-              Delete
-            </a>
-          </li>
-        </g:each>
-      </ul>
-    </div>
+    <g:render template="/courseSession/list" model="[courseSession:scheduledCourseInstance?.courseSessions]" />
   </div>
   <div class="span3">
     <h2><g:message code="scheduledCourse.fullAddress" default="Full Address" />:</h2>
