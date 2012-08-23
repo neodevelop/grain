@@ -52,6 +52,23 @@ class ScheduledCourseController {
     render '0'
   }
 
+  def addPromotion = {
+    def scheduledCourse = ScheduledCourse.get(params.id)
+    def promotion  = Promotion.get(params.long('promotion.id'))
+    def promotionToAdd = new PromotionPerScheduledCourse(params)
+    promotionToAdd.promotion = promotion
+    promotionToAdd.scheduledCourse = scheduledCourse
+    scheduledCourse.addToPromotions(promotionToAdd)
+    render(contentType:"text/json") {
+      promotionId = promotion.id
+      promotionKey = promotion.promotionKey
+      discount = promotion.discount
+      kindPromotion = promotion.kindPromotion
+      validUntil = new SimpleDateFormat("dd-MMMM-yy").format(promotionToAdd.validUntil)
+      status = 200
+    }
+  }
+
   def removeInstructor = {
     def scheduledCourse = ScheduledCourse.get(params.id)
     def instructor = User.get(params.long('instructorId'))
@@ -133,7 +150,14 @@ class ScheduledCourseController {
           instructorsToSelect << instructor
       }
 
-      return [scheduledCourseInstance: scheduledCourseInstance,instructors:instructorsToSelect]
+      def promotionsForThisCourse = scheduledCourseInstance.promotions*.promotion
+      def allPromotionsAvailable = (Promotion.list()) - promotionsForThisCourse
+      def promotionsToSelect = allPromotionsAvailable.findAll { p1 ->
+        def p = promotionsForThisCourse.find{ p2 -> p1.promotionKey == p2.promotionKey }
+        if(!p) p1 
+      }
+
+      [scheduledCourseInstance: scheduledCourseInstance,instructors:instructorsToSelect,promotions:promotionsToSelect]
     }
   }
 

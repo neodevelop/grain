@@ -88,7 +88,7 @@
 
 <g:render template="/scheduledCourse/instructorForm" model="[scheduledCourseInstance:scheduledCourseInstance,instructors:instructors]" />
 
-<g:render template="/scheduledCourse/promotionForm" model="[scheduledCourseInstance:scheduledCourseInstance]" />
+<g:render template="/scheduledCourse/promotionForm" model="[scheduledCourseInstance:scheduledCourseInstance,promotions:promotions]" />
 
 <script type="text/javascript" src="https://raw.github.com/fgelinas/timepicker/master/jquery.ui.timepicker.js"></script>
 </body>

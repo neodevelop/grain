@@ -8,6 +8,12 @@ $(function(){
     return false;
   });
 
+  $("a#addPromotion").click(function(){
+    $("form#addPromotionForm").submit();
+    $("#newPromotion").modal("hide");
+    return false;
+  });  
+
   $("a#addExpense").click(function(){
     $("form#addExpenseToScheduledCourse").submit();
     $("#newExpense").modal("hide");
@@ -67,6 +73,17 @@ function addToInstructors(elementId){
 
 function removeFromInstructors(elementId){
   $("li#instructor"+elementId).appendTo("ul#selectInstructors");
+}
+
+function addToPromotions(data){
+  $("tr#promotionRowId"+data.promotionId).hide();
+  $("select[name='promotion.id'] option[value='"+data.promotionId+"']").remove();
+  var row = $("table#promotionsList tbody tr:first").clone().removeClass("hide");
+  row.find("span[name=promotionKey]").text(data.promotionKey);
+  row.find("span[name=validUntil]").text(data.validUntil);
+  row.find("span[name=discount]").text(data.discount);
+  row.find("span[name=kindPromotion]").text(data.kindPromotion.name);
+  row.appendTo("table#promotionsList tbody").fadeIn();
 }
 
 function reacting(e){

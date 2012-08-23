@@ -9,6 +9,13 @@
     </tr>
   </thead>
   <tbody>
+    <tr class="hide">
+      <td>&nbsp;</td>
+      <td><span name="promotionKey"></span></td>
+      <td><span name="validUntil"></span></td>
+      <td><span name="discount"></span> %</td>
+      <td><span name="kindPromotion"></span></td>
+    </tr>
     <g:each in="${promotions}" var="promotionForThisScheduledCourse" status="i">
     <tr>
       <td>${i+1}</td>
