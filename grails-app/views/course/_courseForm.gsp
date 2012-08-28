@@ -44,13 +44,6 @@
 </div>
 
 <div class="control-group">
-  <label for="status" class="control-label"><g:message code="course.borderColor" default="BorderColor" />:</label>
-  <div class="controls">
-    <g:textField name="borderColor" class="kolorPicker input-xlarge" value="${courseInstance?.borderColor}" />
-  </div>
-</div>
-
-<div class="control-group">
   <label for="status" class="control-label"><g:message code="course.textColor" default="TextColor" />:</label>
   <div class="controls">
     <g:textField name="textColor" value="${courseInstance?.textColor}" class="kolorPicker input-xlarge" />
