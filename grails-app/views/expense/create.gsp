@@ -19,7 +19,7 @@
   <g:render template="/common/errors" model="[instance:expenseInstance]"/>
   <g:form action="save" method="post">
     <g:render template="form" model="[expenseInstance:expenseInstance]"/>
-    <div class="buttons">
+    <div class="form-actions">
       <span class="button">
         <g:submitButton name="create" class="save" value="${message(code: 'create', 'default': 'Create')}"/>
       </span>

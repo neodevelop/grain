@@ -25,7 +25,7 @@
     
     <g:render template="form" model="[expenseInstance:expenseInstance]"/>
 
-    <div class="buttons">
+    <div class="form-actions">
       <span class="button">
         <g:actionSubmit class="save" action="update" value="${message(code: 'update', 'default': 'Update')}"/>
       </span>

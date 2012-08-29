@@ -65,7 +65,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="buttons">
+                <div class="form-actions">
                     <span class="button"><input class="save" type="submit" value="Create" /></span>
                 </div>
             </g:form>

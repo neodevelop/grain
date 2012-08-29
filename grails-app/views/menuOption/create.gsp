@@ -68,7 +68,7 @@
         </tbody>
       </table>
     </div>
-    <div class="buttons">
+    <div class="form-actions">
       <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'create', 'default': 'Create')}"/></span>
     </div>
   </g:form>

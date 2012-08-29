@@ -9,7 +9,7 @@
   <g:render template="/common/errors" model="[instance:payment]"/>
   <g:form controller="payment">
     <g:render template="form" bean="payment"/>
-    <div class="buttons">
+    <div class="form-actions">
       <span class="button">
         <g:actionSubmit class="save" action="update" value="${message(code: 'update', 'default': 'Update')}" />
       </span>

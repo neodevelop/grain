@@ -87,7 +87,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="buttons">
+            <div class="form-actions">
                 <g:form>
                     <input type="hidden" name="id" value="${newsItemInstance?.id}" />
                     <span class="button"><g:actionSubmit class="edit" value="Edit" /></span>
