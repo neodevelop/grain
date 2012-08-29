@@ -2,16 +2,16 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="layout" content="wb"/>
+  <meta name="layout" content="mainContent"/>
   <title><g:message code="content.show" default="Show Content"/></title>
   <parameter name="pageHeader" value="${g.message(code: 'content.show', default: 'Show Content')}"/>
+  <r:require module="common"/>
 </head>
 <body>
-<div class="nav">
-  <span class="menuButton"><a class="home" href="${resource(dir: '')}"><g:message code="home" default="Home"/></a></span>
-  <span class="menuButton"><g:link class="list" action="list"><g:message code="content.list" default="Content List"/></g:link></span>
-  <span class="menuButton"><g:link class="create" action="create"><g:message code="content.new" default="New Content"/></g:link></span>
-</div>
+
+  <g:link class="btn" action="list"><g:message code="content.list" default="Content List"/></g:link>
+  <g:link class="btn" action="create"><g:message code="content.new" default="New Content"/></g:link>
+
 <div class="body">
   <g:if test="${flash.message}">
     <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}"/></div>
@@ -39,7 +39,7 @@
         <tr class="prop">
           <td valign="top" class="name"><g:message code="content.body" default="Body"/>:</td>
 
-          <td valign="top" class="value">${fieldValue(bean: contentInstance, field: "body")}</td>
+          <td valign="top" class="value">${contentInstance.body}</td>
 
         </tr>
 
@@ -88,10 +88,10 @@
         </tbody>
       </table>
     </div>
-    <div class="buttons">
-      <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'edit', 'default': 'Edit')}"/></span>
-      <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'delete', 'default': 'Delete')}" onclick="return confirm('${message(code: 'delete.confirm', 'default': 'Are you sure?')}');"/></span>
-    </div>
+
+    <g:actionSubmit class="btn" action="edit" value="${message(code: 'edit', 'default': 'Edit')}"/>
+    <g:actionSubmit class="btn" action="delete" value="${message(code: 'delete', 'default': 'Delete')}" onclick="return confirm('${message(code: 'delete.confirm', 'default': 'Are you sure?')}');"/>
+
   </g:form>
 </div>
 </body>

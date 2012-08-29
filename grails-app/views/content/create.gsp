@@ -4,18 +4,19 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="layout" content="mainContent"/>
   <title><g:message code="content.create" default="Create Content"/></title>
-  <parameter name="pageHeader" value="${g.message(code: 'content.create', default: 'Create Content')}"/>
+  <link rel="stylesheet" type="text/css" href="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.css"/>
   <r:require module="common"/>
 </head>
 <body>
-<div class="nav">
-  <span class="menuButton"><a class="home" href="${resource(dir: '')}"><g:message code="home" default="Home"/></a></span>
-  <span class="menuButton"><g:link class="list" action="list"><g:message code="content.list" default="Content List"/></g:link></span>
-</div>
-<div class="body">
-  <g:if test="${flash.message}">
-    <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}"/></div>
-  </g:if>
+
+  <g:link class="btn" action="list"><g:message code="content.list" default="Content List"/></g:link>
+
+  <div class="page-header">
+    <h1>${g.message(code: 'content.create', default: 'Create Content')}
+      <small>&nbsp;</small>
+    </h1>
+  </div>
+
   <g:hasErrors bean="${contentInstance}">
     <div class="errors">
       <g:renderErrors bean="${contentInstance}" as="list"/>
@@ -23,10 +24,23 @@
   </g:hasErrors>
   <g:form action="save" method="post">
     <g:render template="form" model="contentInstance:contentInstance" />
-    <div class="buttons">
-      <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'create', 'default': 'Create')}"/></span>
+    <div class="form-actions">
+      <g:submitButton name="create" class="btn" value="${message(code: 'create', 'default': 'Create')}"/>
     </div>
   </g:form>
-</div>
+
+  <!-- Script para el WYSIWYG -->
+  <script type="text/javascript" src="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.js"></script>
+  <!-- Aplicamos el wysiwyg a los textarea y button al menu -->
+  <script language="javascript">
+  $(function(){
+    $('textarea.wysiwyg').wysiwyg({
+      controls:{
+        html  : { visible: true }
+      }
+    });
+  });
+  </script>
+
 </body>
 </html>
