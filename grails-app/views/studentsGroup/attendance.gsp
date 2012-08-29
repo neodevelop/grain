@@ -1,7 +1,7 @@
 <%@ page import="com.synergyj.grain.course.RegistrationStatus; com.synergyj.grain.course.Course" %>
 <html>
 <head>
-  <meta name="layout" content="wb" />
+  <meta name="layout" content="mainContent" />
   <title><g:message code="studentsGroup.attendance" default="Attendance" /></title>
   <parameter name="pageHeader" value="${g.message(code: 'studentsGroup.attendance', default: 'Attendance')}"/>
   <script language="JavaScript" src="${resource(dir:'themes/wb/js/studentsGroup',file:'attendance.js')}"></script>

@@ -1,7 +1,7 @@
 <%@ page import="com.synergyj.grain.course.KindPromotion; com.synergyj.grain.course.RegistrationStatus" %>
 <head>
   <title><g:message code='payment.edit' default="Edit payment info"/></title>
-  <meta name='layout' content='wb'/>
+  <meta name='layout' content="mainContent"/>
   <parameter name="pageHeader" value="${g.message(code: 'payment.edit', default: 'Edit payment info')}"/>
 </head>
 <body>

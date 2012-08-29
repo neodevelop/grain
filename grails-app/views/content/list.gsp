@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="layout" content="mainContent"/>
   <title>${g.message(code: 'content.list', default: 'Content List')}</title>
-  <r:require module="common"/>
+  
   <r:require module="paginator"/>
   <r:script>
   $(function(){

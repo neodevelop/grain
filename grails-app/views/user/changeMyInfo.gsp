@@ -1,7 +1,7 @@
 <head>
   <title><g:message code='me.title' default="Me"/></title>
-  <meta name='layout' content='mainContent'/>
-  <r:require module="common"/>
+  <meta name='layout' content="mainContent"/>
+  
   <r:script>
   $(function(){
     $("form#userInfo").validate({

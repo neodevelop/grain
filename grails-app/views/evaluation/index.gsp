@@ -1,7 +1,7 @@
 <%@ page import="com.synergyj.geedback.KindOfQuestion;" %>
 <head>
   <title><g:message code='evaluation.action' default="Evaluate this course"/></title>
-  <meta name='layout' content='wb'/>
+  <meta name='layout' content="mainContent"/>
   <parameter name="pageHeader" value="${g.message(code: 'evaluation.action', default: 'Evaluate this course')}"/>
   <script type="text/javascript" language="javascript">
   $(function() {

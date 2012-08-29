@@ -5,7 +5,7 @@
   <meta name="layout" content="mainContent"/>
   <title><g:message code="content.show" default="Show Content"/></title>
   <parameter name="pageHeader" value="${g.message(code: 'content.show', default: 'Show Content')}"/>
-  <r:require module="common"/>
+  
 </head>
 <body>
 

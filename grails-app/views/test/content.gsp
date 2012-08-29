@@ -1,11 +1,9 @@
 <head>
-  <meta name="layout" content="wb" />
+  <meta name="layout" content="mainContent" />
   <parameter name="pageHeader" value="Content" />
   <title>Content</title>
 </head>
 <body>
-	
-	
 	
   	<h2>Company Headline  </h2>
 	  <p><img src="images/pic03.jpg" alt="" width="302" height="268" class="rightimage" />Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nula facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdie. doming id quod. mazim placerat facer possim assum vel eum iriure dolor in hendrerit in vulputate velit esse molestie cons.<br />

@@ -1,5 +1,5 @@
 <head>
-  <meta name='layout' content='wb' />
+  <meta name='layout' content="mainContent" />
   <title>Denied</title>
 </head>
 

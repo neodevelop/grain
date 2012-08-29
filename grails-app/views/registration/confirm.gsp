@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta name="layout" content="main" />
-    <r:require module="common"/>
+    
     <title><g:message code="registration.confirm" default="Confirm registration" /></title>
     <r:script> 
       $(function(){

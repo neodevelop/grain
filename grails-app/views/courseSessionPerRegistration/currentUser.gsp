@@ -1,7 +1,7 @@
 <head>
   <title><g:message code='registration.your.sessions' default="Your sessions"/></title>
-  <meta name='layout' content='mainContent'/>
-  <r:require module="common"/>
+  <meta name='layout' content="mainContent"/>
+  
 </head>
 <body>
   <div class="page-header">

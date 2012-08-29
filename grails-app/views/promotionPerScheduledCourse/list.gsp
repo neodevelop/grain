@@ -1,10 +1,10 @@
 <%@ page import="com.synergyj.grain.course.PromotionPerScheduledCourse" %>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  
   <meta name="layout" content="mainContent" />
   <title><g:message code="promotionPerScheduledCourse.list" default="PromotionPerScheduledCourse List" /></title>
-  <r:require module="common"/>
+  
   <r:require module="paginator"/>
 </head>
 <body>

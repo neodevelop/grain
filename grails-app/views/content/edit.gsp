@@ -5,7 +5,7 @@
   <meta name="layout" content="mainContent"/>
   <title><g:message code="content.edit" default="Edit Content"/></title>
   <link rel="stylesheet" type="text/css" href="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.css"/>
-  <r:require module="common"/>
+  
 </head>
 <body>
 

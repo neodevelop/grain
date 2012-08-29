@@ -1,7 +1,7 @@
 <%@ page import="com.synergyj.geedback.KindOfQuestion; com.synergyj.grain.course.Course" %>
 <html>
 <head>
-  <meta name="layout" content="wb"/>
+  <meta name="layout" content="mainContent"/>
   <title><g:message code="evaluation.feedback" default="Evaluation feedback"/></title>
   <parameter name="pageHeader" value="${g.message(code: 'evaluation.feedback', default: 'Evaluation feedback')}"/>
   <script type="text/javascript" language="javascript" src="${resource(dir:'js',file:'tables.js')}"></script>

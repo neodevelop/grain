@@ -3,12 +3,12 @@
 <head>
   <title><g:message code='me.changePassword' default="Change my password"/></title>
   <sec:ifLoggedIn>
-  <meta name='layout' content='mainContent'/>
+  <meta name='layout' content="mainContent"/>
   </sec:ifLoggedIn>
   <sec:ifNotLoggedIn>
   <meta name='layout' content='main'/>
   </sec:ifNotLoggedIn>
-  <r:require module="common"/>
+  
   <r:script>
     $(function(){
       $("#oldPassword").focus();

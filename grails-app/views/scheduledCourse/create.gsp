@@ -2,10 +2,10 @@
 <%@ page import="com.synergyj.grain.course.ScheduledCourse" %>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  
   <meta name="layout" content="mainContent" />
   <title><g:message code="scheduledCourse.create" default="Create ScheduledCourse" /></title>
-  <r:require module="common"/>
+  
 </head>
 <body>
 

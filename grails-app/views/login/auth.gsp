@@ -1,7 +1,7 @@
 <head>
   <title><g:message code='login.title'/></title>
   <meta name='layout' content='main'/>
-  <r:require module="common"/>
+  
   <script language="javascript">
     $(function(){
       $("input[name=j_username]").focus();

@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="layout" content="wb"/>
+  <meta name="layout" content="mainContent"/>
   <title><g:message code="menu.list" default="Menu List"/></title>
   <parameter name="pageHeader" value="${g.message(code: 'menu.list', default: 'Menu List')}"/>
 </head>

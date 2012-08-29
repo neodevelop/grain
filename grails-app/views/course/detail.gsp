@@ -1,7 +1,7 @@
 <%@ page import="com.synergyj.grain.course.Course" %>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
         <meta name="layout" content="main" />
         <title><g:message code="course.detail" default="Course details..." /></title>
     </head>

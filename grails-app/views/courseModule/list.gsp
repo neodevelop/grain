@@ -2,8 +2,8 @@
 <%@ page import="com.synergyj.grain.course.CourseModule" %>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="layout" content="wb" />
+        
+        <meta name="layout" content="mainContent" />
         <title><g:message code="courseModule.list" default="CourseModule List" /></title>
         <parameter name="pageHeader" value="${g.message(code: 'courseModule.list', default: 'Course Module List')}"/>
         <script type="text/javascript" language="javascript" src="${resource(dir:'js',file:'tables.js')}"></script>

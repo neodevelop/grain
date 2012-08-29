@@ -2,7 +2,7 @@
 <head>
   <title><g:message code='payment.info' default="Payment info"/></title>
   <meta name='layout' content='main'/>
-  <r:require module="common"/>
+  
   <r:script>
   $(function(){
     $("a.submit").click(function(){

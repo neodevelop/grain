@@ -4,7 +4,7 @@
   <meta name="layout" content="mainContent" />
   <title><g:message code="scheduledCourse.show" default="Show ScheduledCourse" /></title>
   <link rel="stylesheet" href="https://raw.github.com/fgelinas/timepicker/master/jquery-ui-timepicker.css"/>
-  <r:require module="common"/>
+  
   <r:require module="scheduledCourses"/>
   <r:require module="jquery-ui"/>
 </head>

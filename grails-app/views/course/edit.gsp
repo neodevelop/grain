@@ -2,12 +2,12 @@
 <%@ page import="com.synergyj.grain.course.Course" %>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  
   <meta name="layout" content="mainContent" />
   <title><g:message code="course.edit" default="Edit Course" /></title>
   <!-- Hoja de estilo para el WYSIWYG  -->
   <link rel="stylesheet" type="text/css" href="http://akzhan.github.com/jwysiwyg/jquery.wysiwyg.css"/>
-  <r:require module="common"/>
+  
 </head>
 <body>
   

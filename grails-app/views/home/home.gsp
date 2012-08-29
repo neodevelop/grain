@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-    <r:require module="common"/>
+    
     <r:require module="home"/>
 	</head>
 	<body>

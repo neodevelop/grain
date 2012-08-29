@@ -2,8 +2,8 @@
 <%@ page import="com.synergyj.grain.course.PromotionPerScheduledCourse" %>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="layout" content="wb" />
+  
+  <meta name="layout" content="mainContent" />
   <title><g:message code="promotionPerScheduledCourse.edit" default="Edit PromotionPerScheduledCourse" /></title>
   <parameter name="pageHeader" value="${g.message(code: 'promotionPerScheduledCourse.create', default: 'Edit Promo to ScheduledCourse')}"/>
 </head>

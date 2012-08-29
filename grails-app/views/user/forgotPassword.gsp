@@ -2,7 +2,7 @@
 <head>
   <title><g:message code='me.forgotPassword' default="Forgot my password"/></title>
   <meta name='layout' content='main'/>
-  <r:require module="common"/>
+  
   <r:script>
     $(function(){
       $("#oldPassword").focus();

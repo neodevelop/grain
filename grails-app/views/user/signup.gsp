@@ -1,6 +1,6 @@
 <head>
   <meta name="layout" content="main"/>
-  <r:require module="common"/>
+  
   <title><g:message code="user.signup" default="User signup" /></title>
   <r:script>
     $(function(){

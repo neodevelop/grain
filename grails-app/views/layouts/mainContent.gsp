@@ -3,6 +3,7 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   ${r.external(uri:'/images/ico.png')}
   <title>. : SynergyJ - <g:layoutTitle default="Entrenamiento"/> : .</title>
@@ -14,6 +15,7 @@
 
   <r:require module="bootstrap-js"/>
   <r:require module="bootstrap-css"/>
+  <r:require module="common"/>
   <g:layoutHead/>
   <r:layoutResources />
 </head>

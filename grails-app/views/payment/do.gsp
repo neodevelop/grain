@@ -2,7 +2,7 @@
 <head>
   <title><g:message code='payment.do' default="Making payment"/></title>
   <meta name='layout' content='main'/>
-  <r:require module="common"/>
+  
   <r:script>
     <g:if test="${!user?.firstName || !user?.lastName }">
       $(function(){

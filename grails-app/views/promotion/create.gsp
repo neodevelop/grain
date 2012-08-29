@@ -2,8 +2,8 @@
 <%@ page import="com.synergyj.grain.course.Promotion" %>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="layout" content="wb" />
+  
+  <meta name="layout" content="mainContent" />
   <title><g:message code="promotion.create" default="Create Promotion" /></title>
   <parameter name="pageHeader" value="${g.message(code: 'promotion.create', default: 'Create Promotion')}"/>
 </head>

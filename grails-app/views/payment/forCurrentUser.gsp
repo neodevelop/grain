@@ -1,8 +1,8 @@
 
 <head>
   <title><g:message code='course.payments' default="Your payments"/></title>
-  <meta name='layout' content='mainContent'/>
-  <r:require module="common"/>
+  <meta name='layout' content="mainContent"/>
+  
   <r:require module="paymentForCurrentUser"/>
 </head>
 <body>

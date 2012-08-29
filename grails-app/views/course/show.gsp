@@ -4,7 +4,7 @@
   <meta name="layout" content="mainContent" />
   <title><g:message code="course.show" default="Show Course" /></title>
   
-  <r:require module="common"/>
+  
 </head>
 <body>
   <div class="page-header">
