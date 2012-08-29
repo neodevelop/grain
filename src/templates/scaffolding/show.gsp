@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="nav">
-            <a class="home" href="\${resource(dir: '')}"><g:message code="home" default="Home" /></a>
+            <a class="btn" href="\${resource(dir: '')}"><g:message code="home" default="Home" /></a>
             <g:link class="btn" action="list"><g:message code="${domainClass.propertyName}.list" default="${className} List" /></g:link>
             <g:link class="create" action="create"><g:message code="${domainClass.propertyName}.new" default="New ${className}" /></g:link>
         </div>
@@ -16,7 +16,7 @@
             <h1><g:message code="${domainClass.propertyName}.show" default="Show ${className}" /></h1>
             <g:if test="\${flash.message}">
             <div class="message"><g:message code="\${flash.message}" args="\${flash.args}" default="\${flash.defaultMessage}" /></div>
-            </g:if>
+            </g:if>homehome
             <g:form>
                 <g:hiddenField name="id" value="\${${propertyName}?.id}" />
                 <div class="dialog">

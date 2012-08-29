@@ -15,7 +15,7 @@
 
 <body>
 <div class="nav">
-  <span class="menuButton"><a class="home" href="${resource(dir: '')}"><g:message code="home" default="Home"/></a>
+  <span class="menuButton"><a class="btn" href="${resource(dir: '')}"><g:message code="home" default="Home"/></a>
   </span>
   <span class="menuButton"><g:link class="create" action="create"><g:message code="expense.new"
                                                                              default="New Expense"/></g:link></span>
