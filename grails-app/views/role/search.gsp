@@ -36,7 +36,7 @@
 def queryParams = [authority: authority]
 %>
 
-	<div class="list">
+	<div class="btn">
 	<table>
 		<thead>
 		<tr>

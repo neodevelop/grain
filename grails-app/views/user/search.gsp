@@ -67,7 +67,7 @@
 def queryParams = [username: username, enabled: enabled, accountExpired: accountExpired, accountLocked: accountLocked, passwordExpired: passwordExpired]
 %>
 
-	<div class="list">
+	<div class="btn">
 	<table>
 		<thead>
 		<tr>

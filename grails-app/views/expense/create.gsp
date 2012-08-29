@@ -11,7 +11,7 @@
 <div class="nav">
   <span class="menuButton"><a class="home" href="${resource(dir: '')}"><g:message code="home" default="Home"/></a>
   </span>
-  <span class="menuButton"><g:link class="list" action="list"><g:message code="expense.list"
+  <span class="menuButton"><g:link class="btn" action="list"><g:message code="expense.list"
                                                                          default="Expense List"/></g:link></span>
 </div>
 

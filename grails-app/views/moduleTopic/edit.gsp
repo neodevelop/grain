@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="nav">
-            <g:link class="list" action="list"><g:message code="moduleTopic.list" default="ModuleTopic List" /></g:link>
+            <g:link class="btn" action="list"><g:message code="moduleTopic.list" default="ModuleTopic List" /></g:link>
             <g:link class="create" action="create"><g:message code="moduleTopic.new" default="New ModuleTopic" /></g:link>
         </div>
         <div class="body">

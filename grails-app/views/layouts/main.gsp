@@ -14,6 +14,7 @@
     <ga:trackPageviewAsynch />
     <r:require module="bootstrap-js"/>
     <r:require module="bootstrap-css"/>
+    <r:require module="common"/>list
     <g:layoutHead/>
     <r:layoutResources />
   </head>

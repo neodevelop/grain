@@ -20,7 +20,7 @@
         <br/>
         <div class="body">
 
-            <div class="list">
+            <div class="btn">
                 <table cellpadding="5" cellspacing="0" border="0" width="100%">
                     <thead>
                         <tr>

@@ -11,7 +11,7 @@
 <div class="content">
   <h3>${scheduledCourse.course} / ${formatDate(date: scheduledCourse.beginDate, format: "dd - MMMM - yyyy")}</h3>
 
-  <div class="list">
+  <div class="btn">
     <table cellpadding="5" cellspacing="0" border="0" width="100%">
       <thead>
         <tr>

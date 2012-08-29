@@ -44,7 +44,7 @@
 def queryParams = [username: username, token: token, series: series]
 %>
 
-	<div class="list">
+	<div class="btn">
 	<table>
 		<thead>
 		<tr>
