@@ -8,8 +8,8 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${resource(dir:'')}">Home</a></span>
-            <span class="menuButton"><g:link class="list" action="list">NewsItem List</g:link></span>
+            <a class="home" href="${resource(dir:'')}">Home</a>
+            <g:link class="list" action="list">NewsItem List</g:link>
         </div>
         <div class="body">
             <h1>Create NewsItem</h1>
@@ -66,7 +66,7 @@
                     </table>
                 </div>
                 <div class="form-actions">
-                    <span class="button"><input class="save" type="submit" value="Create" /></span>
+                    <input class="btn btn-primary" type="submit" value="Create" />
                 </div>
             </g:form>
         </div>

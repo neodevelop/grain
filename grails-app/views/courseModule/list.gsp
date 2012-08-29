@@ -15,7 +15,7 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="courseModule.new" default="New CourseModule" /></g:link></span>
+            <g:link class="create" action="create"><g:message code="courseModule.new" default="New CourseModule" /></g:link>
         </div>
         <br/>
         <div class="body">

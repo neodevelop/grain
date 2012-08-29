@@ -8,9 +8,9 @@
 </head>
 <body>
 <div class="nav">
-  <span class="menuButton"><a class="home" href="${resource(dir: '')}"><g:message code="home" default="Home" /></a></span>
-  <span class="menuButton"><g:link class="list" action="list"><g:message code="promotion.list" default="Promotion List" /></g:link></span>
-  <span class="menuButton"><g:link class="create" action="create"><g:message code="promotion.new" default="New Promotion" /></g:link></span>
+  <a class="home" href="${resource(dir: '')}"><g:message code="home" default="Home" /></a>
+  <g:link class="list" action="list"><g:message code="promotion.list" default="Promotion List" /></g:link>
+  <g:link class="create" action="create"><g:message code="promotion.new" default="New Promotion" /></g:link>
 </div>
 <br/>
 <div class="body">
@@ -70,8 +70,8 @@
       </table>
     </div>
     <div class="form-actions">
-      <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'update', 'default': 'Update')}" /></span>
-      <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'delete', 'default': 'Delete')}" onclick="return confirm('${message(code: 'delete.confirm', 'default': 'Are you sure?')}');" /></span>
+      <g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'update', 'default': 'Update')}" />
+      <g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'delete', 'default': 'Delete')}" onclick="return confirm('${message(code: 'delete.confirm', 'default': 'Are you sure?')}');" />
     </div>
   </g:form>
 </div>

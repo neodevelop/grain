@@ -8,9 +8,9 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${resource(dir:'')}">Home</a></span>
-            <span class="menuButton"><g:link class="list" action="list">NewsItem List</g:link></span>
-            <span class="menuButton"><g:link class="create" action="create">New NewsItem</g:link></span>
+            <a class="home" href="${resource(dir:'')}">Home</a>
+            <g:link class="list" action="list">NewsItem List</g:link>
+            <g:link class="create" action="create">New NewsItem</g:link>
         </div>
         <div class="body">
             <h1>Show NewsItem</h1>
@@ -90,8 +90,8 @@
             <div class="form-actions">
                 <g:form>
                     <input type="hidden" name="id" value="${newsItemInstance?.id}" />
-                    <span class="button"><g:actionSubmit class="edit" value="Edit" /></span>
-                    <span class="button"><g:actionSubmit class="delete" onclick="return confirm('Are you sure?');" value="Delete" /></span>
+                    <g:actionSubmit class="btn" value="Edit" />
+                    <g:actionSubmit class="btn btn-danger" onclick="return confirm('Are you sure?');" value="Delete" />
                 </g:form>
             </div>
         </div>

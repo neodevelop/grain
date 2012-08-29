@@ -8,8 +8,8 @@
 </head>
 <body>
 <div class="nav">
-  <span class="menuButton"><a class="home" href="${resource(dir: '')}"><g:message code="home" default="Home"/></a></span>
-  <span class="menuButton"><g:link class="create" action="create"><g:message code="linkParam.new" default="New LinkParam"/></g:link></span>
+  <a class="home" href="${resource(dir: '')}"><g:message code="home" default="Home"/></a>
+  <g:link class="create" action="create"><g:message code="linkParam.new" default="New LinkParam"/></g:link>
 </div>
 <div class="body">
   <g:if test="${flash.message}">

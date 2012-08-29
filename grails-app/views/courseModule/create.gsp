@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><g:link class="list" action="list"><g:message code="courseModule.list" default="CourseModule List" /></g:link></span>
+            <g:link class="list" action="list"><g:message code="courseModule.list" default="CourseModule List" /></g:link>
         </div>
         <div class="body">
             <g:if test="${flash.message}">
@@ -78,7 +78,7 @@
                     </table>
                 </div>
                 <div class="form-actions">
-                    <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'create', 'default': 'Create')}" /></span>
+                    <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'create', 'default': 'Create')}" />
                 </div>
             </g:form>
         </div>

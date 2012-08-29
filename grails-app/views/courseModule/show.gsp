@@ -9,8 +9,8 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><g:link class="list" action="list"><g:message code="courseModule.list" default="CourseModule List" /></g:link></span>
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="courseModule.new" default="New CourseModule" /></g:link></span>
+            <g:link class="list" action="list"><g:message code="courseModule.list" default="CourseModule List" /></g:link>
+            <g:link class="create" action="create"><g:message code="courseModule.new" default="New CourseModule" /></g:link>
         </div>
         <div class="body">
             <g:if test="${flash.message}">
@@ -95,8 +95,8 @@
                     </table>
                 </div>
                 <div class="form-actions">
-                    <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'edit', 'default': 'Edit')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'delete', 'default': 'Delete')}" onclick="return confirm('${message(code: 'delete.confirm', 'default': 'Are you sure?')}');" /></span>
+                    <g:actionSubmit class="btn" action="edit" value="${message(code: 'edit', 'default': 'Edit')}" />
+                    <g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'delete', 'default': 'Delete')}" onclick="return confirm('${message(code: 'delete.confirm', 'default': 'Are you sure?')}');" />
                 </div>
             </g:form>
         </div>
