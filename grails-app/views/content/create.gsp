@@ -2,9 +2,10 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="layout" content="wb"/>
+  <meta name="layout" content="mainContent"/>
   <title><g:message code="content.create" default="Create Content"/></title>
   <parameter name="pageHeader" value="${g.message(code: 'content.create', default: 'Create Content')}"/>
+  <r:require module="common"/>
 </head>
 <body>
 <div class="nav">
@@ -21,72 +22,7 @@
     </div>
   </g:hasErrors>
   <g:form action="save" method="post">
-    <div class="dialog">
-      <table>
-        <tbody>
-
-        <tr class="prop">
-          <td valign="top" class="name">
-            <label for="title"><g:message code="content.title" default="Title"/>:</label>
-          </td>
-          <td valign="top" class="value ${hasErrors(bean: contentInstance, field: 'title', 'errors')}">
-            <g:textField name="title" maxlength="200" value="${fieldValue(bean: contentInstance, field: 'title')}"/>
-
-          </td>
-        </tr>
-
-        <tr class="prop">
-          <td valign="top" class="name">
-            <label for="body"><g:message code="content.body" default="Body"/>:</label>
-          </td>
-          <td valign="top" class="value ${hasErrors(bean: contentInstance, field: 'body', 'errors')}">
-            <g:textArea name="body" value="${fieldValue(bean: contentInstance, field: 'body')}"/>
-
-          </td>
-        </tr>
-
-        <tr class="prop">
-          <td valign="top" class="name">
-            <label for="language"><g:message code="content.language" default="Language"/>:</label>
-          </td>
-          <td valign="top" class="value ${hasErrors(bean: contentInstance, field: 'language', 'errors')}">
-            <g:localeSelect name="locale" />
-          </td>
-        </tr>
-
-        <tr class="prop">
-          <td valign="top" class="name">
-            <label for="key"><g:message code="content.key" default="Key"/>:</label>
-          </td>
-          <td valign="top" class="value ${hasErrors(bean: contentInstance, field: 'key', 'errors')}">
-            <g:textField name="key" maxlength="200" value="${fieldValue(bean: contentInstance, field: 'key')}"/>
-
-          </td>
-        </tr>
-
-        <tr class="prop">
-          <td valign="top" class="name">
-            <label for="author.id"><g:message code="content.author" default="Author"/>:</label>
-          </td>
-          <td valign="top" class="value ${hasErrors(bean: contentInstance, field: 'author', 'errors')}">
-            <g:select name="author.id" from="${com.synergyj.grain.auth.User.list()}" optionKey="id" value="${contentInstance?.author?.id}" noSelection="['null': '']"/>
-
-          </td>
-        </tr>
-
-        <tr class="prop">
-          <td valign="top" class="name">
-            <label for="type"><g:message code="content.type" default="Type"/>:</label>
-          </td>
-          <td valign="top" class="value ${hasErrors(bean: contentInstance, field: 'type', 'errors')}">
-            <g:select name="type" from="${com.synergyj.grain.content.ContentType?.values()}" value="${contentInstance?.type}"/>
-
-          </td>
-        </tr>
-
-        </tbody>
-      </table>
-    </div>
+    <g:render template="form" model="contentInstance:contentInstance" />
     <div class="buttons">
       <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'create', 'default': 'Create')}"/></span>
     </div>
