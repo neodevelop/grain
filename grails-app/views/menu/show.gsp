@@ -10,7 +10,7 @@
 <div class="nav">
   <a class="btn" href="${resource(dir: '')}"><g:message code="home" default="Home"/></a>
   <g:link class="btn" action="list"><g:message code="menu.list" default="Menu List"/></g:link>
-  <g:link class="create" action="create"><g:message code="menu.new" default="New Menu"/></g:link>
+  <g:link class="btn btn-primary" action="create"><g:message code="menu.new" default="New Menu"/></g:link>
 </div>
 <div class="body">
   <g:if test="${flash.message}">

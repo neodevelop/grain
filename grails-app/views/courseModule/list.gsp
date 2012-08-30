@@ -15,7 +15,7 @@
     </head>
     <body>
         <div class="nav">
-            <g:link class="create" action="create"><g:message code="courseModule.new" default="New CourseModule" /></g:link>
+            <g:link class="btn btn-primary" action="create"><g:message code="courseModule.new" default="New CourseModule" /></g:link>
         </div>
         <br/>
         <div class="body">

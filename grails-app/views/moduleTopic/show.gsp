@@ -10,7 +10,7 @@
     <body>
         <div class="nav">
             <g:link class="btn" action="list"><g:message code="moduleTopic.list" default="ModuleTopic List" /></g:link>
-            <g:link class="create" action="create"><g:message code="moduleTopic.new" default="New ModuleTopic" /></g:link>
+            <g:link class="btn btn-primary" action="create"><g:message code="moduleTopic.new" default="New ModuleTopic" /></g:link>
         </div>
         <div class="body">
 

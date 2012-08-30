@@ -13,7 +13,7 @@
   </span>
   <span class="menuButton"><g:link class="btn" action="list"><g:message code="expense.list"
                                                                          default="Expense List"/></g:link></span>
-  <span class="menuButton"><g:link class="create" action="create"><g:message code="expense.new"
+  <span class="menuButton"><g:link class="btn btn-primary" action="create"><g:message code="expense.new"
                                                                              default="New Expense"/></g:link></span>
 </div>
 

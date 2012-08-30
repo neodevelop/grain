@@ -9,7 +9,7 @@
 <body>
 <div class="nav">
   <a class="btn" href="${resource(dir: '')}"><g:message code="home" default="Home"/></a>
-  <g:link class="create" action="create"><g:message code="linkParam.new" default="New LinkParam"/></g:link>
+  <g:link class="btn btn-primary" action="create"><g:message code="linkParam.new" default="New LinkParam"/></g:link>
 </div>
 <div class="body">
   <g:if test="${flash.message}">

@@ -9,7 +9,7 @@
     <body>
         <div class="nav">
             <a class="btn" href="\${resource(dir: '')}"><g:message code="home" default="Home" /></a>
-            <g:link class="create" action="create"><g:message code="${domainClass.propertyName}.new" default="New ${className}" /></g:link>
+            <g:link class="btn btn-primary" action="create"><g:message code="${domainClass.propertyName}.new" default="New ${className}" /></g:link>
         </div>
         <div class="body">
             <h1><g:message code="${domainClass.propertyName}.list" default="${className} List" /></h1>

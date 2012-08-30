@@ -9,7 +9,7 @@
     <body>
         <div class="nav">
             <a class="btn" href="${resource(dir:'')}">Home</a>
-            <g:link class="create" action="create">New NewsItem</g:link>
+            <g:link class="btn btn-primary" action="create">New NewsItem</g:link>
         </div>
         <div class="body">
             <h1>NewsItem List</h1>
