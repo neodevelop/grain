@@ -2,8 +2,15 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-    
     <r:require module="home"/>
+    <r:script>
+    $(function(){
+      $("dd.overview").each(function(){
+        var text = $(this).text();
+        $(this).text($.trim(text).substring(0,300).split(" ").slice(0,-1).join(" ") + "...");
+      });
+    })
+    </r:script>
 	</head>
 	<body>
     <g:render template="/common/flashMessagesAlerts" />
@@ -31,7 +38,7 @@
                 <g:formatDate date="${scheduledCourse.beginDate}" format="dd / MMMM / yyyy"/>
               </dd>
               <dt>Overview</dt>
-              <dd>${scheduledCourse.course.overview}</dd>
+              <dd class="overview">${scheduledCourse.course.overview}</dd>
               <dt>Duración</dt>
               <dd><span class="badge badge-info">${scheduledCourse.durationInHours}</span> horas</dd>
             </dl>

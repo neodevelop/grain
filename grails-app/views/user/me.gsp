@@ -22,8 +22,8 @@
           <th>#</th>
           <th>Curso</th>
           <th>Fecha de inicio</th>
-          <th>Precio</th>
           <th>Duración</th>
+          <th>Precio</th>
           <th>&nbsp;</th>
         </tr>
       </thead>
