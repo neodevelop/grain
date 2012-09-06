@@ -57,6 +57,7 @@ class Course extends CourseContent implements Serializable{
   }
 
   static mapping = {
+    cache true
     overview type:"text"
     audience type:"text"
     prerequisites type:"text"

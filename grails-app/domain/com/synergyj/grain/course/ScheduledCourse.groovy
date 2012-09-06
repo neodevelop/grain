@@ -61,6 +61,10 @@ class ScheduledCourse implements Serializable {
     instructors:User
   ]
 
+  static mapping = {
+    cache true
+  }
+
   String toString() {
     "(${id} : ${beginDate} : ${scheduledCourseStatus})"
   }
