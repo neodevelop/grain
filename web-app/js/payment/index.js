@@ -6,9 +6,9 @@ $(function(){
 });
 
 function activateSendButtons(){
-  $("div#finish > a.submit").click(function(){
+  $("a.submit").click(function(){
+    $("form#makePayment #paymentOption").val($(this).attr("name"));
     $("form#makePayment").trigger('submit');
-    return false;
   });
 }
 
