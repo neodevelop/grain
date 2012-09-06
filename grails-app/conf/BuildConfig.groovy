@@ -37,6 +37,11 @@ grails.project.dependency.resolution = {
     compile ":twitter-bootstrap:2.0.2.25"
     build ":tomcat:$grailsVersion"
 
+    runtime ":zipped-resources:1.0"
+    runtime ":cached-resources:1.0"
+    runtime ":yui-minify-resources:0.1.4"
+    compile ":cache-headers:1.1.5"
+
     compile ":spring-security-core:1.2.7.3"
     compile ":spring-security-ui:0.2"
     runtime 'org.grails.plugins:famfamfam:1.0.1'
