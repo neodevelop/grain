@@ -25,6 +25,7 @@ class PaymentController {
   def notificationService
   def registrationService
   def receiptService
+  def promotionPerRegistrationService
 
   def startForCurrentUser = {
     // Obtenemos el usuario actual
@@ -45,7 +46,7 @@ class PaymentController {
       if (promotion.hasNotExpired())
         promotionsForThisUser << promotion
     }
-    session.promotionsPerCourse = promotionsForThisUser
+    
     // Regresamos sus cursos para presentar el detalle y las promociones a escoger
     [registration: registration, promotionsPerCourse: promotionsForThisUser]
   }
@@ -116,7 +117,7 @@ class PaymentController {
   }
 
   def create = {
-
+    log.debug params
     // Conservamos la opción de pago que selecciono
     def paymentOption = "spei"
     if (params.paymentOption == "dineromail") {
@@ -127,6 +128,7 @@ class PaymentController {
     // Creamos los pagos para el registro
     def registration = new Registration()
     try {
+      log.debug "Preparando pagos para el registro : ${params.registrationId}"
       registration = paymentService.preparePaymentsForRegistration(
         params.long("registrationId"),
         new BigDecimal(params.totalToPay),
@@ -138,39 +140,16 @@ class PaymentController {
       redirect(controller: 'user',action: 'me')
     }
 
-    // Obtenemos las promociones que selecciono/aplico, vienen en un string separado por comas
-    def promotionsIds = params?.checkedPromotions?.tokenize(',')
-
-    // Iteramos la seleccion de promociones
-    promotionsIds.each { promotionId ->
-      // buscamos en la lista de promociones en la sesion el descuento
-      def promotionPerCourse = (session.promotionsPerCourse).find { it.id >= promotionId.toLong() }
-      // Generamos el objeto de promoción por registro
-      def promotionPerRegistration = new PromotionPerRegistration(
-          promotion: promotionPerCourse.promotion,
-          registration: registration
-      )
-      // Si escogió la recomendación
-      if (promotionPerRegistration.promotion.kindPromotion == KindPromotion.RECOMMENDATION) {
-        // Creamos el objeto para tomar el valor, en este caso el correo
-        def promotionPerRegistrationProperty = new PromotionPerRegistrationProperty()
-        promotionPerRegistrationProperty.propertyKey = "email"
-        promotionPerRegistrationProperty.propertyValue = params."emailFrom${promotionId}"
-        // Agregamos la propiedad a la promoción
-        promotionPerRegistration.addToPromotionPerRegistrationProperties(promotionPerRegistrationProperty)
-      }
-      // Agregamos la promoción que aplicó al registro
-      registration.addToPromotions(promotionPerRegistration)
-    }
-
-    // Eliminamos los valores de la sesión
-    if (session?.promotionsPerCourse)
-      session.removeAttribute("promotionsPerCourse")
-
-    // Consultamos los pagos para el registro para mandarlos por el modelo
+    log.debug "Obtenemos las promociones que selecciono/aplico, vienen en un string separado por comas : ${params?.checkedPromotions}"
+    def promotionsIds = params?.checkedPromotions?.tokenize(',')?.collect { it.toLong() }
+    log.debug promotionsIds
+    log.debug "Restaurando las promociones para el registro : ${registration.dump()}"
+    registration = promotionPerRegistrationService.applyPromotionsToRegistration(registration.id,promotionsIds ?: [])
+    
+    log.debug "Consultamos los pagos para el registro para mandarlos por el modelo"
     def payment = Payment.findByRegistrationAndPaymentStatus(registration, PaymentStatus.WAITING, [sort: 'id'])
 
-    // Validar si es SPEI o DineroMail y direccionarlo
+    log.debug "Validar si es SPEI o DineroMail y direccionarlo"
     if (paymentOption == 'spei') {
       notificationService.sendPaymentInstructions(payment.id)
       flash.message = "${g.message(code: 'notification.send')}"
