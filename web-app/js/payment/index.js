@@ -9,6 +9,7 @@ function activateSendButtons(){
   $("a.submit").click(function(){
     $("form#makePayment #paymentOption").val($(this).attr("name"));
     $("form#makePayment").trigger('submit');
+    return false;
   });
 }
 
