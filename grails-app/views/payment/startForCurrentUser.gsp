@@ -53,6 +53,7 @@
 <g:hiddenField name="registrationId" value="${registration.id}"/>
 <g:hiddenField name="totalToPay" value=""/>
 <g:hiddenField name="checkedPromotions" value=""/>
+<g:hiddenField name="paymentOption" value=""/>
 </g:form>
 
 </body>
