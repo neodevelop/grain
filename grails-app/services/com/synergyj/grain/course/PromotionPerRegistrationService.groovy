@@ -23,7 +23,9 @@ class PromotionPerRegistrationService {
     // Obtenemos el registro a modificar
     def registration = Registration.findById(registrationId,[fetch:[promotions:"eager"]])
     // Buscamos los objetos de tipo PromotionPerScheduledCourse
-    def promotionsPerScheduledCourseSelected = PromotionPerScheduledCourse.getAll(promotionIds)
+    def promotionsPerScheduledCourseSelected = []
+    if(promotionIds)
+      promotionsPerScheduledCourseSelected = PromotionPerScheduledCourse.getAll(promotionIds)
     // Obtenemos los promotions y ejecutamos findAll en ellos, algo en el GORM no permite hacerlo directo
     def promotionsToRemove = registration.promotions.findAll { it }
     // Iteramos los objetos
