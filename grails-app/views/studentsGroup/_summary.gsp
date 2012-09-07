@@ -12,7 +12,7 @@
   <g:set var="totalExpenseCost" value="${totalExpenseCost + expense.amount}"/>
 </g:each>
 
-<table class="summary" cellpadding="5px" cellspacing="0" width="100%">
+<table class="summary table table-condensed">
   <thead>
   <tr>
     <th>Concepto</th>
@@ -51,7 +51,7 @@
   <tfoot>
   <tr>
     <td align="right"><b>Total</b></td>
-    <td align="right"><b>${totalAmountPerGroup - totalCommissionPerGroup - totalExpenseCost}</b></td>
+    <td align="right"><b>$ <g:formatNumber number="${totalAmountPerGroup - totalCommissionPerGroup - totalExpenseCost}" format="#,###.00" locale="MX"/></b></td>
   </tr>
   </tfoot>
 </table>

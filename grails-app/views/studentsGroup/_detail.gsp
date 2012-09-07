@@ -1,5 +1,5 @@
 <%@ page import="com.synergyj.grain.course.KindOfPayment; com.synergyj.grain.course.PaymentStatus; com.synergyj.grain.course.PaymentService; com.synergyj.grain.course.RegistrationStatus" %>
-  <table id="${tableName}" cellpadding="5px" cellspacing="0" width="100%">
+  <table id="${tableName}" class="table table-condensed">
     <thead>
       <tr>
         <th><g:message code="login.username"/></th>

@@ -1,5 +1,5 @@
 <%@ page import="com.synergyj.grain.course.KindOfPayment; com.synergyj.grain.course.PaymentStatus; com.synergyj.grain.course.PaymentService; com.synergyj.grain.course.RegistrationStatus" %>
-  <table id="${tableName}" cellpadding="5px" cellspacing="0" width="100%">
+  <table id="${tableName}" class="table table-condensed">
     <thead>
       <tr>
         <th><g:message code="login.username"/></th>
@@ -30,8 +30,8 @@
         <td align="center">${registration?.payments.size()}</td>
         <td align="center">$ <g:formatNumber number="${totalPerRegistration}" locale="es_MX" format="\$ ###,##0.00"/></td>
         <td align="center">
-          <a href="#paymentsForRegistration${registration.id}" class="showDialog">
-            <img src="${resource(file:'search.png',dir:'/themes/wb/icon')}" width="20px" height="20px"/>
+          <a href="#paymentsForRegistration${registration.id}" class="showDialog btn">
+            <i class="icon-search"></i>
           </a>
         </td>
       </tr>
@@ -46,7 +46,7 @@
   
   <g:each in="${registrationGroup}" var="registration">
     <div id="paymentsForRegistration${registration.id}" title="Pagos de ${registration?.student?.email}" align="center">
-        <table class="paymentsDetails" cellpadding="5" cellspacing="0">
+        <table class="paymentsDetails table table-condensed">
           <thead>
             <tr>
               <th>${message(code:'payment.amount')}</th>

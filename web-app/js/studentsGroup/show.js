@@ -1,15 +1,10 @@
 $(function() {
-  $("div#tabs").tabs();
   $("div[id^=paymentsForRegistration]").dialog({ autoOpen: false, show: "blind", hide: "explode", width: 850 });
   $("a.showDialog").click(function(){
     var selector = $(this).attr('href');
     $(selector).dialog("open");
     return false;
   });
-  $("table.paymentsDetails").styleTable();
-  $("table.registrationsList").styleTable();
-  $("table.expensesList").styleTable();
-  $("table.summary").styleTable();
 });
 function addStudent(studentRowId) {
   $("table#studentsNoGroup > tbody > tr#student" + studentRowId).clone().prependTo("table#studentsInGroup");
