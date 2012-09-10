@@ -33,7 +33,7 @@ class NotificationService {
     def user = User.findByEmail(email)
     def mailParams = [
         to: user.email,
-        from: "no-reply@synergyj.com",
+        from: "cursos@synergyj.com",
         subject: "Bienvenido a tu entrenamiento en SynergyJ.com",
         view: '/notification/registration',
         model: [user: user]
@@ -60,7 +60,7 @@ class NotificationService {
 
     def mailParams = [
         to: registration.student.email,
-        from: "no-reply@synergyj.com",
+        from: "cursos@synergyj.com",
         subject: "Te has inscrito a un curso en SynergyJ.com",
         view: "/notification/scheduledCourse",
         model: [user: user, scheduledCourse: scheduledCourse, courseName: scheduledCourse.course.name]
@@ -82,7 +82,7 @@ class NotificationService {
     scheduledCourse.promotions.collect { promotionPerCourse -> promotionPerCourse.promotion.description  }
     def mailParams = [
         to: user.email,
-        from: "no-reply@synergyj.com",
+        from: "cursos@synergyj.com",
         subject: "Gracias por escoger el curso: ${scheduledCourse.course.name}",
         view: "/notification/confirmRegistration",
         model: [user: user, scheduledCourse: scheduledCourse, registrationCode: registrationCode,courseName:scheduledCourse.course.name]
@@ -102,7 +102,7 @@ class NotificationService {
     scheduledCourse.promotions.collect { promotionPerCourse -> promotionPerCourse.promotion.description  }
     def mailParams = [
         to: email,
-        from: "no-reply@synergyj.com",
+        from: "cursos@synergyj.com",
         subject: "Gracias por escoger el curso: ${scheduledCourse.course.name}",
         view: "/notification/invitation",
         model: [email: email, scheduledCourse: scheduledCourse, registrationCode: registrationCode, courseName: scheduledCourse.course.name]
@@ -127,7 +127,7 @@ class NotificationService {
 
     def mailParams = [
         to: payment.registration.student.email,
-        from: "no-reply@synergyj.com",
+        from: "cursos@synergyj.com",
         subject: "Instrucciones de pago",
         view: "/notification/paymentInstructions",
         model: [payment: payment, registration: payment.registration]
@@ -139,7 +139,7 @@ class NotificationService {
     def forgotPasswordCode = ForgotPasswordCode.get(forgotPasswordCodeId)
     def mailParams = [
         to: forgotPasswordCode.user.email,
-        from: "no-reply@synergyj.com",
+        from: "cursos@synergyj.com",
         subject: "Instrucciones para restablecer tu contraseña",
         view: "/notification/resetPassword",
         model: [forgotPasswordCode: forgotPasswordCode]
