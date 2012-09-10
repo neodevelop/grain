@@ -146,4 +146,16 @@ class NotificationService {
     ]
     rabbitSend MAIL_QUEUE_NOTIFICATION, mailParams
   }
+
+  def sendPaymentConfirmation(String trxId){
+    def payment = Payment.findByTransactionId(trxId)
+    def mailParams = [
+        to: payment.registration.student.email,
+        from: "cursos@synergyj.com",
+        subject: "Instrucciones para restablecer tu contraseña",
+        view: "/notification/paymentDone",
+        model: [payment: payment]
+    ]
+    rabbitSend MAIL_QUEUE_NOTIFICATION, mailParams
+  }
 }

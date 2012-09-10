@@ -20,6 +20,8 @@ import grails.converters.XML
 class IPNController {
 
   def dineroMailService
+  def notificationService
+  def registrationService
 
   def index = {
     def toLowerParams = [:]
@@ -36,12 +38,18 @@ class IPNController {
         // Recorremos las operaciones notificadas
         rootNode.operaciones.operacion.each { op ->
           // Llamammos la verificación del pago con el ID de cada operacion
-          dineroMailService.verifyPayment(0L, op.id.text())
+          // Y checamos si ya se hizo el pago
+          if(dineroMailService.verifyPayment(0L, op.id.text())){
+            // Checamos si ya pago el total del curso
+            //registrationService.checkIsPayed()
+            // Enviamos el correo de confirmación de pago
+            notificationService.sendPaymentConfirmation(op.id.text())
+          }
         }
       }
     } else {
       log.error("No hay notificaciones en DM")
-      log.error(params)
+      log.error(params.dump())
     }
     render "ok"
   }
