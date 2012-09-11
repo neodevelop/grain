@@ -152,7 +152,7 @@ class NotificationService {
     def mailParams = [
         to: payment.registration.student.email,
         from: "cursos@synergyj.com",
-        subject: "Instrucciones para restablecer tu contraseña",
+        subject: "Hemos recibido tu pago...",
         view: "/notification/paymentDone",
         model: [payment: payment]
     ]
