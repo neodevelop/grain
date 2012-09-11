@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-  <title>Newsletter template</title>
+  <title>. : Cursos - SynergyJ.com : .</title>
   <!--general stylesheet-->
   <style type="text/css">
   p { padding: 0; margin: 0; }
@@ -46,7 +46,7 @@
                     Entrenamiento
                   </h2>
                   <h2 class="date" style="margin:0; padding:0; font-size:23px; font-weight: normal; color:#192c45; font-weight: bold;">
-                    2011
+                    <g:formatDate date="${new Date()}" format="yyyy"/>
                   </h2>
                 </td>
               </tr>
@@ -88,7 +88,7 @@
                                 Ya has iniciado el proceso de pago, y a través de este correo te adjuntamos los datos que necesitas para hacer una transferencia electrónica.
                               </p>
                               <p style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
-                                Te informamos que para el curso <b>${registration?.scheduledCourse?.course?.name ?: 'Nombre del curso'}</b>, el cual comienza el
+                                Te informamos que para el curso <b>${courseName ?: 'Nombre del curso'}</b>, el cual comienza el
                                 <b><g:formatDate date="${registration?.scheduledCourse?.beginDate ?: new Date()}" format="EEEE dd 'de' MMMM 'del' yyyy" locale="es"/></b>,
                                 tienes como fecha límite <b><g:formatDate date="${registration?.scheduledCourse?.limitRegistrationDate ?: new Date()}" format="EEEE dd 'de' MMMM 'del' yyyy"/></b>
                               para que puedas saldar el total del costo.<br/>

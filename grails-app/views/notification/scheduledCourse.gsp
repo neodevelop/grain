@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-  <title>Newsletter template</title>
+  <title>. : Cursos - SynergyJ.com : .</title>
   <!--general stylesheet-->
   <style type="text/css">
   p { padding: 0; margin: 0; }
@@ -46,7 +46,7 @@
                     Entrenamiento
                   </h2>
                   <h2 class="date" style="margin:0; padding:0; font-size:23px; font-weight: normal; color: #192c45; font-weight: bold;">
-                    2011
+                    <g:formatDate date="${new Date()}" format="yyyy"/>
                   </h2>
                 </td>
               </tr>
