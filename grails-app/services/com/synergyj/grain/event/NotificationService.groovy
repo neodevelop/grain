@@ -147,8 +147,8 @@ class NotificationService {
     rabbitSend MAIL_QUEUE_NOTIFICATION, mailParams
   }
 
-  def sendPaymentConfirmation(String trxId){
-    def payment = Payment.findByTransactionId(trxId)
+  def sendPaymentConfirmation(Long paymentId){
+    def payment = Payment.get(paymentId)
     def mailParams = [
         to: payment.registration.student.email,
         from: "cursos@synergyj.com",
