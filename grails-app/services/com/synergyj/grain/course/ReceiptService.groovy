@@ -4,6 +4,7 @@ class ReceiptService {
 
   def s3AssetService
   def registrationService
+  def notificationService
 
   static transactional = true
 
@@ -36,6 +37,7 @@ class ReceiptService {
     receipt.receiptStatus = ReceiptStatus.APROVED
     receipt.payment.paymentStatus = PaymentStatus.PAYED
     receipt.payment.paymentDate = new Date()
+    notificationService.sendPaymentConfirmation(receipt.payment.id)
     registrationService.checkIsPayed(receipt.payment.registration.id)
   }
 
