@@ -39,11 +39,12 @@ class IPNController {
         rootNode.operaciones.operacion.each { op ->
           // Llamammos la verificación del pago con el ID de cada operacion
           // Y checamos si ya se hizo el pago
-          if(dineroMailService.verifyPayment(0L, op.id.text())){
+          def payment = Payment.findByTransactionId(op.id.text())
+          if(dineroMailService.verifyPayment(payment.id)){
             // Checamos si ya pago el total del curso
-            //registrationService.checkIsPayed()
+            registrationService.checkIsPayed(payment.registration.id)
             // Enviamos el correo de confirmación de pago
-            notificationService.sendPaymentConfirmation(op.id.text())
+            notificationService.sendPaymentConfirmation(payment.id)
           }
         }
       }
