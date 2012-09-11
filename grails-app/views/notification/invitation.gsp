@@ -46,7 +46,7 @@
                     Entrenamiento
                   </h2>
                   <h2 class="date" style="margin:0; padding:0; font-size:23px; font-weight: normal; color:#192c45; font-weight: bold;">
-                    2011
+                    <g:formatDate date="${new Date()}" format="yyyy"/>
                   </h2>
                 </td>
               </tr>
