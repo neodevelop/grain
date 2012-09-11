@@ -70,7 +70,7 @@
                                       <tr>
                                         <td height="49" width="100%" valign="middle" bgcolor="#c8cfd8" background="${grailsApplication.config.grails.serverURL+'/themes/mail/images/article-title-bg.jpg'}" style="vertical-align:middle; border-left-width: 1px; border-left-color: #BAC2CC; border-left-style: solid; border-right-width: 1px; border-right-color: #BAC2CC; border-right-style: solid; border-bottom-width: 1px; border-bottom-color: #98a3b4; border-bottom-style: solid; border-top-width: 1px; border-top-color: #BAC2CC; border-top-style: solid;">
                                           <h3 class="textshadow" style="margin:0; margin-left: 17px; padding:0; font-size: 18px; font-weight: normal; color:#192c45;">
-                                            Hola <b>${registration?.student?.email ?: 'noname'}</b>, te informamos que...
+                                            Hola <b>${payment?.registration?.student?.email ?: 'noname'}</b>, te informamos que...
                                           </h3>
                                         </td>
                                       </tr>
@@ -105,6 +105,13 @@
                                               </b>
                                             </li>
                                             </ul>
+                                          </p>
+                                          <p style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
+                                          Te recomendamos que visites la siguiente URL y compruebes el estado de tu inscripción con este pago que has realizado: 
+                                          <br/>
+                                          <a href="${grailsApplication.config.grails.serverURL+'/myPayments'}">
+                                          ${grailsApplication.config.grails.serverURL+'/myPayments'}
+                                          </a>
                                           </p>
                                           <p style="font-size: 12px; line-height: 20px; font-weight: normal; color: #56667d; margin: 0; margin-bottom: 10px;">
                                             Nuestro compromiso es con la calidad del curso que te vamos a ofrecer, pero también con el servicio que recibes de nuestra parte, así que si hay algo más en lo que podamos ayudarte entonces por favor háznolos saber para actuar lo antes posible y brindarte atención personalizada.
