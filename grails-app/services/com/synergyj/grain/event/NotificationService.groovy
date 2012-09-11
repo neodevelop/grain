@@ -130,7 +130,7 @@ class NotificationService {
         from: "cursos@synergyj.com",
         subject: "Instrucciones de pago",
         view: "/notification/paymentInstructions",
-        model: [payment: payment, registration: payment.registration]
+        model: [payment: payment, registration: payment.registration,courseName:courseName]
     ]
     rabbitSend MAIL_QUEUE_NOTIFICATION, mailParams
   }
