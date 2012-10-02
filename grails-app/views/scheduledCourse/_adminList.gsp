@@ -41,7 +41,9 @@
             </td>
             <td>
               <div class="btn-group">
-                <button class="btn btn-mini">Modificar</button>
+                <g:remoteLink class="btn btn-mini btn-inverse" controller="registration" action="cancel" id="${it.id}" onSuccess="unregister(${it.id})">
+                  Anular
+                </g:remoteLink>
                 <g:if test="${it.registrationStatus == RegistrationStatus.REGISTERED || it.registrationStatus == RegistrationStatus.INSCRIBED_AND_WITH_DEBTH}">
                   <g:remoteLink class="btn btn-danger btn-mini" controller="registration" action="delete" id="${it.id}" onSuccess="removeRegistration(${it.id})">
                     Eliminar registro

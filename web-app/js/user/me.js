@@ -113,3 +113,7 @@ function populateDataForRegistrationAndPromotions(registrationId){
   var row = $("tr#registration"+registrationId);
   $("span#promotionsForUser").text(row.find("td:first").text());
 }
+
+function unregister(registrationId){
+  $("#registration"+registrationId).fadeOut('slow');
+}

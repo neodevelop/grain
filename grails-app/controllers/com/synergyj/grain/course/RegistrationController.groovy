@@ -83,9 +83,11 @@ class RegistrationController {
   def cancel = {
     def registration = Registration.get(params.id)
     registration.registrationStatus = RegistrationStatus.CANCELLED
-    render """
-      <img src="${resource(dir:'themes/wb/icon',file:'purple.png')}" width="24" height="24" />
-    """
+    render(contentType:"text/json") {
+      registrationId = registration.id
+      registrationStatus = registration.registrationStatus
+      message = 'Cancelado'
+    }
   }
 
   def toggleFinished = {

@@ -27,7 +27,7 @@
         <td align="center"><g:formatBoolean boolean="${registration?.invoice}" true="Yes" false="No"/></td>
         <td align="center">$ <g:formatNumber number="${totalAmount}" locale="es_MX" format="\$ ###,##0.00"/></td>
         <td align="center">- $<g:formatNumber number="${totalCommission}" locale="es_MX" format="\$ ###,##0.00"/></td>
-        <td align="center">${registration?.payments.size()}</td>
+        <td align="center">${registration?.payments.size()} <payment:method /></td>
         <td align="center">$ <g:formatNumber number="${totalPerRegistration}" locale="es_MX" format="\$ ###,##0.00"/></td>
         <td align="center">
           <a href="#paymentsForRegistration${registration.id}" class="showDialog btn">
