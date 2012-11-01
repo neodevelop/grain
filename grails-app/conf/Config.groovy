@@ -173,6 +173,7 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
     '/js/**': ['permitAll'],
     '/images/**': ['permitAll'],
     '/plugins/**': ['permitAll'],
+    '/site/**': ['permitAll'],
     '/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
     '/monitoring/**': ["hasRole('ROLE_ADMIN')"],
     '/s3Asset/**': ["hasRole('ROLE_ADMIN')"]
