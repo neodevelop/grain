@@ -14,6 +14,9 @@ ddl.sql
 docs
 target
 .idea
+.classpath
+.project
+.settings/*
 grain.iml
 grain-grailsPlugins.iml
 web-app/css/main.css
