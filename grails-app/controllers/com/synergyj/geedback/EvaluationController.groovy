@@ -45,7 +45,7 @@ class EvaluationController {
   def confirm = {
     def evaluation = Evaluation.get(params.id)
     evaluation.evaluationStatus = EvaluationStatus.CLOSED
-    flash.message = "Gracias por contestar nuestra evaluación del curso..."
+    flash.message = "Gracias por contestar nuestra evaluacion del curso..."
     redirect(uri: '/me')
   }
 

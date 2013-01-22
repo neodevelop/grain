@@ -28,11 +28,14 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			url = "jdbc:hsqldb:file:devDB"
+      url = "jdbc:mysql://localhost/grain"
+      driverClassName = "com.mysql.jdbc.Driver"
+      username = "root"
+      password = "mysql91"
 			dbCreate = "update" // one of 'create', 'create-drop','update'
 		}
     hibernate {
-      show_sql = true
+      show_sql = false
       format_sql = true
     }
 	}

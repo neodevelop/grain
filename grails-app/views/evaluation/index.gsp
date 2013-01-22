@@ -3,52 +3,7 @@
   <title><g:message code='evaluation.action' default="Evaluate this course"/></title>
   <meta name='layout' content="mainContent"/>
   <parameter name="pageHeader" value="${g.message(code: 'evaluation.action', default: 'Evaluate this course')}"/>
-  <script type="text/javascript" language="javascript">
-  $(function() {
-    $("#accordion").accordion({autoHeight: false,navigation: true});
-    $("button").button();
-    $("#accordion > h3").hide();
-    $("div[id^=question]").hide();
-    $("#accordion > h3").first().fadeIn();
-    $("div[id^=question]").first().fadeIn();
-    
-    $("input[name^=answerFor]").click(function(){
-      var questionId = $(this).attr('name').substring("answerFor".length);
-      $(this).parent().parent().next().fadeIn();
-      $("form#formQuestion"+questionId).submit();
-      $("span#quizCursor").text(questionId);
-    });
-    
-    $("button[name^=actionForQuestion]").click(function(){
-      var questionId = $(this).attr("name").substring("actionForQuestion".length);
-      $(this).parent().parent().next().fadeIn();
-      $("form#formQuestion"+questionId).submit();
-      $("span#quizCursor").text(questionId);
-      $(this).children("span").text("Actualizar");
-    });
-        
-  });
-  
-  function waiting(id){
-    $("img#loader"+id).fadeIn();
-    $("img#check"+id).hide();
-  }
-
-  function complete(id){
-    $("img#loader"+id).hide();
-    $("img#check"+id).fadeIn();
-  }
-  
-  function success(data){
-    if( (data.question.id / 1) == ( ( $("#quizTotal").text() ) / 1) ){
-      $("#statusAction").addClass("complete");
-      $("#statusAction").removeClass("incomplete");
-      $("#counter").hide();
-      $("#finalAction").fadeIn();
-    }
-  }
-    
-  </script>
+   <r:require module="jquery-ui"/>
 </head>
 <body>
 
@@ -95,5 +50,50 @@
       <span id="quizCursor">0</span> de <span id="quizTotal">${quiz.questions.size()}</span>
     </div>
   </div>
+    <script type="text/javascript" language="javascript">
+  $(function() {
+    $("#accordion").accordion({autoHeight: false,navigation: true});
+    $("button").button();
+    $("#accordion > h3").hide();
+    $("div[id^=question]").hide();
+    $("#accordion > h3").first().fadeIn();
+    $("div[id^=question]").first().fadeIn();
+    
+    $("input[name^=answerFor]").click(function(){
+      var questionId = $(this).attr('name').substring("answerFor".length);
+      $(this).parent().parent().next().fadeIn();
+      $("form#formQuestion"+questionId).submit();
+      $("span#quizCursor").text(questionId);
+    });
+    
+    $("button[name^=actionForQuestion]").click(function(){
+      var questionId = $(this).attr("name").substring("actionForQuestion".length);
+      $(this).parent().parent().next().fadeIn();
+      $("form#formQuestion"+questionId).submit();
+      $("span#quizCursor").text(questionId);
+      $(this).children("span").text("Actualizar");
+    });
+        
+  });
   
+  function waiting(id){
+    $("img#loader"+id).fadeIn();
+    $("img#check"+id).hide();
+  }
+
+  function complete(id){
+    $("img#loader"+id).hide();
+    $("img#check"+id).fadeIn();
+  }
+  
+  function success(data){
+    if( (data.question.id / 1) == ( ( $("#quizTotal").text() ) / 1) ){
+      $("#statusAction").addClass("complete");
+      $("#statusAction").removeClass("incomplete");
+      $("#counter").hide();
+      $("#finalAction").fadeIn();
+    }
+  }
+    
+  </script>
 </body>
