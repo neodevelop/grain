@@ -21,7 +21,7 @@
       <div class="form-actions">
         <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'create', 'default': 'Create')}" />
       </div>
-  </g:form>
   </fieldset>
+  </g:form>
 </body>
 </html>

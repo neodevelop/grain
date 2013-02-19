@@ -82,6 +82,11 @@ class UrlMappings {
     name addMeFromLandingNoPost: "/addMeFromLandingNoPost"(controller:"landing"){
       action = [GET:"addMeNoPost"]
     }
+
+    name addMeFromConfirmation: "/addMeFromConfirmation"(controller:"landing"){
+      action = [POST:"addMeNoPost"]
+    }
+    
     name ipn:"/ipn"(controller:"IPN"){
 
     }

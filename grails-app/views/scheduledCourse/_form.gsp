@@ -44,7 +44,7 @@
 
 <div class="control-group">
   <label class="control-label" for="geolocation"><g:message code="scheduledCourse.geolocation" default="Geolocation" />:</label>
-  <g:hiddenField name="geolocation" value="${scheduledCourseInstance?.geolocation}"/>
+  <g:textField name="geolocation" value="${scheduledCourseInstance?.geolocation}"/>
   <g:render template="/common/map" model="[refField:'geolocation',width:480,height:240]" />
 </div>
 <r:script>
