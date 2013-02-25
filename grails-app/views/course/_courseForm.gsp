@@ -18,7 +18,7 @@
 <div class="control-group">
   <label for="urlLandingPage" class="control-label"><g:message code="course.url" default="URL Landing" />:</label>
   <div class="controls">
-    <g:textField name="urlLandingPage" class="input-xlarge" maxlength="50" value="${fieldValue(bean: courseInstance, field: 'urlLandingPage')}" />
+    <g:textField name="urlLandingPage" class="input-xlarge" maxlength="100" value="${fieldValue(bean: courseInstance, field: 'urlLandingPage')}" />
   </div>
 </div>
 
